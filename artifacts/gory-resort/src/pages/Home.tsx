@@ -124,33 +124,37 @@ export default function Home() {
           }}
         />
 
-        <div className="container mx-auto px-6 pt-28 pb-0 lg:pt-32 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-12 lg:items-center">
+        <div className="container mx-auto px-6 pt-16 pb-0 lg:pt-20 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-12 lg:items-start">
 
             {/* ── Text ── */}
-            <div className="lg:col-span-7 flex flex-col items-start pb-8 lg:pb-24">
+            <div className="lg:col-span-7 flex flex-col items-start pb-4 lg:pb-4">
               <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 mb-6 uppercase">
                 Международная недвижимость
               </span>
 
-              <h1 className="section-reveal-heading mb-2 -ml-3" aria-label="Ваш капитал заслуживает свободы">
+              <h1 className="section-reveal-heading -ml-3" aria-label="Ваш капитал заслуживает свободы"
+                style={{ marginTop: '-40px', marginBottom: '-55px' }}>
+                {/* Negative margins collapse the invisible black padding in the 1:1 square image
+                    so the chrome text sits flush with surrounding copy */}
                 <img
-                  src="/chrome/liquid/text-headline-combined.png"
+                  src="/chrome/liquid/text-headline-v2.png"
                   alt="Ваш капитал заслуживает свободы"
                   style={{
                     mixBlendMode: 'screen',
-                    width: 'clamp(260px, 38vw, 500px)',
+                    width: 'clamp(220px, 28vw, 380px)',
                     height: 'auto',
+                    display: 'block',
                   }}
                   draggable={false}
                 />
               </h1>
 
-              <p className="font-space-grotesk text-lg text-white/55 max-w-lg mb-12 leading-relaxed">
+              <p className="font-space-grotesk text-lg text-white/55 max-w-lg mb-7 leading-relaxed">
                 Инвестиции в зарубежную недвижимость — ОАЭ, Турция, Кипр, Грузия, Португалия
               </p>
 
-              <div className="flex flex-wrap gap-4 mb-12">
+              <div className="flex flex-wrap gap-4 mb-8">
                 <Link href="/properties" className="eom-btn-primary font-oxanium text-sm uppercase tracking-wider">
                   Подобрать объект
                 </Link>
@@ -207,13 +211,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Chrome frame border — mix-blend:screen makes its black bg invisible */}
-        <img
-          src="/chrome/liquid/chrome-hero-frame.png"
-          alt="" aria-hidden="true"
-          className="absolute inset-0 w-full h-full pointer-events-none select-none hidden md:block"
-          style={{ objectFit: 'cover', mixBlendMode: 'screen', opacity: 0.45, zIndex: 15 }}
-        />
+        {/* chrome-hero-frame removed — contour looked wrong */}
         {/* Hero bottom fade — blob section melts into black */}
         <div
           className="absolute inset-x-0 bottom-0 pointer-events-none"
@@ -373,13 +371,18 @@ export default function Home() {
             Международная недвижимость
           </p>
 
-          {/* Headline */}
-          <h2
-            className="font-oxanium text-[clamp(2.2rem,8vw,5rem)] font-bold chrome-text leading-[1.05] tracking-tight mb-10"
-            style={{ textShadow: '0 2px 6px rgba(0,0,0,0.95)' }}
-          >
-            Свобода<br />капитала
-          </h2>
+          {/* Headline — liquid chrome image, no drips */}
+          <img
+            src="/chrome/liquid/text-svoboda-kapitala.png"
+            alt="Свобода капитала"
+            style={{
+              mixBlendMode: 'screen',
+              width: 'clamp(240px, 44vw, 560px)',
+              height: 'auto',
+              marginBottom: '2.5rem',
+            }}
+            draggable={false}
+          />
 
           {/* Key stats */}
           <div className="flex flex-wrap justify-center gap-8 md:gap-14 mb-10">

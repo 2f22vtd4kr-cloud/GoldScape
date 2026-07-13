@@ -7,7 +7,7 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
-            <span className="font-oxanium text-2xl font-bold chrome-text tracking-wide block mb-6">EstateofMind</span>
+            <img src="/chrome/liquid/logo-estateofmind.png" alt="EstateofMind" style={{ mixBlendMode: 'screen', height: '28px', width: 'auto', marginBottom: '1.5rem' }} draggable={false} />
             <p className="font-space-grotesk text-sm text-white/40 max-w-xs">
               Ваш капитал заслуживает свободы. Инвестиции в зарубежную недвижимость с полным сопровождением.
             </p>

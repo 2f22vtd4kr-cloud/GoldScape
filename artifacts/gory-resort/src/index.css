@@ -279,7 +279,7 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: chrome-sweep 10s linear infinite;
+  /* No sweep animation — static chrome. переливание only on buttons/accents. */
   /* Hard shadow for 3D depth; glow for luminosity */
   filter: drop-shadow(0 2px 3px rgba(0,0,0,0.95))
           drop-shadow(0 0 12px rgba(230,226,218,0.10));
@@ -306,7 +306,7 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: spinPrism 9s linear infinite;
+  /* No spinPrism — static chrome accent. переливание only on buttons/accents. */
   filter: drop-shadow(0 0 18px rgba(180,160,240,0.18));
 }
 

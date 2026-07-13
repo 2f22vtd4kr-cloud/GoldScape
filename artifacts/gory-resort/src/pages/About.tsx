@@ -108,14 +108,20 @@ export default function About() {
   return (
     <Layout>
       {/* PAGE HEADER */}
-      <section className="relative pt-40 pb-24 px-6 max-w-7xl mx-auto">
-        <div className="absolute top-20 right-1/4 w-[600px] h-[600px] rounded-full iridescent-spill opacity-30 blur-[100px] pointer-events-none" />
+      <section className="relative pt-28 pb-20 px-6 max-w-7xl mx-auto overflow-hidden">
+        {/* Subtle accent — absolutely-positioned wrapper so it never affects flow */}
+        <div style={{ position: 'absolute', top: 0, right: 0, width: '520px', height: '520px', pointerEvents: 'none', zIndex: 0 }}>
+          <div className="iridescent-spill w-full h-full" style={{ opacity: 0.12 }} />
+        </div>
         <div className="relative z-10 max-w-3xl">
-          <h1 className="text-5xl md:text-[64px] font-oxanium font-bold chrome-text leading-[1.1] mb-6 uppercase">
+          <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-6 block">
             Как мы работаем
+          </span>
+          <h1 className="text-5xl md:text-[64px] font-oxanium font-bold text-white leading-[1.05] mb-6 uppercase">
+            Полное сопровождение
           </h1>
-          <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed">
-            «Полное сопровождение от первого запроса до ключей в руках»
+          <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed max-w-xl">
+            От первого запроса до ключей в руках — мы с вами на каждом шаге.
           </p>
         </div>
       </section>

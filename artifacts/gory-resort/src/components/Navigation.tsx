@@ -26,10 +26,19 @@ export function Navigation() {
   return (
     <nav className={`eom-nav ${isScrolled || mobileOpen ? 'scrolled' : ''}`}>
       <Link href="/" className="flex items-center shrink-0">
-        <span className="font-oxanium text-[20px] font-bold chrome-text tracking-[0.06em]"
-          style={{ filter: 'drop-shadow(0 1px 6px rgba(0,0,0,0.9)) drop-shadow(0 0 14px rgba(220,216,208,0.12))' }}>
-          EstateofMind
-        </span>
+        {/* object-fit:cover centers on the text band of the ~1:1 image */}
+        <img
+          src="/chrome/liquid/logo-estateofmind.png"
+          alt="EstateofMind"
+          style={{
+            mixBlendMode: 'screen',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            width: '186px',
+            height: '30px',
+          }}
+          draggable={false}
+        />
       </Link>
 
       <div className="hidden md:flex items-center gap-8">
