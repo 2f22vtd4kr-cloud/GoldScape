@@ -538,6 +538,88 @@ body {
   width: 1px;
   background: rgba(255, 255, 255, 0.12);
 }
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL REVEAL SYSTEM — v5 (final)
+
+   Iteration history:
+   v1: basic opacity/translateY + ease — generic, no brand personality
+   v2: cubic-bezier, directional variants, stagger — opacity curve wrong
+   v3: separate opacity/transform curves, heading sweep pseudo-element
+   v4: mix-blend-mode:overlay for sweep, overflow:clip descender issue found
+   v5: clip-path on ::after (no overflow needed), corrected ease-out opacity,
+       will-change lifecycle via JS, prefers-reduced-motion support
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-reveal] {
+  opacity: 0;
+  transition:
+    opacity 0.8s cubic-bezier(0, 0, 0.2, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-reveal="up"]    { transform: translateY(28px); }
+[data-reveal="left"]  { transform: translateX(-28px); }
+[data-reveal="right"] { transform: translateX(28px); }
+[data-reveal="scale"] { transform: scale(0.94); }
+[data-reveal].is-revealed { opacity: 1; transform: none; }
+
+/* Stagger — diminishing delays give an easeOut feel to the group */
+[data-stagger] > [data-reveal]:nth-child(1) { transition-delay: 0ms; }
+[data-stagger] > [data-reveal]:nth-child(2) { transition-delay: 65ms; }
+[data-stagger] > [data-reveal]:nth-child(3) { transition-delay: 115ms; }
+[data-stagger] > [data-reveal]:nth-child(4) { transition-delay: 155ms; }
+[data-stagger] > [data-reveal]:nth-child(5) { transition-delay: 185ms; }
+[data-stagger] > [data-reveal]:nth-child(6) { transition-delay: 205ms; }
+
+/* Section heading chrome sweep
+   clip-path on ::after avoids overflow:hidden (which clips Oxanium descenders).
+   mix-blend-mode:overlay works with the chrome-text gradient without obscuring it. */
+.section-reveal-heading { position: relative; }
+.section-reveal-heading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 100%
+  );
+  clip-path: inset(0 100% 0 0);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 2;
+}
+.section-reveal-heading.is-revealed::after {
+  animation: chromeHeadingSweep 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+@keyframes chromeHeadingSweep {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 100%); }
+}
+
+/* Testimonial cards */
+.testimonial-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.testimonial-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+/* Reduced motion — reveal system degrades gracefully */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .section-reveal-heading::after { display: none; }
+}
+
 .process-item:last-child .process-line {
   display: none;
 }

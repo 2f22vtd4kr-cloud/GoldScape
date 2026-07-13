@@ -4,6 +4,7 @@ export const modules: ModuleMap = {
   "./components/mockups/estate-of-mind/About.tsx": () => import("../components/mockups/estate-of-mind/About.tsx"),
   "./components/mockups/estate-of-mind/Home.tsx": () => import("../components/mockups/estate-of-mind/Home.tsx"),
   "./components/mockups/estate-of-mind/Properties.tsx": () => import("../components/mockups/estate-of-mind/Properties.tsx"),
+  "./components/mockups/estate-redesign/HomeRedesign.tsx": () => import("../components/mockups/estate-redesign/HomeRedesign.tsx"),
   "./components/mockups/gory-v1-cinematic/Gallery.tsx": () => import("../components/mockups/gory-v1-cinematic/Gallery.tsx"),
   "./components/mockups/gory-v1-cinematic/Home.tsx": () => import("../components/mockups/gory-v1-cinematic/Home.tsx"),
   "./components/mockups/gory-v1-cinematic/Investment.tsx": () => import("../components/mockups/gory-v1-cinematic/Investment.tsx"),
