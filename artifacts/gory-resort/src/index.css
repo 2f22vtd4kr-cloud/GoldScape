@@ -786,3 +786,32 @@ body {
 .process-item:last-child .process-line {
   display: none;
 }
+
+/* ─── Liquid Chrome asset animations ─────────────────────────────────────
+   Applied to AI-generated high-res chrome PNGs (starburst, eye, ribbon).
+   Separate from ChromeShape breathe so both can coexist without conflict. */
+
+@keyframes liquid-chrome-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.35)) brightness(1);
+    transform: scale(1);
+  }
+  40% {
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.65)) drop-shadow(0 0 40px rgba(200,180,255,0.3)) brightness(1.12);
+    transform: scale(1.04);
+  }
+  70% {
+    filter: drop-shadow(0 0 14px rgba(255,255,255,0.45)) brightness(1.06);
+    transform: scale(1.02);
+  }
+}
+
+.liquid-chrome-pulse {
+  animation: liquid-chrome-pulse 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-chrome-pulse {
+    animation: none;
+  }
+}

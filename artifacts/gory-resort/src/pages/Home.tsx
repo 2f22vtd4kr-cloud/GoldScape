@@ -112,6 +112,38 @@ export default function Home() {
       <section className="relative min-h-[100dvh] flex items-center pt-20 overflow-hidden">
         <div className="hero-grid" />
 
+        {/* Liquid chrome tendrils — blended over grid, top-right framing */}
+        <img
+          src="/chrome/liquid/chrome-tendrils.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none select-none hidden md:block"
+          style={{
+            top: '-5%',
+            right: '-8%',
+            width: 'clamp(320px, 42vw, 640px)',
+            opacity: 0.55,
+            mixBlendMode: 'screen',
+            zIndex: 1,
+          }}
+        />
+        {/* Tendrils mirrored bottom-left — subtle echo */}
+        <img
+          src="/chrome/liquid/chrome-tendrils.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none select-none hidden lg:block"
+          style={{
+            bottom: '-8%',
+            left: '-12%',
+            width: 'clamp(240px, 30vw, 480px)',
+            opacity: 0.3,
+            mixBlendMode: 'screen',
+            transform: 'rotate(180deg) scaleX(-1)',
+            zIndex: 1,
+          }}
+        />
+
         <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 flex flex-col items-start pt-10 lg:pt-0">
             <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 mb-6 uppercase">
@@ -164,23 +196,35 @@ export default function Home() {
               />
             </div>
 
-            {/* Main iridescent blob image */}
+            {/* Main liquid chrome twisted blob — AI-generated high-res asset */}
             <img
-              src="/chrome/blob-iridescent-3.png"
+              src="/chrome/liquid/chrome-blob-twisted.png"
               alt=""
-              className="animate-float relative z-10 drop-shadow-[0_0_60px_rgba(120,80,255,0.4)]"
-              style={{ width: 'clamp(240px, 36vw, 500px)', height: 'auto', pointerEvents: 'none' }}
+              aria-hidden="true"
+              className="animate-float relative z-10"
+              style={{
+                width: 'clamp(240px, 36vw, 500px)',
+                height: 'auto',
+                pointerEvents: 'none',
+                filter: 'drop-shadow(0 0 50px rgba(180,140,255,0.35)) drop-shadow(0 0 100px rgba(100,60,220,0.2))',
+              }}
             />
 
-            {/* Small spike — hidden on mobile, positioned so it doesn't overlap text */}
+            {/* Chrome starburst — AI-generated, replaces old spike */}
             <img
-              src="/chrome/spike-chrome.png"
+              src="/chrome/liquid/chrome-starburst.png"
               alt=""
-              className="animate-float-small absolute z-20 opacity-80 hidden sm:block"
-              style={{ width: '80px', bottom: '14%', right: '6%', filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.25))' }}
+              aria-hidden="true"
+              className="animate-float-small absolute z-20 opacity-90 hidden sm:block"
+              style={{
+                width: 'clamp(70px, 10vw, 110px)',
+                bottom: '10%',
+                right: '4%',
+                filter: 'drop-shadow(0 0 24px rgba(255,255,255,0.5)) drop-shadow(0 0 8px rgba(200,180,255,0.4))',
+              }}
             />
 
-            {/* Chrome ring accent — opposite corner from spike */}
+            {/* Chrome ring accent — opposite corner from starburst */}
             <ChromeShape
               variant="ring"
               size={52}
@@ -244,14 +288,36 @@ export default function Home() {
           className="iridescent-spill w-[500px] h-[500px] absolute -bottom-[250px] -left-[250px] opacity-25 z-0 pointer-events-none"
         />
 
-        {/* Decorative spike accent top-right */}
-        <ChromeShape
-          variant="spike"
-          size={68}
-          breathe={true}
-          float={true}
-          iridescent={false}
-          className="absolute top-10 right-[8%] opacity-35 pointer-events-none hidden lg:block"
+        {/* Chrome ribbon — AI-generated, horizontal decorative edge top */}
+        <img
+          src="/chrome/liquid/chrome-ribbon.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute top-0 left-0 w-full pointer-events-none select-none"
+          style={{
+            height: '80px',
+            objectFit: 'cover',
+            objectPosition: 'center top',
+            opacity: 0.35,
+            mixBlendMode: 'screen',
+            zIndex: 0,
+          }}
+        />
+
+        {/* Chrome starburst — AI-generated, top-right accent */}
+        <img
+          src="/chrome/liquid/chrome-starburst.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none select-none hidden lg:block liquid-chrome-pulse"
+          style={{
+            top: '8%',
+            right: '5%',
+            width: 'clamp(60px, 8vw, 100px)',
+            opacity: 0.7,
+            filter: 'drop-shadow(0 0 18px rgba(255,255,255,0.4))',
+            zIndex: 1,
+          }}
         />
 
         <div className="container mx-auto px-6 relative z-10">
@@ -277,10 +343,25 @@ export default function Home() {
       </section>
 
       {/* ─── TRUST METRICS ───────────────────────────────────────────────── */}
-      <section className="bg-[#080808] relative">
+      <section className="bg-[#080808] relative overflow-hidden">
         <div className="iridescent-line" />
 
-        <div className="container mx-auto px-6 py-16">
+        {/* Chrome tendrils — blended behind stats, left side */}
+        <img
+          src="/chrome/liquid/chrome-tendrils.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none select-none hidden xl:block"
+          style={{
+            width: '320px',
+            opacity: 0.18,
+            mixBlendMode: 'screen',
+            transform: 'translateY(-50%) scaleX(-1)',
+            zIndex: 0,
+          }}
+        />
+
+        <div className="container mx-auto px-6 py-16 relative z-10">
           <div
             className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 divide-x-0 md:divide-x divide-white/10"
             data-stagger
@@ -337,8 +418,22 @@ export default function Home() {
             {/* Iridescent color spill — GPU-composited, no flash */}
             <div className="iridescent-spill w-[380px] h-[380px] absolute z-0 opacity-28 mix-blend-screen pointer-events-none" />
 
-            {/* Iridescent chrome blob — now with real chrome/iridescent texture */}
-            <div className="chrome-blob w-[260px] h-[260px] absolute z-10 animate-float-small opacity-72 pointer-events-none" />
+            {/* Chrome eye — AI-generated, atmospheric background visual */}
+            <img
+              src="/chrome/liquid/chrome-eye.png"
+              alt=""
+              aria-hidden="true"
+              className="absolute pointer-events-none select-none animate-float"
+              style={{
+                width: 'clamp(180px, 28vw, 280px)',
+                opacity: 0.18,
+                filter: 'drop-shadow(0 0 30px rgba(180,160,255,0.3))',
+                zIndex: 5,
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            />
 
             {/* Decorative star4 beside the card */}
             <ChromeShape
@@ -352,13 +447,16 @@ export default function Home() {
 
             {/* CTA card */}
             <div className="relative z-20 text-center bg-black/48 backdrop-blur-2xl px-10 py-12 border border-white/12 rounded-3xl shadow-[0_8px_60px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.08)] max-w-[320px] w-full">
-              {/* Faint chrome orb inside card */}
-              <ChromeShape
-                variant="orb"
-                size={36}
-                breathe={true}
-                iridescent={true}
-                className="absolute -top-4 left-1/2 -translate-x-1/2 opacity-90"
+              {/* Chrome eye as card top ornament — small, crisp */}
+              <img
+                src="/chrome/liquid/chrome-eye.png"
+                alt=""
+                aria-hidden="true"
+                className="absolute -top-6 left-1/2 -translate-x-1/2 liquid-chrome-pulse pointer-events-none"
+                style={{
+                  width: '52px',
+                  filter: 'drop-shadow(0 0 12px rgba(255,255,255,0.6))',
+                }}
               />
               <h3 className="font-oxanium text-[28px] chrome-text mt-2 mb-8 max-w-[250px] mx-auto leading-tight">
                 Первая консультация бесплатно
