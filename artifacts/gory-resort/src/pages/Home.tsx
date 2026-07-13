@@ -5,12 +5,12 @@ import { Layout } from '@/components/Layout';
 
 const DESTINATIONS = [
   { flag: '🇦🇪', country: 'ОАЭ',         city: 'Дубай',     price: '$380,000',  image: '/images/dest-dubai.jpg' },
-  { flag: '🇹🇷', country: 'Турция',       city: 'Стамбул',   price: '$120,000',  image: null },
+  { flag: '🇹🇷', country: 'Турция',       city: 'Стамбул',   price: '$120,000',  image: '/images/dest-turkey.jpg' },
   { flag: '🇨🇾', country: 'Кипр',         city: 'Лимасол',   price: '€180,000',  image: '/images/dest-cyprus.jpg' },
   { flag: '🇬🇪', country: 'Грузия',       city: 'Батуми',    price: '$65,000',   image: '/images/dest-georgia.jpg' },
-  { flag: '🇹🇭', country: 'Таиланд',      city: 'Пхукет',    price: '$95,000',   image: null },
-  { flag: '🇵🇹', country: 'Португалия',   city: 'Лиссабон',  price: '€345,000',  image: null },
-  { flag: '🇷🇸', country: 'Сербия',       city: 'Белград',   price: '€85,000',   image: null },
+  { flag: '🇹🇭', country: 'Таиланд',      city: 'Пхукет',    price: '$95,000',   image: '/images/dest-thailand.jpg' },
+  { flag: '🇵🇹', country: 'Португалия',   city: 'Лиссабон',  price: '€345,000',  image: '/images/dest-portugal.jpg' },
+  { flag: '🇷🇸', country: 'Сербия',       city: 'Белград',   price: '€85,000',   image: '/images/dest-serbia.jpg' },
 ];
 
 const FEATURED_PROPERTIES = [

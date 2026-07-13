@@ -59,7 +59,7 @@ export function Navigation() {
         </a>
         <button
           type="button"
-          className="md:hidden text-white"
+          className="md:hidden text-white p-2.5 -mr-2.5 flex items-center justify-center"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? 'Закрыть меню' : 'Открыть меню'}
         >
