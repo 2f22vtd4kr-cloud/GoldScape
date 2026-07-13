@@ -85,3 +85,15 @@ channel = "stable-25_05"
 [userenv.shared]
 PORT = "5000"
 BASE_PATH = "/"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 8080
+externalPort = 8080
+
+[[ports]]
+localPort = 8081
+externalPort = 8081
