@@ -2,11 +2,11 @@
 
 A real-estate investment site (Russian-language) helping clients buy property abroad — UAE, Turkey, Cyprus, Georgia, Thailand, Serbia — with full legal support and residency-permit guidance. Three pages: Home (`/`), "How we work" (`/about` — process, per-country breakdown, FAQ, contact form), and Properties (`/properties` — filterable listing grid). Visual language: dark "chrome/liquid-metal" aesthetic with iridescent gradient accents (Oxanium + Space Grotesk fonts).
 
-This replaced an earlier "GORY Mountain Resort" ski-resort site that lived in this same artifact; that resort content (sections, bilingual EN/RU `LanguageContext`, AI-persona-review pipeline) was fully removed on 2026-07-13 when the site was re-pointed at the EstateofMind design (graduated from a Canvas mockup).
+This replaced an earlier "GORY Mountain Resort" ski-resort site that lived in this same artifact; that resort content (sections, bilingual EN/RU `LanguageContext`, AI-persona-review pipeline) was fully removed on 2026-07-13 when the site was re-pointed at the EstateofMind design (graduated from a Canvas mockup). The original mockup source (`artifacts/mockup-sandbox/src/components/mockups/estate-of-mind/`) was deliberately kept on the Canvas for reference rather than deleted — it's no longer wired to the live site.
 
 ## Run & Operate
 
-- Workflows are configured in Replit: **artifacts/gory-resort: web** (frontend, Vite, port 5000) and **artifacts/api-server: API Server** (Express 5, port 8080)
+- Workflows are configured in Replit: **artifacts/gory-resort: web** (frontend, Vite, port 5000), **artifacts/api-server: API Server** (Express 5, port 8080), **artifacts/mockup-sandbox: Component Preview Server** (Canvas mockup preview, port 8081)
 - `pnpm --filter @workspace/api-server run dev` — run the API server manually
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
@@ -46,6 +46,7 @@ Marketing/lead-gen site for a real-estate investment brokerage. No transactional
 - **React 19 + `flushSync`**: `flushSync(() => { createRoot.render() })` silently fails to commit in React 19 — `#root` stays empty. Use plain `root.render(<App />)` (already the case in `main.tsx`). Never re-introduce `flushSync` for the initial render.
 - **Screenshot tool**: captures before React's async render commits, so it can only ever show the `#root:empty` CSS loading state on a cold load. This is expected — it is not evidence the app failed to mount.
 - **wouter@3.x catch-all route syntax**: the fallback 404 route must be `<Route path="/*" component={NotFound} />`. Do **not** use `path="/:rest*"` — that named-wildcard form is not supported by wouter's matcher and silently matches nothing, for any path, with zero errors anywhere.
+- **Workflow restarts can leave orphaned processes**: manually restarting these workflows outside the normal `WorkflowsRestart` flow (or restarting several times in quick succession) can leave old `vite`/`node` processes still holding ports 5000/8080/8081. Symptoms: `EADDRINUSE` on restart, or mockup-sandbox landing on 8082+ instead of 8081. Fix: find and `kill -9` the stale PIDs (`ps aux | grep -E "vite|dist/index.mjs"`), then restart the workflow — don't hand-edit the run command or port env vars, since artifact-managed services get their `PORT`/`BASE_PATH` from `.replit-artifact/artifact.toml`, not the workflow command line.
 
 ## Pointers
 
