@@ -24,5 +24,8 @@ export const modules: ModuleMap = {
   "./components/mockups/liquid-spill/ChromeShape.tsx": () => import("../components/mockups/liquid-spill/ChromeShape.tsx"),
   "./components/mockups/liquid-spill/ChromeShapeSpill.tsx": () => import("../components/mockups/liquid-spill/ChromeShapeSpill.tsx"),
   "./components/mockups/liquid-spill/Current.tsx": () => import("../components/mockups/liquid-spill/Current.tsx"),
-  "./components/mockups/liquid-spill/LiquidSpill.tsx": () => import("../components/mockups/liquid-spill/LiquidSpill.tsx")
+  "./components/mockups/liquid-spill/LiquidSpill.tsx": () => import("../components/mockups/liquid-spill/LiquidSpill.tsx"),
+  "./components/mockups/liquid-spill/QACta.tsx": () => import("../components/mockups/liquid-spill/QACta.tsx"),
+  "./components/mockups/liquid-spill/QATestimonials.tsx": () => import("../components/mockups/liquid-spill/QATestimonials.tsx"),
+  "./components/mockups/liquid-spill/QAWhyUs.tsx": () => import("../components/mockups/liquid-spill/QAWhyUs.tsx")
 };
