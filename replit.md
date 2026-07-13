@@ -28,21 +28,37 @@ This replaced an earlier "GORY Mountain Resort" ski-resort site that lived in th
 
 - `src/pages/{Home,About,Properties}.tsx` — the three pages; each wraps its content in `src/components/Layout.tsx` (shared `Navigation` + `Footer`)
 - `src/components/Navigation.tsx`, `Footer.tsx` — shared nav/footer, used by every page
-- `src/components/ChromeShape.tsx` — SVG-based decorative chrome/iridescent shape component (6 variants: blob, star4, spike, ring, orb, drip); supports `breathe` and `float` animation props
+- `src/components/ChromeShape.tsx` — SVG-based decorative chrome/iridescent shape component (6 variants: blob, star4, spike, ring, orb, drip); supports `breathe` and `float` animation props. **Note:** no longer used in Home.tsx (removed — looked cheap vs. AI-generated PNG assets); may still be used on About/Properties.
 - `src/hooks/useScrollReveal.ts` — scroll-triggered reveal animation hook (IntersectionObserver); wired into `Layout.tsx` so it runs on every page automatically
-- `src/index.css` — single source of truth for the chrome/iridescent design tokens (`.chrome-text`, `.iridescent-text`, `.eom-card`, `.eom-btn-primary/ghost`, `.eom-nav`, blob animations, scroll-reveal system, testimonial cards, chrome-shape keyframes, etc.) plus the Oxanium/Space Grotesk font import
-- `public/chrome/*.png` — chrome/iridescent blob and accent images referenced by the pages
+- `src/index.css` — single source of truth for the chrome/iridescent design tokens (`.chrome-text`, `.chrome-text-accent`, `.iridescent-text`, `.eom-card`, `.eom-btn-primary/ghost/oilslick`, `.eom-nav`, `.void-wave-section`, `.face-bg-animate`, `.face-shimmer`, `.liquid-chrome-pulse`, blob animations, scroll-reveal system, testimonial cards, chrome-shape keyframes, etc.) plus the Oxanium/Space Grotesk font import
+- `public/chrome/liquid/` — AI-generated chrome PNG assets used by Home.tsx (see full list in Home page sections below). All black-background assets use `mix-blend-mode: screen` so black disappears.
 - `public/images/` — AI-generated property and destination photos (prop-dubai.jpg, prop-cyprus.jpg, prop-georgia.jpg, dest-dubai.jpg, dest-cyprus.jpg, dest-georgia.jpg)
 
 ## Home page sections (in order)
 
-1. **Hero** — chrome headline, iridescent blob + spike accent, ChromeShape ring (top-left accent), two CTAs, stats strip. Spike hidden on mobile (`hidden sm:block`); glow div uses `min(480px, 88vw)` to prevent horizontal overflow on phones.
+1. **Hero** — two-column layout: chrome headline ("Ваш капитал заслуживает свободы"), subheadline, two CTAs, stats strip (left); `chrome-blob-twisted.png` + `chrome-tendrils.png` + `chrome-starburst.png` + `chrome-hero-frame.png` (spike-tendril border frame, `mix-blend-mode: screen`, 45% opacity) as right-side accent (right). Glow div uses `min(480px, 88vw)` to prevent horizontal overflow. Mobile: `pt-28 pb-0` top-anchored, `clamp()` sizing.
 2. **Destinations strip** — 7 destination cards (Dubai, Cyprus, Georgia, Turkey, Thailand, Serbia, Lisbon); Dubai/Cyprus/Georgia have real photo backgrounds, others are dark-glass. Horizontal scroll on mobile, `xl:grid-cols-7` on desktop.
-3. **Why us** — 3 columns (Shield/Globe/Zap icons): legal diligence, local partners (incl. Knight Frank Portugal), 14-day deal timeline. ChromeShape spike in top-right corner.
-4. **Trust metrics bar** — `$130M+` / `847` / `12` / `2019`; stats animate from 0 on scroll via `data-counter` + `useScrollReveal`
-5. **Process teaser** — 4 numbered steps (left) + free-consult CTA card with iridescent chrome blob + ChromeShape star4 + ChromeShape orb (right)
-6. **Featured properties** — 3 cards with real AI-generated photos (Dubai, Cyprus, Batumi); image zoom on hover, glassmorphism location/type badges
-7. **Testimonials** — 3 Russian-language client quotes: Viktor M. (Dubai $340k), Anna & Sergei K. (Cyprus €285k), Dmitry L. (Batumi 9.4% yield); glass cards with chrome-gradient avatar initials. ChromeShape ring in bottom-left corner.
+3. **Void Wave** — full-bleed section; `sky-bg.jpg` background with black fades top + bottom (`.void-wave-section`). Content: `chrome-eye-v2.png` (animated `animate-float`), eyebrow "Международная недвижимость", headline "Свобода капитала" (`.chrome-text`), three key stats ($130M+ / 12 стран / 847 семей), and "Смотреть объекты" CTA button.
+4. **Chrome Face (Why Us)** — two-column layout: `chrome-face-colorful.jpg` left panel (animated with `face-bg-animate` hue-rotate + `face-shimmer` overlay + stats overlay + CTA button), Why Us content right panel (3 icon rows: Shield / Globe / Zap).
+5. **Trust metrics bar** — `$130M+` / `847` / `12` / `2019`; stats animate from 0 on scroll via `data-counter` + `useScrollReveal`.
+6. **Process teaser** — 4 steps with AI chrome numeral images (`chrome-num-01/02/03/04.png`) replacing the old number circles; process line repositioned to `left: 27px / top: 58px` to align with the wider numeral images. Right column: free-consult CTA card with `chrome-ribbon.png` accent.
+7. **Featured properties** — 3 cards with real AI-generated photos (Dubai, Cyprus, Batumi); image zoom on hover, glassmorphism location/type badges.
+8. **Testimonials** — 3 Russian-language client quotes: Viktor M. (Dubai $340k), Anna & Sergei K. (Cyprus €285k), Dmitry L. (Batumi 9.4% yield); glass cards with chrome-gradient avatar initials.
+
+### AI chrome assets (`public/chrome/liquid/`)
+
+| File | Usage |
+|---|---|
+| `chrome-blob-twisted.png` | Hero — main right-side chrome object |
+| `chrome-tendrils.png` | Hero — wispy accent overlay |
+| `chrome-starburst.png` | Hero — starburst accent |
+| `chrome-hero-frame.png` | Hero — ornate spike-tendril border frame, `mix-blend-mode: screen`, 45% opacity |
+| `chrome-eye-v2.png` | Void Wave — centered eye, `animate-float` |
+| `sky-bg.jpg` | Void Wave — full-bleed sky background |
+| `chrome-face-colorful.jpg` | Chrome Face / Why Us — iridescent face, left panel |
+| `chrome-burst-overlay.png` | Chrome Face — overlay accent |
+| `chrome-ribbon.png` | Process — CTA card accent |
+| `chrome-num-01/02/03/04.png` | Process — step numerals replacing CSS circles |
 
 ## ChromeShape component
 
@@ -140,6 +156,7 @@ Marketing/lead-gen site for a real-estate investment brokerage. No transactional
 - **Contact form submit** — `About.tsx` form has no submit handler; API endpoint exists in spec but not wired.
 - **Properties page filtering** — the Country/Type/Price dropdowns are static HTML; no React state or filter logic applied. Grid always renders all 16 cards.
 - **Properties listing photos** — cards use CSS gradients as placeholder images (the three Featured Properties on Home use real AI photos from `/images/`). Actual per-listing photos would require sourcing.
+- **About.tsx / Properties.tsx** — have not yet received the new AI chrome assets, updated typography, or mobile layout fixes applied to Home.tsx. Those pages still use the original graduation styles.
 - **ChromeShape breathe + float stacking** — when both props are true on one element, `transform` from the two keyframes fights (only one `transform` per frame applies). Fix: nest in a wrapper (outer floats, inner breathes), or split into `translate` + `scale` separate CSS properties.
 
 ## Gotchas
