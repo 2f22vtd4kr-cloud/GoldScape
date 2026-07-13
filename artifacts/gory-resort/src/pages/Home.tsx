@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Shield, Globe, Zap, Bed, Bath, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 import { Layout } from '@/components/Layout';
@@ -105,49 +106,90 @@ const WHY_US = [
 ];
 
 export default function Home() {
+  const heroSectionRef = useRef<HTMLDivElement>(null);
+  const heroGlowRef = useRef<HTMLDivElement>(null);
+  const heroTiltRef = useRef<HTMLDivElement>(null);
+
+  // Desktop-only 3D parallax tilt for the hero chrome blob — cursor position
+  // drives translate/rotate on the tilt wrapper. Runs via direct DOM writes
+  // (not React state) so mouse movement never triggers a re-render, and lives
+  // on a plain ref so it never fights the CSS-driven float/hue animations,
+  // which sit on separate nested elements.
+  useEffect(() => {
+    const section = heroSectionRef.current;
+    const glow = heroGlowRef.current;
+    const tilt = heroTiltRef.current;
+    if (!section || !tilt) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let raf = 0;
+    const handleMove = (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      const relX = (e.clientX - rect.left) / rect.width - 0.5;
+      const relY = (e.clientY - rect.top) / rect.height - 0.5;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        tilt.style.transform =
+          `translate3d(${relX * -28}px, ${relY * -18}px, 0) rotateX(${relY * 8}deg) rotateY(${relX * -10}deg)`;
+        if (glow) glow.style.transform = `translate3d(${relX * -16}px, ${relY * -12}px, 0)`;
+      });
+    };
+    const reset = () => {
+      tilt.style.transform = '';
+      if (glow) glow.style.transform = '';
+    };
+    section.addEventListener('mousemove', handleMove);
+    section.addEventListener('mouseleave', reset);
+    return () => {
+      section.removeEventListener('mousemove', handleMove);
+      section.removeEventListener('mouseleave', reset);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <Layout>
 
       {/* ─── HERO ───────────────────────────────────────────────────────── */}
-      <section className="relative bg-black overflow-hidden">
+      <section ref={heroSectionRef} className="relative bg-black overflow-hidden">
         <div className="hero-grid" />
 
-        {/* Chrome tendrils — top-right framing (desktop only) */}
-        <img
-          src="/chrome/liquid/chrome-tendrils.png"
-          alt="" aria-hidden="true"
-          className="absolute pointer-events-none select-none hidden md:block"
-          style={{
-            top: '-4%', right: '-6%',
-            width: 'clamp(340px, 44vw, 660px)',
-            opacity: 0.6, mixBlendMode: 'screen', zIndex: 1,
-          }}
-        />
+        {/* Mobile/tablet ambient background — the animated chrome shape lives
+            BEHIND the text as a dimmed wash, not as its own scroll block.
+            Real estate clients on a phone need the pitch + CTA immediately;
+            scrolling through a standalone animation with no info first is a
+            trust-and-attention cost we can't afford here. */}
+        <div className="absolute inset-0 lg:hidden pointer-events-none overflow-hidden" aria-hidden="true">
+          <div
+            className="hero-glow-spill absolute"
+            style={{ width: '120vw', height: '120vw', top: '-10%', right: '-30vw', opacity: 0.32 }}
+          />
+          <img
+            src="/chrome/blob-iridescent-1.png"
+            alt=""
+            className="hero-blob-gasoline absolute"
+            style={{
+              width: '86vw', top: '4%', right: '-18vw',
+              opacity: 0.4, filter: 'blur(0.5px)',
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.68) 55%, #000000 100%)' }}
+          />
+        </div>
 
         <div className="container mx-auto px-6 pt-16 pb-0 lg:pt-20 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-12 lg:items-start">
 
             {/* ── Text ── */}
-            <div className="lg:col-span-7 flex flex-col items-start pb-4 lg:pb-4">
+            <div className="lg:col-span-7 flex flex-col items-start pb-10 lg:pb-4">
               <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 mb-6 uppercase">
                 Международная недвижимость
               </span>
 
-              <h1 className="section-reveal-heading -ml-3" aria-label="Ваш капитал заслуживает свободы"
-                style={{ marginTop: '-40px', marginBottom: '-55px' }}>
-                {/* Negative margins collapse the invisible black padding in the 1:1 square image
-                    so the chrome text sits flush with surrounding copy */}
-                <img
-                  src="/chrome/liquid/text-headline-v2.png"
-                  alt="Ваш капитал заслуживает свободы"
-                  style={{
-                    mixBlendMode: 'screen',
-                    width: 'clamp(220px, 28vw, 380px)',
-                    height: 'auto',
-                    display: 'block',
-                  }}
-                  draggable={false}
-                />
+              <h1 className="section-reveal-heading font-oxanium font-bold text-white uppercase leading-[1.05] tracking-tight mb-6 text-[clamp(2rem,5.6vw,3.75rem)] max-w-xl">
+                Полное освобождение
               </h1>
 
               <p className="font-space-grotesk text-lg text-white/55 max-w-lg mb-7 leading-relaxed">
@@ -172,34 +214,32 @@ export default function Home() {
               </div>
             </div>
 
-            {/* ── Visual ── */}
-            <div className="lg:col-span-5 relative flex items-center justify-center
-                            h-[360px] sm:h-[460px] lg:h-[680px] -mx-6 lg:mx-0">
-              {/* Purple iridescent glow */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
-                <div style={{
-                  width: 'min(440px, 90vw)', height: 'min(440px, 90vw)',
-                  background: 'conic-gradient(from 0deg,#4a00e0,#8e2de2,#f000ff,#00c9ff,#92fe9d,#4a00e0)',
-                  filter: 'blur(80px)', opacity: 0.24, borderRadius: '50%',
-                }} />
-              </div>
-
-              {/* Main hero chrome blob — always visible */}
-              <img
-                src="/chrome/liquid/chrome-blob-twisted.png"
-                alt="" aria-hidden="true"
-                className="animate-float relative z-10 w-full max-w-[clamp(260px,55vw,500px)] lg:max-w-[500px]"
-                style={{
-                  height: 'auto', pointerEvents: 'none',
-                  filter: 'drop-shadow(0 0 50px rgba(180,140,255,0.4)) drop-shadow(0 0 100px rgba(100,60,220,0.25))',
-                }}
+            {/* ── Visual (desktop only — mobile uses the ambient background above) ── */}
+            <div className="hidden lg:flex lg:col-span-5 relative items-center justify-center h-[680px]">
+              {/* Rotating gas-spill glow — radially masked, no hard edge */}
+              <div
+                ref={heroGlowRef}
+                className="hero-glow-spill"
+                style={{ width: 'min(560px, 90%)', height: 'min(560px, 90%)' }}
               />
+
+              {/* Parallax tilt wrapper (JS-driven) → float wrapper (CSS) → blob (hue-drift CSS) */}
+              <div ref={heroTiltRef} className="hero-tilt-wrap relative z-10">
+                <div className="animate-float">
+                  <img
+                    src="/chrome/blob-iridescent-1.png"
+                    alt="" aria-hidden="true"
+                    className="hero-blob-gasoline w-full max-w-[500px]"
+                    style={{ height: 'auto', pointerEvents: 'none' }}
+                  />
+                </div>
+              </div>
 
               {/* Chrome starburst — bottom-right corner accent */}
               <img
                 src="/chrome/liquid/chrome-starburst.png"
                 alt="" aria-hidden="true"
-                className="animate-float-small absolute z-20 hidden sm:block"
+                className="animate-float-small absolute z-20"
                 style={{
                   width: 'clamp(64px, 9vw, 100px)',
                   bottom: '8%', right: '4%',
@@ -211,7 +251,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* chrome-hero-frame removed — contour looked wrong */}
         {/* Hero bottom fade — blob section melts into black */}
         <div
           className="absolute inset-x-0 bottom-0 pointer-events-none"
@@ -371,18 +410,17 @@ export default function Home() {
             Международная недвижимость
           </p>
 
-          {/* Headline — liquid chrome image, no drips */}
-          <img
-            src="/chrome/liquid/text-svoboda-kapitala.png"
-            alt="Свобода капитала"
-            style={{
-              mixBlendMode: 'screen',
-              width: 'clamp(240px, 44vw, 560px)',
-              height: 'auto',
-              marginBottom: '2.5rem',
-            }}
-            draggable={false}
-          />
+          {/* Headline — real text with the chrome-text gradient-clip treatment.
+              (Previously a PNG with mixBlendMode:'screen', but this div is a
+              z-indexed stacking context of its own — mix-blend-mode can only
+              see backdrop content *inside* the same stacking context, so the
+              image's black background never reached the sky behind it and
+              rendered as an opaque black box. chrome-text avoids the problem
+              entirely since it's a background-clip:text gradient, not a
+              blend composite.) */}
+          <h2 className="font-oxanium font-bold uppercase chrome-text leading-[1.05] text-[clamp(2rem,6vw,4rem)] mb-10">
+            Свобода капитала
+          </h2>
 
           {/* Key stats */}
           <div className="flex flex-wrap justify-center gap-8 md:gap-14 mb-10">

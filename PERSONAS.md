@@ -196,6 +196,23 @@ Irina and Viktor will likely access this on a phone, possibly on a slow connecti
 in a stressed mental state. Every tap target ≥48×48px. Hero CTA within first viewport
 on 390px wide screen. No horizontal scroll anywhere.
 
+**Mandatory desktop + mobile screenshot review (standing rule, added July 2026):**
+Every sim pass must capture and visually inspect *both* a desktop-width screenshot
+and a true mobile-viewport screenshot (~390px) before signing off a section — never
+infer mobile layout from desktop code alone. The two viewports get genuinely
+different design treatment for decorative/animated elements, not just a scaled-down
+copy:
+- **Desktop:** decorative animated visuals (chrome blobs, glows, parallax) can own
+  real estate as a full compositional element alongside the copy.
+- **Mobile:** this is a real-estate trust site, not an art studio. A decorative
+  animated shape must sit as a dimmed/blurred *background wash behind the text*,
+  never as its own stacked full-width block — that pattern adds scroll distance
+  with zero information and delays the pitch/CTA a stressed, phone-first visitor
+  needs immediately.
+When a hard visual defect is suspected (seams, banding, clipping), diagnose from
+the screenshot pixels first — don't assume a CSS mask/z-index fix from reading
+the code alone; confirm the actual rendered boundary before patching it.
+
 ### Nika's 3-step finding format (unchanged)
 
 1. **The Observation** — state exactly what is happening mechanically.

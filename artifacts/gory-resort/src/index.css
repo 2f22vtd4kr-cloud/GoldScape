@@ -457,6 +457,67 @@ body {
   animation: floatBlobSmall 5s ease-in-out infinite;
 }
 
+/* ─── Hero gas-spill system ──────────────────────────────────────────────
+   Rotating oil-slick conic gradient, heavily blurred and radially masked so
+   it fades to nothing well before any container edge — no hard box seam
+   behind the hero visual (the old flat/opaque blurred-box glow produced a
+   visible rectangular boundary against the black hero background). */
+.hero-glow-spill {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+  mask-image: radial-gradient(circle at center, black 0%, black 30%, transparent 68%);
+  -webkit-mask-image: radial-gradient(circle at center, black 0%, black 30%, transparent 68%);
+  pointer-events: none;
+  transition: transform 0.2s ease-out;
+}
+.hero-glow-spill::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    hsl(210, 95%, 60%) 0%,
+    hsl(190, 90%, 60%) 12%,
+    hsl(170, 80%, 55%) 24%,
+    hsl(280, 85%, 65%) 38%,
+    hsl(320, 90%, 68%) 50%,
+    hsl(340, 95%, 65%) 60%,
+    hsl(28, 95%, 62%) 72%,
+    hsl(45, 90%, 60%) 82%,
+    hsl(250, 85%, 62%) 94%,
+    hsl(210, 95%, 60%) 100%
+  );
+  animation: gas-spill-spin 28s linear infinite;
+  will-change: transform;
+}
+@keyframes gas-spill-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Hero blob — slow hue-drift so the gasoline-spill palette migrates across
+   the chrome surface over time, echoing the rotating glow behind it. Kept on
+   its own filter-only animation (no transform) so it composes cleanly with
+   the floatBlob transform animation and the JS-driven parallax tilt, which
+   each live on separate wrapping elements. */
+@keyframes gasoline-hue-drift {
+  0%   { filter: hue-rotate(0deg)   drop-shadow(0 0 50px rgba(180,140,255,0.4)) drop-shadow(0 0 100px rgba(100,60,220,0.25)); }
+  50%  { filter: hue-rotate(50deg)  drop-shadow(0 0 55px rgba(140,200,255,0.4)) drop-shadow(0 0 100px rgba(255,140,220,0.22)); }
+  100% { filter: hue-rotate(0deg)   drop-shadow(0 0 50px rgba(180,140,255,0.4)) drop-shadow(0 0 100px rgba(100,60,220,0.25)); }
+}
+.hero-blob-gasoline {
+  animation: gasoline-hue-drift 22s ease-in-out infinite;
+}
+.hero-tilt-wrap {
+  transition: transform 0.2s ease-out;
+  transform-style: preserve-3d;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow-spill::before,
+  .hero-blob-gasoline { animation: none; }
+}
+
 .eom-card {
   background: #0f0f0f;
   border: 1px solid rgba(255, 255, 255, 0.08);
