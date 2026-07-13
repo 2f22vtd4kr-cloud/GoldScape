@@ -239,12 +239,81 @@ body {
   }
 }
 
+/* ─── Liquid Chrome Typography — Definitive Set v2 ──────────────────────── */
+/* Three-tier system:
+   .chrome-text        — hard specular platinum sweep (H1 / brand / stats)
+   .chrome-text-accent — slow iridescent conic cycle (accent word per section)
+   Both tiers work on any Oxanium or Space Grotesk element.              */
+
+@keyframes chrome-sweep {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
 .chrome-text {
-  background: linear-gradient(135deg, #ffffff 0%, #d8d8d8 25%, #888888 50%, #cccccc 75%, #ffffff 100%);
+  /* Hard specular: narrow bright band sweeps left → right over platinum base.
+     Warm tint (#faf8f4) at peak keeps it "platinum" rather than cold steel. */
+  background: linear-gradient(
+    105deg,
+    #3a3a3a  0%,
+    #7a7a7a  8%,
+    #b8b8b8 16%,
+    #e0dcd4 24%,
+    #faf8f4 30%,   /* platinum hot-spot */
+    #f0ece4 34%,
+    #d0ccc4 40%,
+    #909090 50%,
+    #c0bcb4 60%,
+    #e8e4dc 70%,
+    #f4f0e8 76%,
+    #d8d4cc 82%,
+    #909090 90%,
+    #5a5a5a 100%
+  );
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  animation: chrome-sweep 11s linear infinite;
+  filter: drop-shadow(0 1px 6px rgba(240,236,228,0.08));
+}
+
+/* Iridescent chrome — reserved for one accent word per hero section.
+   Cycles through a cool-to-warm chrome spectrum to echo the iridescent blob. */
+.chrome-text-accent {
+  background: conic-gradient(
+    from var(--angle),
+    #b0b0c0,
+    #d8d0f0,
+    #e8e4f8,
+    #f4f0ff,
+    #c8e8f8,
+    #e0f4fc,
+    #faf8ff,
+    #f0dce8,
+    #e8d8f0,
+    #c8c0d8,
+    #b0b0c0
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: spinPrism 9s linear infinite;
+  filter: drop-shadow(0 0 18px rgba(180,160,240,0.18));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chrome-text {
+    animation: none;
+    background-size: 100% auto;
+  }
+  .chrome-text-accent {
+    animation: none;
+    /* Freeze at a neutral chrome state when motion is reduced */
+    background: linear-gradient(105deg, #b0b0c0, #e8e4f8, #b0b0c0);
+  }
 }
 
 .iridescent-text {

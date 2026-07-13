@@ -1,0 +1,334 @@
+/* ─── Liquid Chrome Typography — EstateofMind ───────────────────────────── */
+/* DEFINITIVE SET — applied to live site ─────────────────────────────────── */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DEFINITIVE — 4 role classes
+   ─────────────────────────────────────────────────────────────────────────
+   def-chrome-hero    : H1 display — hard specular platinum, animated shimmer
+   def-chrome-accent  : Key accent word — slow iridescent conic, living chrome
+   def-chrome-secondary: H2/H3 — blue-steel, quiet and structural
+   def-chrome-tertiary : H3 sublines — near-ghost chrome, very muted
+   def-chrome-stat    : Large numerics — platinum-warm, +SVG warp in JSX
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Animated shimmer: moves the hard specular band across the text */
+@keyframes chrome-sweep {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* H1 — hard specular with platinum warmth and slow sweep */
+.def-chrome-hero {
+  background: linear-gradient(
+    105deg,
+    #3a3a3a  0%,
+    #7a7a7a  8%,
+    #b8b8b8 16%,
+    #e0dcd4 24%,    /* platinum peak — very slight warm tint */
+    #faf8f4 30%,    /* hot specular — warm white, not pure */
+    #f0ece4 34%,
+    #d0ccc4 40%,
+    #909090 50%,
+    #c0bcb4 60%,
+    #e8e4dc 70%,
+    #f4f0e8 76%,
+    #d8d4cc 82%,
+    #909090 90%,
+    #5a5a5a 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: chrome-sweep 10s linear infinite;
+  filter: drop-shadow(0 1px 8px rgba(240,236,228,0.09));
+}
+
+/* Accent word — iridescent conic, cycles slowly through chrome spectrum */
+.def-chrome-accent {
+  background: conic-gradient(
+    from var(--iris-angle),
+    #b0b0c0,
+    #d8d0f0,    /* cool violet shimmer */
+    #e8e4f8,
+    #f4f0ff,    /* near-white peak */
+    #c8e8f8,    /* ice blue */
+    #e0f4fc,
+    #faf8ff,    /* pure peak */
+    #f0dce8,    /* pink/rose warmth */
+    #e8d8f0,
+    #c8c0d8,
+    #b0b0c0
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: iris-spin 9s linear infinite;
+  filter: drop-shadow(0 0 20px rgba(180,160,240,0.18))
+          drop-shadow(0 1px 2px rgba(0,0,0,0.7));
+}
+
+/* H2/H3 — blue-steel: cool, structural, clearly secondary */
+.def-chrome-secondary {
+  background: linear-gradient(
+    108deg,
+    #30343e  0%,
+    #62687a 12%,
+    #9aa0b8 26%,
+    #c4cad8 38%,
+    #dce0ec 46%,
+    #c0c6d6 54%,
+    #8890a8 64%,
+    #a8aec4 74%,
+    #d0d6e4 82%,
+    #8898b0 92%,
+    #3c4050 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* H3 sublines — near-ghost, very muted for hierarchy depth */
+.def-chrome-tertiary {
+  background: linear-gradient(
+    108deg,
+    #282c34 0%,
+    #484e5e 30%,
+    #686e80 55%,
+    #505466 75%,
+    #282c34 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Large stats — platinum with gold warmth */
+.def-chrome-stat {
+  background: linear-gradient(
+    112deg,
+    #4a4840  0%,
+    #8a8478 10%,
+    #c8c2b4 20%,
+    #e8e0d0 28%,
+    #faf4e8 34%,   /* warm platinum peak */
+    #f0e8d8 40%,
+    #ccc6b8 50%,
+    #b0aaa0 60%,
+    #d4cec4 70%,
+    #ece6dc 78%,
+    #a8a29a 90%,
+    #606058 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 12px rgba(240,230,200,0.12));
+}
+
+
+/* Shared token: Google Fonts loaded non-blocking in index.html              */
+
+@property --chrome-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --iris-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes shimmer {
+  0%   { --chrome-angle: 0deg; }
+  100% { --chrome-angle: 360deg; }
+}
+@keyframes iris-spin {
+  0%   { --iris-angle: 0deg; }
+  100% { --iris-angle: 360deg; }
+}
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.88; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VARIANT 1 — Chrome Classic
+   Multi-stop polished-metal gradient; animated highlight sweep.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.chrome-classic-text {
+  /* Deep, multi-stop chrome: dark → bright → mid → bright → dark
+     Tilted at 110° to simulate a hard light raking across the surface */
+  background: linear-gradient(
+    110deg,
+    #4a4a4a  0%,
+    #9a9a9a 12%,
+    #e8e8e8 24%,
+    #ffffff 32%,
+    #d0d0d0 40%,
+    #888888 52%,
+    #c0c0c0 64%,
+    #f0f0f0 76%,
+    #e0e0e0 84%,
+    #aaaaaa 92%,
+    #666666 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  /* Subtle drop to add depth on the dark bg */
+  filter: drop-shadow(0 2px 12px rgba(220,220,220,0.10))
+          drop-shadow(0 0px 1px rgba(255,255,255,0.25));
+}
+
+/* Secondary text — quieter metallic for supporting lines */
+.chrome-classic-subtle {
+  background: linear-gradient(
+    110deg,
+    #3a3a3a 0%,
+    #6a6a6a 30%,
+    #8a8a8a 55%,
+    #5a5a5a 80%,
+    #3a3a3a 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VARIANT 2 — Liquid Mercury
+   High-contrast mercury palette (cooler, bluer chrome) + SVG distortion
+   applied via filter: url(#liquid-warp) on the parent element in JSX.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mercury-text {
+  background: linear-gradient(
+    115deg,
+    #2a2e38  0%,
+    #7a8494 10%,
+    #c8d2e0 22%,
+    #eef2f8 30%,
+    #ffffff 36%,
+    #d4dae6 44%,
+    #8a94a8 54%,
+    #b4bece 64%,
+    #e8ecf4 74%,
+    #c0c8d8 84%,
+    #6a7080 92%,
+    #3a4050 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 8px rgba(180,200,240,0.12));
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VARIANT 3 — Mirror Glass
+   Base chrome + rotating iridescent conic overlay using CSS Houdini
+   @property animation for buttery smooth color cycling.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Primary: deep chrome with a living iridescent shift */
+.glass-text {
+  background: linear-gradient(
+    120deg,
+    #3a3a42  0%,
+    #8a8a96 10%,
+    #d0d0dc 22%,
+    #f0f0f8 30%,
+    #ffffff 36%,
+    #c8c8d8 44%,
+    #8890a4 52%,
+    #b8bcd0 62%,
+    #e4e6f4 72%,
+    #d0d0e0 80%,
+    #9090a0 90%,
+    #505060 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 16px rgba(180,160,240,0.14))
+          drop-shadow(0 2px 2px rgba(0,0,0,0.6));
+}
+
+/* Accent word — iridescent chrome highlight */
+.glass-text-accent {
+  background: conic-gradient(
+    from var(--iris-angle),
+    #c0c0d8,
+    #e8e0ff,
+    #f0e8ff,
+    #c0e8ff,
+    #d0f0e8,
+    #f0e0ff,
+    #ffffff,
+    #d8d0f0,
+    #c0c0d8
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: iris-spin 7s linear infinite;
+  filter: drop-shadow(0 0 20px rgba(180,160,255,0.20));
+}
+
+/* Mid-level — slightly muted metallic */
+.glass-text-mid {
+  background: linear-gradient(
+    120deg,
+    #585868 0%,
+    #8888a0 25%,
+    #b0b0c8 50%,
+    #888898 75%,
+    #585868 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Very subtle — almost ghostly chrome for captions */
+.glass-text-subtle {
+  background: linear-gradient(
+    120deg,
+    #404050 0%,
+    #6a6a80 40%,
+    #808090 60%,
+    #505060 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Vertical separator */
+.glass-divider {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(160,160,200,0.3) 30%,
+    rgba(200,200,240,0.5) 50%,
+    rgba(160,160,200,0.3) 70%,
+    transparent
+  );
+}

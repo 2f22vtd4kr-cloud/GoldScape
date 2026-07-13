@@ -7,3 +7,4 @@
 - [Artifact-managed workflow ports/env](artifact-workflow-management.md) — artifact.toml [services.env] is authoritative; never hand-patch workflow run commands, check for orphaned processes on port conflicts
 - [Graduating a multi-page mockup as a full site replacement](mockup-graduation-full-site.md) — consolidate duplicated per-page CSS/nav/footer into shared app code, and remove old-content-specific infra (i18n, persona pipelines) rather than adapting it
 - [Google Fonts CSS import blocking mobile](google-fonts-mobile-block.md) — @import url() in CSS is render-blocking; causes white page on slow/blocked mobile; use HTML link tags instead
+- [Liquid Chrome Typography system](liquid-chrome-typography.md) — definitive two-tier chrome system: .chrome-text (platinum sweep) + .chrome-text-accent (iridescent conic); design rationale and placement rules

@@ -16,5 +16,9 @@ export const modules: ModuleMap = {
   "./components/mockups/gory-v2-alpine/Stay.tsx": () => import("../components/mockups/gory-v2-alpine/Stay.tsx"),
   "./components/mockups/gory-v3-terrain/Home.tsx": () => import("../components/mockups/gory-v3-terrain/Home.tsx"),
   "./components/mockups/gory-v3-terrain/Ski.tsx": () => import("../components/mockups/gory-v3-terrain/Ski.tsx"),
-  "./components/mockups/gory-v3-terrain/Stay.tsx": () => import("../components/mockups/gory-v3-terrain/Stay.tsx")
+  "./components/mockups/gory-v3-terrain/Stay.tsx": () => import("../components/mockups/gory-v3-terrain/Stay.tsx"),
+  "./components/mockups/liquid-chrome/ChromeClassic.tsx": () => import("../components/mockups/liquid-chrome/ChromeClassic.tsx"),
+  "./components/mockups/liquid-chrome/Definitive.tsx": () => import("../components/mockups/liquid-chrome/Definitive.tsx"),
+  "./components/mockups/liquid-chrome/LiquidMercury.tsx": () => import("../components/mockups/liquid-chrome/LiquidMercury.tsx"),
+  "./components/mockups/liquid-chrome/MirrorGlass.tsx": () => import("../components/mockups/liquid-chrome/MirrorGlass.tsx")
 };
