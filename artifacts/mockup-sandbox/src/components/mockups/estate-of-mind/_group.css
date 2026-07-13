@@ -1,0 +1,220 @@
+/* EstateofMind — Shared Design Tokens */
+/* Import this file in every EstateofMind component: import './_group.css'; */
+
+/* ─── Base ─────────────────────────────────────────────────────────── */
+:root {
+  --eom-bg:        #080808;
+  --eom-bg-2:      #0f0f0f;
+  --eom-bg-3:      #181818;
+  --eom-border:    rgba(255,255,255,0.08);
+  --eom-border-hi: rgba(255,255,255,0.18);
+
+  /* Chrome palette */
+  --chrome-hi:     #ffffff;
+  --chrome-mid:    #d0d0d0;
+  --chrome-shadow: #444444;
+  --chrome-dark:   #1a1a1a;
+
+  /* Gas-spill hues (iridescent) */
+  --spill-1: hsl(250, 90%, 65%);   /* electric blue-violet */
+  --spill-2: hsl(295, 80%, 65%);   /* magenta-purple */
+  --spill-3: hsl(335, 90%, 65%);   /* hot rose */
+  --spill-4: hsl(25,  90%, 65%);   /* amber-orange */
+  --spill-5: hsl(55,  90%, 70%);   /* gold */
+  --spill-6: hsl(185, 80%, 58%);   /* teal-cyan */
+
+  /* Typography */
+  --font-display: 'Oxanium', 'Space Grotesk', sans-serif;
+  --font-body:    'Space Grotesk', 'DM Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --section-pad:  clamp(60px, 8vw, 120px);
+  --container:    min(1320px, calc(100% - 48px));
+}
+
+/* ─── CSS property for conic-gradient angle animation ─────────────── */
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ─── Base reset ───────────────────────────────────────────────────── */
+.eom-root {
+  background: var(--eom-bg);
+  color: #f0f0f0;
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── Chrome gradient utility ──────────────────────────────────────── */
+.chrome-grad {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #e8e8e8 12%,
+    #b0b0b0 28%,
+    #555555 46%,
+    #333333 54%,
+    #777777 64%,
+    #c8c8c8 78%,
+    #f0f0f0 90%,
+    #ffffff 100%
+  );
+}
+
+/* ─── Morphing blob ────────────────────────────────────────────────── */
+.chrome-blob {
+  border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%;
+  background: linear-gradient(
+    135deg,
+    #f0f0f0 0%,
+    #d4d4d4 18%,
+    #888888 38%,
+    #444444 52%,
+    #666666 62%,
+    #c0c0c0 78%,
+    #f8f8f8 100%
+  );
+  box-shadow:
+    inset  8px  8px 40px rgba(255,255,255,0.45),
+    inset -8px -8px 40px rgba(0,0,0,0.55),
+    0 0 80px rgba(200,200,200,0.06);
+  animation: morphBlob 10s ease-in-out infinite;
+}
+@keyframes morphBlob {
+  0%   { border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%; }
+  25%  { border-radius: 40% 60% 50% 50% / 70% 30% 60% 40%; }
+  50%  { border-radius: 50% 50% 30% 70% / 40% 70% 50% 60%; }
+  75%  { border-radius: 70% 30% 60% 40% / 60% 50% 40% 70%; }
+  100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%; }
+}
+
+/* ─── Gas-spill iridescent blob ────────────────────────────────────── */
+.iridescent-spill {
+  border-radius: 50% 70% 40% 60% / 60% 40% 70% 50%;
+  background: conic-gradient(
+    from var(--angle),
+    hsl(250, 90%, 65%) 0%,
+    hsl(290, 80%, 65%) 14%,
+    hsl(330, 90%, 65%) 28%,
+    hsl(20,  90%, 65%) 42%,
+    hsl(55,  90%, 72%) 54%,
+    hsl(185, 80%, 60%) 68%,
+    hsl(225, 85%, 65%) 82%,
+    hsl(250, 90%, 65%) 100%
+  );
+  filter: blur(55px);
+  opacity: 0.5;
+  animation: spinPrism 14s linear infinite;
+}
+@keyframes spinPrism { to { --angle: 360deg; } }
+
+/* ─── Chrome text ──────────────────────────────────────────────────── */
+.chrome-text {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #d8d8d8 25%,
+    #888888 50%,
+    #cccccc 75%,
+    #ffffff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ─── Iridescent text ──────────────────────────────────────────────── */
+.iridescent-text {
+  background: conic-gradient(
+    from var(--angle),
+    hsl(250, 90%, 78%),
+    hsl(295, 80%, 78%),
+    hsl(335, 90%, 78%),
+    hsl(20,  90%, 78%),
+    hsl(185, 80%, 72%),
+    hsl(250, 90%, 78%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: spinPrism 8s linear infinite;
+}
+
+/* ─── Card ─────────────────────────────────────────────────────────── */
+.eom-card {
+  background: var(--eom-bg-2);
+  border: 1px solid var(--eom-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.eom-card:hover {
+  border-color: var(--eom-border-hi);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 40px rgba(180,180,255,0.05);
+}
+
+/* ─── Button ───────────────────────────────────────────────────────── */
+.eom-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: linear-gradient(135deg, #e8e8e8 0%, #a8a8a8 50%, #e0e0e0 100%);
+  color: #0a0a0a;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.eom-btn-primary:hover { opacity: 0.88; transform: scale(1.02); }
+
+.eom-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 27px;
+  border: 1px solid var(--eom-border-hi);
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: transparent;
+  color: #d0d0d0;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.eom-btn-ghost:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: #fff;
+  background: rgba(255,255,255,0.04);
+}
+
+/* ─── Nav ──────────────────────────────────────────────────────────── */
+.eom-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(24px, 4vw, 60px);
+  height: 72px;
+  background: rgba(8,8,8,0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--eom-border);
+}
