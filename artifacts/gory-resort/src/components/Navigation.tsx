@@ -68,7 +68,10 @@ export function Navigation() {
       </div>
 
       {mobileOpen && (
-        <div className="absolute top-full left-0 right-0 md:hidden bg-[#080808]/95 backdrop-blur-xl border-t border-white/5 flex flex-col px-8 py-6 gap-6">
+        <div className="absolute top-full left-0 right-0 md:hidden bg-[#080808] border-t border-white/5 flex flex-col px-8 py-6 gap-6">
+          {/* Fully opaque (not translucent + blurred) on purpose: with the animated
+              chrome-blob hero sitting right underneath, a semi-transparent panel let
+              the bright hero text/blob bleed through and collide with the menu links. */}
           {LINKS.map((link) => (
             <Link
               key={link.href}

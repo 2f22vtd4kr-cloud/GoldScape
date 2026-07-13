@@ -11,3 +11,5 @@
 - [Gas-spill liquid chrome system](gas-spill-chrome-system.md) — oil-slick multi-hue palette + multi-tendril "spill" SVG variant built on Canvas, pending graduation
 - [Mockup sandbox static asset paths](mockup-sandbox-static-paths.md) — use /chrome/… not /__mockup/chrome/… inside components; /__mockup/ hits Vite SPA fallback and silently returns HTML
 - [Property listing photography wiring](property-listing-photos.md) — Properties.tsx listing→image mapping; gradients silently pass type-check, don't leave new listings without a real photo
+- [Mobile-viewport screenshots & lazy-image timing](mobile-viewport-screenshots.md) — puppeteer-core recipe for real mobile QA; fast scripted scrolling makes lazy images falsely look blank/broken
+- [Backdrop-blur bleed-through on translucent overlays](backdrop-blur-bleed-through.md) — translucent+blurred panels over bright/animated content can leak it through visibly despite correct computed styles; prefer fully opaque for guaranteed legibility
