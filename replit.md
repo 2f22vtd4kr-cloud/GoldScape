@@ -28,4 +28,16 @@ Workflows (managed by Replit):
 
 ## User preferences
 
-<!-- Add preferences here as they come up -->
+- **Mandatory work log**: every job/task worked on in this project must be transcribed into the "Work Log" section below as it happens — not just at the end. Add a dated entry when starting a piece of work and update/finish it when done. This is obligatory for every session, not optional.
+
+## Work Log
+
+### 2026-07-13 — Visual/legibility pass on Home & Properties
+- Root-caused the "barely visible text" complaint to a single shared CSS class: `.chrome-text`'s metallic gradient dropped to near-black stops, which on longer headings and property prices could land a fully dark segment over part of the string. Raised the gradient floor to a legible charcoal across the board (fixes it site-wide, not just on the pages checked).
+- Replaced off-brand imagery on the Home page: the mechanical-eye motif (3 usages) and the rainbow-neon AI face panel, both of which clashed with the platinum/violet liquid-chrome design language.
+  - "Свобода капитала" section: swapped the sky photo + eye for an ambient chrome glow + `chrome-blob-twisted.png`.
+  - "Почему нас выбирают": swapped the AI face for a real Dubai penthouse photo (Burj Khalifa view) — more trust-building than an abstract render.
+  - CTA card: replaced both remaining eye ornaments with `ChromeShape` components (blob + orb).
+  - Process-step numerals: recolored the drop-shadow glow from a mismatched neon-blue to the brand's violet/platinum.
+- Verified all changes on both desktop and mobile viewports via screenshots; no regressions found. Cleaned up throwaway QA scripts/screenshots afterward.
+- Fixed an unrelated port conflict (orphaned Node processes holding ports 5000/8080 from earlier manual scripts) that had crashed the `gory-resort` and `api-server` workflows; killed the stale processes and restarted both cleanly.
