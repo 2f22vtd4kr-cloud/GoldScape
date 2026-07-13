@@ -3,17 +3,16 @@ import { Shield, Globe, Zap, Bed, Bath, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 import { Layout } from '@/components/Layout';
 import { ChromeShape } from '@/components/ChromeShape';
-import { IsoTerrain, DUBAI_DOWNTOWN_LANDMARKS } from '@/components/IsoTerrain';
 import { ChromeHeroFrame } from '@/components/ChromeHeroFrame';
 
 const DESTINATIONS = [
-  { flag: '🇦🇪', country: 'ОАЭ',         city: 'Дубай',     price: '$380,000',  image: '/images/dest-dubai.jpg' },
-  { flag: '🇹🇷', country: 'Турция',       city: 'Стамбул',   price: '$120,000',  image: '/images/dest-turkey.jpg' },
-  { flag: '🇨🇾', country: 'Кипр',         city: 'Лимасол',   price: '€180,000',  image: '/images/dest-cyprus.jpg' },
-  { flag: '🇬🇪', country: 'Грузия',       city: 'Батуми',    price: '$65,000',   image: '/images/dest-georgia.jpg' },
-  { flag: '🇹🇭', country: 'Таиланд',      city: 'Пхукет',    price: '$95,000',   image: '/images/dest-thailand.jpg' },
-  { flag: '🇵🇹', country: 'Португалия',   city: 'Лиссабон',  price: '€345,000',  image: '/images/dest-portugal.jpg' },
-  { flag: '🇷🇸', country: 'Сербия',       city: 'Белград',   price: '€85,000',   image: '/images/dest-serbia.jpg' },
+  { flag: '🇦🇪', country: 'ОАЭ',         city: 'Дубай',     price: '$380,000',  image: '/images/dest-dubai.jpg',    code: 'ae' },
+  { flag: '🇹🇷', country: 'Турция',       city: 'Стамбул',   price: '$120,000',  image: '/images/dest-turkey.jpg',   code: 'tr' },
+  { flag: '🇨🇾', country: 'Кипр',         city: 'Лимасол',   price: '€180,000',  image: '/images/dest-cyprus.jpg',   code: 'cy' },
+  { flag: '🇬🇪', country: 'Грузия',       city: 'Батуми',    price: '$65,000',   image: '/images/dest-georgia.jpg',  code: 'ge' },
+  { flag: '🇹🇭', country: 'Таиланд',      city: 'Пхукет',    price: '$95,000',   image: '/images/dest-thailand.jpg', code: 'th' },
+  { flag: '🇵🇹', country: 'Португалия',   city: 'Лиссабон',  price: '€345,000',  image: '/images/dest-portugal.jpg', code: 'pt' },
+  { flag: '🇷🇸', country: 'Сербия',       city: 'Белград',   price: '€85,000',   image: '/images/dest-serbia.jpg',   code: 'rs' },
 ];
 
 const FEATURED_PROPERTIES = [
@@ -283,8 +282,9 @@ export default function Home() {
             data-stagger
           >
             {DESTINATIONS.map((dest, i) => (
-              <div
+              <Link
                 key={i}
+                href={`/countries/${dest.code}`}
                 className="dest-card min-w-[200px] lg:min-w-0 snap-start flex flex-col justify-between h-[180px] relative overflow-hidden"
                 data-reveal="up"
                 style={
@@ -307,7 +307,7 @@ export default function Home() {
                     <p className="font-oxanium text-white text-lg tracking-wide">{dest.price}</p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -526,41 +526,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ─── 3D LOCATION MAP ─────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-black relative overflow-hidden">
-        {/* Ambient glow */}
-        <div
-          className="hero-glow-spill absolute pointer-events-none"
-          style={{
-            width: 'min(700px, 110vw)', height: 'min(700px, 110vw)',
-            top: '50%', left: '50%',
-            transform: 'translate(-50%, -50%)',
-            opacity: 0.18,
-            zIndex: 0,
-          }}
-        />
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="mb-14 text-center" data-reveal="up">
-            <p className="font-oxanium text-[11px] tracking-[0.28em] text-white/40 uppercase mb-3">
-              Геолокация объекта
-            </p>
-            <h2 className="font-oxanium text-3xl md:text-[38px] text-white section-reveal-heading">
-              3D карта расположения
-            </h2>
-            <p className="font-space-grotesk text-sm text-white/35 mt-2">
-              Реальное расстояние до ключевых объектов инфраструктуры
-            </p>
-          </div>
-          <IsoTerrain
-            propertyName="Пентхаус · Downtown"
-            propertyAddress="Downtown Dubai, UAE"
-            propertySvgX={200}
-            propertySvgY={138}
-            landmarks={DUBAI_DOWNTOWN_LANDMARKS}
-          />
         </div>
       </section>
 

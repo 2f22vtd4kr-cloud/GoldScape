@@ -2,6 +2,7 @@ import { Router, Route, Switch } from 'wouter';
 import Home from '@/pages/Home';
 import About from '@/pages/About';
 import Properties from '@/pages/Properties';
+import CountryPage from '@/pages/CountryPage';
 import NotFound from '@/pages/not-found';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/properties" component={Properties} />
+        <Route path="/countries/:code" component={CountryPage} />
         <Route path="/*" component={NotFound} />
       </Switch>
     </Router>

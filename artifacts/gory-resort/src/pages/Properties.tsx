@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useSearch } from 'wouter';
 import { Filter, MessageCircle, ArrowRight, Send } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 
@@ -284,6 +286,14 @@ const LISTINGS = [
 ];
 
 export default function Properties() {
+  const search = useSearch();
+  const initialCountry = new URLSearchParams(search).get('country') ?? '';
+  const [countryFilter, setCountryFilter] = useState(initialCountry.toUpperCase());
+
+  const filteredListings = countryFilter
+    ? LISTINGS.filter(l => l.country === countryFilter)
+    : LISTINGS;
+
   return (
     <Layout>
       {/* PAGE HEADER */}
@@ -317,15 +327,19 @@ export default function Properties() {
       {/* FILTER BAR */}
       <div className="sticky top-20 z-40 bg-[#080808]/90 backdrop-blur-xl border-b border-white/10 py-4 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto flex flex-wrap gap-3 items-center">
-          <select className="bg-[#141414] border border-white/10 rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider text-gray-300 hover:border-white/30 focus:border-white focus:outline-none transition-colors appearance-none cursor-pointer">
-            <option>Страна: Все</option>
-            <option>ОАЭ</option>
-            <option>Турция</option>
-            <option>Кипр</option>
-            <option>Грузия</option>
-            <option>Таиланд</option>
-            <option>Португалия</option>
-            <option>Сербия</option>
+          <select
+            className="bg-[#141414] border border-white/10 rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider text-gray-300 hover:border-white/30 focus:border-white focus:outline-none transition-colors appearance-none cursor-pointer"
+            value={countryFilter}
+            onChange={e => setCountryFilter(e.target.value)}
+          >
+            <option value="">Страна: Все</option>
+            <option value="AE">ОАЭ</option>
+            <option value="TR">Турция</option>
+            <option value="CY">Кипр</option>
+            <option value="GE">Грузия</option>
+            <option value="TH">Таиланд</option>
+            <option value="PT">Португалия</option>
+            <option value="RS">Сербия</option>
           </select>
 
           <select className="bg-[#141414] border border-white/10 rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider text-gray-300 hover:border-white/30 focus:border-white focus:outline-none transition-colors appearance-none cursor-pointer">
@@ -361,7 +375,7 @@ export default function Properties() {
       <section className="py-12 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {LISTINGS.map((item) => (
+            {filteredListings.map((item) => (
               <div key={item.id} className="eom-card flex flex-col group cursor-pointer">
                 <div className="relative aspect-[3/2] overflow-hidden bg-[#111]">
                   <img
