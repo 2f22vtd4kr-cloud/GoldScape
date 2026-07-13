@@ -2,6 +2,7 @@ import { Filter, MessageCircle, ArrowRight, Send } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 
 const LISTINGS = [
+  /* ── UAE ──────────────────────────────────────────────────────── */
   {
     id: 1,
     country: 'AE',
@@ -17,6 +18,7 @@ const LISTINGS = [
     gradient: 'radial-gradient(ellipse at 30% 40%, #c8933a 0%, #8b5e1a 40%, #1a0e04 100%)',
     agency: 'fäm Properties',
     exclusive: true,
+    tag: 'Вид на море',
   },
   {
     id: 2,
@@ -33,6 +35,7 @@ const LISTINGS = [
     gradient: 'radial-gradient(ellipse at 70% 30%, #1a5c8a 0%, #0d2a40 50%, #050d14 100%)',
     agency: 'fäm Properties',
     exclusive: false,
+    tag: null,
   },
   {
     id: 3,
@@ -49,6 +52,7 @@ const LISTINGS = [
     gradient: 'radial-gradient(ellipse at 50% 20%, #8a6a1a 0%, #3d2e08 50%, #0d0a02 100%)',
     agency: 'fäm Properties',
     exclusive: true,
+    tag: 'Вид Burj Khalifa',
   },
   {
     id: 4,
@@ -65,7 +69,26 @@ const LISTINGS = [
     gradient: 'radial-gradient(ellipse at 40% 60%, #5a3a1a 0%, #2a1a0a 50%, #0a0604 100%)',
     agency: 'fäm Properties',
     exclusive: false,
+    tag: null,
   },
+  {
+    id: 16,
+    country: 'AE',
+    flag: '🇦🇪',
+    city: 'Дубай',
+    district: 'Business Bay',
+    type: 'АПАРТАМЕНТЫ',
+    price: '$695,000',
+    pricePerSqm: '≈ $7,989/м²',
+    beds: 2,
+    baths: 2,
+    area: 87,
+    gradient: 'radial-gradient(ellipse at 55% 25%, #1e3a5a 0%, #0d1e30 50%, #040a14 100%)',
+    agency: 'fäm Properties',
+    exclusive: false,
+    tag: 'Canal View',
+  },
+  /* ── Turkey ───────────────────────────────────────────────────── */
   {
     id: 5,
     country: 'TR',
@@ -81,13 +104,14 @@ const LISTINGS = [
     gradient: 'radial-gradient(ellipse at 60% 40%, #8a1a2a 0%, #3d0d12 50%, #0d0406 100%)',
     agency: 'H&S Real Estate',
     exclusive: false,
+    tag: null,
   },
   {
     id: 6,
     country: 'TR',
     flag: '🇹🇷',
     city: 'Анталья',
-    district: 'Coast',
+    district: 'Lara Beach',
     type: 'ВИЛЛА',
     price: '$448,000',
     pricePerSqm: '≈ $2,036/м²',
@@ -97,29 +121,32 @@ const LISTINGS = [
     gradient: 'radial-gradient(ellipse at 30% 70%, #2a5a3a 0%, #0f2218 50%, #040a07 100%)',
     agency: 'H&S Real Estate',
     exclusive: false,
+    tag: '200м до пляжа',
   },
+  /* ── Cyprus ───────────────────────────────────────────────────── */
   {
     id: 7,
     country: 'CY',
     flag: '🇨🇾',
     city: 'Лимасол',
-    district: 'Limassol',
+    district: 'Germasogeia',
     type: 'АПАРТАМЕНТЫ',
-    price: '€420,000',
-    pricePerSqm: '≈ €4,000/м²',
+    price: '€435,000',
+    pricePerSqm: '≈ €4,350/м²',
     beds: 2,
     baths: 2,
-    area: 105,
+    area: 100,
     gradient: 'radial-gradient(ellipse at 50% 30%, #1a4a7a 0%, #0d2238 50%, #040c18 100%)',
     agency: 'H&S Real Estate',
     exclusive: false,
+    tag: 'Рядом с морем',
   },
   {
     id: 8,
     country: 'CY',
     flag: '🇨🇾',
     city: 'Пафос',
-    district: 'Paphos',
+    district: 'Koloni',
     type: 'ВИЛЛА',
     price: '€680,000',
     pricePerSqm: '≈ €2,833/м²',
@@ -129,13 +156,15 @@ const LISTINGS = [
     gradient: 'radial-gradient(ellipse at 35% 50%, #3a6a1a 0%, #1a2e0d 50%, #080f04 100%)',
     agency: 'H&S Real Estate',
     exclusive: true,
+    tag: 'Бассейн',
   },
+  /* ── Georgia ──────────────────────────────────────────────────── */
   {
     id: 9,
     country: 'GE',
     flag: '🇬🇪',
     city: 'Батуми',
-    district: 'Seafront',
+    district: 'Набережная',
     type: 'АПАРТАМЕНТЫ',
     price: '$95,000',
     pricePerSqm: '≈ $1,319/м²',
@@ -145,13 +174,14 @@ const LISTINGS = [
     gradient: 'radial-gradient(ellipse at 50% 40%, #1a5a5a 0%, #0d2828 50%, #040e0e 100%)',
     agency: 'EstateofMind Direct',
     exclusive: false,
+    tag: 'Доходность 9.4%',
   },
   {
     id: 10,
     country: 'GE',
     flag: '🇬🇪',
     city: 'Тбилиси',
-    district: 'Centre',
+    district: 'Ваке',
     type: 'ПЕНТХАУС',
     price: '$185,000',
     pricePerSqm: '≈ $1,321/м²',
@@ -161,7 +191,9 @@ const LISTINGS = [
     gradient: 'radial-gradient(ellipse at 60% 30%, #6a3a1a 0%, #2e1a0d 50%, #0e0906 100%)',
     agency: 'EstateofMind Direct',
     exclusive: false,
+    tag: 'Вид на Мтацминда',
   },
+  /* ── Thailand ─────────────────────────────────────────────────── */
   {
     id: 11,
     country: 'TH',
@@ -175,15 +207,69 @@ const LISTINGS = [
     baths: 3,
     area: 280,
     gradient: 'radial-gradient(ellipse at 40% 60%, #1a5a2a 0%, #0d2814 50%, #040e07 100%)',
-    agency: 'EstateofMind Direct',
+    agency: 'Samui Exclusive Homes',
     exclusive: false,
+    tag: 'Бассейн с инфинити',
   },
+  {
+    id: 15,
+    country: 'TH',
+    flag: '🇹🇭',
+    city: 'Самуи',
+    district: 'Chaweng Noi',
+    type: 'ВИЛЛА',
+    price: '$318,000',
+    pricePerSqm: '≈ $1,691/м²',
+    beds: 3,
+    baths: 3,
+    area: 188,
+    gradient: 'radial-gradient(ellipse at 42% 35%, #0d4a2a 0%, #062214 55%, #020d07 100%)',
+    agency: 'Samui Exclusive Homes',
+    exclusive: false,
+    tag: 'Рядом с пляжем',
+  },
+  /* ── Portugal ─────────────────────────────────────────────────── */
+  {
+    id: 13,
+    country: 'PT',
+    flag: '🇵🇹',
+    city: 'Лиссабон',
+    district: 'Campo de Ourique',
+    type: 'АПАРТАМЕНТЫ',
+    price: '€410,000',
+    pricePerSqm: '≈ €5,000/м²',
+    beds: 2,
+    baths: 1,
+    area: 82,
+    gradient: 'radial-gradient(ellipse at 48% 28%, #3a1a5c 0%, #1e0e30 50%, #0c0618 100%)',
+    agency: 'Sotheby\'s International Realty',
+    exclusive: false,
+    tag: 'Golden Visa',
+  },
+  {
+    id: 14,
+    country: 'PT',
+    flag: '🇵🇹',
+    city: 'Алгарве',
+    district: 'Vale do Lobo',
+    type: 'ВИЛЛА',
+    price: '€1,380,000',
+    pricePerSqm: '≈ €6,000/м²',
+    beds: 4,
+    baths: 4,
+    area: 230,
+    gradient: 'radial-gradient(ellipse at 35% 45%, #5c2a0e 0%, #2e1408 55%, #0e0604 100%)',
+    agency: 'Knight Frank Portugal',
+    exclusive: true,
+    tag: 'Golf & Ocean',
+  },
+  /* ── Serbia ───────────────────────────────────────────────────── */
   {
     id: 12,
     country: 'RS',
     flag: '🇷🇸',
     city: 'Белград',
-    district: 'Centre',
+    district: 'Savski Venac',
     type: 'АПАРТАМЕНТЫ',
     price: '€88,000',
     pricePerSqm: '≈ €1,294/м²',
@@ -193,6 +279,7 @@ const LISTINGS = [
     gradient: 'radial-gradient(ellipse at 55% 35%, #4a1a5a 0%, #200d28 50%, #0c0410 100%)',
     agency: 'EstateofMind Direct',
     exclusive: false,
+    tag: null,
   },
 ];
 
@@ -221,7 +308,9 @@ export default function Properties() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-oxanium font-bold chrome-text leading-tight">
             Объекты за рубежом
           </h1>
-          <p className="text-gray-400 font-space-grotesk text-base md:text-lg">847 объектов в 12 странах</p>
+          <p className="text-gray-400 font-space-grotesk text-base md:text-lg">
+            847 объектов · 8 стран · от $88 000
+          </p>
         </div>
       </header>
 
@@ -235,6 +324,7 @@ export default function Properties() {
             <option>Кипр</option>
             <option>Грузия</option>
             <option>Таиланд</option>
+            <option>Португалия</option>
             <option>Сербия</option>
           </select>
 
@@ -285,6 +375,11 @@ export default function Properties() {
                       <span className="text-sm leading-none">{item.flag}</span>
                       <span className="text-gray-200 tracking-wider">{item.country}</span>
                     </div>
+                    {item.tag && (
+                      <div className="bg-[#080808]/60 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1 text-[10px] font-space-grotesk text-white/70 shadow-lg">
+                        {item.tag}
+                      </div>
+                    )}
                   </div>
 
                   {item.exclusive && (
@@ -343,7 +438,7 @@ export default function Properties() {
               className="w-12 h-0.5 mb-6 rounded-full opacity-50"
               style={{ background: 'linear-gradient(90deg, #e0e0e0, #808080)' }}
             />
-            <button className="eom-btn-ghost">Загрузить ещё (835 объектов)</button>
+            <button className="eom-btn-ghost">Загрузить ещё (831 объект)</button>
           </div>
         </div>
       </section>

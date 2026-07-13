@@ -1,14 +1,16 @@
 import { Shield, Globe, Zap, Bed, Bath, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 import { Layout } from '@/components/Layout';
+import { ChromeShape } from '@/components/ChromeShape';
 
 const DESTINATIONS = [
-  { flag: '🇦🇪', country: 'ОАЭ', city: 'Дубай', price: '$380,000', image: '/images/dest-dubai.jpg' },
-  { flag: '🇹🇷', country: 'Турция', city: 'Стамбул', price: '$120,000', image: null },
-  { flag: '🇨🇾', country: 'Кипр', city: 'Лимасол', price: '€180,000', image: '/images/dest-cyprus.jpg' },
-  { flag: '🇬🇪', country: 'Грузия', city: 'Батуми', price: '$65,000', image: '/images/dest-georgia.jpg' },
-  { flag: '🇹🇭', country: 'Таиланд', city: 'Пхукет', price: '$95,000', image: null },
-  { flag: '🇷🇸', country: 'Сербия', city: 'Белград', price: '€85,000', image: null },
+  { flag: '🇦🇪', country: 'ОАЭ',         city: 'Дубай',     price: '$380,000',  image: '/images/dest-dubai.jpg' },
+  { flag: '🇹🇷', country: 'Турция',       city: 'Стамбул',   price: '$120,000',  image: null },
+  { flag: '🇨🇾', country: 'Кипр',         city: 'Лимасол',   price: '€180,000',  image: '/images/dest-cyprus.jpg' },
+  { flag: '🇬🇪', country: 'Грузия',       city: 'Батуми',    price: '$65,000',   image: '/images/dest-georgia.jpg' },
+  { flag: '🇹🇭', country: 'Таиланд',      city: 'Пхукет',    price: '$95,000',   image: null },
+  { flag: '🇵🇹', country: 'Португалия',   city: 'Лиссабон',  price: '€345,000',  image: null },
+  { flag: '🇷🇸', country: 'Сербия',       city: 'Белград',   price: '€85,000',   image: null },
 ];
 
 const FEATURED_PROPERTIES = [
@@ -80,9 +82,9 @@ const TESTIMONIALS = [
 
 const TRUST_STATS = [
   { value: '$130M+', label: 'Общая стоимость закрытых сделок' },
-  { value: '847', label: 'Семей нашли новый дом' },
-  { value: '12', label: 'Стран присутствия' },
-  { value: '2019', label: 'Год основания' },
+  { value: '847',    label: 'Семей нашли новый дом' },
+  { value: '12',     label: 'Стран присутствия' },
+  { value: '2019',   label: 'Год основания' },
 ];
 
 const WHY_US = [
@@ -94,7 +96,7 @@ const WHY_US = [
   {
     Icon: Globe,
     title: 'Локальные партнёры',
-    desc: 'fäm Properties (ОАЭ), H&S Real Estate (Кипр/Турция) и другие аккредитованные агентства. Выход на реальный рынок, не витрину.',
+    desc: 'fäm Properties (ОАЭ), H&S Real Estate (Кипр/Турция), Knight Frank (Португалия) и другие аккредитованные агентства.',
   },
   {
     Icon: Zap,
@@ -122,7 +124,7 @@ export default function Home() {
             </h1>
 
             <p className="font-space-grotesk text-lg text-white/55 max-w-lg mb-12 leading-relaxed">
-              Инвестиции в зарубежную недвижимость — ОАЭ, Турция, Кипр, Грузия
+              Инвестиции в зарубежную недвижимость — ОАЭ, Турция, Кипр, Грузия, Португалия
             </p>
 
             <div className="flex flex-wrap gap-4 mb-16">
@@ -143,12 +145,17 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative h-[400px] lg:h-[600px] flex items-center justify-center mt-12 lg:mt-0">
-            <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+          {/* Hero visual column */}
+          <div className="lg:col-span-5 relative h-[400px] lg:h-[600px] flex items-center justify-center mt-4 lg:mt-0">
+            {/* Iridescent glow — responsive, never overflows on mobile */}
+            <div
+              className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
+              aria-hidden="true"
+            >
               <div
                 style={{
-                  width: '480px',
-                  height: '480px',
+                  width: 'min(480px, 88vw)',
+                  height: 'min(480px, 88vw)',
                   background: 'conic-gradient(from 0deg, #4a00e0, #8e2de2, #f000ff, #00c9ff, #92fe9d, #4a00e0)',
                   filter: 'blur(90px)',
                   opacity: 0.22,
@@ -157,18 +164,30 @@ export default function Home() {
               />
             </div>
 
+            {/* Main iridescent blob image */}
             <img
               src="/chrome/blob-iridescent-3.png"
               alt=""
               className="animate-float relative z-10 drop-shadow-[0_0_60px_rgba(120,80,255,0.4)]"
-              style={{ width: 'clamp(280px, 38vw, 520px)', height: 'auto', pointerEvents: 'none' }}
+              style={{ width: 'clamp(240px, 36vw, 500px)', height: 'auto', pointerEvents: 'none' }}
             />
 
+            {/* Small spike — hidden on mobile, positioned so it doesn't overlap text */}
             <img
               src="/chrome/spike-chrome.png"
               alt=""
-              className="animate-float-small absolute z-20 opacity-80"
-              style={{ width: '90px', bottom: '10%', right: '8%', filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.25))' }}
+              className="animate-float-small absolute z-20 opacity-80 hidden sm:block"
+              style={{ width: '80px', bottom: '14%', right: '6%', filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.25))' }}
+            />
+
+            {/* Chrome ring accent — opposite corner from spike */}
+            <ChromeShape
+              variant="ring"
+              size={52}
+              breathe={true}
+              iridescent={false}
+              className="absolute z-20 opacity-60 hidden sm:block"
+              style={{ top: '18%', left: '4%' }}
             />
           </div>
         </div>
@@ -180,18 +199,18 @@ export default function Home() {
           <h2 className="font-oxanium text-3xl md:text-[32px] chrome-text mb-2 section-reveal-heading">
             Куда переезжают
           </h2>
-          <p className="font-space-grotesk text-sm text-white/40">Топ-6 направлений 2026 года</p>
+          <p className="font-space-grotesk text-sm text-white/40">Топ-7 направлений 2026 года</p>
         </div>
 
         <div className="container mx-auto px-6">
           <div
-            className="flex overflow-x-auto pb-8 -mx-6 px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 xl:grid-cols-6 gap-4 snap-x hide-scrollbar"
+            className="flex overflow-x-auto pb-8 -mx-6 px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4 xl:grid-cols-7 gap-4 snap-x hide-scrollbar"
             data-stagger
           >
             {DESTINATIONS.map((dest, i) => (
               <div
                 key={i}
-                className="dest-card min-w-[240px] lg:min-w-0 snap-start flex flex-col justify-between h-[200px] relative overflow-hidden"
+                className="dest-card min-w-[200px] lg:min-w-0 snap-start flex flex-col justify-between h-[180px] relative overflow-hidden"
                 data-reveal="up"
                 style={
                   dest.image
@@ -204,13 +223,13 @@ export default function Home() {
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">{dest.flag}</span>
                     <div>
-                      <h3 className="font-oxanium text-white font-medium text-lg">{dest.country}</h3>
-                      <p className="font-space-grotesk text-white/50 text-sm">{dest.city}</p>
+                      <h3 className="font-oxanium text-white font-medium text-base">{dest.country}</h3>
+                      <p className="font-space-grotesk text-white/50 text-xs">{dest.city}</p>
                     </div>
                   </div>
                   <div className="mt-4">
                     <p className="font-space-grotesk text-white/40 text-xs mb-1">от</p>
-                    <p className="font-oxanium text-white text-xl tracking-wide">{dest.price}</p>
+                    <p className="font-oxanium text-white text-lg tracking-wide">{dest.price}</p>
                   </div>
                 </div>
               </div>
@@ -223,6 +242,16 @@ export default function Home() {
       <section id="about" className="py-24 bg-[#0f0f0f] relative overflow-hidden">
         <div
           className="iridescent-spill w-[500px] h-[500px] absolute -bottom-[250px] -left-[250px] opacity-25 z-0 pointer-events-none"
+        />
+
+        {/* Decorative spike accent top-right */}
+        <ChromeShape
+          variant="spike"
+          size={68}
+          breathe={true}
+          float={true}
+          iridescent={false}
+          className="absolute top-10 right-[8%] opacity-35 pointer-events-none hidden lg:block"
         />
 
         <div className="container mx-auto px-6 relative z-10">
@@ -303,15 +332,38 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Consultation CTA card */}
           <div className="relative flex flex-col items-center justify-center py-20" data-reveal="right">
-            <div className="iridescent-spill w-[400px] h-[400px] absolute z-0 opacity-30 mix-blend-screen" />
-            <div className="chrome-blob w-[280px] h-[280px] absolute z-10 animate-float-small opacity-80" />
+            {/* Iridescent color spill — GPU-composited, no flash */}
+            <div className="iridescent-spill w-[380px] h-[380px] absolute z-0 opacity-28 mix-blend-screen pointer-events-none" />
 
-            <div className="relative z-20 text-center bg-black/40 backdrop-blur-xl p-10 border border-white/10 rounded-3xl shadow-2xl">
-              <h3 className="font-oxanium text-[28px] chrome-text mb-8 max-w-[250px] mx-auto leading-tight">
+            {/* Iridescent chrome blob — now with real chrome/iridescent texture */}
+            <div className="chrome-blob w-[260px] h-[260px] absolute z-10 animate-float-small opacity-72 pointer-events-none" />
+
+            {/* Decorative star4 beside the card */}
+            <ChromeShape
+              variant="star4"
+              size={46}
+              breathe={true}
+              iridescent={true}
+              className="absolute z-20 opacity-80 hidden md:block"
+              style={{ top: '12%', right: '-4%' }}
+            />
+
+            {/* CTA card */}
+            <div className="relative z-20 text-center bg-black/48 backdrop-blur-2xl px-10 py-12 border border-white/12 rounded-3xl shadow-[0_8px_60px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.08)] max-w-[320px] w-full">
+              {/* Faint chrome orb inside card */}
+              <ChromeShape
+                variant="orb"
+                size={36}
+                breathe={true}
+                iridescent={true}
+                className="absolute -top-4 left-1/2 -translate-x-1/2 opacity-90"
+              />
+              <h3 className="font-oxanium text-[28px] chrome-text mt-2 mb-8 max-w-[250px] mx-auto leading-tight">
                 Первая консультация бесплатно
               </h3>
-              <Link href="/about" className="eom-btn-ghost w-full font-oxanium tracking-wide">
+              <Link href="/about" className="eom-btn-ghost w-full font-oxanium tracking-wide justify-center">
                 Записаться
               </Link>
             </div>
@@ -388,6 +440,16 @@ export default function Home() {
       <section className="py-24 bg-[#080808] relative overflow-hidden">
         <div
           className="iridescent-spill w-[600px] h-[600px] absolute -right-[300px] top-1/2 -translate-y-1/2 opacity-12 z-0 pointer-events-none"
+        />
+
+        {/* Decorative ring bottom-left */}
+        <ChromeShape
+          variant="ring"
+          size={80}
+          breathe={true}
+          iridescent={true}
+          float={true}
+          className="absolute bottom-12 left-[5%] opacity-25 pointer-events-none hidden lg:block"
         />
 
         <div className="container mx-auto px-6 relative z-10">
