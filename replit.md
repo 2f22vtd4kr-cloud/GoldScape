@@ -93,7 +93,34 @@ The system went through 5 critique iterations before landing on v5 (see comments
 
 ## Canvas mockup
 
-A full-page redesign mockup lives at `artifacts/mockup-sandbox/src/components/mockups/estate-redesign/HomeRedesign.tsx` — built by a DESIGN subagent. It's embedded as a live iframe on the Canvas board (shape ID `estate-home-redesign`, 1440×5000). Images are served from `artifacts/mockup-sandbox/public/images/` (mirrored from `gory-resort/public/images/`).
+### Liquid-spill before/after comparison (desktop)
+
+Two components sit side-by-side on the Canvas board (y=0, each 1280×900):
+
+| Shape ID | Component | Description |
+|---|---|---|
+| `current-preview` | `liquid-spill/Current.tsx` | **Before** — chrome shapes as small centred featured visuals in a dedicated right column |
+| `liquid-spill-preview` | `liquid-spill/LiquidSpill.tsx` | **After** — same shapes at 3–4× scale, edge-bleeding as atmospheric section backgrounds behind copy |
+
+Both use the proven chrome PNG set in `artifacts/mockup-sandbox/public/chrome/` (`blob-iridescent-3.png`, `spike-chrome.png`, `ring-chrome.png`, `drip-chrome.png`) via direct `/chrome/…` root-relative paths (see Gotchas).
+
+### Mobile liquid-chrome redesign
+
+A full mobile mockup (390×844) lives at `artifacts/mockup-sandbox/src/components/mockups/mobile-chrome/MobileHome.tsx`, placed on the Canvas board below the desktop comparison (shape ID `mobile-home-preview`, y=1110).
+
+It uses three new AI-generated chrome images inspired by the "Liquid Chrome Poster Series" (industrial techno aesthetic — silver/steel chrome, not iridescent):
+
+| File | Subject | Placement |
+|---|---|---|
+| `src/assets/images/chrome-wire.png` | Twisted sinuous silver wire ribbon | Hero — top-right bleed, rotate −18°, opacity 0.72 |
+| `src/assets/images/chrome-burst.png` | Explosive starburst with jagged silver spikes | Hero lower-right + CTA upper-right (two uses) |
+| `src/assets/images/chrome-organic.png` | Organic bone-lattice chrome sculptural form | Why Us — left bleed, opacity 0.22 |
+
+Images are stored in `artifacts/mockup-sandbox/src/assets/images/` and referenced via Vite `import` statements (`import chromeWire from '@/assets/images/chrome-wire.png'`). This works on both proxy access and direct port 8081 access, unlike URL-path approaches (see Gotchas).
+
+### Earlier design reference
+
+`artifacts/mockup-sandbox/src/components/mockups/estate-redesign/HomeRedesign.tsx` — original DESIGN-subagent full-page mockup that was graduated to the live site. Kept for reference; no longer wired to any live shape.
 
 ## Architecture decisions
 
@@ -116,6 +143,12 @@ Marketing/lead-gen site for a real-estate investment brokerage. No transactional
 - **ChromeShape breathe + float stacking** — when both props are true on one element, `transform` from the two keyframes fights (only one `transform` per frame applies). Fix: nest in a wrapper (outer floats, inner breathes), or split into `translate` + `scale` separate CSS properties.
 
 ## Gotchas
+
+- **Mockup sandbox image paths — proxy vs direct port**: The mockup sandbox Vite server runs with `base: '/'` on port 8081. The Replit platform proxy maps `/__mockup/` → port 8081 root. This creates two access contexts with different correct image URL prefixes:
+  - **Canvas iframes via proxy** (no port in URL, e.g. `https://domain/__mockup/preview/…`): `/__mockup/images/foo.png` resolves correctly (proxy strips `/__mockup`, Vite serves `/images/foo.png`).
+  - **Direct port access** (localhost:8081, or canvas iframes using `:8081` URL): `/__mockup/images/foo.png` hits Vite's SPA fallback and returns `text/html` with HTTP 200 — the browser silently gets HTML instead of an image. Use `/images/foo.png` (no `/__mockup/` prefix) or `/chrome/foo.png`.
+  - **Best practice — use Vite imports**: `import img from '@/assets/images/foo.png'` works on both proxy and direct port with zero configuration. Preferred for new mockup components. Files go in `artifacts/mockup-sandbox/src/assets/images/`.
+  - **URL-path option**: Place file in `artifacts/mockup-sandbox/public/chrome/` and reference as `/chrome/foo.png`. Works for direct port + proxy (proxy strips `/__mockup` → `/chrome/foo.png` on server). Do not use `/__mockup/chrome/foo.png` in component src attributes.
 
 - **React 19 + `flushSync`**: `flushSync(() => { createRoot.render() })` silently fails to commit in React 19 — `#root` stays empty. Use plain `root.render(<App />)` (already the case in `main.tsx`). Never re-introduce `flushSync` for the initial render.
 - **Screenshot tool**: captures before React's async render commits, so it can only ever show the `#root:empty` CSS loading state on a cold load. This is expected — it is not evidence the app failed to mount. Also, hash-anchor URLs (`/#section`) do not scroll the viewport in the screenshot tool — it always captures from the top of the page.
