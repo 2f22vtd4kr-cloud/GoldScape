@@ -251,28 +251,31 @@ body {
 }
 
 .chrome-text {
-  /* High-contrast chrome: near-black troughs, pure-white specular peaks,
-     dual-reflection band gives convincing polished-metal depth.          */
+  /* High-contrast chrome: charcoal troughs (never near-black — a heading or
+     price spanning several glyphs can land entirely inside a trough at any
+     given background-position, and #111/#181818 read as illegible against
+     a black section background), pure-white specular peaks, dual-reflection
+     band gives convincing polished-metal depth while staying legible.      */
   background: linear-gradient(
     100deg,
-    #111111  0%,
-    #2e2e2e  4%,
-    #606060  9%,
+    #4c4c48  0%,
+    #5c5c58  4%,
+    #7c7c76 9%,
     #b8b8b4 14%,
     #e8e4e0 18%,
     #ffffff 22%,   /* primary specular — pure white peak */
     #f8f4f0 25%,
     #d4d0c8 30%,
-    #808078 38%,
-    #383838 46%,
-    #787874 54%,
+    #949288 38%,
+    #58584f 46%,
+    #878378 54%,
     #c8c4bc 62%,
     #ece8e0 68%,
     #ffffff 72%,   /* secondary specular hit */
     #e4e0d8 76%,
     #a8a4a0 82%,
-    #505050 90%,
-    #181818 100%
+    #6c6c66 90%,
+    #4c4c48 100%
   );
   background-size: 300% auto;
   -webkit-background-clip: text;

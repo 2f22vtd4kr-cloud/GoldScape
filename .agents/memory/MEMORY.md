@@ -13,3 +13,4 @@
 - [Property listing photography wiring](property-listing-photos.md) — Properties.tsx listing→image mapping; gradients silently pass type-check, don't leave new listings without a real photo
 - [Mobile-viewport screenshots & lazy-image timing](mobile-viewport-screenshots.md) — puppeteer-core recipe for real mobile QA; fast scripted scrolling makes lazy images falsely look blank/broken
 - [Backdrop-blur bleed-through on translucent overlays](backdrop-blur-bleed-through.md) — translucent+blurred panels over bright/animated content can leak it through visibly despite correct computed styles; prefer fully opaque for guaranteed legibility
+- [Chrome-text gradient contrast floor](chrome-text-contrast-floor.md) — decorative text-clip gradients need a minimum-luminance floor or long/multi-line strings hit dark troughs and go illegible

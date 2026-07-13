@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Shield, Globe, Zap, Bed, Bath, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 import { Layout } from '@/components/Layout';
+import { ChromeShape } from '@/components/ChromeShape';
 
 const DESTINATIONS = [
   { flag: '🇦🇪', country: 'ОАЭ',         city: 'Дубай',     price: '$380,000',  image: '/images/dest-dubai.jpg' },
@@ -307,63 +308,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── VOID WAVE — blue sky chrome section ─────────────────────────── */}
+      {/* ─── VOID WAVE — liquid chrome trust section ─────────────────────── */}
       <section className="void-wave-section relative overflow-hidden">
-        {/* Sky background */}
-        <img
-          src="/chrome/liquid/sky-bg.jpg"
-          alt="" aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
-          style={{ zIndex: 0 }}
-        />
-
-        {/* Black fade from top — sky "emerges" from darkness */}
+        {/* Ambient chrome glow — same gas-spill treatment as the hero, keeps
+            the section on-palette instead of the old bright sky photo which
+            fought with the text for contrast. */}
         <div
-          className="absolute inset-x-0 top-0 pointer-events-none"
+          className="hero-glow-spill absolute pointer-events-none"
           style={{
-            height: '42%',
-            background: 'linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.7) 50%, transparent 100%)',
-            zIndex: 1,
-          }}
-        />
-        {/* Black fade from bottom — sky recedes back into darkness */}
-        <div
-          className="absolute inset-x-0 bottom-0 pointer-events-none"
-          style={{
-            height: '55%',
-            background: 'linear-gradient(to top, #000000 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.5) 65%, transparent 100%)',
-            zIndex: 1,
-          }}
-        />
-        {/* Left + right edge vignettes */}
-        <div
-          className="absolute inset-y-0 left-0 pointer-events-none hidden md:block"
-          style={{
-            width: '18%',
-            background: 'linear-gradient(to right, rgba(0,0,0,0.6), transparent)',
-            zIndex: 1,
-          }}
-        />
-        <div
-          className="absolute inset-y-0 right-0 pointer-events-none hidden md:block"
-          style={{
-            width: '18%',
-            background: 'linear-gradient(to left, rgba(0,0,0,0.6), transparent)',
-            zIndex: 1,
-          }}
-        />
-
-        {/* Chrome burst overlay — scattered around eye (desktop) */}
-        <img
-          src="/chrome/liquid/chrome-burst-overlay.png"
-          alt="" aria-hidden="true"
-          className="absolute pointer-events-none select-none hidden sm:block"
-          style={{
-            width: 'clamp(300px, 50vw, 700px)',
+            width: 'min(900px, 130vw)', height: 'min(900px, 130vw)',
             top: '50%', left: '50%',
             transform: 'translate(-50%, -50%)',
-            opacity: 0.65,
-            zIndex: 2,
+            opacity: 0.4,
+            zIndex: 0,
           }}
         />
 
@@ -375,7 +332,7 @@ export default function Home() {
           style={{
             left: '-8%', top: '10%',
             width: 'clamp(200px, 28vw, 400px)',
-            opacity: 0.7, mixBlendMode: 'screen',
+            opacity: 0.5, mixBlendMode: 'screen',
             transform: 'scaleX(-1)',
             zIndex: 2,
           }}
@@ -388,20 +345,20 @@ export default function Home() {
           style={{
             right: '-8%', bottom: '10%',
             width: 'clamp(200px, 28vw, 400px)',
-            opacity: 0.7, mixBlendMode: 'screen',
+            opacity: 0.5, mixBlendMode: 'screen',
             zIndex: 2,
           }}
         />
 
-        {/* Chrome eye + real estate headline */}
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-28 md:py-44">
+        {/* Liquid chrome blob + real estate headline */}
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-28 md:py-40">
           <img
-            src="/chrome/liquid/chrome-eye-v2.png"
+            src="/chrome/liquid/chrome-blob-twisted.png"
             alt="" aria-hidden="true"
             className="animate-float mb-10 md:mb-12"
             style={{
-              width: 'clamp(160px, 36vw, 340px)',
-              filter: 'drop-shadow(0 0 40px rgba(255,255,255,0.6)) drop-shadow(0 0 80px rgba(180,220,255,0.4))',
+              width: 'clamp(150px, 26vw, 260px)',
+              filter: 'drop-shadow(0 0 40px rgba(200,180,255,0.35)) drop-shadow(0 0 80px rgba(120,140,255,0.2))',
             }}
           />
 
@@ -450,24 +407,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── CHROME FACE — WHY US ────────────────────────────────────────── */}
+      {/* ─── DUBAI SKYLINE — WHY US ──────────────────────────────────────── */}
       <section id="about" className="bg-black relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
 
-          {/* Chrome face image — full-bleed left panel with animated light */}
+          {/* Real listing photography — full-bleed left panel. A believable
+              penthouse view earns more trust here than an abstract render:
+              this panel exists to answer "why should I believe this agency",
+              and a stock-AI chrome face reads as evasive, not premium. */}
           <div className="relative overflow-hidden min-h-[400px] lg:min-h-0">
-            {/* Animated colour overlay — slow hue cycle of the bg gradient */}
+            {/* Subtle iridescent wash — brand touch, dialled back so the
+                photo (and its warm sunset tones) stays the focal point */}
             <div
               className="absolute inset-0 face-bg-animate pointer-events-none"
               style={{
-                background: 'conic-gradient(from 0deg at 35% 60%, rgba(255,0,255,0.12), rgba(255,128,0,0.12), rgba(255,220,0,0.08), rgba(0,200,255,0.10), rgba(140,0,255,0.12))',
+                background: 'conic-gradient(from 0deg at 35% 60%, rgba(160,140,255,0.10), rgba(120,170,255,0.08), rgba(255,220,180,0.06), rgba(140,200,255,0.08), rgba(180,150,255,0.10))',
                 mixBlendMode: 'overlay',
                 zIndex: 1,
               }}
             />
             <img
-              src="/chrome/liquid/chrome-face-colorful.jpg"
-              alt="Chrome metallic face"
+              src="/images/prop-dubai-downtown.jpg"
+              alt="Пентхаус с видом на Burj Khalifa, Downtown Dubai"
               className="absolute inset-0 w-full h-full object-cover object-center face-shimmer"
               style={{ zIndex: 0 }}
             />
@@ -625,7 +586,7 @@ export default function Home() {
                     src={`/chrome/liquid/chrome-num-${step.num}.png`}
                     alt={step.num}
                     className="w-14 h-14 shrink-0 object-contain relative z-10"
-                    style={{ filter: 'drop-shadow(0 0 14px rgba(120,160,255,0.40))' }}
+                    style={{ filter: 'drop-shadow(0 0 14px rgba(200,180,255,0.40))' }}
                   />
                   <div className="pt-3">
                     <h4 className="font-space-grotesk text-[18px] text-white mb-2">{step.title}</h4>
@@ -636,35 +597,27 @@ export default function Home() {
             </div>
           </div>
 
-          {/* CTA card with chrome eye ornament */}
+          {/* CTA card with chrome shape ornament */}
           <div className="relative flex flex-col items-center justify-center py-12 lg:py-20" data-reveal="right">
-            {/* Chrome eye — large atmospheric element behind card */}
-            <img
-              src="/chrome/liquid/chrome-eye-v2.png"
-              alt="" aria-hidden="true"
+            {/* Chrome blob — large atmospheric element behind card */}
+            <div
               className="absolute pointer-events-none select-none animate-float"
               style={{
-                width: 'clamp(200px, 30vw, 300px)',
-                opacity: 0.12,
                 top: '50%', left: '50%',
                 transform: 'translate(-50%, -50%)',
-                filter: 'drop-shadow(0 0 40px rgba(180,200,255,0.3))',
+                opacity: 0.14,
                 zIndex: 0,
               }}
-            />
+            >
+              <ChromeShape variant="blob" iridescent size={280} breathe={false} />
+            </div>
 
             {/* CTA card */}
             <div className="relative z-10 text-center bg-black/60 backdrop-blur-2xl px-10 py-12 border border-white/12 rounded-3xl shadow-[0_8px_60px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.08)] max-w-[340px] w-full">
-              {/* Chrome eye as card top ornament */}
-              <img
-                src="/chrome/liquid/chrome-eye-v2.png"
-                alt="" aria-hidden="true"
-                className="absolute -top-7 left-1/2 -translate-x-1/2 liquid-chrome-pulse pointer-events-none"
-                style={{
-                  width: '56px',
-                  filter: 'drop-shadow(0 0 14px rgba(255,255,255,0.7))',
-                }}
-              />
+              {/* Chrome orb as card top ornament */}
+              <div className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none">
+                <ChromeShape variant="orb" size={56} float />
+              </div>
               <h3 className="font-oxanium text-[28px] chrome-text mt-2 mb-8 max-w-[260px] mx-auto leading-tight">
                 Первая консультация бесплатно
               </h3>
