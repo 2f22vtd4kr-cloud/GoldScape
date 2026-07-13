@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="ru" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>GORY | Mountain Resort</title>
-    <meta name="description" content="GORY Mountain Resort — Where the Caucasus meets the future. Opening 2027." />
-
-    <!-- Preload hero image so the browser fetches it immediately -->
-    <link rel="preload" href="/images/hero.jpg" as="image" fetchpriority="high" />
+    <title>EstateofMind | Зарубежная недвижимость</title>
+    <meta name="description" content="EstateofMind — инвестиции в зарубежную недвижимость с полным юридическим сопровождением. ОАЭ, Турция, Кипр, Грузия." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Critical first-paint styles: the loading state looks like the real hero -->
     <style>
@@ -15,45 +13,35 @@
 
       html, body {
         min-height: 100vh;
-        background: #0B0D0F;
-        color: #F5F2E8;
+        background: #080808;
+        color: #ffffff;
       }
 
-      /* Full-viewport hero shown before React mounts (#root is still empty) */
+      /* Full-viewport placeholder shown before React mounts (#root is still empty) */
       #root:empty {
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100dvh;
-        background-image: url('/images/hero.jpg');
-        background-size: cover;
-        background-position: center;
-        background-color: #0B0D0F;
+        background-color: #080808;
       }
 
-      /* Dark overlays matching the React hero */
-      #root:empty::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background:
-          linear-gradient(to top, #0B0D0F 0%, transparent 55%),
-          rgba(0, 0, 0, 0.40);
-        z-index: 1;
-      }
-
-      /* GORY wordmark — full white, matches the actual React component */
+      /* Wordmark — matches the actual React hero's chrome-text treatment */
       #root:empty::after {
-        content: 'GORY';
+        content: 'EstateofMind';
         position: relative;
         z-index: 2;
-        font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif;
-        font-size: 15vw;
-        letter-spacing: 0.1em;
+        font-family: 'Oxanium', sans-serif;
+        font-weight: 600;
+        font-size: 8vw;
+        letter-spacing: 0.02em;
         line-height: 1;
-        color: #ffffff;
-        text-shadow: 0 25px 25px rgba(0, 0, 0, 0.15);
+        background: linear-gradient(135deg, #ffffff 0%, #d8d8d8 25%, #888888 50%, #cccccc 75%, #ffffff 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
         user-select: none;
       }
     </style>
