@@ -198,6 +198,23 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* Chrome frame border — mix-blend:screen makes its black bg invisible */}
+        <img
+          src="/chrome/liquid/chrome-hero-frame.png"
+          alt="" aria-hidden="true"
+          className="absolute inset-0 w-full h-full pointer-events-none select-none hidden md:block"
+          style={{ objectFit: 'cover', mixBlendMode: 'screen', opacity: 0.45, zIndex: 15 }}
+        />
+        {/* Hero bottom fade — blob section melts into black */}
+        <div
+          className="absolute inset-x-0 bottom-0 pointer-events-none"
+          style={{
+            height: '28%',
+            background: 'linear-gradient(to top, #000000 0%, rgba(0,0,0,0.75) 45%, transparent 100%)',
+            zIndex: 20,
+          }}
+        />
       </section>
 
       {/* ─── DESTINATIONS ────────────────────────────────────────────────── */}
@@ -268,8 +285,8 @@ export default function Home() {
         <div
           className="absolute inset-x-0 bottom-0 pointer-events-none"
           style={{
-            height: '42%',
-            background: 'linear-gradient(to top, #000000 0%, rgba(0,0,0,0.7) 50%, transparent 100%)',
+            height: '55%',
+            background: 'linear-gradient(to top, #000000 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.5) 65%, transparent 100%)',
             zIndex: 1,
           }}
         />
@@ -355,12 +372,22 @@ export default function Home() {
       <section id="about" className="bg-black relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
 
-          {/* Chrome face image — full-bleed left panel */}
-          <div className="relative overflow-hidden min-h-[360px] lg:min-h-0">
+          {/* Chrome face image — full-bleed left panel with animated light */}
+          <div className="relative overflow-hidden min-h-[400px] lg:min-h-0">
+            {/* Animated colour overlay — slow hue cycle of the bg gradient */}
+            <div
+              className="absolute inset-0 face-bg-animate pointer-events-none"
+              style={{
+                background: 'conic-gradient(from 0deg at 35% 60%, rgba(255,0,255,0.12), rgba(255,128,0,0.12), rgba(255,220,0,0.08), rgba(0,200,255,0.10), rgba(140,0,255,0.12))',
+                mixBlendMode: 'overlay',
+                zIndex: 1,
+              }}
+            />
             <img
               src="/chrome/liquid/chrome-face-colorful.jpg"
               alt="Chrome metallic face"
-              className="absolute inset-0 w-full h-full object-cover object-center"
+              className="absolute inset-0 w-full h-full object-cover object-center face-shimmer"
+              style={{ zIndex: 0 }}
             />
             {/* Right fade to match text panel */}
             <div
@@ -368,28 +395,51 @@ export default function Home() {
               style={{
                 width: '30%',
                 background: 'linear-gradient(to right, transparent, #000000)',
+                zIndex: 2,
               }}
             />
-            {/* Bottom fade on mobile */}
+            {/* Bottom fade — content reads over dark gradient */}
             <div
-              className="absolute inset-x-0 bottom-0 lg:hidden pointer-events-none"
+              className="absolute inset-x-0 bottom-0 pointer-events-none"
               style={{
-                height: '30%',
-                background: 'linear-gradient(to top, #000000, transparent)',
+                height: '55%',
+                background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 45%, transparent 100%)',
+                zIndex: 2,
               }}
             />
-            {/* Chrome starburst accent over the face image */}
+            {/* Chrome starburst accent */}
             <img
               src="/chrome/liquid/chrome-starburst.png"
               alt="" aria-hidden="true"
               className="absolute pointer-events-none liquid-chrome-pulse hidden sm:block"
               style={{
-                width: '80px',
-                top: '12%', right: '8%',
+                width: '72px',
+                top: '10%', right: '10%',
                 filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.7))',
-                zIndex: 2,
+                zIndex: 3,
               }}
             />
+            {/* Content overlay — stats + CTA button */}
+            <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-start px-6 md:px-8 pb-7 md:pb-9" style={{ zIndex: 4 }}>
+              <p className="font-oxanium text-[9px] tracking-[0.32em] text-white/40 uppercase mb-4">
+                Ваши инвестиции под защитой
+              </p>
+              <div className="flex gap-6 mb-5">
+                {[
+                  { val: '7+',  label: 'лет опыта' },
+                  { val: '847', label: 'сделок' },
+                  { val: '₽0',  label: 'комиссии' },
+                ].map(s => (
+                  <div key={s.val}>
+                    <p className="font-oxanium text-[22px] chrome-text leading-none">{s.val}</p>
+                    <p className="font-space-grotesk text-[9px] text-white/45 uppercase tracking-widest mt-1">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+              <Link href="/about" className="eom-btn-primary font-oxanium text-[11px] uppercase tracking-wider" style={{ padding: '11px 20px' }}>
+                Бесплатная консультация
+              </Link>
+            </div>
           </div>
 
           {/* Why us content — right panel */}
@@ -486,12 +536,16 @@ export default function Home() {
 
             <div className="flex flex-col gap-10 relative" data-stagger>
               {PROCESS_STEPS.map((step, i) => (
-                <div key={i} className="process-item relative flex gap-6 z-10" data-reveal="up">
+                <div key={i} className="process-item relative flex gap-5 z-10 items-start" data-reveal="up">
                   <div className="process-line" />
-                  <div className="w-10 h-10 rounded-full bg-[#1a1a1a] border border-white/20 flex items-center justify-center shrink-0 shadow-[inset_0_2px_10px_rgba(255,255,255,0.1)] relative z-10">
-                    <span className="font-oxanium text-sm chrome-text">{step.num}</span>
-                  </div>
-                  <div className="pt-2">
+                  {/* Liquid chrome numeral — matches the "03" reference */}
+                  <img
+                    src={`/chrome/liquid/chrome-num-${step.num}.png`}
+                    alt={step.num}
+                    className="w-14 h-14 shrink-0 object-contain relative z-10"
+                    style={{ filter: 'drop-shadow(0 0 14px rgba(120,160,255,0.40))' }}
+                  />
+                  <div className="pt-3">
                     <h4 className="font-space-grotesk text-[18px] text-white mb-2">{step.title}</h4>
                     <p className="font-space-grotesk text-[14px] text-white/40 max-w-sm">{step.desc}</p>
                   </div>

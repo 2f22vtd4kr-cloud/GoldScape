@@ -239,44 +239,50 @@ body {
   }
 }
 
-/* ─── Liquid Chrome Typography — Definitive Set v2 ──────────────────────── */
+/* ─── Liquid Chrome Typography — Definitive Set v3 ──────────────────────── */
 /* Three-tier system:
-   .chrome-text        — hard specular platinum sweep (H1 / brand / stats)
+   .chrome-text        — high-contrast specular with deep shadows + white peaks
    .chrome-text-accent — slow iridescent conic cycle (accent word per section)
    Both tiers work on any Oxanium or Space Grotesk element.              */
 
 @keyframes chrome-sweep {
-  0%   { background-position: 200% center; }
-  100% { background-position: -200% center; }
+  0%   { background-position: 300% center; }
+  100% { background-position: -300% center; }
 }
 
 .chrome-text {
-  /* Hard specular: narrow bright band sweeps left → right over platinum base.
-     Warm tint (#faf8f4) at peak keeps it "platinum" rather than cold steel. */
+  /* High-contrast chrome: near-black troughs, pure-white specular peaks,
+     dual-reflection band gives convincing polished-metal depth.          */
   background: linear-gradient(
-    105deg,
-    #3a3a3a  0%,
-    #7a7a7a  8%,
-    #b8b8b8 16%,
-    #e0dcd4 24%,
-    #faf8f4 30%,   /* platinum hot-spot */
-    #f0ece4 34%,
-    #d0ccc4 40%,
-    #909090 50%,
-    #c0bcb4 60%,
-    #e8e4dc 70%,
-    #f4f0e8 76%,
-    #d8d4cc 82%,
-    #909090 90%,
-    #5a5a5a 100%
+    100deg,
+    #111111  0%,
+    #2e2e2e  4%,
+    #606060  9%,
+    #b8b8b4 14%,
+    #e8e4e0 18%,
+    #ffffff 22%,   /* primary specular — pure white peak */
+    #f8f4f0 25%,
+    #d4d0c8 30%,
+    #808078 38%,
+    #383838 46%,
+    #787874 54%,
+    #c8c4bc 62%,
+    #ece8e0 68%,
+    #ffffff 72%,   /* secondary specular hit */
+    #e4e0d8 76%,
+    #a8a4a0 82%,
+    #505050 90%,
+    #181818 100%
   );
-  background-size: 200% auto;
+  background-size: 300% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: chrome-sweep 11s linear infinite;
-  filter: drop-shadow(0 1px 6px rgba(240,236,228,0.08));
+  animation: chrome-sweep 10s linear infinite;
+  /* Hard shadow for 3D depth; glow for luminosity */
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.95))
+          drop-shadow(0 0 12px rgba(230,226,218,0.10));
 }
 
 /* Iridescent chrome — reserved for one accent word per hero section.
@@ -785,6 +791,36 @@ body {
 
 .process-item:last-child .process-line {
   display: none;
+}
+
+/* Chrome numeral images replace the old circle — keep the connecting line centred */
+.process-line {
+  left: 27px;   /* half of w-14 (56px) */
+  top: 58px;
+}
+
+/* ─── Chrome face panel animations ───────────────────────────────────────
+   face-bg-animate — slow hue-rotate cycles the rainbow bg behind the face
+   face-shimmer    — subtle brightness/saturation pulse on the face itself  */
+
+@keyframes face-bg-hue {
+  0%,100% { filter: hue-rotate(0deg)   saturate(1.15) brightness(1.04); }
+  30%      { filter: hue-rotate(28deg)  saturate(1.35) brightness(1.08); }
+  65%      { filter: hue-rotate(-18deg) saturate(1.40) brightness(1.10); }
+}
+
+@keyframes face-shimmer {
+  0%,100% { filter: brightness(1)    saturate(1)    contrast(1); }
+  25%      { filter: brightness(1.06) saturate(1.10) contrast(1.04); }
+  55%      { filter: brightness(1.13) saturate(1.20) contrast(1.08); }
+  80%      { filter: brightness(1.08) saturate(1.14) contrast(1.05); }
+}
+
+.face-bg-animate { animation: face-bg-hue 14s ease-in-out infinite; }
+.face-shimmer    { animation: face-shimmer 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .face-bg-animate, .face-shimmer { animation: none; }
 }
 
 /* ─── Void Wave section ───────────────────────────────────────────────────
