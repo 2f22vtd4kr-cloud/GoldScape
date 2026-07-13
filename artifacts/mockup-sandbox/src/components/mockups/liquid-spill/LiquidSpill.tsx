@@ -2,39 +2,36 @@ import './_group.css';
 import './liquid-spill.css';
 
 /** Improved decorative chrome system — one large background shape per
- *  section, cropped pixel-perfectly from the Softulka "Wavy Chrome"
- *  reference sheet (no hand-authored SVG approximations). Each shape
- *  bleeds off a screen edge, sits at big scale behind the real content,
- *  and uses mix-blend-mode: screen so its black sheet-background
- *  disappears into the page — never presented as a standalone visual,
- *  always ambient decoration for the copy/UI in front of it. Same copy,
- *  layout and section structure as Current.tsx so the two compare
- *  side-by-side. */
+ *  visible-window section. Chrome PNGs used at 2–4× their "normal" accent
+ *  size, bleeding off a viewport edge, sitting behind the real content.
+ *  Compare against Current.tsx:
+ *    Current  → shapes are small centred visuals in their own column
+ *    This     → same shapes at 4–5× scale as atmospheric section backgrounds */
 export default function LiquidSpill() {
   return (
     <div style={{ background: '#080808', minHeight: '100vh' }} className="font-space-grotesk">
-      {/* ─── HERO ─── */}
+
+      {/* ─── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[640px] flex items-center pt-20 overflow-hidden">
         <div className="hero-grid" />
 
-        {/* One big pixel-perfect chrome shape, bleeding off the right edge
-            behind the copy — background decoration, not a featured visual */}
+        {/* BIG background shape — blob at 700px, right-edge bleed.
+            /chrome/* is the correct static-asset path for the mockup sandbox. */}
         <img
-          src="/__mockup/chrome/spill-sheet/hero.png"
+          src="/chrome/blob-iridescent-3.png"
           alt=""
-          className="absolute z-0 pointer-events-none select-none hidden md:block"
+          aria-hidden="true"
+          className="absolute inset-y-0 my-auto pointer-events-none select-none"
           style={{
-            width: 'min(680px, 52vw)',
+            width: 700,
             height: 'auto',
-            top: '-4%',
-            right: '-6%',
-            mixBlendMode: 'screen',
-            opacity: 0.92,
+            right: -80,
+            opacity: 0.52,
           }}
         />
 
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-2xl flex flex-col items-start pt-10 lg:pt-0">
+        <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-7 flex flex-col items-start pt-10 lg:pt-0">
             <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 mb-6 uppercase">
               Международная недвижимость
             </span>
@@ -53,24 +50,34 @@ export default function LiquidSpill() {
                 Бесплатная консультация
               </a>
             </div>
+            <div className="flex gap-10 pt-4 border-t border-white/8 w-full max-w-md">
+              {[['847','сделок'],['12','стран'],['₽0','комиссии']].map(([n,l]) => (
+                <div key={l}>
+                  <p className="font-oxanium text-xl chrome-text font-bold">{n}</p>
+                  <p className="font-space-grotesk text-xs text-white/35 uppercase tracking-wider">{l}</p>
+                </div>
+              ))}
+            </div>
           </div>
+          {/* Empty right col — the blob above IS the right-column decoration */}
+          <div className="lg:col-span-5 hidden lg:block" />
         </div>
       </section>
 
-      {/* ─── WHY US ─── */}
+      {/* ─── WHY US ───────────────────────────────────────────────────────── */}
       <section id="why-us" className="py-24 bg-[#0f0f0f] relative overflow-hidden">
-        {/* One big shape, bleeding off the bottom-left corner behind the grid */}
+        {/* BIG background shape — ring at 520px, bottom-left bleed */}
         <img
-          src="/__mockup/chrome/spill-sheet/whyus.png"
+          src="/chrome/ring-chrome.png"
           alt=""
-          className="absolute z-0 pointer-events-none select-none hidden lg:block"
+          aria-hidden="true"
+          className="absolute pointer-events-none select-none"
           style={{
-            width: 'min(560px, 42vw)',
+            width: 520,
             height: 'auto',
-            bottom: '-8%',
-            left: '-6%',
-            mixBlendMode: 'screen',
-            opacity: 0.75,
+            bottom: -120,
+            left: -100,
+            opacity: 0.32,
           }}
         />
 
@@ -96,20 +103,20 @@ export default function LiquidSpill() {
         </div>
       </section>
 
-      {/* ─── CTA ─── */}
+      {/* ─── CTA ──────────────────────────────────────────────────────────── */}
       <section id="cta" className="py-32 bg-[#080808] relative overflow-hidden">
-        {/* One big shape, bleeding off the top-right corner behind the card */}
+        {/* BIG background shape — spike at 560px, top-right bleed */}
         <img
-          src="/__mockup/chrome/spill-sheet/cta.png"
+          src="/chrome/spike-chrome.png"
           alt=""
-          className="absolute z-0 pointer-events-none select-none hidden md:block"
+          aria-hidden="true"
+          className="absolute pointer-events-none select-none"
           style={{
-            width: 'min(560px, 48vw)',
+            width: 560,
             height: 'auto',
-            top: '4%',
-            right: '4%',
-            mixBlendMode: 'screen',
-            opacity: 0.8,
+            top: -80,
+            right: -90,
+            opacity: 0.28,
           }}
         />
 
@@ -127,21 +134,21 @@ export default function LiquidSpill() {
         </div>
       </section>
 
-      {/* ─── Testimonials strip ─── */}
+      {/* ─── Testimonials ─────────────────────────────────────────────────── */}
       <section id="testimonials" className="py-24 bg-[#080808] relative overflow-hidden">
-        {/* One big shape, bleeding off the left edge behind the card */}
+        {/* BIG background shape — drip at 480px, left bleed */}
         <img
-          src="/__mockup/chrome/spill-sheet/testimonials.png"
+          src="/chrome/drip-chrome.png"
           alt=""
-          className="absolute z-0 pointer-events-none select-none hidden lg:block"
+          aria-hidden="true"
+          className="absolute pointer-events-none select-none"
           style={{
-            width: 'min(540px, 42vw)',
+            width: 480,
             height: 'auto',
             top: '50%',
-            left: '-4%',
-            transform: 'translateY(-50%)',
-            mixBlendMode: 'screen',
-            opacity: 0.75,
+            left: -120,
+            transform: 'translateY(-50%) rotate(-12deg)',
+            opacity: 0.30,
           }}
         />
 
@@ -162,6 +169,7 @@ export default function LiquidSpill() {
           </div>
         </div>
       </section>
+
     </div>
   );
 }

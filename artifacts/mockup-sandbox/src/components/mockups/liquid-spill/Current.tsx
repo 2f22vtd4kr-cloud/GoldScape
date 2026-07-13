@@ -48,13 +48,13 @@ export default function Current() {
               />
             </div>
             <img
-              src="/__mockup/chrome/blob-iridescent-3.png"
+              src="/chrome/blob-iridescent-3.png"
               alt=""
               className="animate-float relative z-10 drop-shadow-[0_0_60px_rgba(120,80,255,0.4)]"
               style={{ width: 'clamp(240px, 36vw, 440px)', height: 'auto', pointerEvents: 'none' }}
             />
             <img
-              src="/__mockup/chrome/spike-chrome.png"
+              src="/chrome/spike-chrome.png"
               alt=""
               className="animate-float-small absolute z-20 opacity-80 hidden sm:block"
               style={{ width: '80px', bottom: '14%', right: '6%', filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.25))' }}
