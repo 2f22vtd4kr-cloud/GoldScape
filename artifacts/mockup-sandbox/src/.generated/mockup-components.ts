@@ -20,5 +20,9 @@ export const modules: ModuleMap = {
   "./components/mockups/liquid-chrome/ChromeClassic.tsx": () => import("../components/mockups/liquid-chrome/ChromeClassic.tsx"),
   "./components/mockups/liquid-chrome/Definitive.tsx": () => import("../components/mockups/liquid-chrome/Definitive.tsx"),
   "./components/mockups/liquid-chrome/LiquidMercury.tsx": () => import("../components/mockups/liquid-chrome/LiquidMercury.tsx"),
-  "./components/mockups/liquid-chrome/MirrorGlass.tsx": () => import("../components/mockups/liquid-chrome/MirrorGlass.tsx")
+  "./components/mockups/liquid-chrome/MirrorGlass.tsx": () => import("../components/mockups/liquid-chrome/MirrorGlass.tsx"),
+  "./components/mockups/liquid-spill/ChromeShape.tsx": () => import("../components/mockups/liquid-spill/ChromeShape.tsx"),
+  "./components/mockups/liquid-spill/ChromeShapeSpill.tsx": () => import("../components/mockups/liquid-spill/ChromeShapeSpill.tsx"),
+  "./components/mockups/liquid-spill/Current.tsx": () => import("../components/mockups/liquid-spill/Current.tsx"),
+  "./components/mockups/liquid-spill/LiquidSpill.tsx": () => import("../components/mockups/liquid-spill/LiquidSpill.tsx")
 };

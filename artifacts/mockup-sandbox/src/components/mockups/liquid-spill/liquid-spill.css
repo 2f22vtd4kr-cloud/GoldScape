@@ -1,0 +1,74 @@
+/* Gas-spill glow — richer oil-slick hue sweep than the original
+   .iridescent-spill (which cycled through violet/pink/gold but stayed in a
+   narrow warm-purple band). This sweeps a full oil-slick spectrum: electric
+   blue → cyan → violet → magenta → gold → teal. */
+.gas-spill-glow {
+  position: relative;
+  border-radius: 42% 58% 66% 34% / 55% 45% 62% 38%;
+  filter: blur(60px);
+  opacity: 0.55;
+  overflow: hidden;
+}
+.gas-spill-glow::before {
+  content: '';
+  position: absolute;
+  inset: -80%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    hsl(210, 95%, 60%) 0%,
+    hsl(190, 90%, 60%) 12%,
+    hsl(170, 80%, 55%) 24%,
+    hsl(280, 85%, 65%) 38%,
+    hsl(320, 90%, 68%) 50%,
+    hsl(340, 95%, 65%) 60%,
+    hsl(28, 95%, 62%) 72%,
+    hsl(45, 90%, 60%) 82%,
+    hsl(250, 85%, 62%) 94%,
+    hsl(210, 95%, 60%) 100%
+  );
+  animation: gas-spill-spin 11s linear infinite;
+  will-change: transform;
+}
+@keyframes gas-spill-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gas-spill-glow::before { animation: none; }
+}
+
+/* Gas-spill blob — CSS-only liquid chrome sphere with the same oil-slick
+   hue range as .gas-spill-glow, used where an <img> isn't warranted. */
+.gas-spill-blob {
+  border-radius: 55% 45% 62% 38% / 48% 62% 38% 52%;
+  background:
+    radial-gradient(circle at 26% 20%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0) 22%),
+    radial-gradient(circle at 70% 26%, rgba(120,220,255,0.5) 0%, rgba(120,220,255,0) 20%),
+    radial-gradient(circle at 66% 74%, rgba(255,150,220,0.5) 0%, rgba(255,150,220,0) 20%),
+    radial-gradient(circle at 22% 72%, rgba(255,190,110,0.4) 0%, rgba(255,190,110,0) 18%),
+    linear-gradient(
+      148deg,
+      #05040f  0%,
+      #17124a 8%,
+      #3a2c9c 18%,
+      #3a9ce0 28%,
+      #8be8ff 36%,
+      #fdf6ff 42%,
+      #ffd7f0 47%,
+      #ff8fce 54%,
+      #ffb347 62%,
+      #7a4fd0 71%,
+      #35c9c9 80%,
+      #1c1440 90%,
+      #06040f 100%
+    );
+}
+
+/* Small drip accents that trail off decorative shapes toward the edge —
+   the "spill" motif made literal, reused across sections. */
+.gas-drip {
+  position: absolute;
+  border-radius: 50% 50% 50% 4% / 60% 60% 40% 40%;
+  background: linear-gradient(160deg, #fdf6ff 0%, #8be8ff 30%, #7a4fd0 60%, #1c1440 100%);
+  filter: blur(0.3px) drop-shadow(0 0 8px rgba(120, 200, 255, 0.35));
+  opacity: 0.85;
+}
