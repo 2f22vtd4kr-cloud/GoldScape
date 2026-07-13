@@ -3,6 +3,8 @@ import { Shield, Globe, Zap, Bed, Bath, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 import { Layout } from '@/components/Layout';
 import { ChromeShape } from '@/components/ChromeShape';
+import { IsoTerrain, DUBAI_DOWNTOWN_LANDMARKS } from '@/components/IsoTerrain';
+import { ChromeHeroFrame } from '@/components/ChromeHeroFrame';
 
 const DESTINATIONS = [
   { flag: '🇦🇪', country: 'ОАЭ',         city: 'Дубай',     price: '$380,000',  image: '/images/dest-dubai.jpg' },
@@ -252,6 +254,9 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Chrome bone frame — organic spike border overlay */}
+        <ChromeHeroFrame opacity={0.62} />
+
         {/* Hero bottom fade — blob section melts into black */}
         <div
           className="absolute inset-x-0 bottom-0 pointer-events-none"
@@ -411,43 +416,41 @@ export default function Home() {
       <section id="about" className="bg-black relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
 
-          {/* Real listing photography — full-bleed left panel. A believable
-              penthouse view earns more trust here than an abstract render:
-              this panel exists to answer "why should I believe this agency",
-              and a stock-AI chrome face reads as evasive, not premium. */}
+          {/* Chrome face — full-bleed left panel with aurora animated background.
+              The slowly dancing purple→pink→orange aurora behind the chrome sculpture
+              makes this section feel alive. The face-shimmer CSS cycles brightness
+              and hue-rotate to create convincing metallic reflections.              */}
           <div className="relative overflow-hidden min-h-[400px] lg:min-h-0">
-            {/* Subtle iridescent wash — brand touch, dialled back so the
-                photo (and its warm sunset tones) stays the focal point */}
+            {/* Aurora animated background — cycling through warm/cool spectrum */}
             <div
-              className="absolute inset-0 face-bg-animate pointer-events-none"
-              style={{
-                background: 'conic-gradient(from 0deg at 35% 60%, rgba(160,140,255,0.10), rgba(120,170,255,0.08), rgba(255,220,180,0.06), rgba(140,200,255,0.08), rgba(180,150,255,0.10))',
-                mixBlendMode: 'overlay',
-                zIndex: 1,
-              }}
-            />
-            <img
-              src="/images/prop-dubai-downtown.jpg"
-              alt="Пентхаус с видом на Burj Khalifa, Downtown Dubai"
-              className="absolute inset-0 w-full h-full object-cover object-center face-shimmer"
+              className="absolute inset-0 face-aurora-bg pointer-events-none"
               style={{ zIndex: 0 }}
             />
-            {/* Right fade to match text panel */}
+            {/* Chrome face sculpture */}
+            <img
+              src="/chrome/liquid/chrome-face-colorful.jpg"
+              alt="Chrome face sculpture"
+              className="absolute inset-0 w-full h-full object-cover object-center face-chrome-shimmer"
+              style={{ zIndex: 1 }}
+            />
+            {/* Highlight sweep — bright reflection crossing the face */}
+            <div className="face-highlight-sweep" style={{ zIndex: 3 }} />
+            {/* Right fade */}
             <div
               className="absolute inset-y-0 right-0 hidden lg:block pointer-events-none"
               style={{
-                width: '30%',
+                width: '35%',
                 background: 'linear-gradient(to right, transparent, #000000)',
-                zIndex: 2,
+                zIndex: 4,
               }}
             />
-            {/* Bottom fade — content reads over dark gradient */}
+            {/* Bottom fade */}
             <div
               className="absolute inset-x-0 bottom-0 pointer-events-none"
               style={{
-                height: '55%',
-                background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 45%, transparent 100%)',
-                zIndex: 2,
+                height: '52%',
+                background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.55) 45%, transparent 100%)',
+                zIndex: 4,
               }}
             />
             {/* Chrome starburst accent */}
@@ -459,11 +462,11 @@ export default function Home() {
                 width: '72px',
                 top: '10%', right: '10%',
                 filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.7))',
-                zIndex: 3,
+                zIndex: 5,
               }}
             />
-            {/* Content overlay — stats + CTA button */}
-            <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-start px-6 md:px-8 pb-7 md:pb-9" style={{ zIndex: 4 }}>
+            {/* Content overlay — stats + CTA */}
+            <div className="absolute inset-x-0 bottom-0 flex flex-col items-start px-6 md:px-8 pb-7 md:pb-9" style={{ zIndex: 6 }}>
               <p className="font-oxanium text-[9px] tracking-[0.32em] text-white/40 uppercase mb-4">
                 Ваши инвестиции под защитой
               </p>
@@ -523,6 +526,41 @@ export default function Home() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ─── 3D LOCATION MAP ─────────────────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-black relative overflow-hidden">
+        {/* Ambient glow */}
+        <div
+          className="hero-glow-spill absolute pointer-events-none"
+          style={{
+            width: 'min(700px, 110vw)', height: 'min(700px, 110vw)',
+            top: '50%', left: '50%',
+            transform: 'translate(-50%, -50%)',
+            opacity: 0.18,
+            zIndex: 0,
+          }}
+        />
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="mb-14 text-center" data-reveal="up">
+            <p className="font-oxanium text-[11px] tracking-[0.28em] text-white/40 uppercase mb-3">
+              Геолокация объекта
+            </p>
+            <h2 className="font-oxanium text-3xl md:text-[38px] text-white section-reveal-heading">
+              3D карта расположения
+            </h2>
+            <p className="font-space-grotesk text-sm text-white/35 mt-2">
+              Реальное расстояние до ключевых объектов инфраструктуры
+            </p>
+          </div>
+          <IsoTerrain
+            propertyName="Пентхаус · Downtown"
+            propertyAddress="Downtown Dubai, UAE"
+            propertySvgX={200}
+            propertySvgY={138}
+            landmarks={DUBAI_DOWNTOWN_LANDMARKS}
+          />
         </div>
       </section>
 
@@ -586,7 +624,7 @@ export default function Home() {
                     src={`/chrome/liquid/chrome-num-${step.num}.png`}
                     alt={step.num}
                     className="w-14 h-14 shrink-0 object-contain relative z-10"
-                    style={{ filter: 'drop-shadow(0 0 14px rgba(200,180,255,0.40))' }}
+                    style={{ mixBlendMode: 'screen' as const, filter: 'drop-shadow(0 0 18px rgba(200,180,255,0.55))' }}
                   />
                   <div className="pt-3">
                     <h4 className="font-space-grotesk text-[18px] text-white mb-2">{step.title}</h4>

@@ -117,7 +117,7 @@ export default function About() {
           <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-6 block">
             Как мы работаем
           </span>
-          <h1 className="text-5xl md:text-[64px] font-oxanium font-bold text-white leading-[1.05] mb-6 uppercase">
+          <h1 className="text-[clamp(1.65rem,9.2vw,4rem)] font-oxanium font-bold text-white leading-[1.05] mb-6 uppercase">
             Полное сопровождение
           </h1>
           <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed max-w-xl">
