@@ -787,6 +787,16 @@ body {
   display: none;
 }
 
+/* ─── Void Wave section ───────────────────────────────────────────────────
+   Full-bleed sky panel that fades from black → blue sky → black.
+   The sky image is CSS-contained; all fade overlays are pseudo-gradient divs. */
+
+.void-wave-section {
+  position: relative;
+  background: #000;
+  /* No fixed height — content (the centered eye + text) determines height */
+}
+
 /* ─── Liquid Chrome asset animations ─────────────────────────────────────
    Applied to AI-generated high-res chrome PNGs (starburst, eye, ribbon).
    Separate from ChromeShape breathe so both can coexist without conflict. */

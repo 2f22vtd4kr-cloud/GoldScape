@@ -1,7 +1,6 @@
 import { Shield, Globe, Zap, Bed, Bath, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 import { Layout } from '@/components/Layout';
-import { ChromeShape } from '@/components/ChromeShape';
 
 const DESTINATIONS = [
   { flag: '🇦🇪', country: 'ОАЭ',         city: 'Дубай',     price: '$380,000',  image: '/images/dest-dubai.jpg' },
@@ -108,131 +107,95 @@ const WHY_US = [
 export default function Home() {
   return (
     <Layout>
+
       {/* ─── HERO ───────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[100dvh] flex items-center pt-20 overflow-hidden">
+      <section className="relative bg-black overflow-hidden">
         <div className="hero-grid" />
 
-        {/* Liquid chrome tendrils — blended over grid, top-right framing */}
+        {/* Chrome tendrils — top-right framing (desktop only) */}
         <img
           src="/chrome/liquid/chrome-tendrils.png"
-          alt=""
-          aria-hidden="true"
+          alt="" aria-hidden="true"
           className="absolute pointer-events-none select-none hidden md:block"
           style={{
-            top: '-5%',
-            right: '-8%',
-            width: 'clamp(320px, 42vw, 640px)',
-            opacity: 0.55,
-            mixBlendMode: 'screen',
-            zIndex: 1,
-          }}
-        />
-        {/* Tendrils mirrored bottom-left — subtle echo */}
-        <img
-          src="/chrome/liquid/chrome-tendrils.png"
-          alt=""
-          aria-hidden="true"
-          className="absolute pointer-events-none select-none hidden lg:block"
-          style={{
-            bottom: '-8%',
-            left: '-12%',
-            width: 'clamp(240px, 30vw, 480px)',
-            opacity: 0.3,
-            mixBlendMode: 'screen',
-            transform: 'rotate(180deg) scaleX(-1)',
-            zIndex: 1,
+            top: '-4%', right: '-6%',
+            width: 'clamp(340px, 44vw, 660px)',
+            opacity: 0.6, mixBlendMode: 'screen', zIndex: 1,
           }}
         />
 
-        <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 flex flex-col items-start pt-10 lg:pt-0">
-            <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 mb-6 uppercase">
-              Международная недвижимость
-            </span>
+        <div className="container mx-auto px-6 pt-28 pb-0 lg:pt-32 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-12 lg:items-center">
 
-            <h1 className="font-oxanium text-5xl md:text-7xl lg:text-[88px] font-light leading-[1.05] chrome-text mb-6 tracking-tight section-reveal-heading">
-              Ваш капитал <br /> заслуживает <br />
-              <span className="chrome-text-accent font-bold">свободы</span>
-            </h1>
+            {/* ── Text ── */}
+            <div className="lg:col-span-7 flex flex-col items-start pb-8 lg:pb-24">
+              <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 mb-6 uppercase">
+                Международная недвижимость
+              </span>
 
-            <p className="font-space-grotesk text-lg text-white/55 max-w-lg mb-12 leading-relaxed">
-              Инвестиции в зарубежную недвижимость — ОАЭ, Турция, Кипр, Грузия, Португалия
-            </p>
+              <h1 className="font-oxanium text-[clamp(2.8rem,10vw,5.5rem)] font-light leading-[1.05] chrome-text mb-6 tracking-tight section-reveal-heading">
+                Ваш капитал <br />заслуживает <br />
+                <span className="chrome-text-accent font-bold">свободы</span>
+              </h1>
 
-            <div className="flex flex-wrap gap-4 mb-16">
-              <Link href="/properties" className="eom-btn-primary font-oxanium text-sm uppercase tracking-wider">
-                Подобрать объект
-              </Link>
-              <Link href="/about" className="eom-btn-ghost font-oxanium text-sm uppercase tracking-wider">
-                Бесплатная консультация
-              </Link>
+              <p className="font-space-grotesk text-lg text-white/55 max-w-lg mb-12 leading-relaxed">
+                Инвестиции в зарубежную недвижимость — ОАЭ, Турция, Кипр, Грузия, Португалия
+              </p>
+
+              <div className="flex flex-wrap gap-4 mb-12">
+                <Link href="/properties" className="eom-btn-primary font-oxanium text-sm uppercase tracking-wider">
+                  Подобрать объект
+                </Link>
+                <Link href="/about" className="eom-btn-ghost font-oxanium text-sm uppercase tracking-wider">
+                  Бесплатная консультация
+                </Link>
+              </div>
+
+              <div className="flex items-center gap-4 text-white/45 font-oxanium text-[13px] uppercase tracking-wider">
+                <span>847 сделок</span>
+                <span className="w-1 h-1 rounded-full bg-white/20" />
+                <span>12 стран</span>
+                <span className="w-1 h-1 rounded-full bg-white/20" />
+                <span>₽0 комиссии для покупателя</span>
+              </div>
             </div>
 
-            <div className="flex items-center gap-4 text-white/45 font-oxanium text-[13px] uppercase tracking-wider">
-              <span>847 сделок</span>
-              <span className="w-1 h-1 rounded-full bg-white/20" />
-              <span>12 стран</span>
-              <span className="w-1 h-1 rounded-full bg-white/20" />
-              <span>₽0 комиссии для покупателя</span>
-            </div>
-          </div>
+            {/* ── Visual ── */}
+            <div className="lg:col-span-5 relative flex items-center justify-center
+                            h-[360px] sm:h-[460px] lg:h-[680px] -mx-6 lg:mx-0">
+              {/* Purple iridescent glow */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
+                <div style={{
+                  width: 'min(440px, 90vw)', height: 'min(440px, 90vw)',
+                  background: 'conic-gradient(from 0deg,#4a00e0,#8e2de2,#f000ff,#00c9ff,#92fe9d,#4a00e0)',
+                  filter: 'blur(80px)', opacity: 0.24, borderRadius: '50%',
+                }} />
+              </div>
 
-          {/* Hero visual column */}
-          <div className="lg:col-span-5 relative h-[400px] lg:h-[600px] flex items-center justify-center mt-4 lg:mt-0">
-            {/* Iridescent glow — responsive, never overflows on mobile */}
-            <div
-              className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
-              aria-hidden="true"
-            >
-              <div
+              {/* Main hero chrome blob — always visible */}
+              <img
+                src="/chrome/liquid/chrome-blob-twisted.png"
+                alt="" aria-hidden="true"
+                className="animate-float relative z-10 w-full max-w-[clamp(260px,55vw,500px)] lg:max-w-[500px]"
                 style={{
-                  width: 'min(480px, 88vw)',
-                  height: 'min(480px, 88vw)',
-                  background: 'conic-gradient(from 0deg, #4a00e0, #8e2de2, #f000ff, #00c9ff, #92fe9d, #4a00e0)',
-                  filter: 'blur(90px)',
-                  opacity: 0.22,
-                  borderRadius: '50%',
+                  height: 'auto', pointerEvents: 'none',
+                  filter: 'drop-shadow(0 0 50px rgba(180,140,255,0.4)) drop-shadow(0 0 100px rgba(100,60,220,0.25))',
+                }}
+              />
+
+              {/* Chrome starburst — bottom-right corner accent */}
+              <img
+                src="/chrome/liquid/chrome-starburst.png"
+                alt="" aria-hidden="true"
+                className="animate-float-small absolute z-20 hidden sm:block"
+                style={{
+                  width: 'clamp(64px, 9vw, 100px)',
+                  bottom: '8%', right: '4%',
+                  opacity: 0.92,
+                  filter: 'drop-shadow(0 0 22px rgba(255,255,255,0.55)) drop-shadow(0 0 8px rgba(200,180,255,0.45))',
                 }}
               />
             </div>
-
-            {/* Main liquid chrome twisted blob — AI-generated high-res asset */}
-            <img
-              src="/chrome/liquid/chrome-blob-twisted.png"
-              alt=""
-              aria-hidden="true"
-              className="animate-float relative z-10"
-              style={{
-                width: 'clamp(240px, 36vw, 500px)',
-                height: 'auto',
-                pointerEvents: 'none',
-                filter: 'drop-shadow(0 0 50px rgba(180,140,255,0.35)) drop-shadow(0 0 100px rgba(100,60,220,0.2))',
-              }}
-            />
-
-            {/* Chrome starburst — AI-generated, replaces old spike */}
-            <img
-              src="/chrome/liquid/chrome-starburst.png"
-              alt=""
-              aria-hidden="true"
-              className="animate-float-small absolute z-20 opacity-90 hidden sm:block"
-              style={{
-                width: 'clamp(70px, 10vw, 110px)',
-                bottom: '10%',
-                right: '4%',
-                filter: 'drop-shadow(0 0 24px rgba(255,255,255,0.5)) drop-shadow(0 0 8px rgba(200,180,255,0.4))',
-              }}
-            />
-
-            {/* Chrome ring accent — opposite corner from starburst */}
-            <ChromeShape
-              variant="ring"
-              size={52}
-              breathe={true}
-              iridescent={false}
-              className="absolute z-20 opacity-60 hidden sm:block"
-              style={{ top: '18%', left: '4%' }}
-            />
           </div>
         </div>
       </section>
@@ -282,62 +245,190 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── WHY US ──────────────────────────────────────────────────────── */}
-      <section id="about" className="py-24 bg-[#0f0f0f] relative overflow-hidden">
-        <div
-          className="iridescent-spill w-[500px] h-[500px] absolute -bottom-[250px] -left-[250px] opacity-25 z-0 pointer-events-none"
+      {/* ─── VOID WAVE — blue sky chrome section ─────────────────────────── */}
+      <section className="void-wave-section relative overflow-hidden">
+        {/* Sky background */}
+        <img
+          src="/chrome/liquid/sky-bg.jpg"
+          alt="" aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+          style={{ zIndex: 0 }}
         />
 
-        {/* Chrome ribbon — AI-generated, horizontal decorative edge top */}
-        <img
-          src="/chrome/liquid/chrome-ribbon.png"
-          alt=""
-          aria-hidden="true"
-          className="absolute top-0 left-0 w-full pointer-events-none select-none"
+        {/* Black fade from top — sky "emerges" from darkness */}
+        <div
+          className="absolute inset-x-0 top-0 pointer-events-none"
           style={{
-            height: '80px',
-            objectFit: 'cover',
-            objectPosition: 'center top',
-            opacity: 0.35,
-            mixBlendMode: 'screen',
-            zIndex: 0,
+            height: '42%',
+            background: 'linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.7) 50%, transparent 100%)',
+            zIndex: 1,
           }}
         />
-
-        {/* Chrome starburst — AI-generated, top-right accent */}
-        <img
-          src="/chrome/liquid/chrome-starburst.png"
-          alt=""
-          aria-hidden="true"
-          className="absolute pointer-events-none select-none hidden lg:block liquid-chrome-pulse"
+        {/* Black fade from bottom — sky recedes back into darkness */}
+        <div
+          className="absolute inset-x-0 bottom-0 pointer-events-none"
           style={{
-            top: '8%',
-            right: '5%',
-            width: 'clamp(60px, 8vw, 100px)',
-            opacity: 0.7,
-            filter: 'drop-shadow(0 0 18px rgba(255,255,255,0.4))',
+            height: '42%',
+            background: 'linear-gradient(to top, #000000 0%, rgba(0,0,0,0.7) 50%, transparent 100%)',
+            zIndex: 1,
+          }}
+        />
+        {/* Left + right edge vignettes */}
+        <div
+          className="absolute inset-y-0 left-0 pointer-events-none hidden md:block"
+          style={{
+            width: '18%',
+            background: 'linear-gradient(to right, rgba(0,0,0,0.6), transparent)',
+            zIndex: 1,
+          }}
+        />
+        <div
+          className="absolute inset-y-0 right-0 pointer-events-none hidden md:block"
+          style={{
+            width: '18%',
+            background: 'linear-gradient(to left, rgba(0,0,0,0.6), transparent)',
             zIndex: 1,
           }}
         />
 
-        <div className="container mx-auto px-6 relative z-10">
-          <h2
-            className="font-oxanium text-3xl md:text-[40px] text-white mb-16 section-reveal-heading"
-            data-reveal="up"
-          >
-            Почему нас выбирают
-          </h2>
+        {/* Chrome burst overlay — scattered around eye (desktop) */}
+        <img
+          src="/chrome/liquid/chrome-burst-overlay.png"
+          alt="" aria-hidden="true"
+          className="absolute pointer-events-none select-none hidden sm:block"
+          style={{
+            width: 'clamp(300px, 50vw, 700px)',
+            top: '50%', left: '50%',
+            transform: 'translate(-50%, -50%)',
+            opacity: 0.65,
+            zIndex: 2,
+          }}
+        />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12" data-stagger>
-            {WHY_US.map(({ Icon, title, desc }, i) => (
-              <div key={i} className="flex flex-col" data-reveal="up">
-                <div className="feature-icon-wrapper chrome-bg-gradient shadow-[0_0_20px_rgba(255,255,255,0.15)]">
-                  <Icon className="feature-icon-inner w-5 h-5" />
+        {/* Chrome tendrils — left edge bleed */}
+        <img
+          src="/chrome/liquid/chrome-tendrils.png"
+          alt="" aria-hidden="true"
+          className="absolute pointer-events-none select-none hidden lg:block"
+          style={{
+            left: '-8%', top: '10%',
+            width: 'clamp(200px, 28vw, 400px)',
+            opacity: 0.7, mixBlendMode: 'screen',
+            transform: 'scaleX(-1)',
+            zIndex: 2,
+          }}
+        />
+        {/* Chrome tendrils — right edge */}
+        <img
+          src="/chrome/liquid/chrome-tendrils.png"
+          alt="" aria-hidden="true"
+          className="absolute pointer-events-none select-none hidden lg:block"
+          style={{
+            right: '-8%', bottom: '10%',
+            width: 'clamp(200px, 28vw, 400px)',
+            opacity: 0.7, mixBlendMode: 'screen',
+            zIndex: 2,
+          }}
+        />
+
+        {/* Chrome eye — centered hero of the section */}
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-32 md:py-48 pointer-events-none">
+          <img
+            src="/chrome/liquid/chrome-eye-v2.png"
+            alt="" aria-hidden="true"
+            className="animate-float mb-8 md:mb-10"
+            style={{
+              width: 'clamp(160px, 36vw, 340px)',
+              filter: 'drop-shadow(0 0 40px rgba(255,255,255,0.6)) drop-shadow(0 0 80px rgba(180,220,255,0.4))',
+            }}
+          />
+          <p className="font-oxanium text-[clamp(0.65rem,1.5vw,0.85rem)] tracking-[0.3em] text-white/50 uppercase mb-4">
+            Sky, signal and liquid chrome in collision
+          </p>
+          <h2 className="font-oxanium text-[clamp(2rem,7vw,5rem)] font-bold text-white leading-none tracking-tight" style={{ textShadow: '0 0 60px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.9)' }}>
+            VOID<br />WAVE
+          </h2>
+        </div>
+      </section>
+
+      {/* ─── CHROME FACE — WHY US ────────────────────────────────────────── */}
+      <section id="about" className="bg-black relative overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
+
+          {/* Chrome face image — full-bleed left panel */}
+          <div className="relative overflow-hidden min-h-[360px] lg:min-h-0">
+            <img
+              src="/chrome/liquid/chrome-face-colorful.jpg"
+              alt="Chrome metallic face"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
+            {/* Right fade to match text panel */}
+            <div
+              className="absolute inset-y-0 right-0 hidden lg:block pointer-events-none"
+              style={{
+                width: '30%',
+                background: 'linear-gradient(to right, transparent, #000000)',
+              }}
+            />
+            {/* Bottom fade on mobile */}
+            <div
+              className="absolute inset-x-0 bottom-0 lg:hidden pointer-events-none"
+              style={{
+                height: '30%',
+                background: 'linear-gradient(to top, #000000, transparent)',
+              }}
+            />
+            {/* Chrome starburst accent over the face image */}
+            <img
+              src="/chrome/liquid/chrome-starburst.png"
+              alt="" aria-hidden="true"
+              className="absolute pointer-events-none liquid-chrome-pulse hidden sm:block"
+              style={{
+                width: '80px',
+                top: '12%', right: '8%',
+                filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.7))',
+                zIndex: 2,
+              }}
+            />
+          </div>
+
+          {/* Why us content — right panel */}
+          <div className="flex flex-col justify-center px-8 md:px-12 lg:px-16 py-16 lg:py-24 bg-black relative">
+            {/* Subtle chrome ribbon top edge on desktop */}
+            <img
+              src="/chrome/liquid/chrome-ribbon.png"
+              alt="" aria-hidden="true"
+              className="absolute top-0 left-0 right-0 pointer-events-none hidden lg:block"
+              style={{
+                height: '3px', width: '100%',
+                objectFit: 'cover',
+                opacity: 0.5, mixBlendMode: 'screen',
+              }}
+            />
+
+            <h2
+              className="font-oxanium text-3xl md:text-[40px] text-white mb-4 section-reveal-heading"
+              data-reveal="up"
+            >
+              Почему нас выбирают
+            </h2>
+            <p className="font-space-grotesk text-sm text-white/40 mb-12" data-reveal="up">
+              Семь лет — сотни сделок — ноль скрытых комиссий
+            </p>
+
+            <div className="flex flex-col gap-10" data-stagger>
+              {WHY_US.map(({ Icon, title, desc }, i) => (
+                <div key={i} className="flex gap-5" data-reveal="up">
+                  <div className="feature-icon-wrapper chrome-bg-gradient shadow-[0_0_20px_rgba(255,255,255,0.15)] shrink-0">
+                    <Icon className="feature-icon-inner w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-oxanium text-[18px] text-white mb-2">{title}</h3>
+                    <p className="font-space-grotesk text-[15px] text-white/50 leading-relaxed">{desc}</p>
+                  </div>
                 </div>
-                <h3 className="font-oxanium text-[18px] text-white mb-4">{title}</h3>
-                <p className="font-space-grotesk text-[15px] text-white/50 leading-relaxed">{desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -345,21 +436,6 @@ export default function Home() {
       {/* ─── TRUST METRICS ───────────────────────────────────────────────── */}
       <section className="bg-[#080808] relative overflow-hidden">
         <div className="iridescent-line" />
-
-        {/* Chrome tendrils — blended behind stats, left side */}
-        <img
-          src="/chrome/liquid/chrome-tendrils.png"
-          alt=""
-          aria-hidden="true"
-          className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none select-none hidden xl:block"
-          style={{
-            width: '320px',
-            opacity: 0.18,
-            mixBlendMode: 'screen',
-            transform: 'translateY(-50%) scaleX(-1)',
-            zIndex: 0,
-          }}
-        />
 
         <div className="container mx-auto px-6 py-16 relative z-10">
           <div
@@ -372,10 +448,7 @@ export default function Home() {
                 className={`flex flex-col items-center text-center px-4${i >= 2 ? ' mt-8 md:mt-0' : ''}`}
                 data-reveal="scale"
               >
-                <span
-                  className="font-oxanium text-4xl md:text-[56px] chrome-text mb-2"
-                  data-counter
-                >
+                <span className="font-oxanium text-4xl md:text-[56px] chrome-text mb-2" data-counter>
                   {value}
                 </span>
                 <span className="font-space-grotesk text-[13px] text-white/40 uppercase tracking-wider max-w-[180px]">
@@ -389,9 +462,23 @@ export default function Home() {
         <div className="iridescent-line" />
       </section>
 
-      {/* ─── PROCESS TEASER ──────────────────────────────────────────────── */}
-      <section id="consult" className="py-32 bg-[#080808] relative overflow-hidden">
-        <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
+      {/* ─── PROCESS ─────────────────────────────────────────────────────── */}
+      <section id="consult" className="py-24 md:py-32 bg-black relative overflow-hidden">
+        {/* Chrome tendrils — right atmospheric accent */}
+        <img
+          src="/chrome/liquid/chrome-tendrils.png"
+          alt="" aria-hidden="true"
+          className="absolute right-0 top-0 pointer-events-none select-none hidden xl:block"
+          style={{
+            width: '340px', opacity: 0.2,
+            mixBlendMode: 'screen',
+            transform: 'scaleY(-1)',
+          }}
+        />
+
+        <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center relative z-10">
+
+          {/* Steps */}
           <div data-reveal="left">
             <h2 className="font-oxanium text-3xl md:text-[40px] text-white mb-16 section-reveal-heading">
               Как это работает
@@ -413,52 +500,36 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Consultation CTA card */}
-          <div className="relative flex flex-col items-center justify-center py-20" data-reveal="right">
-            {/* Iridescent color spill — GPU-composited, no flash */}
-            <div className="iridescent-spill w-[380px] h-[380px] absolute z-0 opacity-28 mix-blend-screen pointer-events-none" />
-
-            {/* Chrome eye — AI-generated, atmospheric background visual */}
+          {/* CTA card with chrome eye ornament */}
+          <div className="relative flex flex-col items-center justify-center py-12 lg:py-20" data-reveal="right">
+            {/* Chrome eye — large atmospheric element behind card */}
             <img
-              src="/chrome/liquid/chrome-eye.png"
-              alt=""
-              aria-hidden="true"
+              src="/chrome/liquid/chrome-eye-v2.png"
+              alt="" aria-hidden="true"
               className="absolute pointer-events-none select-none animate-float"
               style={{
-                width: 'clamp(180px, 28vw, 280px)',
-                opacity: 0.18,
-                filter: 'drop-shadow(0 0 30px rgba(180,160,255,0.3))',
-                zIndex: 5,
-                top: '50%',
-                left: '50%',
+                width: 'clamp(200px, 30vw, 300px)',
+                opacity: 0.12,
+                top: '50%', left: '50%',
                 transform: 'translate(-50%, -50%)',
+                filter: 'drop-shadow(0 0 40px rgba(180,200,255,0.3))',
+                zIndex: 0,
               }}
             />
 
-            {/* Decorative star4 beside the card */}
-            <ChromeShape
-              variant="star4"
-              size={46}
-              breathe={true}
-              iridescent={true}
-              className="absolute z-20 opacity-80 hidden md:block"
-              style={{ top: '12%', right: '-4%' }}
-            />
-
             {/* CTA card */}
-            <div className="relative z-20 text-center bg-black/48 backdrop-blur-2xl px-10 py-12 border border-white/12 rounded-3xl shadow-[0_8px_60px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.08)] max-w-[320px] w-full">
-              {/* Chrome eye as card top ornament — small, crisp */}
+            <div className="relative z-10 text-center bg-black/60 backdrop-blur-2xl px-10 py-12 border border-white/12 rounded-3xl shadow-[0_8px_60px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.08)] max-w-[340px] w-full">
+              {/* Chrome eye as card top ornament */}
               <img
-                src="/chrome/liquid/chrome-eye.png"
-                alt=""
-                aria-hidden="true"
-                className="absolute -top-6 left-1/2 -translate-x-1/2 liquid-chrome-pulse pointer-events-none"
+                src="/chrome/liquid/chrome-eye-v2.png"
+                alt="" aria-hidden="true"
+                className="absolute -top-7 left-1/2 -translate-x-1/2 liquid-chrome-pulse pointer-events-none"
                 style={{
-                  width: '52px',
-                  filter: 'drop-shadow(0 0 12px rgba(255,255,255,0.6))',
+                  width: '56px',
+                  filter: 'drop-shadow(0 0 14px rgba(255,255,255,0.7))',
                 }}
               />
-              <h3 className="font-oxanium text-[28px] chrome-text mt-2 mb-8 max-w-[250px] mx-auto leading-tight">
+              <h3 className="font-oxanium text-[28px] chrome-text mt-2 mb-8 max-w-[260px] mx-auto leading-tight">
                 Первая консультация бесплатно
               </h3>
               <Link href="/about" className="eom-btn-ghost w-full font-oxanium tracking-wide justify-center">
@@ -470,7 +541,15 @@ export default function Home() {
       </section>
 
       {/* ─── FEATURED PROPERTIES ─────────────────────────────────────────── */}
-      <section id="properties" className="py-24 bg-[#0f0f0f] relative">
+      <section id="properties" className="py-24 bg-[#080808] relative">
+        {/* Chrome ribbon top accent */}
+        <img
+          src="/chrome/liquid/chrome-ribbon.png"
+          alt="" aria-hidden="true"
+          className="absolute top-0 left-0 right-0 w-full pointer-events-none"
+          style={{ height: '3px', objectFit: 'cover', opacity: 0.4, mixBlendMode: 'screen' }}
+        />
+
         <div className="container mx-auto px-6">
           <div
             className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
@@ -493,7 +572,7 @@ export default function Home() {
               <Link
                 key={i}
                 href="/properties"
-                className="bg-[#080808] border border-white/10 rounded-2xl overflow-hidden group cursor-pointer hover:border-white/20 transition-colors block"
+                className="bg-[#0d0d0d] border border-white/10 rounded-2xl overflow-hidden group cursor-pointer hover:border-white/20 transition-colors block"
                 data-reveal="up"
               >
                 <div className="aspect-[3/2] relative overflow-hidden bg-[#141414]">
@@ -535,19 +614,16 @@ export default function Home() {
       </section>
 
       {/* ─── TESTIMONIALS ────────────────────────────────────────────────── */}
-      <section className="py-24 bg-[#080808] relative overflow-hidden">
-        <div
-          className="iridescent-spill w-[600px] h-[600px] absolute -right-[300px] top-1/2 -translate-y-1/2 opacity-12 z-0 pointer-events-none"
-        />
-
-        {/* Decorative ring bottom-left */}
-        <ChromeShape
-          variant="ring"
-          size={80}
-          breathe={true}
-          iridescent={true}
-          float={true}
-          className="absolute bottom-12 left-[5%] opacity-25 pointer-events-none hidden lg:block"
+      <section className="py-24 bg-black relative overflow-hidden">
+        {/* Chrome tendrils — very faint right side */}
+        <img
+          src="/chrome/liquid/chrome-tendrils.png"
+          alt="" aria-hidden="true"
+          className="absolute right-0 bottom-0 pointer-events-none select-none hidden xl:block"
+          style={{
+            width: '280px', opacity: 0.14,
+            mixBlendMode: 'screen',
+          }}
         />
 
         <div className="container mx-auto px-6 relative z-10">
@@ -583,6 +659,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
     </Layout>
   );
 }
