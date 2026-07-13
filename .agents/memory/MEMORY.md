@@ -1,0 +1,6 @@
+- [AI Simulator backend (OpenAI)](openai-simulator.md) — insufficient_quota is permanent (check err.code, not message text); manual-persona fallback when no LLM billing available
+- [Cinematic Noir graduation decisions](noir-graduation.md) — palette, type, and content choices made when graduating the Canvas mockup to the live site
+- [Translation fixes applied](translation-fixes.md) — 6 Russian translation issues patched in LanguageContext.tsx
+- [Hero black screen root cause](hero-loading-state.md) — screenshot tool captures #root:empty loading state (before React 19 concurrent render commits); fix is to make the CSS loading state look like the actual hero
+- [React 19 flushSync + createRoot](react19-flushsync.md) — flushSync silently fails to commit DOM in React 19; never wrap createRoot.render() in flushSync; screenshot tool always captures before async render
+- [wouter v3 wildcard route syntax](wouter-wildcard-route.md) — catch-all route must be path="/*" not "/:rest*"; the latter silently never matches, blanking the whole app with zero errors anywhere

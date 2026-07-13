@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>GORY | Mountain Resort</title>
+    <meta name="description" content="GORY Mountain Resort — Where the Caucasus meets the future. Opening 2027." />
+
+    <!-- Preload hero image so the browser fetches it immediately -->
+    <link rel="preload" href="/images/hero.jpg" as="image" fetchpriority="high" />
+
+    <!-- Critical first-paint styles: the loading state looks like the real hero -->
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+
+      html, body {
+        min-height: 100vh;
+        background: #0B0D0F;
+        color: #F5F2E8;
+      }
+
+      /* Full-viewport hero shown before React mounts (#root is still empty) */
+      #root:empty {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100dvh;
+        background-image: url('/images/hero.jpg');
+        background-size: cover;
+        background-position: center;
+        background-color: #0B0D0F;
+      }
+
+      /* Dark overlays matching the React hero */
+      #root:empty::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(to top, #0B0D0F 0%, transparent 55%),
+          rgba(0, 0, 0, 0.40);
+        z-index: 1;
+      }
+
+      /* GORY wordmark — full white, matches the actual React component */
+      #root:empty::after {
+        content: 'GORY';
+        position: relative;
+        z-index: 2;
+        font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif;
+        font-size: 15vw;
+        letter-spacing: 0.1em;
+        line-height: 1;
+        color: #ffffff;
+        text-shadow: 0 25px 25px rgba(0, 0, 0, 0.15);
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

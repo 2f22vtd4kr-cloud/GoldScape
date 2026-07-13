@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono&display=swap');
+
+:root {
+  --gory-bg: #050505;
+  --gory-surface: #0a0a0a;
+  --gory-accent: #cfa16b; /* Warm metallic bronze/gold */
+  --gory-text: #ffffff;
+  --gory-text-muted: #888888;
+  --gory-border: rgba(255, 255, 255, 0.15);
+  --font-serif: 'Playfair Display', serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+}
+
+/* Cinematic reveal animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes letterboxReveal {
+  from { clip-path: inset(50% 0 50% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-letterbox {
+  animation: letterboxReveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* Base styles for the mockup wrapper */
+.gory-mockup {
+  background-color: var(--gory-bg);
+  color: var(--gory-text);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.gory-font-serif { font-family: var(--font-serif); }
+.gory-font-mono { font-family: var(--font-mono); }
+.gory-font-sans { font-family: var(--font-sans); }
+
+.gory-text-accent { color: var(--gory-accent); }
+.gory-border-b { border-bottom: 1px solid var(--gory-border); }
+.gory-border-t { border-top: 1px solid var(--gory-border); }
+.gory-border-l { border-left: 1px solid var(--gory-border); }
+.gory-border-y { border-top: 1px solid var(--gory-border); border-bottom: 1px solid var(--gory-border); }

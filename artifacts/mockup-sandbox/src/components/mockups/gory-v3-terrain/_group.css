@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --terrain-bg: #09090b;
+  --terrain-fg: #f4f4f5;
+  --terrain-accent: #ff4d00;
+  --terrain-secondary: #27272a;
+  
+  --font-syne: 'Syne', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-inter: 'Inter', sans-serif;
+}
+
+.terrain-theme {
+  background-color: var(--terrain-bg);
+  color: var(--terrain-fg);
+  font-family: var(--font-inter);
+}
+
+.font-display {
+  font-family: var(--font-syne);
+}
+
+.font-mono-data {
+  font-family: var(--font-mono);
+}
+
+.text-accent {
+  color: var(--terrain-accent);
+}
+
+.bg-accent {
+  background-color: var(--terrain-accent);
+}
+
+.border-accent {
+  border-color: var(--terrain-accent);
+}
+
+/* Utilities for data drama */
+.text-outline {
+  -webkit-text-stroke: 1px var(--terrain-fg);
+  color: transparent;
+}
+
+.text-outline-accent {
+  -webkit-text-stroke: 1px var(--terrain-accent);
+  color: transparent;
+}
+
+/* Gradients */
+.bg-gradient-data {
+  background: linear-gradient(135deg, var(--terrain-secondary) 0%, var(--terrain-bg) 100%);
+}

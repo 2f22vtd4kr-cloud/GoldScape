@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap');
+
+.gory-v2-alpine {
+  --bg-color: #f7f6f2; /* Cream/ivory */
+  --text-primary: #2a2a28;
+  --text-secondary: #7a7a78;
+  --border-color: #dcdad2;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Inter', sans-serif;
+  
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.gory-v2-alpine h1,
+.gory-v2-alpine h2,
+.gory-v2-alpine h3,
+.gory-v2-alpine h4,
+.gory-v2-alpine h5,
+.gory-v2-alpine h6,
+.gory-v2-alpine .font-serif {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+.gory-v2-alpine .thin-line {
+  height: 1px;
+  background-color: var(--border-color);
+  width: 100%;
+}
+
+.gory-v2-alpine .thin-line-v {
+  width: 1px;
+  background-color: var(--border-color);
+  height: 100%;
+}
+
+.gory-v2-alpine .data-panel {
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+}
+
+.gory-v2-alpine .img-container {
+  overflow: hidden;
+  background-color: var(--border-color);
+}
+
+.gory-v2-alpine img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease-out;
+}
+
+.gory-v2-alpine .img-container:hover img {
+  transform: scale(1.03);
+}
+
+.gory-v2-alpine .text-sm-mono {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
