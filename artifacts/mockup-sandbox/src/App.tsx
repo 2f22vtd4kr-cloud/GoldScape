@@ -140,7 +140,9 @@ function App() {
     );
   }
 
-  return <Gallery />;
+  // Redirect root to EstateofMind homepage
+  window.location.replace(getBasePath() + '/preview/estate-of-mind/Home');
+  return null;
 }
 
 export default App;

@@ -64,7 +64,7 @@ export default function About() {
               </div>
             </div>
             <div className="flex-1 flex justify-center relative z-10">
-              <div className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] chrome-blob" style={{ borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }} />
+              <img src={`${import.meta.env.BASE_URL}chrome/blob-iridescent-1.png`} alt="" className="animate-float drop-shadow-[0_0_60px_rgba(100,60,255,0.35)]" style={{ width: 'clamp(260px,32vw,420px)', height: 'auto', pointerEvents: 'none' }} />
             </div>
           </div>
 
@@ -74,7 +74,7 @@ export default function About() {
               02
             </div>
             <div className="flex-1 flex justify-center relative z-10">
-              <div className="w-[280px] h-[320px] md:w-[380px] md:h-[420px] chrome-blob" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }} />
+              <img src={`${import.meta.env.BASE_URL}chrome/ring-chrome.png`} alt="" className="animate-float drop-shadow-[0_0_40px_rgba(220,220,255,0.2)]" style={{ width: 'clamp(240px,30vw,400px)', height: 'auto', pointerEvents: 'none' }} />
             </div>
             <div className="flex-1 relative z-10">
               <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/20 bg-transparent text-white font-['Oxanium'] text-[11px] uppercase tracking-wider mb-6">
@@ -122,7 +122,7 @@ export default function About() {
               </div>
             </div>
             <div className="flex-1 flex justify-center relative z-10">
-              <div className="w-[320px] h-[280px] md:w-[420px] md:h-[380px] chrome-blob" style={{ borderRadius: '30% 70% 50% 50% / 50% 50% 70% 30%' }} />
+              <img src={`${import.meta.env.BASE_URL}chrome/blob-iridescent-2.png`} alt="" className="animate-float drop-shadow-[0_0_60px_rgba(140,60,255,0.3)]" style={{ width: 'clamp(240px,30vw,400px)', height: 'auto', pointerEvents: 'none' }} />
             </div>
           </div>
 
@@ -132,7 +132,7 @@ export default function About() {
               04
             </div>
             <div className="flex-1 flex justify-center relative z-10">
-              <div className="w-[350px] h-[350px] md:w-[450px] md:h-[450px] chrome-blob" style={{ borderRadius: '70% 30% 40% 60% / 40% 60% 40% 60%' }} />
+              <img src={`${import.meta.env.BASE_URL}chrome/drip-chrome.png`} alt="" className="animate-float drop-shadow-[0_0_40px_rgba(200,200,255,0.25)]" style={{ width: 'clamp(260px,32vw,420px)', height: 'auto', pointerEvents: 'none' }} />
             </div>
             <div className="flex-1 relative z-10">
               <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/20 bg-transparent text-white font-['Oxanium'] text-[11px] uppercase tracking-wider mb-6">

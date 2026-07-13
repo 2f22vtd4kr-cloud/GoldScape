@@ -112,6 +112,18 @@
 }
 @keyframes spinPrism { to { --angle: 360deg; } }
 
+/* ─── Float animations ─────────────────────────────────────────────── */
+@keyframes floatBlob {
+  0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+  50% { transform: translateY(-14px) rotate(2deg) scale(1.015); }
+}
+@keyframes floatBlobSmall {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-4deg); }
+}
+.animate-float { animation: floatBlob 7s ease-in-out infinite; }
+.animate-float-small { animation: floatBlobSmall 5s ease-in-out infinite; }
+
 /* ─── Chrome text ──────────────────────────────────────────────────── */
 .chrome-text {
   background: linear-gradient(

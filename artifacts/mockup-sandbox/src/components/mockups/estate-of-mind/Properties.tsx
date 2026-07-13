@@ -233,9 +233,9 @@ export default function Properties() {
 
       {/* PAGE HEADER */}
       <header className="relative pt-32 pb-12 px-6 md:px-12 lg:px-24 overflow-hidden border-b border-white/5">
-        <div className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none">
-          <div className="iridescent-spill w-full h-full opacity-20 blur-[120px] mix-blend-screen" />
-        </div>
+        {/* Chrome accent shapes */}
+        <img src={`${import.meta.env.BASE_URL}chrome/spike-chrome.png`} alt="" className="absolute top-8 right-[12%] w-[120px] opacity-70 animate-float drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] pointer-events-none" />
+        <img src={`${import.meta.env.BASE_URL}chrome/blob-iridescent-1.png`} alt="" className="absolute -top-20 right-0 w-[360px] opacity-30 mix-blend-screen pointer-events-none" />
         
         <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-4">
           <div className="text-xs text-gray-500 font-body">

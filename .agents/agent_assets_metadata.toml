@@ -1,0 +1,38 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "LtsPJ-il-qLD0LmbhQD2C"
+uri = "file://artifacts/mockup-sandbox/public/chrome/blob-iridescent-1.png"
+type = "image"
+title = "blob-iridescent-1.png"
+
+[[outputs]]
+id = "-vAnADKzGxCZPuP3T_sXO"
+uri = "file://artifacts/mockup-sandbox/public/chrome/blob-iridescent-2.png"
+type = "image"
+title = "blob-iridescent-2.png"
+
+[[outputs]]
+id = "xNRjhx92ZGzPwkQa7i9MR"
+uri = "file://artifacts/mockup-sandbox/public/chrome/blob-iridescent-3.png"
+type = "image"
+title = "blob-iridescent-3.png"
+
+[[outputs]]
+id = "KHeq_Dnv5l7HhEUMWe4kj"
+uri = "file://artifacts/mockup-sandbox/public/chrome/ring-chrome.png"
+type = "image"
+title = "ring-chrome.png"
+
+[[outputs]]
+id = "JCNCLqP5j3ARXjFqoPXeJ"
+uri = "file://artifacts/mockup-sandbox/public/chrome/spike-chrome.png"
+type = "image"
+title = "spike-chrome.png"
+
+[[outputs]]
+id = "yNctVW9YUCtZUqLG-ZTa-"
+uri = "file://artifacts/mockup-sandbox/public/chrome/drip-chrome.png"
+type = "image"
+title = "drip-chrome.png"

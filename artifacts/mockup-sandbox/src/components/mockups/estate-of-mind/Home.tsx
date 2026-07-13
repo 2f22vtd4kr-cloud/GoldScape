@@ -307,11 +307,32 @@ export default function Home() {
           </div>
           
           <div className="lg:col-span-5 relative h-[400px] lg:h-[600px] flex items-center justify-center mt-12 lg:mt-0">
-            {/* Ambient iridescent spill behind the chrome blob */}
-            <div className="iridescent-spill w-[300px] h-[300px] md:w-[600px] md:h-[600px] absolute z-0 opacity-40 mix-blend-screen"></div>
+            {/* Ambient iridescent glow behind the blob */}
+            <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+              <div style={{
+                width: '480px', height: '480px',
+                background: 'conic-gradient(from 0deg, #4a00e0, #8e2de2, #f000ff, #00c9ff, #92fe9d, #4a00e0)',
+                filter: 'blur(90px)',
+                opacity: 0.22,
+                borderRadius: '50%',
+              }} />
+            </div>
             
-            {/* Floating chrome blob */}
-            <div className="chrome-blob w-[250px] h-[250px] md:w-[400px] md:h-[400px] relative z-10 animate-float"></div>
+            {/* Real 3D chrome blob image */}
+            <img
+              src={`${import.meta.env.BASE_URL}chrome/blob-iridescent-3.png`}
+              alt=""
+              className="animate-float relative z-10 drop-shadow-[0_0_60px_rgba(120,80,255,0.4)]"
+              style={{ width: 'clamp(280px, 38vw, 520px)', height: 'auto', pointerEvents: 'none' }}
+            />
+
+            {/* Secondary floating accent */}
+            <img
+              src={`${import.meta.env.BASE_URL}chrome/spike-chrome.png`}
+              alt=""
+              className="animate-float-small absolute z-20 opacity-80"
+              style={{ width: '90px', bottom: '10%', right: '8%', filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.25))' }}
+            />
           </div>
           
         </div>
