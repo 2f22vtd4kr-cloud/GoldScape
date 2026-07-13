@@ -1,6 +1,6 @@
 kind = "web"
 previewPath = "/"
-title = "GORY Mountain Resort"
+title = "EstateofMind"
 version = "1.0.0"
 id = "artifacts/gory-resort"
 router = "path"
