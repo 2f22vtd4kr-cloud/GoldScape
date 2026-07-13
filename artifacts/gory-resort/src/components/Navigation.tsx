@@ -25,8 +25,11 @@ export function Navigation() {
 
   return (
     <nav className={`eom-nav ${isScrolled || mobileOpen ? 'scrolled' : ''}`}>
-      <Link href="/" className="flex items-center">
-        <span className="font-oxanium text-[22px] font-bold chrome-text tracking-wide">EstateofMind</span>
+      <Link href="/" className="flex items-center shrink-0">
+        <span className="font-oxanium text-[20px] font-bold chrome-text tracking-[0.06em]"
+          style={{ filter: 'drop-shadow(0 1px 6px rgba(0,0,0,0.9)) drop-shadow(0 0 14px rgba(220,216,208,0.12))' }}>
+          EstateofMind
+        </span>
       </Link>
 
       <div className="hidden md:flex items-center gap-8">
@@ -42,7 +45,7 @@ export function Navigation() {
       </div>
 
       <div className="flex items-center gap-4">
-        <a href="/about#consult" className="eom-btn-ghost !py-2.5 !px-5 !text-xs hidden md:inline-flex">
+        <a href="/about#consult" className="eom-btn-oilslick hidden md:inline-flex">
           Консультация
         </a>
         <button

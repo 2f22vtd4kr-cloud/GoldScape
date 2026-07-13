@@ -348,23 +348,56 @@ export default function Home() {
           }}
         />
 
-        {/* Chrome eye — centered hero of the section */}
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-32 md:py-48 pointer-events-none">
+        {/* Chrome eye + real estate headline */}
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-28 md:py-44">
           <img
             src="/chrome/liquid/chrome-eye-v2.png"
             alt="" aria-hidden="true"
-            className="animate-float mb-8 md:mb-10"
+            className="animate-float mb-10 md:mb-12"
             style={{
               width: 'clamp(160px, 36vw, 340px)',
               filter: 'drop-shadow(0 0 40px rgba(255,255,255,0.6)) drop-shadow(0 0 80px rgba(180,220,255,0.4))',
             }}
           />
-          <p className="font-oxanium text-[clamp(0.65rem,1.5vw,0.85rem)] tracking-[0.3em] text-white/50 uppercase mb-4">
-            Sky, signal and liquid chrome in collision
+
+          {/* Eyebrow */}
+          <p className="font-oxanium text-[clamp(0.6rem,1.4vw,0.8rem)] tracking-[0.32em] text-white/45 uppercase mb-5">
+            Международная недвижимость
           </p>
-          <h2 className="font-oxanium text-[clamp(2rem,7vw,5rem)] font-bold text-white leading-none tracking-tight" style={{ textShadow: '0 0 60px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.9)' }}>
-            VOID<br />WAVE
+
+          {/* Headline */}
+          <h2
+            className="font-oxanium text-[clamp(2.2rem,8vw,5rem)] font-bold chrome-text leading-[1.05] tracking-tight mb-10"
+            style={{ textShadow: '0 2px 6px rgba(0,0,0,0.95)' }}
+          >
+            Свобода<br />капитала
           </h2>
+
+          {/* Key stats */}
+          <div className="flex flex-wrap justify-center gap-8 md:gap-14 mb-10">
+            {[
+              { val: '$130M+', label: 'сделок закрыто' },
+              { val: '12',     label: 'стран' },
+              { val: '847',    label: 'семей' },
+            ].map(s => (
+              <div key={s.val} className="text-center">
+                <p
+                  className="font-oxanium text-[clamp(1.5rem,4.5vw,2.6rem)] chrome-text leading-none"
+                  style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}
+                >
+                  {s.val}
+                </p>
+                <p className="font-space-grotesk text-[10px] text-white/40 uppercase tracking-[0.22em] mt-1.5">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <Link href="/properties" className="eom-btn-ghost font-oxanium text-sm uppercase tracking-wider">
+            Смотреть объекты
+          </Link>
         </div>
       </section>
 
