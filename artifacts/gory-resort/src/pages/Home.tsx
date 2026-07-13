@@ -25,10 +25,10 @@ const FEATURED_PROPERTIES = [
   },
   {
     image: '/images/prop-cyprus.jpg',
-    location: '🇨🇾 Лимасол, Кипр',
+    location: '🇨🇾 Пафос, Кипр',
     type: 'Вилла',
     price: '€680,000',
-    district: 'Панорамный вид на море',
+    district: 'Koloni · Панорамный вид на море',
     beds: 3,
     baths: 3,
     area: '240м²',

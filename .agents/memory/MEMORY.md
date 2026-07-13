@@ -10,3 +10,4 @@
 - [Liquid Chrome Typography system](liquid-chrome-typography.md) — definitive two-tier chrome system: .chrome-text (platinum sweep) + .chrome-text-accent (iridescent conic); design rationale and placement rules
 - [Gas-spill liquid chrome system](gas-spill-chrome-system.md) — oil-slick multi-hue palette + multi-tendril "spill" SVG variant built on Canvas, pending graduation
 - [Mockup sandbox static asset paths](mockup-sandbox-static-paths.md) — use /chrome/… not /__mockup/chrome/… inside components; /__mockup/ hits Vite SPA fallback and silently returns HTML
+- [Property listing photography wiring](property-listing-photos.md) — Properties.tsx listing→image mapping; gradients silently pass type-check, don't leave new listings without a real photo

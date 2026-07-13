@@ -15,7 +15,7 @@ const LISTINGS = [
     beds: 3,
     baths: 3,
     area: 210,
-    gradient: 'radial-gradient(ellipse at 30% 40%, #c8933a 0%, #8b5e1a 40%, #1a0e04 100%)',
+    image: '/images/prop-dubai.jpg',
     agency: 'fäm Properties',
     exclusive: true,
     tag: 'Вид на море',
@@ -32,7 +32,7 @@ const LISTINGS = [
     beds: 'Studio',
     baths: 1,
     area: 52,
-    gradient: 'radial-gradient(ellipse at 70% 30%, #1a5c8a 0%, #0d2a40 50%, #050d14 100%)',
+    image: '/images/prop-dubai-marina.jpg',
     agency: 'fäm Properties',
     exclusive: false,
     tag: null,
@@ -49,7 +49,7 @@ const LISTINGS = [
     beds: 4,
     baths: 4,
     area: 580,
-    gradient: 'radial-gradient(ellipse at 50% 20%, #8a6a1a 0%, #3d2e08 50%, #0d0a02 100%)',
+    image: '/images/prop-dubai-downtown.jpg',
     agency: 'fäm Properties',
     exclusive: true,
     tag: 'Вид Burj Khalifa',
@@ -66,7 +66,7 @@ const LISTINGS = [
     beds: 4,
     baths: 5,
     area: 420,
-    gradient: 'radial-gradient(ellipse at 40% 60%, #5a3a1a 0%, #2a1a0a 50%, #0a0604 100%)',
+    image: '/images/prop-dubai-villa.jpg',
     agency: 'fäm Properties',
     exclusive: false,
     tag: null,
@@ -83,7 +83,7 @@ const LISTINGS = [
     beds: 2,
     baths: 2,
     area: 87,
-    gradient: 'radial-gradient(ellipse at 55% 25%, #1e3a5a 0%, #0d1e30 50%, #040a14 100%)',
+    image: '/images/prop-dubai-canal.jpg',
     agency: 'fäm Properties',
     exclusive: false,
     tag: 'Canal View',
@@ -101,7 +101,7 @@ const LISTINGS = [
     beds: 2,
     baths: 1,
     area: 95,
-    gradient: 'radial-gradient(ellipse at 60% 40%, #8a1a2a 0%, #3d0d12 50%, #0d0406 100%)',
+    image: '/images/prop-istanbul.jpg',
     agency: 'H&S Real Estate',
     exclusive: false,
     tag: null,
@@ -118,7 +118,7 @@ const LISTINGS = [
     beds: 3,
     baths: 3,
     area: 220,
-    gradient: 'radial-gradient(ellipse at 30% 70%, #2a5a3a 0%, #0f2218 50%, #040a07 100%)',
+    image: '/images/prop-antalya.jpg',
     agency: 'H&S Real Estate',
     exclusive: false,
     tag: '200м до пляжа',
@@ -136,7 +136,7 @@ const LISTINGS = [
     beds: 2,
     baths: 2,
     area: 100,
-    gradient: 'radial-gradient(ellipse at 50% 30%, #1a4a7a 0%, #0d2238 50%, #040c18 100%)',
+    image: '/images/prop-limassol.jpg',
     agency: 'H&S Real Estate',
     exclusive: false,
     tag: 'Рядом с морем',
@@ -153,7 +153,7 @@ const LISTINGS = [
     beds: 3,
     baths: 3,
     area: 240,
-    gradient: 'radial-gradient(ellipse at 35% 50%, #3a6a1a 0%, #1a2e0d 50%, #080f04 100%)',
+    image: '/images/prop-cyprus.jpg',
     agency: 'H&S Real Estate',
     exclusive: true,
     tag: 'Бассейн',
@@ -171,7 +171,7 @@ const LISTINGS = [
     beds: 2,
     baths: 1,
     area: 72,
-    gradient: 'radial-gradient(ellipse at 50% 40%, #1a5a5a 0%, #0d2828 50%, #040e0e 100%)',
+    image: '/images/prop-georgia.jpg',
     agency: 'EstateofMind Direct',
     exclusive: false,
     tag: 'Доходность 9.4%',
@@ -188,7 +188,7 @@ const LISTINGS = [
     beds: 3,
     baths: 2,
     area: 140,
-    gradient: 'radial-gradient(ellipse at 60% 30%, #6a3a1a 0%, #2e1a0d 50%, #0e0906 100%)',
+    image: '/images/prop-tbilisi.jpg',
     agency: 'EstateofMind Direct',
     exclusive: false,
     tag: 'Вид на Мтацминда',
@@ -206,7 +206,7 @@ const LISTINGS = [
     beds: 3,
     baths: 3,
     area: 280,
-    gradient: 'radial-gradient(ellipse at 40% 60%, #1a5a2a 0%, #0d2814 50%, #040e07 100%)',
+    image: '/images/prop-phuket.jpg',
     agency: 'Samui Exclusive Homes',
     exclusive: false,
     tag: 'Бассейн с инфинити',
@@ -223,7 +223,7 @@ const LISTINGS = [
     beds: 3,
     baths: 3,
     area: 188,
-    gradient: 'radial-gradient(ellipse at 42% 35%, #0d4a2a 0%, #062214 55%, #020d07 100%)',
+    image: '/images/prop-koh-samui.jpg',
     agency: 'Samui Exclusive Homes',
     exclusive: false,
     tag: 'Рядом с пляжем',
@@ -241,7 +241,7 @@ const LISTINGS = [
     beds: 2,
     baths: 1,
     area: 82,
-    gradient: 'radial-gradient(ellipse at 48% 28%, #3a1a5c 0%, #1e0e30 50%, #0c0618 100%)',
+    image: '/images/prop-lisbon.jpg',
     agency: 'Sotheby\'s International Realty',
     exclusive: false,
     tag: 'Golden Visa',
@@ -258,7 +258,7 @@ const LISTINGS = [
     beds: 4,
     baths: 4,
     area: 230,
-    gradient: 'radial-gradient(ellipse at 35% 45%, #5c2a0e 0%, #2e1408 55%, #0e0604 100%)',
+    image: '/images/prop-algarve.jpg',
     agency: 'Knight Frank Portugal',
     exclusive: true,
     tag: 'Golf & Ocean',
@@ -276,7 +276,7 @@ const LISTINGS = [
     beds: 2,
     baths: 1,
     area: 68,
-    gradient: 'radial-gradient(ellipse at 55% 35%, #4a1a5a 0%, #200d28 50%, #0c0410 100%)',
+    image: '/images/prop-belgrade.jpg',
     agency: 'EstateofMind Direct',
     exclusive: false,
     tag: null,
@@ -364,11 +364,13 @@ export default function Properties() {
             {LISTINGS.map((item) => (
               <div key={item.id} className="eom-card flex flex-col group cursor-pointer">
                 <div className="relative aspect-[3/2] overflow-hidden bg-[#111]">
-                  <div
-                    className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
-                    style={{ background: item.gradient }}
+                  <img
+                    src={item.image}
+                    alt={`${item.type} · ${item.city}, ${item.district}`}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
                   <div className="absolute top-4 left-4 flex gap-2">
                     <div className="bg-[#080808]/70 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1 text-[10px] font-oxanium flex items-center gap-1.5 shadow-lg">
