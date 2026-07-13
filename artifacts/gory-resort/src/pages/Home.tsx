@@ -133,9 +133,17 @@ export default function Home() {
                 Международная недвижимость
               </span>
 
-              <h1 className="font-oxanium text-[clamp(2.8rem,10vw,5.5rem)] font-light leading-[1.05] chrome-text mb-6 tracking-tight section-reveal-heading">
-                Ваш капитал <br />заслуживает <br />
-                <span className="chrome-text-accent font-bold">свободы</span>
+              <h1 className="section-reveal-heading mb-2 -ml-3" aria-label="Ваш капитал заслуживает свободы">
+                <img
+                  src="/chrome/liquid/text-headline-combined.png"
+                  alt="Ваш капитал заслуживает свободы"
+                  style={{
+                    mixBlendMode: 'screen',
+                    width: 'clamp(260px, 38vw, 500px)',
+                    height: 'auto',
+                  }}
+                  draggable={false}
+                />
               </h1>
 
               <p className="font-space-grotesk text-lg text-white/55 max-w-lg mb-12 leading-relaxed">
