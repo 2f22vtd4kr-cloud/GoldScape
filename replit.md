@@ -32,6 +32,22 @@ Workflows (managed by Replit):
 
 ## Work Log
 
+### 2026-07-14 — Light/dark mode toggle
+
+- Added full light/dark mode system to the permanently-dark site. Default stays dark; new users see the dark site first.
+- Created `src/contexts/ThemeContext.tsx`: `ThemeProvider` manages `'dark' | 'light'` state, persists to `localStorage` under key `eom-theme`, applies/removes `.dark` class on `<html>`, and briefly adds `.theme-transitioning` during toggle (gates a `background-color`/`border-color` cross-fade without accidentally inheriting the transition into animation loops).
+- FOUC prevention: `index.html` ships with `class="dark"` on `<html>` and a sync `<script>` in `<head>` that reads `localStorage` before first paint — users in light mode don't see a dark flash on reload.
+- Toggle button: Sun/Moon icon in the nav (`w-9 h-9` circle, right of the Consultation CTA). Sun shown in dark mode (click → go light), Moon in light mode (click → go dark).
+- Nav logo fix for light mode: added `className="dark:invert-0 invert hue-rotate-180"` to the logo `<img>` — inverts the bright chrome metallic to dark metallic on the warm white nav. Avoids the `mix-blend-mode + backdrop-filter` conflict documented in memory.
+- CSS variable split: `:root` now holds the light palette (warm off-white `#FAF9F6` background, deep charcoal `#1A1B1E` foreground, warm borders); `.dark` retains the original dark values unchanged.
+- Body background: light mode uses `hsl(var(--background))`; dark mode uses `html.dark body { background: linear-gradient(black → #171717) }` — preserving the depth gradient.
+- Chrome text in light mode: `html:not(.dark) .chrome-text` uses a dark-metallic gradient (`#2a2a28 → #b8b4b0`, no white peaks) so it reads as polished steel on the warm white background.
+- All custom CSS classes updated with `.dark` scoped overrides: `.eom-nav`, `.eom-card`, `.eom-btn-ghost`, `.dest-card`, `.testimonial-card`, `.nav-link`, `.process-line`, `.hero-grid`, `.iso-tile`, `.footer-logo`.
+- `Footer.tsx`: replaced all hardcoded `text-white`/`border-white`/`bg-[#050505]` with `text-foreground`/`dark:` variants and `bg-[#F2F0EB] dark:bg-[#050505]`; footer logo uses `.footer-logo` CSS class (`mix-blend-mode: multiply` in light, `screen` in dark).
+- `Layout.tsx`: `text-white` → `text-foreground`; `Navigation.tsx`: mobile menu panel updated to `bg-white dark:bg-[#080808]`; hamburger button `text-white` → `text-foreground`.
+- Property maps (`bg-[#0c0c0c]`) intentionally kept dark in both modes — the isometric tile images require a dark base.
+- Ran one Nola review pass post-implementation; caught and fixed the FOUC script not handling the light-mode removal case and verified all seven audit points clean.
+
 ### 2026-07-14 — Property card fixes: badge overlap, pin marker, immersion animation, scroll-to-top
 - Fixed the "ЭКСКЛЮЗИВ" badge overlapping the country/tag badges on property cards: the tag row lacked a `right-4` width constraint, so it wasn't reliably wrapping before running under the exclusive badge. Added `right-4` + conditional `pr-24` reserve when a card is exclusive.
 - Diagnosed the "lightbulb" on the isometric location maps: it was the existing `MapPin` pin marker — filled + heavily glow-blurred at small size, its round head/narrow stem silhouette reads as a lightbulb, not a pin. Replaced it with a new `.property-pin` marker (slow-breathing iridescent oil-slick halo + solid white core, in `index.css`) that pinpoints the exact building and invites a tap.
