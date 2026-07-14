@@ -7,7 +7,24 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
-            <img src="/chrome/liquid/logo-estateofmind.png" alt="EstateofMind" className="footer-logo" style={{ height: '28px', width: 'auto', marginBottom: '1.5rem' }} draggable={false} />
+            <img
+              src="/chrome/liquid/logo-estateofmind.png"
+              alt="EstateofMind"
+              /* Two bugs fixed here, both pre-existing (present in dark mode
+                 too, not just light): (1) the source PNG is a square 1024×1024
+                 canvas with the wordmark occupying only a horizontal band —
+                 without an explicit width + object-fit:cover (as the nav logo
+                 already has), `width: auto` at height:28 rendered the whole
+                 square, squashing the wordmark into an illegible 28×28 sliver.
+                 (2) mix-blend-mode was an unnecessary hack given the PNG's
+                 real alpha channel, and `multiply` against the near-white
+                 footer background washed the brighter iridescent pixels out
+                 to invisible. Grayscale + darken now matches the nav's
+                 light-mode treatment. */
+              className="footer-logo dark:filter-none grayscale brightness-[0.4] contrast-125"
+              style={{ height: '28px', width: '174px', objectFit: 'cover', objectPosition: 'center', marginBottom: '1.5rem' }}
+              draggable={false}
+            />
             <p className="font-space-grotesk text-sm text-foreground/50 dark:text-white/40 max-w-xs">
               Ваш капитал заслуживает свободы. Инвестиции в зарубежную недвижимость с полным сопровождением.
             </p>

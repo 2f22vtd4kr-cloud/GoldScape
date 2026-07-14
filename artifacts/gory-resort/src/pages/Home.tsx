@@ -30,7 +30,7 @@ const FEATURED_PROPERTIES = [
   {
     // No exact catalogue match at this price point — links to the general catalogue, not a detail page.
     id: null,
-    image: '/images/prop-turkey.jpg',
+    image: '/images/prop-antalya.jpg',
     location: 'Анталья, Турция',
     type: 'Квартира',
     price: '$115,000',

@@ -20,3 +20,5 @@
 - [Property pin & fly-into-building immersion](property-pin-immersion.md) — MapPin icon read as a lightbulb; replaced with animated glow marker + click-origin iris-wipe transition into the listing photo
 - [SPA scroll-to-top](spa-scroll-to-top.md) — wouter preserves scroll across route changes like the browser default; App.tsx's ScrollToTop effect already covers all routes
 - [Nav breakpoint content-fit](nav-breakpoint-content-fit.md) — a `hidden md:flex` nav can overflow right at 768px itself even though mobile/desktop screenshots look fine; sweep every width, not just two
+- [Light-mode contrast fixes](light-mode-contrast-fixes.md) — 3 root causes for "light mode looks broken": reused dark-tuned text-opacity alphas, gradient-sweep legibility floor, invert+hue-rotate failing on saturated art
+- [Reveal/counter animation false positives](mobile-viewport-screenshots.md) — fast scripted scroll also catches scroll-reveal fades and count-up numbers mid-flight, not just lazy images; always settle+wait before judging

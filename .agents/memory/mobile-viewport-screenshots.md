@@ -29,3 +29,17 @@ viewport; a fast programmatic scroll outruns that fetch.
 `document.querySelectorAll('img')` → `img.complete && img.naturalWidth > 0` in
 `page.evaluate` before screenshotting. Only treat it as a real bug if `complete` is
 false or `naturalWidth` is 0 after that wait.
+
+## Same false positive for scroll-reveal fades and count-up numbers
+The same fast-scroll-then-screenshot pattern also catches IntersectionObserver-driven
+reveal animations (opacity fade-in) and staggered count-up number animations mid-flight
+— e.g. a trust-stats row showing `$105M+` / `526` when the real settled values are
+`$130M+` / `847`, or a card that looks "pale"/near-invisible because its reveal
+opacity transition hadn't finished. Different elements mid-animation can show
+different completion percentages if they have staggered start delays, which looks
+alarming but is expected.
+
+**How to apply:** after the slow scroll pass, do one more `scrollTo` to the exact
+target position and wait ~700-1000ms (long enough for both the reveal transition and
+any count-up duration) before the final screenshot used for judgment. Don't diagnose
+contrast/legibility bugs from a screenshot taken right after a scroll jump.

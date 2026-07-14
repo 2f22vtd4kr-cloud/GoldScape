@@ -17,8 +17,20 @@ export function Navigation() {
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
+    // rAF-throttled: a bare scroll listener can fire dozens of times per
+    // gesture, each one a synchronous setState. Coalescing to one check per
+    // animation frame keeps the class toggle (and the CSS transition it
+    // kicks off) from competing with the browser's own scroll/paint work.
+    let ticking = false;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 50);
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -47,7 +59,16 @@ export function Navigation() {
         <img
           src="/chrome/liquid/logo-estateofmind.png"
           alt="EstateofMind"
-          className="dark:invert-0 invert hue-rotate-180 transition-all duration-300"
+          /* invert + hue-rotate(180) is a classic dark-mode-icon trick, but it
+             only cleanly restores hue for near-grayscale source art. This logo
+             is a saturated multi-hue iridescent chrome gradient, so inverting
+             each RGB channel and rotating hue does not map back to the
+             original colors — it produces a streaky, glitchy rainbow smear in
+             light mode. Grayscale + darken instead: strip the hue entirely and
+             darken so the metallic highlights/shadows still read as a
+             brushed-steel wordmark against a light background, matching the
+             .chrome-text light-mode treatment used for headings. */
+          className="dark:filter-none grayscale brightness-[0.4] contrast-125 transition-all duration-300"
           style={{
             objectFit: 'cover',
             objectPosition: 'center',

@@ -121,6 +121,31 @@
   --ring: 33 24% 44%;
 }
 
+/* ─── Light-mode muted-text contrast correction ─────────────────────────
+   `text-foreground/NN` opacity utilities were tuned by eye against a dark
+   background (where near-white text at low alpha still reads with strong
+   contrast) and reused unchanged for light mode. Alpha blending is NOT
+   symmetric under color inversion: near-black text at the same alpha
+   fraction over a near-white background loses contrast far faster (e.g.
+   dark:text-white/50 ≈ 5.3:1 on black, but text-foreground/50 ≈ 3.2:1 on
+   our warm-white background — below the 4.5:1 body-text floor). This is
+   the root cause of "light mode barely changes anything" complaints: most
+   secondary/body copy across every section was reading as pale gray-on-
+   cream. Boost the effective alpha in light mode only, per value, so the
+   visual weight matches its dark-mode counterpart. Dark mode is untouched
+   because these rules are scoped under html:not(.dark). */
+html:not(.dark) .text-foreground\/25 { color: hsl(var(--foreground) / 0.45) !important; }
+html:not(.dark) .text-foreground\/35 { color: hsl(var(--foreground) / 0.55) !important; }
+html:not(.dark) .text-foreground\/40 { color: hsl(var(--foreground) / 0.60) !important; }
+html:not(.dark) .text-foreground\/45 { color: hsl(var(--foreground) / 0.65) !important; }
+html:not(.dark) .text-foreground\/50 { color: hsl(var(--foreground) / 0.70) !important; }
+html:not(.dark) .text-foreground\/55 { color: hsl(var(--foreground) / 0.75) !important; }
+html:not(.dark) .text-foreground\/60 { color: hsl(var(--foreground) / 0.78) !important; }
+html:not(.dark) .text-foreground\/65 { color: hsl(var(--foreground) / 0.80) !important; }
+html:not(.dark) .text-foreground\/70 { color: hsl(var(--foreground) / 0.82) !important; }
+html:not(.dark) .text-foreground\/75 { color: hsl(var(--foreground) / 0.85) !important; }
+html:not(.dark) .text-foreground\/80 { color: hsl(var(--foreground) / 0.90) !important; }
+
 @layer base {
   * {
     @apply border-border;
@@ -280,24 +305,31 @@ html.dark body {
 
 /* Light mode chrome — dark metallic, readable on warm white background */
 html:not(.dark) .chrome-text {
+  /* Lightest stop capped around #6c6c68 (~5.3:1 against our warm-white
+     background) — the previous palette peaked at #b8b4b0 (~1.9:1), which
+     is why multi-word chrome headings (e.g. "СВОБОДА КАПИТАЛА") went
+     completely illegible wherever a longer string's glyphs happened to
+     land on that light trough of the 300%-wide sweeping gradient. Every
+     stop below now stays under the ~4.5:1 legibility floor computed
+     against hsl(40 25% 97%). */
   background: linear-gradient(
     100deg,
-    #2a2a28  0%,
-    #3c3c38  5%,
-    #545450 10%,
-    #787470 16%,
-    #9c9894 22%,
-    #b8b4b0 28%,
-    #9c9894 34%,
-    #6c6c68 42%,
-    #484844 50%,
-    #686460 58%,
-    #8c8884 66%,
-    #a8a4a0 72%,
-    #8c8884 78%,
-    #5c5c58 86%,
-    #3c3c38 94%,
-    #2a2a28 100%
+    #201f1d  0%,
+    #2c2b28  5%,
+    #403f3a  10%,
+    #545248  16%,
+    #605e54  22%,
+    #6c6a60  28%,
+    #605e54  34%,
+    #4c4a42  42%,
+    #34332e 50%,
+    #4a4840 58%,
+    #58564c 66%,
+    #605e54 72%,
+    #58564c 78%,
+    #40403a 86%,
+    #2c2b28 94%,
+    #201f1d 100%
   );
   background-size: 300% auto;
   -webkit-background-clip: text;
@@ -805,7 +837,19 @@ html:not(.dark) .chrome-text {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
-  transition: all 0.3s ease;
+  /* Explicit properties, not `all` — animating `all` was also picking up
+     the backdrop-filter/box-shadow declared below (via the liquid-glass
+     block), which is expensive to recompute every frame against scrolling
+     content behind it and was the real source of the "jerky, low-framerate"
+     feel on scroll, not the padding change itself. transform: translateZ(0)
+     promotes the bar to its own compositor layer so the heavy
+     backdrop-filter blur isn't re-flattened into the page's paint every
+     scroll frame. */
+  transition: padding 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+  will-change: background-color;
 }
 .dark .eom-nav {
   background: rgba(8, 8, 8, 0.6);
@@ -1155,8 +1199,9 @@ html:not(.dark) .section-reveal-heading::after {
   border: 1px solid rgba(255,255,255,0.09);
 }
 
-.footer-logo { mix-blend-mode: multiply; }
-.dark .footer-logo { mix-blend-mode: screen; }
+/* mix-blend-mode removed — real alpha PNG + explicit grayscale/darken
+   filter (set in Footer.tsx) handles both themes without the wash-out risk
+   blend-modes carry against varying section backgrounds. */
 
 /* Keep map container always dark regardless of theme */
 .property-map-container {
@@ -1501,10 +1546,15 @@ html:not(.dark) .liquid-glass-tinted {
    These rules enhance existing component classes. They add the glass
    properties without touching layout, typography, or colour identity.   */
 
-/* Navigation — deepen the blur, add volumetric depth ring */
+/* Navigation — deepen the blur, add volumetric depth ring.
+   blur(22px) + saturate(210%) recomputed against live scrolling content
+   underneath is one of the most GPU-expensive things a browser can do per
+   frame; that cost, not the padding transition, is what reads as dropped
+   frames/jank while scrolling. Trimmed to a still-glassy but noticeably
+   cheaper radius/saturation. */
 .eom-nav {
-  backdrop-filter: blur(22px) saturate(210%) brightness(1.02) !important;
-  -webkit-backdrop-filter: blur(22px) saturate(210%) brightness(1.02) !important;
+  backdrop-filter: blur(14px) saturate(160%) brightness(1.02) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(160%) brightness(1.02) !important;
 }
 .dark .eom-nav {
   background: rgba(6, 6, 6, 0.52) !important;
