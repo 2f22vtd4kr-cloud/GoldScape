@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { WhatsAppFloat } from '@/components/WhatsAppFloat';
+import { AIChat } from '@/components/AIChat';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 export function Layout({ children }: { children: ReactNode }) {
@@ -14,6 +15,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <main>{children}</main>
       <Footer />
       <WhatsAppFloat />
+      <AIChat />
     </div>
   );
 }
