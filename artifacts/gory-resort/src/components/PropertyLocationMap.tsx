@@ -59,22 +59,19 @@ export function PropertyLocationMap({ image, distances, pinPos = { x: 50, y: 46 
           className="absolute inset-0 w-full h-full object-contain scale-[1.12] drop-shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
         />
 
-        {/* Pin marking the exact property — a slow-breathing warm white/gold beacon
-            so the exact building draws the eye and invites a tap. */}
+        {/* Invisible tap target covering the building footprint with a slow-breathing warm glow */}
         <button
           type="button"
           onClick={(e) => {
             e.stopPropagation();
             onPinClick?.(pinPos);
           }}
-          className="property-pin z-10"
+          className="property-building-btn z-10"
           style={{ left: `${pinPos.x}%`, top: `${pinPos.y}%` }}
           aria-label="Смотреть этот объект"
           title="Смотреть этот объект"
         >
-          <span className="property-pin__halo" aria-hidden="true" />
-          <span className="property-pin__beam" aria-hidden="true" />
-          <span className="property-pin__core" aria-hidden="true" />
+          <span className="property-building-glow" aria-hidden="true" />
         </button>
       </div>
 

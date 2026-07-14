@@ -483,85 +483,55 @@ body {
   animation: pulseGlow 2s ease-in-out infinite;
 }
 
-/* ─── Property pin — Glowing architectural beacon ──
-   A slow breathing warm white/gold beacon marking the building like a light on a scale model diorama. */
-@keyframes pin-breathe {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50%      { transform: scale(1.1); opacity: 1; }
+/* ─── Property Building Glow ──
+   A slow breathing warm white/gold glow marking the building footprint itself. */
+@keyframes building-glow-breathe {
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.08); }
 }
-@keyframes pin-beam-breathe {
-  0%, 100% { opacity: 0.8; }
-  50%      { opacity: 1; }
-}
-.property-pin {
+.property-building-btn {
   position: absolute;
-  width: 22px;
-  height: 70px;
-  border: none;
+  /* Using % sizing to scale proportionally with the 16/10 map container */
+  width: 18%;
+  height: 38%;
   background: none;
+  border: none;
   padding: 0;
   cursor: pointer;
+  /* Extends upwards from the base pinPos so the bounding box covers the isometric tower */
+  transform: translate(-50%, -75%);
   -webkit-tap-highlight-color: transparent;
-  transform: translate(-50%, calc(-100% + 11px));
+  /* Moved mix-blend-mode to the button so the entire stacking context screens against the map */
+  mix-blend-mode: screen;
 }
-.property-pin__halo {
+.property-building-glow {
   position: absolute;
-  bottom: -10px;
-  left: -10px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(255, 230, 180, 0.35) 0%, rgba(255, 230, 180, 0) 70%);
-  animation: pin-breathe 5s ease-in-out infinite;
-  transition: transform 0.3s ease;
-}
-.property-pin__beam {
-  position: absolute;
-  bottom: 11px;
-  left: 9px;
-  width: 4px;
-  height: 50px;
-  background: linear-gradient(to top, rgba(255, 245, 220, 0.95) 0%, rgba(255, 235, 190, 0.4) 40%, rgba(255, 235, 190, 0) 100%);
-  filter: drop-shadow(0 0 4px rgba(255, 230, 180, 0.5));
-  animation: pin-beam-breathe 5s ease-in-out infinite;
+  inset: 0;
+  border-radius: 40%;
+  background: radial-gradient(ellipse at center,
+    rgba(255, 242, 200, 0.6) 0%,
+    rgba(255, 220, 150, 0.25) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: building-glow-breathe 5s ease-in-out infinite;
   transition: all 0.3s ease;
-  transform-origin: bottom center;
 }
-.property-pin__core {
-  position: absolute;
-  bottom: 7px;
-  left: 7px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 8px 2px rgba(255, 230, 180, 0.8), 0 0 16px 4px rgba(255, 230, 180, 0.4);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-.property-pin:hover .property-pin__halo,
-.property-pin:focus-visible .property-pin__halo {
-  transform: scale(1.3);
-}
-.property-pin:hover .property-pin__beam,
-.property-pin:focus-visible .property-pin__beam {
+.property-building-btn:hover .property-building-glow,
+.property-building-btn:focus-visible .property-building-glow {
+  animation: none;
   opacity: 1;
-  filter: drop-shadow(0 0 8px rgba(255, 230, 180, 0.9));
-  transform: scaleX(1.3);
+  transform: scale(1.12);
 }
-.property-pin:hover .property-pin__core,
-.property-pin:focus-visible .property-pin__core {
-  box-shadow: 0 0 10px 3px rgba(255, 240, 200, 1), 0 0 20px 6px rgba(255, 230, 180, 0.6);
-  transform: scale(1.1);
-}
-.property-pin:focus-visible {
+.property-building-btn:focus-visible {
   outline: 2px solid rgba(255, 230, 180, 0.6);
   outline-offset: 4px;
-  border-radius: 11px;
+  border-radius: 40%;
 }
 @media (prefers-reduced-motion: reduce) {
-  .property-pin__halo,
-  .property-pin__beam {
+  .property-building-glow {
     animation: none;
+    opacity: 0.8;
   }
 }
 
