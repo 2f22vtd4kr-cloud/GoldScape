@@ -59,7 +59,7 @@ export function Navigation() {
         </a>
         <button
           type="button"
-          className="md:hidden text-white p-2.5 -mr-2.5 flex items-center justify-center"
+          className="md:hidden text-white w-12 h-12 -mr-3 flex items-center justify-center"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? 'Закрыть меню' : 'Открыть меню'}
         >
@@ -76,12 +76,12 @@ export function Navigation() {
             <Link
               key={link.href}
               href={link.href}
-              className={`nav-link font-space-grotesk tracking-wide uppercase text-sm ${location === link.href ? 'active' : ''}`}
+              className={`nav-link font-space-grotesk tracking-wide uppercase text-sm block py-3 ${location === link.href ? 'active' : ''}`}
             >
               {link.label}
             </Link>
           ))}
-          <a href="/about#consult" className="eom-btn-primary text-center justify-center">
+          <a href="/about#consult" className="eom-btn-primary text-center justify-center min-h-[48px] flex items-center">
             Консультация
           </a>
         </div>

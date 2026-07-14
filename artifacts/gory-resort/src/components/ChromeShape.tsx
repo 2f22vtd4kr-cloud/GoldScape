@@ -39,7 +39,7 @@ export function ChromeShape({
   return (
     <span
       className={`inline-block pointer-events-none select-none ${animClass} ${className}`}
-      style={{ width: size, height: size, display: 'inline-block', ...style }}
+      style={{ width: size, height: size, display: 'inline-block', maxWidth: '100%', ...style }}
     >
       {variant === 'blob' && <BlobShape size={size} uid={uid} iridescent={iridescent} hueOffset={hueOffset} />}
       {variant === 'star4' && <Star4Shape size={size} uid={uid} iridescent={iridescent} />}

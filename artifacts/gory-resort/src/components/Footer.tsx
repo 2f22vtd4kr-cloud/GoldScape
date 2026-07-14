@@ -17,22 +17,22 @@ export function Footer() {
             <h4 className="font-oxanium text-white mb-6 uppercase tracking-wider text-sm">Направления</h4>
             <ul className="flex flex-col gap-4 font-space-grotesk text-sm text-white/40">
               <li>
-                <Link href="/properties" className="hover:text-white transition-colors">
+                <Link href="/properties" className="hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   ОАЭ (Дубай)
                 </Link>
               </li>
               <li>
-                <Link href="/properties" className="hover:text-white transition-colors">
+                <Link href="/properties" className="hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Турция (Стамбул)
                 </Link>
               </li>
               <li>
-                <Link href="/properties" className="hover:text-white transition-colors">
+                <Link href="/properties" className="hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Кипр (Лимасол)
                 </Link>
               </li>
               <li>
-                <Link href="/properties" className="hover:text-white transition-colors">
+                <Link href="/properties" className="hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Грузия (Батуми)
                 </Link>
               </li>
@@ -43,22 +43,22 @@ export function Footer() {
             <h4 className="font-oxanium text-white mb-6 uppercase tracking-wider text-sm">Услуги</h4>
             <ul className="flex flex-col gap-4 font-space-grotesk text-sm text-white/40">
               <li>
-                <Link href="/properties" className="hover:text-white transition-colors">
+                <Link href="/properties" className="hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Подбор недвижимости
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Юридическое сопровождение
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Помощь с ВНЖ
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="#" className="hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Управление объектами
                 </a>
               </li>
@@ -69,17 +69,17 @@ export function Footer() {
             <h4 className="font-oxanium text-white mb-6 uppercase tracking-wider text-sm">Компания</h4>
             <ul className="flex flex-col gap-4 font-space-grotesk text-sm text-white/40 mb-8">
               <li>
-                <Link href="/about" className="hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   О нас
                 </Link>
               </li>
               <li>
-                <a href="/about#consult" className="hover:text-white transition-colors">
+                <a href="/about#consult" className="hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Контакты
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="#" className="hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Блог
                 </a>
               </li>
@@ -88,33 +88,38 @@ export function Footer() {
             <div className="flex gap-4">
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
+                className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
                 aria-label="WhatsApp"
               >
-                <MessageCircle className="w-5 h-5" />
+                <MessageCircle className="w-6 h-6" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
+                className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
                 aria-label="Telegram"
               >
-                <Send className="w-5 h-5" />
+                <Send className="w-6 h-6" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/5 font-space-grotesk text-xs text-white/30 gap-4">
-          <p>
-            ©2026 <span className="iridescent-text font-medium">EstateofMind</span>. Все права защищены.
+        <div className="pt-8 border-t border-white/5 font-space-grotesk text-xs text-white/30 space-y-6">
+          <p className="max-w-4xl leading-relaxed">
+            Информация на сайте не является индивидуальной инвестиционной рекомендацией. Мы работаем в строгом соответствии с международными стандартами (включая рекомендации FATF) и законодательством стран присутствия. Полная стоимость приобретения, включая налоги и сборы, рассчитывается индивидуально.
           </p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-white/60 transition-colors">
-              Политика конфиденциальности
-            </a>
-            <a href="#" className="hover:text-white/60 transition-colors">
-              Пользовательское соглашение
-            </a>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p>
+              ©2026 <span className="iridescent-text font-medium">EstateofMind</span>. Все права защищены.
+            </p>
+            <div className="flex flex-wrap gap-6">
+              <a href="#" className="hover:text-white/60 transition-colors py-2 md:py-0 min-h-[48px] md:min-h-0 flex items-center">
+                Политика конфиденциальности
+              </a>
+              <a href="#" className="hover:text-white/60 transition-colors py-2 md:py-0 min-h-[48px] md:min-h-0 flex items-center">
+                Пользовательское соглашение
+              </a>
+            </div>
           </div>
         </div>
       </div>

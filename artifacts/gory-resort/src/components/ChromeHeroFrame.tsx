@@ -102,7 +102,7 @@ const STARS: Array<{ x: number; y: number; r: number }> = [
 export function ChromeHeroFrame({ opacity = 0.70, className = '' }: ChromeHeroFrameProps) {
   return (
     <motion.div
-      className={`absolute inset-0 pointer-events-none select-none ${className}`}
+      className={`absolute inset-0 pointer-events-none select-none hidden lg:block ${className}`}
       style={{ zIndex: 15 }}
       initial={{ opacity: 0 }}
       animate={{ opacity }}

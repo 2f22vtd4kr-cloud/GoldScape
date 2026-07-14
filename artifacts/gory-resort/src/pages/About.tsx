@@ -42,42 +42,42 @@ const PROCESS_STEPS = [
 
 const DESTINATIONS = [
   {
-    flag: '🇦🇪',
+    code: 'DXB',
     title: 'ОАЭ / Дубай',
     points: ['0% налог на доход и прирост капитала', 'Golden Visa от $545,000', 'Крупнейший рынок среди эмигрантов из России'],
     threshold: 'от $368,000',
     visa: 'ВНЖ: Golden Visa',
   },
   {
-    flag: '🇹🇷',
+    code: 'IST',
     title: 'Турция / Стамбул и Анталья',
     points: ['Гражданство от $400,000 (ускоренный процесс)', 'Высокий спрос на аренду, доходность 5–8%', '№1 по покупкам среди россиян 50 месяцев подряд'],
     threshold: 'от $120,000',
     visa: 'ВНЖ: Ikamet + Гражданство',
   },
   {
-    flag: '🇨🇾',
+    code: 'LCA',
     title: 'Кипр / Лимасол',
     points: ['Член ЕС — доступ к Шенгену', 'Non-dom режим: льготное налогообложение', 'Лимасол — финансовая столица Кипра'],
     threshold: 'от €180,000',
     visa: 'ВНЖ: EU Residency',
   },
   {
-    flag: '🇬🇪',
+    code: 'TBS',
     title: 'Грузия / Тбилиси и Батуми',
     points: ['Территориальный налог: 0% на зарубежный доход', 'Самый доступный рынок для старта', 'Без виз для граждан РФ до 1 года'],
     threshold: 'от $60,000',
     visa: 'ВНЖ: Residence permit',
   },
   {
-    flag: '🇹🇭',
+    code: 'HKT',
     title: 'Таиланд / Пхукет и Паттайя',
     points: ['Thailand Elite Visa — ВНЖ от $15,000', 'Высокий туристический рентный доход', 'Тёплый климат, развитая инфраструктура'],
     threshold: 'от $85,000',
     visa: 'ВНЖ: Elite Visa',
   },
   {
-    flag: '🇷🇸',
+    code: 'BEG',
     title: 'Сербия / Белград',
     points: ['Безвизовый въезд, простая регистрация', 'Самая доступная недвижимость в Европе', 'Динамично растущий рынок (рост 12% за 2025)'],
     threshold: 'от €75,000',
@@ -117,12 +117,53 @@ export default function About() {
           <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-6 block">
             Как мы работаем
           </span>
-          <h1 className="text-[clamp(1.65rem,9.2vw,4rem)] font-oxanium font-bold text-white leading-[1.05] mb-6 uppercase">
+          <h1 className="text-[clamp(1.65rem,9.2vw,4rem)] font-oxanium font-bold text-white leading-[1.05] mb-6 uppercase tracking-tight">
             Полное сопровождение
           </h1>
           <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed max-w-xl">
             От первого запроса до ключей в руках — мы с вами на каждом шаге.
           </p>
+        </div>
+      </section>
+
+      {/* TRUST METRICS (VIKTOR) */}
+      <section className="py-12 border-y border-white/5 bg-white/[0.01]">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">5 лет</div>
+            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">На рынке недвижимости</div>
+          </div>
+          <div>
+            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">$85M+</div>
+            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">Объем сделок за 2025 год</div>
+          </div>
+          <div>
+            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">100%</div>
+            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">Успешное прохождение комплаенса</div>
+          </div>
+          <div>
+            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">350+</div>
+            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">Семей получили ВНЖ/Паспорта</div>
+          </div>
+        </div>
+      </section>
+
+      {/* LEADERSHIP / PARTNERS (VIKTOR) */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row gap-16 md:items-end mb-16">
+            <div className="flex-1">
+              <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-4 block">
+                Легитимность и Опыт
+              </span>
+              <h2 className="text-3xl md:text-[40px] font-oxanium font-bold chrome-text leading-[1.1] uppercase tracking-tight">
+                Официальные партнёры<br />крупнейших девелоперов
+              </h2>
+            </div>
+            <div className="flex-1 max-w-xl text-zinc-400 font-light leading-relaxed">
+              Мы не работаем через цепочки посредников. Прямые договоры с застройщиками уровня EMAAR, Nakheel, DAMAC (ОАЭ), Aristo, Pafilia (Кипр). Каждая сделка сопровождается лицензированными юристами и проходит многоуровневую проверку на соответствие нормам FATF.
+            </div>
+          </div>
         </div>
       </section>
 
@@ -132,10 +173,10 @@ export default function About() {
           {PROCESS_STEPS.map((step) => (
             <div
               key={step.num}
-              className={`flex flex-col ${step.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 relative`}
+              className={`flex flex-col ${step.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 md:gap-16 relative py-8 md:py-0`}
             >
               <div
-                className={`absolute ${step.reverse ? 'right-0' : '-left-10 md:left-0'} top-1/2 -translate-y-1/2 text-[150px] md:text-[200px] font-oxanium font-bold chrome-text opacity-[0.06] pointer-events-none select-none z-0`}
+                className={`absolute ${step.reverse ? 'right-0' : '-left-10 md:left-0'} top-1/2 -translate-y-1/2 text-[120px] md:text-[200px] font-oxanium font-bold chrome-text opacity-[0.04] md:opacity-[0.06] pointer-events-none select-none z-0`}
               >
                 {step.num}
               </div>
@@ -143,23 +184,22 @@ export default function About() {
                 <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/20 bg-transparent text-white font-oxanium text-[11px] uppercase tracking-wider mb-6">
                   {step.badge}
                 </div>
-                <h3 className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-6 uppercase">{step.title}</h3>
+                <h3 className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-6 uppercase tracking-tight">{step.title}</h3>
                 <p className="text-lg text-zinc-400 mb-8 leading-relaxed">{step.desc}</p>
                 <div className="space-y-4">
                   {step.items.map((item) => (
                     <div key={item} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-white/50" />
+                      <CheckCircle2 className="w-5 h-5 text-white/50 shrink-0" />
                       <span className="text-zinc-300">{item}</span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="flex-1 flex justify-center relative z-10">
+              <div className="absolute inset-0 md:relative md:flex-1 flex items-center justify-center z-0 md:z-10 pointer-events-none overflow-hidden md:overflow-visible">
                 <img
                   src={step.image}
                   alt=""
-                  className="animate-float drop-shadow-[0_0_60px_rgba(100,60,255,0.35)]"
-                  style={{ width: 'clamp(240px,32vw,420px)', height: 'auto', pointerEvents: 'none' }}
+                  className="w-[150%] max-w-none md:max-w-none opacity-10 blur-[30px] md:w-[clamp(240px,32vw,420px)] h-auto md:opacity-100 md:blur-none md:animate-float md:drop-shadow-[0_0_60px_rgba(100,60,255,0.35)]"
                 />
               </div>
             </div>
@@ -167,10 +207,109 @@ export default function About() {
         </div>
       </section>
 
+      {/* COST TRANSPARENCY (IRINA & DMITRI) */}
+      <section className="py-24 bg-[#0a0a0a] border-t border-white/5 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row gap-16">
+            <div className="lg:w-1/3">
+              <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-4 block">
+                Открытая смета
+              </span>
+              <h2 className="text-3xl md:text-[40px] font-oxanium font-bold text-white leading-[1.1] uppercase tracking-tight mb-6">
+                Сколько это <br/>стоит на самом деле
+              </h2>
+              <p className="text-lg text-zinc-400 font-light leading-relaxed mb-8">
+                Мы не скрываем дополнительные расходы. При планировании бюджета мы всегда рассчитываем «полную стоимость ключей», а не рекламную цену застройщика.
+              </p>
+            </div>
+            
+            <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="p-8 bg-white/[0.02] border border-white/5 rounded-2xl">
+                <h4 className="font-oxanium text-lg text-white font-bold mb-4 uppercase">Наши услуги — 0 ₽</h4>
+                <p className="text-sm text-zinc-400 leading-relaxed mb-6">
+                  Для покупателя наша работа абсолютно бесплатна. Комиссию (обычно от 2% до 5%) нам выплачивает застройщик или продавец, при этом цена объекта для вас остаётся официальной.
+                </p>
+                <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500">
+                  Включает: Подбор, юр. проверку, сопровождение сделки
+                </div>
+              </div>
+              
+              <div className="p-8 bg-white/[0.02] border border-white/5 rounded-2xl">
+                <h4 className="font-oxanium text-lg text-white font-bold mb-4 uppercase">Налоги и сборы</h4>
+                <ul className="space-y-3 text-sm text-zinc-400">
+                  <li className="flex justify-between border-b border-white/5 pb-2">
+                    <span>DLD (Дубай)</span>
+                    <span className="text-white">4% от стоимости</span>
+                  </li>
+                  <li className="flex justify-between border-b border-white/5 pb-2">
+                    <span>Налог на переход права (Турция)</span>
+                    <span className="text-white">4% от кадастра</span>
+                  </li>
+                  <li className="flex justify-between border-b border-white/5 pb-2">
+                    <span>НДС (Кипр, новостройки)</span>
+                    <span className="text-white">5% или 19%</span>
+                  </li>
+                  <li className="flex justify-between pb-2">
+                    <span>Регистрация (Грузия)</span>
+                    <span className="text-white">~$50-100</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS (IRINA) */}
+      <section className="py-24 relative bg-white/[0.02] border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-4 block">
+              Реальные истории
+            </span>
+            <h2 className="text-3xl md:text-[40px] font-oxanium font-bold chrome-text leading-[1.1] uppercase tracking-tight">
+              Отзывы клиентов
+            </h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="eom-card p-8 flex flex-col gap-6">
+              <p className="text-zinc-300 text-[15px] leading-relaxed flex-1">
+                «Мы искали место для переезда с двумя детьми. Боялись скрытых комиссий и проблем со школами. Ребята не просто подобрали виллу на Кипре, но и помогли устроить детей в Heritage School. Все расходы расписали до евро еще на первой встрече.»
+              </p>
+              <div className="pt-6 border-t border-white/10">
+                <div className="font-bold text-white mb-1">Анна и Дмитрий</div>
+                <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500">Переезд: Санкт-Петербург → Лимасол</div>
+              </div>
+            </div>
+
+            <div className="eom-card p-8 flex flex-col gap-6">
+              <p className="text-zinc-300 text-[15px] leading-relaxed flex-1">
+                «Нужна была легальная база для бизнеса и налоговое резидентство. Взял апартаменты в Business Bay (Дубай). Оформили всё дистанционно, оплату структурировали криптой через лицензированный OTC. Минимум созвонов, максимум дела.»
+              </p>
+              <div className="pt-6 border-t border-white/10">
+                <div className="font-bold text-white mb-1">Михаил</div>
+                <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500">IT-предприниматель, Москва → Дубай</div>
+              </div>
+            </div>
+
+            <div className="eom-card p-8 flex flex-col gap-6">
+              <p className="text-zinc-300 text-[15px] leading-relaxed flex-1">
+                «Задача была сохранить капитал в твердой валюте. Купил три юнита в Стамбуле под сдачу и получил гражданство. Отдельное спасибо юристам EstateofMind — завернули сделку так, что комар носа не подточит в плане compliance.»
+              </p>
+              <div className="pt-6 border-t border-white/10">
+                <div className="font-bold text-white mb-1">Виктор С.</div>
+                <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500">Инвестор, Екатеринбург → Стамбул</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* DESTINATIONS DEEP-DIVE */}
       <section className="py-24 bg-white/[0.02] border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl md:text-[44px] font-oxanium font-bold chrome-text mb-16 uppercase text-center">
+          <h2 className="text-4xl md:text-[44px] font-oxanium font-bold chrome-text mb-16 uppercase text-center tracking-tight">
             Наши направления
           </h2>
 
@@ -178,7 +317,7 @@ export default function About() {
             {DESTINATIONS.map((dest) => (
               <div key={dest.title} className="eom-card p-8 flex flex-col aspect-[2/3] group relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <div className="text-[64px] mb-6">{dest.flag}</div>
+                <div className="text-[32px] font-oxanium font-bold tracking-widest text-white/20 mb-8">{dest.code}</div>
                 <h3 className="text-xl font-oxanium font-bold chrome-text uppercase mb-6">{dest.title}</h3>
                 <ul className="space-y-3 text-sm text-zinc-400 mb-auto flex-1">
                   {dest.points.map((point) => (
@@ -206,7 +345,7 @@ export default function About() {
 
       {/* FAQ */}
       <section className="py-24 max-w-4xl mx-auto px-6">
-        <h2 className="text-3xl md:text-[40px] font-oxanium font-bold text-white mb-16 text-center uppercase">
+        <h2 className="text-3xl md:text-[40px] font-oxanium font-bold text-white mb-16 text-center uppercase tracking-tight">
           Часто задаваемые вопросы
         </h2>
 
@@ -227,7 +366,7 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <div>
               <div className="mb-12">
-                <h2 className="text-4xl md:text-[52px] font-oxanium font-bold chrome-text leading-[1.1] mb-4 uppercase">
+                <h2 className="text-4xl md:text-[52px] font-oxanium font-bold chrome-text leading-[1.1] mb-4 uppercase tracking-tight">
                   Начать работу
                 </h2>
                 <p className="text-xl text-zinc-400 font-light">«Бесплатная консультация — без давления, без навязывания»</p>
@@ -239,7 +378,7 @@ export default function About() {
                     <label className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-400 block ml-1">Имя *</label>
                     <input
                       type="text"
-                      className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-white/30 transition-colors"
+                      className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 min-h-[48px] text-white placeholder-zinc-600 focus:outline-none focus:border-white/30 transition-colors"
                       placeholder="Иван Иванов"
                     />
                   </div>
@@ -249,7 +388,7 @@ export default function About() {
                     </label>
                     <input
                       type="tel"
-                      className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-white/30 transition-colors"
+                      className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 min-h-[48px] text-white placeholder-zinc-600 focus:outline-none focus:border-white/30 transition-colors"
                       placeholder="+7 (999) 000-00-00"
                     />
                   </div>
@@ -258,7 +397,7 @@ export default function About() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-400 block ml-1">Бюджет</label>
-                    <select className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors appearance-none">
+                    <select className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 min-h-[48px] text-white focus:outline-none focus:border-white/30 transition-colors appearance-none">
                       <option>до $100k</option>
                       <option>$100k–500k</option>
                       <option>$500k–2M</option>
@@ -269,7 +408,7 @@ export default function About() {
                     <label className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-400 block ml-1">
                       Направление интереса
                     </label>
-                    <select className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors appearance-none">
+                    <select className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 min-h-[48px] text-white focus:outline-none focus:border-white/30 transition-colors appearance-none">
                       <option>ОАЭ</option>
                       <option>Турция</option>
                       <option>Кипр</option>
@@ -282,13 +421,13 @@ export default function About() {
                 <div className="space-y-2">
                   <label className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-400 block ml-1">Сообщение</label>
                   <textarea
-                    className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-white/30 transition-colors min-h-[120px] resize-y"
+                    className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 min-h-[120px] text-white placeholder-zinc-600 focus:outline-none focus:border-white/30 transition-colors resize-y"
                     placeholder="Опишите вашу ситуацию (необязательно)"
                   />
                 </div>
 
-                <button type="submit" className="w-full eom-btn-primary flex items-center justify-center gap-2 py-4 mt-8">
-                  Отправить запрос <SendHorizonal className="w-4 h-4" />
+                <button type="submit" className="w-full eom-btn-primary flex items-center justify-center gap-2 py-4 min-h-[56px] mt-8">
+                  Отправить запрос <SendHorizonal className="w-5 h-5" />
                 </button>
 
                 <p className="text-[11px] text-zinc-500 text-center mt-4 px-4 leading-relaxed">
@@ -303,35 +442,35 @@ export default function About() {
               <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full iridescent-spill opacity-30 blur-[80px] pointer-events-none" />
 
               <div className="bg-[#080808] border border-white/10 p-8 rounded-2xl relative z-10 space-y-8">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center">
+                <a href="https://wa.me/971580000000" target="_blank" rel="noreferrer" className="flex items-center gap-4 group min-h-[48px]">
+                  <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center group-hover:bg-[#25D366]/20 transition-colors">
                     <MessageCircle className="w-6 h-6 text-[#25D366]" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500 mb-1">WhatsApp</div>
-                    <div className="text-lg text-white">+971 58 XXX XXXX</div>
+                    <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500 mb-1">WhatsApp (Пишите напрямую)</div>
+                    <div className="text-lg text-white group-hover:text-[#25D366] transition-colors">+971 58 XXX XXXX</div>
                   </div>
-                </div>
+                </a>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
+                <a href="https://t.me/estateofmind" target="_blank" rel="noreferrer" className="flex items-center gap-4 group min-h-[48px]">
+                  <div className="w-12 h-12 rounded-full bg-[#229ED9]/10 flex items-center justify-center group-hover:bg-[#229ED9]/20 transition-colors">
                     <Send className="w-5 h-5 text-[#229ED9] -ml-1" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500 mb-1">Telegram</div>
-                    <div className="text-lg text-white">@estateofmind</div>
+                    <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500 mb-1">Telegram (Быстрый ответ)</div>
+                    <div className="text-lg text-white group-hover:text-[#229ED9] transition-colors">@estateofmind</div>
                   </div>
-                </div>
+                </a>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center">
+                <a href="mailto:hello@estateofmind.com" className="flex items-center gap-4 group min-h-[48px]">
+                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
                     <Mail className="w-5 h-5 text-white/70" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500 mb-1">Email</div>
-                    <div className="text-lg text-white">hello@estateofmind.com</div>
+                    <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500 mb-1">Email (Для документов)</div>
+                    <div className="text-lg text-white group-hover:text-white/70 transition-colors">hello@estateofmind.com</div>
                   </div>
-                </div>
+                </a>
 
                 <div className="pt-6 border-t border-white/10 mt-6">
                   <p className="text-sm text-zinc-400 leading-relaxed">
@@ -341,8 +480,8 @@ export default function About() {
                 </div>
               </div>
 
-              <div className="mt-12 flex justify-center lg:justify-end relative z-10">
-                <div className="w-[220px] h-[220px] chrome-blob" style={{ borderRadius: '50% 50% 30% 70% / 60% 40% 60% 40%' }} />
+              <div className="absolute inset-0 flex justify-center lg:justify-end z-0 opacity-20 blur-xl pointer-events-none lg:relative lg:mt-12 lg:opacity-100 lg:blur-none lg:z-10">
+                <div className="w-[320px] h-[320px] lg:w-[220px] lg:h-[220px] chrome-blob" style={{ borderRadius: '50% 50% 30% 70% / 60% 40% 60% 40%' }} />
               </div>
             </div>
           </div>
