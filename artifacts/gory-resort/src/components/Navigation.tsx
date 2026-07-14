@@ -7,6 +7,7 @@ const LINKS = [
   { href: '/', label: 'Главная' },
   { href: '/about', label: 'Как мы работаем' },
   { href: '/properties', label: 'Объекты' },
+  { href: '/tax', label: 'Налоговый гид' },
 ];
 
 export function Navigation() {

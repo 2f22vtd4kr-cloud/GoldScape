@@ -195,7 +195,7 @@ export default function Home() {
               </h1>
 
               <p className="font-space-grotesk text-[15px] md:text-lg text-white/60 max-w-lg mb-8 leading-relaxed">
-                Инвестиции в зарубежную недвижимость. Проверенные юрисдикции, ВНЖ для всей семьи и прозрачные сделки без скрытых комиссий. Оплата Swift и криптой.
+                Инвестиции в зарубежную недвижимость. Проверенные юрисдикции, ВНЖ для всей семьи и прозрачные сделки без скрытых комиссий. Легальный перевод средств — Swift, SEPA и другие механизмы.
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8 w-full sm:w-auto">
@@ -208,7 +208,7 @@ export default function Home() {
               </div>
 
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-white/50 font-oxanium text-[12px] uppercase tracking-wider">
-                <div className="flex items-center gap-2"><Globe className="w-4 h-4 opacity-50"/> 12 стран</div>
+                <div className="flex items-center gap-2"><Globe className="w-4 h-4 opacity-50"/> 7 стран</div>
                 <div className="flex items-center gap-2"><Shield className="w-4 h-4 opacity-50"/> ₽0 комиссии</div>
                 <div className="flex items-center gap-2"><Zap className="w-4 h-4 opacity-50"/> Легально</div>
               </div>
@@ -266,7 +266,7 @@ export default function Home() {
           <h2 className="font-oxanium text-3xl md:text-[32px] chrome-text tracking-tight mb-2 section-reveal-heading">
             Куда переезжают
           </h2>
-          <p className="font-space-grotesk text-sm text-white/40">Топ-7 направлений для инвестиций и ВНЖ в 2026 году</p>
+          <p className="font-space-grotesk text-sm text-white/40">Топ-7 направлений для инвестиций, релокации и ВНЖ</p>
         </div>
 
         <div className="container mx-auto px-6">
@@ -299,6 +299,44 @@ export default function Home() {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FOR WHOM — use-case entry points (Irina + Viktor + Dmitri) ───── */}
+      <section className="py-20 bg-[#060606] border-t border-white/5 relative z-10">
+        <div className="container mx-auto px-6">
+          <div className="mb-10" data-reveal="up">
+            <h2 className="font-oxanium text-2xl md:text-[28px] text-white tracking-tight mb-2 section-reveal-heading">
+              Для кого мы работаем
+            </h2>
+            <p className="font-space-grotesk text-sm text-white/40">Три ситуации — одно надёжное агентство</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5" data-stagger>
+            <Link href="/countries/ae" className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl p-7 flex flex-col gap-4 hover:border-white/20 hover:bg-white/[0.04] transition-all" data-reveal="up">
+              <div className="text-2xl">🏦</div>
+              <h3 className="font-oxanium text-white text-[18px] tracking-tight">Сохранение капитала</h3>
+              <p className="font-space-grotesk text-sm text-white/50 leading-relaxed flex-1">
+                Имеете ₽15–100M и хотите перевести в твёрдый актив. Легально, через SWIFT/SEPA и другие механизмы. Полный FATF-комплаенс.
+              </p>
+              <span className="font-oxanium text-[11px] uppercase tracking-wider text-white/25 group-hover:text-white/50 transition-colors">ОАЭ и Кипр →</span>
+            </Link>
+            <Link href="/countries/cy" className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl p-7 flex flex-col gap-4 hover:border-white/20 hover:bg-white/[0.04] transition-all" data-reveal="up">
+              <div className="text-2xl">👨‍👩‍👧</div>
+              <h3 className="font-oxanium text-white text-[18px] tracking-tight">Переезд с семьёй</h3>
+              <p className="font-space-grotesk text-sm text-white/50 leading-relaxed flex-1">
+                Планируете переезд с детьми. Нужны международные школы, безопасность и ВНЖ. Сопровождаем от выбора района до записи детей в школу.
+              </p>
+              <span className="font-oxanium text-[11px] uppercase tracking-wider text-white/25 group-hover:text-white/50 transition-colors">Кипр и Турция →</span>
+            </Link>
+            <Link href="/tax" className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl p-7 flex flex-col gap-4 hover:border-white/20 hover:bg-white/[0.04] transition-all" data-reveal="up">
+              <div className="text-2xl">💻</div>
+              <h3 className="font-oxanium text-white text-[18px] tracking-tight">База для бизнеса</h3>
+              <p className="font-space-grotesk text-sm text-white/50 leading-relaxed flex-1">
+                Нужна юрисдикция с нулевым налогом, счётом в банке и налоговым резидентством. Работаем с крипто-доходом и IT-бизнесом.
+              </p>
+              <span className="font-oxanium text-[11px] uppercase tracking-wider text-white/25 group-hover:text-white/50 transition-colors">Налоговый гид →</span>
+            </Link>
           </div>
         </div>
       </section>

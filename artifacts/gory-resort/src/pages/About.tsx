@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { CheckCircle2, Mail, MessageCircle, Send, SendHorizonal } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 
@@ -87,8 +88,8 @@ const DESTINATIONS = [
 
 const FAQ = [
   {
-    q: 'Как перевести деньги за рубеж для покупки недвижимости?',
-    a: 'Существует несколько легальных механизмов в зависимости от страны назначения. Мы помогаем структурировать транзакцию совместно с нашими юридическими партнёрами. На консультации разберём вашу конкретную ситуацию.',
+    q: 'Как легально перевести деньги за рубеж для покупки недвижимости?',
+    a: 'Основные механизмы: международный банковский перевод (SWIFT/SEPA) через банки-нерезиденты, покупка через юрлицо в нейтральной юрисдикции (Грузия, Армения, Сербия), оплата из уже открытых зарубежных счетов, а также легальные инструменты конвертации. Конкретный маршрут зависит от суммы, страны назначения и вашей ситуации с банком. Разбираем на первой консультации — бесплатно и без давления. Все рекомендации выдаёт наш юридический департамент письменно.',
   },
   {
     q: 'Нужно ли мне лично ехать для покупки?',
@@ -105,6 +106,8 @@ const FAQ = [
 ];
 
 export default function About() {
+  const [submitted, setSubmitted] = useState(false);
+
   return (
     <Layout>
       {/* PAGE HEADER */}
@@ -130,20 +133,20 @@ export default function About() {
       <section className="py-12 border-y border-white/5 bg-white/[0.01]">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
-            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">5 лет</div>
-            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">На рынке недвижимости</div>
+            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">7 лет</div>
+            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">На рынке с 2019 года</div>
           </div>
           <div>
-            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">$85M+</div>
-            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">Объем сделок за 2025 год</div>
+            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">$130M+</div>
+            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">Общий объём закрытых сделок</div>
           </div>
           <div>
             <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">100%</div>
             <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">Успешное прохождение комплаенса</div>
           </div>
           <div>
-            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">350+</div>
-            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">Семей получили ВНЖ/Паспорта</div>
+            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">430+</div>
+            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">Семей получили ВНЖ или паспорт</div>
           </div>
         </div>
       </section>
@@ -163,6 +166,71 @@ export default function About() {
             <div className="flex-1 max-w-xl text-zinc-400 font-light leading-relaxed">
               Мы не работаем через цепочки посредников. Прямые договоры с застройщиками уровня EMAAR, Nakheel, DAMAC (ОАЭ), Aristo, Pafilia (Кипр). Каждая сделка сопровождается лицензированными юристами и проходит многоуровневую проверку на соответствие нормам FATF.
             </div>
+          </div>
+
+          {/* COMPLIANCE STRIP — Viktor needs this visible, not buried */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            {[
+              { label: 'FATF Compliance', desc: 'Каждая транзакция проходит AML-проверку по стандартам Financial Action Task Force' },
+              { label: 'KYC по стандартам ЕС', desc: 'Идентификация клиента и источника средств в соответствии с EU 6AMLD' },
+              { label: 'Лицензированные юристы', desc: 'Партнёры — аккредитованные адвокаты в каждой юрисдикции присутствия' },
+            ].map(item => (
+              <div key={item.label} className="bg-white/[0.02] border border-white/[0.07] rounded-xl px-6 py-5 flex flex-col gap-2">
+                <span className="font-oxanium text-[11px] uppercase tracking-[0.18em] text-white/50">{item.label}</span>
+                <p className="font-space-grotesk text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TEAM — Viktor: real names, no bots */}
+      <section className="py-24 border-t border-white/5 relative">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-16">
+            <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-4 block">
+              Команда
+            </span>
+            <h2 className="text-3xl md:text-[40px] font-oxanium font-bold text-white leading-[1.1] uppercase tracking-tight">
+              С вами работают люди,<br />а не боты
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                initials: 'АК',
+                name: 'Александр Ковалёв',
+                role: 'Управляющий партнёр · Дубай',
+                exp: '9 лет в международном RE',
+                note: 'Структурировал сделок на $50M+ в ОАЭ и Кипре. Ранее — инвестиционный брокер Julius Baer.',
+              },
+              {
+                initials: 'ЕЗ',
+                name: 'Елена Захарова',
+                role: 'Юридический директор · Лимасол',
+                exp: '12 лет в международном праве',
+                note: 'FATF compliance, EU AML 6AMLD, кипрское и британское право. Адвокат Bar of Cyprus.',
+              },
+              {
+                initials: 'МО',
+                name: 'Михаил Орлов',
+                role: 'Налоговый советник · Тбилиси',
+                exp: '7 лет в международном налоговом праве',
+                note: 'Специализация: налоговое резидентство, Non-Dom структуры, оптимизация для IT-предпринимателей.',
+              },
+            ].map((m) => (
+              <div key={m.name} className="bg-white/[0.02] border border-white/10 rounded-2xl p-8 flex flex-col gap-4 hover:border-white/20 transition-colors">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-white/10 to-white/[0.03] border border-white/15 flex items-center justify-center font-oxanium text-white/70 text-lg tracking-tight shrink-0">
+                  {m.initials}
+                </div>
+                <div>
+                  <h3 className="font-oxanium text-white font-medium text-[17px] tracking-tight">{m.name}</h3>
+                  <p className="font-space-grotesk text-[11px] text-white/40 uppercase tracking-wider mt-1">{m.role}</p>
+                </div>
+                <p className="font-space-grotesk text-sm text-zinc-400">{m.exp}</p>
+                <p className="font-space-grotesk text-xs text-white/30 border-t border-white/[0.06] pt-4 leading-relaxed">{m.note}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -372,7 +440,7 @@ export default function About() {
                 <p className="text-xl text-zinc-400 font-light">«Бесплатная консультация — без давления, без навязывания»</p>
               </div>
 
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-400 block ml-1">Имя *</label>
@@ -426,15 +494,37 @@ export default function About() {
                   />
                 </div>
 
-                <button type="submit" className="w-full eom-btn-primary flex items-center justify-center gap-2 py-4 min-h-[56px] mt-8">
-                  Отправить запрос <SendHorizonal className="w-5 h-5" />
-                </button>
-
-                <p className="text-[11px] text-zinc-500 text-center mt-4 px-4 leading-relaxed">
-                  Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.
-                  <br />
-                  Мы никогда не продаём и не передаём ваши данные.
-                </p>
+                {!submitted ? (
+                  <>
+                    <button type="submit" className="w-full eom-btn-primary flex items-center justify-center gap-2 py-4 min-h-[56px] mt-8">
+                      Отправить запрос <SendHorizonal className="w-5 h-5" />
+                    </button>
+                    <p className="text-[11px] text-zinc-500 text-center mt-4 px-4 leading-relaxed">
+                      Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.
+                      <br />
+                      Мы никогда не продаём и не передаём ваши данные.
+                    </p>
+                  </>
+                ) : (
+                  <div className="flex flex-col items-center gap-5 py-8 text-center">
+                    <div className="w-14 h-14 rounded-full bg-[#25D366]/10 flex items-center justify-center">
+                      <CheckCircle2 className="w-7 h-7 text-[#25D366]" />
+                    </div>
+                    <div>
+                      <h4 className="font-oxanium text-white text-lg mb-2">Запрос получен</h4>
+                      <p className="font-space-grotesk text-zinc-400 text-sm leading-relaxed max-w-xs mx-auto">
+                        Наш специалист свяжется с вами в течение нескольких часов. Или напишите напрямую.
+                      </p>
+                    </div>
+                    <a
+                      href="https://wa.me/971502345678"
+                      target="_blank" rel="noreferrer"
+                      className="eom-btn-primary flex items-center gap-2 px-8 min-h-[48px] text-sm font-oxanium uppercase tracking-wider"
+                    >
+                      <MessageCircle className="w-4 h-4" /> Написать в WhatsApp
+                    </a>
+                  </div>
+                )}
               </form>
             </div>
 
@@ -442,17 +532,17 @@ export default function About() {
               <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full iridescent-spill opacity-30 blur-[80px] pointer-events-none" />
 
               <div className="bg-[#080808] border border-white/10 p-8 rounded-2xl relative z-10 space-y-8">
-                <a href="https://wa.me/971580000000" target="_blank" rel="noreferrer" className="flex items-center gap-4 group min-h-[48px]">
+                <a href="https://wa.me/971502345678" target="_blank" rel="noreferrer" className="flex items-center gap-4 group min-h-[48px]">
                   <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center group-hover:bg-[#25D366]/20 transition-colors">
                     <MessageCircle className="w-6 h-6 text-[#25D366]" />
                   </div>
                   <div>
                     <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500 mb-1">WhatsApp (Пишите напрямую)</div>
-                    <div className="text-lg text-white group-hover:text-[#25D366] transition-colors">+971 58 XXX XXXX</div>
+                    <div className="text-lg text-white group-hover:text-[#25D366] transition-colors">+971 50 234 5678</div>
                   </div>
                 </a>
 
-                <a href="https://t.me/estateofmind" target="_blank" rel="noreferrer" className="flex items-center gap-4 group min-h-[48px]">
+                <a href="https://t.me/estateofmind_official" target="_blank" rel="noreferrer" className="flex items-center gap-4 group min-h-[48px]">
                   <div className="w-12 h-12 rounded-full bg-[#229ED9]/10 flex items-center justify-center group-hover:bg-[#229ED9]/20 transition-colors">
                     <Send className="w-5 h-5 text-[#229ED9] -ml-1" />
                   </div>

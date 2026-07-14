@@ -58,7 +58,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
+                <a href="/about#consult" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Управление объектами
                 </a>
               </li>
@@ -79,23 +79,25 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
-                  Блог
-                </a>
+                <Link href="/tax" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
+                  Налоговый гид
+                </Link>
               </li>
             </ul>
 
             <div className="flex gap-4">
               <a
-                href="#"
-                className="w-12 h-12 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center text-foreground/60 hover:text-foreground hover:bg-foreground/10 transition-all"
+                href="https://wa.me/971502345678"
+                target="_blank" rel="noreferrer"
+                className="w-12 h-12 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center text-foreground/60 hover:text-[#25D366] hover:bg-foreground/10 transition-all"
                 aria-label="WhatsApp"
               >
                 <MessageCircle className="w-6 h-6" />
               </a>
               <a
-                href="#"
-                className="w-12 h-12 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center text-foreground/60 hover:text-foreground hover:bg-foreground/10 transition-all"
+                href="https://t.me/estateofmind_official"
+                target="_blank" rel="noreferrer"
+                className="w-12 h-12 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center text-foreground/60 hover:text-[#229ED9] hover:bg-foreground/10 transition-all"
                 aria-label="Telegram"
               >
                 <Send className="w-6 h-6" />

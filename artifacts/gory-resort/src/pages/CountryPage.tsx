@@ -91,7 +91,7 @@ function CountryPageContent({ data }: { data: CountryData }) {
           <div className="hidden md:block w-px h-4 bg-white/10" />
           <div className="flex items-center gap-2">
             <Building2 className="w-4 h-4 text-white/30" />
-            <span className="tracking-wide uppercase md:normal-case">8+ лет на рынке</span>
+            <span className="tracking-wide uppercase md:normal-case">7 лет на рынке</span>
           </div>
           <div className="hidden md:block w-px h-4 bg-white/10" />
           <div className="flex items-center gap-2">

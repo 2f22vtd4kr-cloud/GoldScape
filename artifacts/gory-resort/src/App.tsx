@@ -5,6 +5,7 @@ import Home from '@/pages/Home';
 import About from '@/pages/About';
 import Properties from '@/pages/Properties';
 import CountryPage from '@/pages/CountryPage';
+import TaxGuide from '@/pages/TaxGuide';
 import NotFound from '@/pages/not-found';
 
 /** Wouter (like the browser's default history API) keeps the previous scroll
@@ -38,6 +39,7 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/properties" component={Properties} />
           <Route path="/countries/:code" component={CountryPage} />
+          <Route path="/tax" component={TaxGuide} />
           <Route path="/*" component={NotFound} />
         </Switch>
       </Router>
