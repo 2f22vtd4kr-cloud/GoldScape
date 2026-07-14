@@ -1347,21 +1347,21 @@ html:not(.dark) .liquid-glass {
     inset 0 -2px   6px rgba(0,   0,   0,   0.04);
 }
 
-/* Neutral — near-clear, top radial highlight only */
+/* Neutral — self-luminous top glow, readable even over pure black */
 .liquid-glass-neutral {
   background: radial-gradient(
-    ellipse at 50% -8%,
-    rgba(255, 255, 255, 0.13) 0%,
-    rgba(255, 255, 255, 0.04) 55%,
-    rgba(255, 255, 255, 0.01) 100%
+    ellipse at 50% 0%,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.10) 40%,
+    rgba(255, 255, 255, 0.04) 100%
   );
 }
 html:not(.dark) .liquid-glass-neutral {
   background: radial-gradient(
-    ellipse at 50% -8%,
-    rgba(255, 255, 255, 0.92) 0%,
-    rgba(255, 255, 255, 0.58) 55%,
-    rgba(255, 255, 255, 0.28) 100%
+    ellipse at 50% 0%,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.65) 40%,
+    rgba(255, 255, 255, 0.30) 100%
   );
 }
 
@@ -1446,69 +1446,80 @@ html:not(.dark) .liquid-glass-tinted {
     inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
 }
 
-/* Primary button — add glass volume on top of chrome gradient */
+/* Primary button — glass volume on chrome gradient, strong specular */
 .eom-btn-primary {
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
-  border-bottom-color: rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.14) !important;
   box-shadow:
-    0 6px 24px rgba(0, 0, 0, 0.20),
+    0 6px 24px rgba(0, 0, 0, 0.22),
     0 2px  8px rgba(0, 0, 0, 0.14),
-    inset 0  1.5px 2px rgba(255, 255, 255, 0.55),
-    inset 0 -2px   5px rgba(0,   0,   0,   0.20) !important;
+    inset 0  1.5px 0px rgba(255, 255, 255, 0.70),  /* sharp arc specular */
+    inset 0 -2px   5px rgba(0,   0,   0,   0.22) !important;
 }
 .eom-btn-primary:hover {
   opacity: 0.92 !important;
   transform: scale(1.02) translateY(-1px) !important;
   box-shadow:
-    0 10px 36px rgba(0, 0, 0, 0.26),
+    0 10px 36px rgba(0, 0, 0, 0.28),
     0  4px 12px rgba(0, 0, 0, 0.16),
-    inset 0  2px 3px rgba(255, 255, 255, 0.60),
-    inset 0 -3px 6px rgba(0,   0,   0,   0.22) !important;
+    inset 0  2px 0px rgba(255, 255, 255, 0.80),
+    inset 0 -3px 6px rgba(0,   0,   0,   0.24) !important;
 }
 
-/* Ghost button — liquid glass neutral treatment */
+/* Hero CTA pill shape — pill form maximises the specular arc illusion */
+.hero-cta-pill {
+  border-radius: 50px !important;
+}
+
+/* Ghost button — self-luminous iridescent film, not borrowed refraction */
 .eom-btn-ghost {
   backdrop-filter: blur(14px) saturate(180%);
   -webkit-backdrop-filter: blur(14px) saturate(180%);
 }
 .dark .eom-btn-ghost {
-  background: radial-gradient(
-    ellipse at 50% -10%,
-    rgba(255, 255, 255, 0.07) 0%,
-    rgba(255, 255, 255, 0.02) 70%,
-    transparent 100%
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(180, 160, 255, 0.06) 35%,
+    rgba(100, 200, 255, 0.06) 65%,
+    rgba(255, 255, 255, 0.04) 100%
   ) !important;
-  border: 1px solid rgba(255, 255, 255, 0.20) !important;
-  border-top-color: rgba(255, 255, 255, 0.26) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-top-color: rgba(255, 255, 255, 0.42) !important;
   box-shadow:
     0 6px 22px rgba(0, 0, 0, 0.18),
-    inset 0  1.5px 2px rgba(255, 255, 255, 0.22),
-    inset 0 -2px   5px rgba(0,   0,   0,   0.15) !important;
+    inset 0  1.5px 0px rgba(255, 255, 255, 0.55),  /* punchy specular arc */
+    inset 0 -2px   5px rgba(0,   0,   0,   0.18),
+    0 0 18px rgba(150, 130, 255, 0.06) !important;  /* ambient iridescent halo */
 }
 .dark .eom-btn-ghost:hover {
-  background: radial-gradient(
-    ellipse at 50% -10%,
-    rgba(255, 255, 255, 0.10) 0%,
-    rgba(255, 255, 255, 0.04) 70%,
-    transparent 100%
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.13) 0%,
+    rgba(180, 160, 255, 0.09) 35%,
+    rgba(100, 200, 255, 0.09) 65%,
+    rgba(255, 255, 255, 0.06) 100%
   ) !important;
+  border-top-color: rgba(255, 255, 255, 0.55) !important;
   transform: translateY(-1px) !important;
   box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.26),
-    inset 0  2px 3px rgba(255, 255, 255, 0.28),
-    inset 0 -3px 7px rgba(0,   0,   0,   0.18) !important;
+    inset 0  2px 0px rgba(255, 255, 255, 0.65),
+    inset 0 -3px 7px rgba(0,   0,   0,   0.20),
+    0 0 28px rgba(150, 130, 255, 0.10) !important;
 }
 
-/* Oil-slick CTA — glass depth on top of the gradient animation */
+/* Oil-slick CTA — pill shape + punchy specular arc */
 .eom-btn-oilslick {
+  border-radius: 50px;  /* pill → specular arc reads as curved glass */
   backdrop-filter: blur(8px) saturate(150%);
   -webkit-backdrop-filter: blur(8px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  border-top-color: rgba(255, 255, 255, 0.28) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-top-color: rgba(255, 255, 255, 0.42) !important;
   box-shadow:
     0 8px 28px rgba(0, 0, 0, 0.30),
     0 2px  8px rgba(0, 0, 0, 0.20),
-    inset 0  1.5px 2px rgba(255, 255, 255, 0.28),
+    inset 0  1.5px 0px rgba(255, 255, 255, 0.45),  /* sharp arc */
     inset 0 -2px   6px rgba(0,   0,   0,   0.30) !important;
 }
 .eom-btn-oilslick:hover {
@@ -1517,7 +1528,7 @@ html:not(.dark) .liquid-glass-tinted {
   box-shadow:
     0 14px 40px rgba(0, 0, 0, 0.38),
     0  4px 12px rgba(0, 0, 0, 0.24),
-    inset 0  2px 3px rgba(255, 255, 255, 0.34),
+    inset 0  2px 0px rgba(255, 255, 255, 0.55),
     inset 0 -3px 8px rgba(0,   0,   0,   0.34) !important;
 }
 

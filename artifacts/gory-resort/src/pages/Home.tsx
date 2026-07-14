@@ -199,10 +199,10 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8 w-full sm:w-auto">
-                <Link href="/properties" className="eom-btn-primary font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-8 flex items-center justify-center text-center">
+                <Link href="/properties" className="eom-btn-primary hero-cta-pill font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-8 flex items-center justify-center text-center">
                   Подобрать объект
                 </Link>
-                <a href="https://wa.me/1234567890" target="_blank" rel="noreferrer" className="eom-btn-ghost font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-8 flex items-center justify-center text-center">
+                <a href="https://wa.me/1234567890" target="_blank" rel="noreferrer" className="eom-btn-ghost hero-cta-pill font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-8 flex items-center justify-center text-center">
                   Написать в WhatsApp
                 </a>
               </div>
