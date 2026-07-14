@@ -166,15 +166,15 @@ export default function Home() {
             className="hero-glow-spill absolute"
             style={{ width: '120vw', height: '120vw', top: '-10%', right: '-30vw', opacity: 0.32 }}
           />
-          <img
-            src="/chrome/blob-iridescent-1.png"
-            alt=""
-            className="hero-blob-gasoline absolute"
-            style={{
-              width: '86vw', top: '4%', right: '-18vw',
-              opacity: 0.4, filter: 'blur(0.5px)',
-            }}
-          />
+          {/* Blur lives on wrapper so it doesn't override the CSS color-flow animation */}
+          <div className="absolute" style={{ width: '86vw', top: '4%', right: '-18vw', filter: 'blur(0.5px)' }}>
+            <img
+              src="/chrome/blob-iridescent-1.png"
+              alt=""
+              className="hero-blob-gasoline w-full"
+              style={{ opacity: 0.4, pointerEvents: 'none' }}
+            />
+          </div>
           <div
             className="absolute inset-0"
             style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.68) 55%, #000000 100%)' }}
@@ -223,7 +223,7 @@ export default function Home() {
               />
 
               <div ref={heroTiltRef} className="hero-tilt-wrap relative z-10">
-                <div className="animate-float">
+                <div className="hero-blob-float">
                   <img
                     src="/chrome/blob-iridescent-1.png"
                     alt="" aria-hidden="true"
