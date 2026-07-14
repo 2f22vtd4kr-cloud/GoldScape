@@ -1305,3 +1305,351 @@ html:not(.dark) .section-reveal-heading::after {
 @media (prefers-reduced-motion: reduce) {
   .iso-tile { transform: rotateX(52deg) rotateZ(-18deg); }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   LIQUID GLASS SYSTEM — visionOS-inspired volumetric refraction
+
+   Three physical illusions working together:
+   1. backdrop-filter: blur+saturate  — refracts background content
+   2. inset top shadow                — "caught light" specular edge
+   3. inset bottom shadow             — depth below the glass surface
+   4. outer elevation shadow          — lifts element off the page
+
+   Three fill variants:
+   .liquid-glass-neutral    — near-clear, icon buttons / toggles
+   .liquid-glass-tinted     — faint iridescent film, panels / cards
+   .liquid-glass-iridescent — CTA pill, pink→indigo→cyan (Focus style)
+   ═══════════════════════════════════════════════════════════════ */
+
+.liquid-glass {
+  position: relative;
+  backdrop-filter: blur(22px) saturate(200%) brightness(1.03);
+  -webkit-backdrop-filter: blur(22px) saturate(200%) brightness(1.03);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+  border-left-color:   rgba(255, 255, 255, 0.09);
+  border-right-color:  rgba(255, 255, 255, 0.09);
+  box-shadow:
+    0 8px 32px  rgba(0, 0, 0, 0.22),
+    0 2px 8px   rgba(0, 0, 0, 0.14),
+    inset 0  1.5px 2px rgba(255, 255, 255, 0.32),  /* top caught-light */
+    inset 0 -2px   6px rgba(0,   0,   0,   0.18);  /* bottom depth     */
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+html:not(.dark) .liquid-glass {
+  border-color:        rgba(255, 255, 255, 0.72);
+  border-bottom-color: rgba(0,   0,   0,   0.06);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.09),
+    0 2px 8px  rgba(0, 0, 0, 0.05),
+    inset 0  1.5px 2px rgba(255, 255, 255, 0.92),
+    inset 0 -2px   6px rgba(0,   0,   0,   0.04);
+}
+
+/* Neutral — near-clear, top radial highlight only */
+.liquid-glass-neutral {
+  background: radial-gradient(
+    ellipse at 50% -8%,
+    rgba(255, 255, 255, 0.13) 0%,
+    rgba(255, 255, 255, 0.04) 55%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+}
+html:not(.dark) .liquid-glass-neutral {
+  background: radial-gradient(
+    ellipse at 50% -8%,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.58) 55%,
+    rgba(255, 255, 255, 0.28) 100%
+  );
+}
+
+/* Tinted — soft iridescent film for cards and panels */
+.liquid-glass-tinted {
+  background: linear-gradient(
+    148deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(180, 155, 255, 0.04) 35%,
+    rgba(100, 185, 255, 0.04) 65%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+html:not(.dark) .liquid-glass-tinted {
+  background: linear-gradient(
+    148deg,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(200, 180, 255, 0.28) 35%,
+    rgba(160, 210, 255, 0.25) 65%,
+    rgba(255, 255, 255, 0.62) 100%
+  );
+}
+
+/* Iridescent — primary CTA / Focus-pill treatment: pink→indigo→sky */
+.liquid-glass-iridescent {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(236,  72, 153, 0.11) 25%,
+    rgba( 99, 102, 241, 0.13) 52%,
+    rgba( 56, 189, 248, 0.09) 76%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  border-top-color: rgba(255, 255, 255, 0.30);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.30),
+    0  2px 10px rgba(0, 0, 0, 0.18),
+    inset 0  2px 3px rgba(255, 255, 255, 0.42),
+    inset 0 -3px 8px rgba(0,   0,   0,   0.16),
+    0 0 28px rgba(140, 100, 255, 0.10);
+}
+
+/* Interactive hover lift for any .liquid-glass element */
+.liquid-glass-interactive:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.34),
+    0  4px 14px rgba(0, 0, 0, 0.20),
+    inset 0  2px 3px rgba(255, 255, 255, 0.42),
+    inset 0 -3px 8px rgba(0,   0,   0,   0.22);
+  border-top-color: rgba(255, 255, 255, 0.26);
+}
+.liquid-glass-interactive:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.26),
+    inset 0  1px  2px rgba(255, 255, 255, 0.18),
+    inset 0  4px 10px rgba(0,   0,   0,   0.26);
+}
+
+/* ─── Apply Liquid Glass to site components ──────────────────────────────
+   These rules enhance existing component classes. They add the glass
+   properties without touching layout, typography, or colour identity.   */
+
+/* Navigation — deepen the blur, add volumetric depth ring */
+.eom-nav {
+  backdrop-filter: blur(22px) saturate(210%) brightness(1.02) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(210%) brightness(1.02) !important;
+}
+.dark .eom-nav {
+  background: rgba(6, 6, 6, 0.52) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 32px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.dark .eom-nav.scrolled {
+  background: rgba(5, 5, 5, 0.80) !important;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Primary button — add glass volume on top of chrome gradient */
+.eom-btn-primary {
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.12) !important;
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.20),
+    0 2px  8px rgba(0, 0, 0, 0.14),
+    inset 0  1.5px 2px rgba(255, 255, 255, 0.55),
+    inset 0 -2px   5px rgba(0,   0,   0,   0.20) !important;
+}
+.eom-btn-primary:hover {
+  opacity: 0.92 !important;
+  transform: scale(1.02) translateY(-1px) !important;
+  box-shadow:
+    0 10px 36px rgba(0, 0, 0, 0.26),
+    0  4px 12px rgba(0, 0, 0, 0.16),
+    inset 0  2px 3px rgba(255, 255, 255, 0.60),
+    inset 0 -3px 6px rgba(0,   0,   0,   0.22) !important;
+}
+
+/* Ghost button — liquid glass neutral treatment */
+.eom-btn-ghost {
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+}
+.dark .eom-btn-ghost {
+  background: radial-gradient(
+    ellipse at 50% -10%,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 70%,
+    transparent 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  border-top-color: rgba(255, 255, 255, 0.26) !important;
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.18),
+    inset 0  1.5px 2px rgba(255, 255, 255, 0.22),
+    inset 0 -2px   5px rgba(0,   0,   0,   0.15) !important;
+}
+.dark .eom-btn-ghost:hover {
+  background: radial-gradient(
+    ellipse at 50% -10%,
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(255, 255, 255, 0.04) 70%,
+    transparent 100%
+  ) !important;
+  transform: translateY(-1px) !important;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.26),
+    inset 0  2px 3px rgba(255, 255, 255, 0.28),
+    inset 0 -3px 7px rgba(0,   0,   0,   0.18) !important;
+}
+
+/* Oil-slick CTA — glass depth on top of the gradient animation */
+.eom-btn-oilslick {
+  backdrop-filter: blur(8px) saturate(150%);
+  -webkit-backdrop-filter: blur(8px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-top-color: rgba(255, 255, 255, 0.28) !important;
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.30),
+    0 2px  8px rgba(0, 0, 0, 0.20),
+    inset 0  1.5px 2px rgba(255, 255, 255, 0.28),
+    inset 0 -2px   6px rgba(0,   0,   0,   0.30) !important;
+}
+.eom-btn-oilslick:hover {
+  opacity: 0.92 !important;
+  transform: scale(1.02) translateY(-1px) !important;
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.38),
+    0  4px 12px rgba(0, 0, 0, 0.24),
+    inset 0  2px 3px rgba(255, 255, 255, 0.34),
+    inset 0 -3px 8px rgba(0,   0,   0,   0.34) !important;
+}
+
+/* Destination cards — glass sheen appears on hover */
+.dark .dest-card:hover {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.065) 0%,
+    rgba(160, 140, 255, 0.035) 40%,
+    rgba( 90, 180, 255, 0.035) 70%,
+    rgba(255, 255, 255, 0.015) 100%
+  ) !important;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.50),
+    0  0   40px rgba(140, 100, 255, 0.06),
+    inset 0  1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(0,   0,   0,   0.20) !important;
+}
+
+/* Property listing cards — glass sheen on hover */
+.dark .eom-card:hover {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.055) 0%,
+    rgba(150, 130, 255, 0.030) 40%,
+    rgba( 80, 170, 255, 0.025) 70%,
+    rgba(255, 255, 255, 0.010) 100%
+  ) !important;
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.54),
+    0  0   50px rgba(140, 100, 255, 0.055),
+    inset 0  1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 -1px 0 rgba(0,   0,   0,   0.22) !important;
+}
+
+/* Testimonial cards — always-on glass in dark mode */
+.dark .testimonial-card {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: linear-gradient(
+    148deg,
+    rgba(255, 255, 255, 0.055) 0%,
+    rgba(175, 150, 255, 0.025) 40%,
+    rgba(255, 255, 255, 0.010) 100%
+  ) !important;
+  border-top-color: rgba(255, 255, 255, 0.10) !important;
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
+}
+.dark .testimonial-card:hover {
+  background: linear-gradient(
+    148deg,
+    rgba(255, 255, 255, 0.075) 0%,
+    rgba(175, 150, 255, 0.040) 40%,
+    rgba(255, 255, 255, 0.015) 100%
+  ) !important;
+  box-shadow:
+    0 14px 50px rgba(0, 0, 0, 0.30),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.14) !important;
+}
+
+/* Small glass icon button — used for social links, theme toggle, etc. */
+.glass-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: radial-gradient(
+    ellipse at 50% 20%,
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0.03) 60%,
+    transparent 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.20),
+    inset 0  1.5px 1.5px rgba(255, 255, 255, 0.26),
+    inset 0 -1.5px 4px   rgba(0,   0,   0,   0.18);
+  transition: all 0.28s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.glass-icon-btn:hover {
+  background: radial-gradient(
+    ellipse at 50% 20%,
+    rgba(255, 255, 255, 0.17) 0%,
+    rgba(255, 255, 255, 0.06) 60%,
+    transparent 100%
+  );
+  border-color: rgba(255, 255, 255, 0.26);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.28),
+    inset 0  2px 2px rgba(255, 255, 255, 0.34),
+    inset 0 -2px 6px rgba(0,   0,   0,   0.22);
+  transform: translateY(-1px) scale(1.04);
+}
+.glass-icon-btn:active {
+  transform: scale(0.96);
+}
+
+/* Glass filter/select inputs */
+.glass-filter-select {
+  backdrop-filter: blur(14px) saturate(170%);
+  -webkit-backdrop-filter: blur(14px) saturate(170%);
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 60%,
+    transparent 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-top-color: rgba(255, 255, 255, 0.22) !important;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.18),
+    inset 0  1px 1px rgba(255, 255, 255, 0.14),
+    inset 0 -1px 4px rgba(0,   0,   0,   0.16) !important;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+.glass-filter-select:hover,
+.glass-filter-select:focus {
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.24),
+    inset 0  1.5px 2px rgba(255, 255, 255, 0.20),
+    inset 0 -1.5px 5px rgba(0,   0,   0,   0.20) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass,
+  .liquid-glass-interactive,
+  .glass-icon-btn { transition: none; }
+  .liquid-glass-interactive:hover,
+  .glass-icon-btn:hover { transform: none; }
+}

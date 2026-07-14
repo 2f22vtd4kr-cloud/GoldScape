@@ -537,7 +537,7 @@ export default function Properties() {
       <div className="sticky top-20 z-40 bg-[#080808]/90 backdrop-blur-xl border-b border-white/10 py-4 px-4 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:flex md:flex-wrap gap-3 items-center">
           <select
-            className="w-full md:w-auto min-h-[48px] bg-[#141414] border border-white/10 rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider text-gray-300 hover:border-white/30 focus:border-white focus:outline-none transition-colors appearance-none cursor-pointer"
+            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider text-gray-300 focus:outline-none appearance-none cursor-pointer"
             value={countryFilter}
             onChange={e => setCountryFilter(e.target.value)}
           >
@@ -552,7 +552,7 @@ export default function Properties() {
           </select>
 
           <select
-            className="w-full md:w-auto min-h-[48px] bg-[#141414] border border-white/10 rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider text-gray-300 hover:border-white/30 focus:border-white focus:outline-none transition-colors appearance-none cursor-pointer"
+            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider text-gray-300 focus:outline-none appearance-none cursor-pointer"
             value={typeFilter}
             onChange={e => setTypeFilter(e.target.value)}
           >
@@ -564,7 +564,7 @@ export default function Properties() {
           </select>
 
           <select
-            className="w-full md:w-auto min-h-[48px] bg-[#141414] border border-white/10 rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider text-gray-300 hover:border-white/30 focus:border-white focus:outline-none transition-colors appearance-none cursor-pointer"
+            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider text-gray-300 focus:outline-none appearance-none cursor-pointer"
             value={priceFilter}
             onChange={e => setPriceFilter(e.target.value)}
           >
@@ -576,7 +576,7 @@ export default function Properties() {
           </select>
 
           <select
-            className="w-full md:w-auto min-h-[48px] bg-[#141414] border border-white/10 rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider text-gray-300 hover:border-white/30 focus:border-white focus:outline-none transition-colors appearance-none cursor-pointer"
+            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider text-gray-300 focus:outline-none appearance-none cursor-pointer"
             value={bedFilter}
             onChange={e => setBedFilter(e.target.value)}
           >
@@ -788,7 +788,7 @@ export default function Properties() {
               <a
                 href="https://wa.me/971502345678"
                 target="_blank" rel="noreferrer"
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#25D366] hover:border-white/30 transition-colors bg-[#141414] hover:bg-[#1a1a1a]"
+                className="glass-icon-btn w-12 h-12 rounded-full text-gray-400 hover:text-[#25D366]"
                 aria-label="Написать в WhatsApp"
               >
                 <MessageCircle className="w-5 h-5" />
@@ -796,7 +796,7 @@ export default function Properties() {
               <a
                 href="https://t.me/estateofmind_official"
                 target="_blank" rel="noreferrer"
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#229ED9] hover:border-white/30 transition-colors bg-[#141414] hover:bg-[#1a1a1a]"
+                className="glass-icon-btn w-12 h-12 rounded-full text-gray-400 hover:text-[#229ED9]"
                 aria-label="Написать в Telegram"
               >
                 <Send className="w-5 h-5" />

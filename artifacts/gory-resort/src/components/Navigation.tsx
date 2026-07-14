@@ -66,7 +66,7 @@ export function Navigation() {
         <button
           type="button"
           onClick={toggleTheme}
-          className="w-9 h-9 rounded-full border border-foreground/15 dark:border-white/15 bg-foreground/5 dark:bg-white/5 hover:bg-foreground/10 transition-colors flex items-center justify-center text-foreground/70 dark:text-white/70"
+          className="glass-icon-btn w-9 h-9 rounded-full text-foreground/70 dark:text-white/70"
           aria-label="Переключить тему"
         >
           {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
