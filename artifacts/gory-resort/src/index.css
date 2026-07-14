@@ -626,21 +626,30 @@ html:not(.dark) .chrome-text {
 .hero-glow-spill {
   position: absolute;
   border-radius: 50%;
-  filter: blur(110px);
-  opacity: 0.46;
-  mask-image: radial-gradient(circle at center,
-    black 0%, black 16%,
-    rgba(0,0,0,0.75) 34%,
-    rgba(0,0,0,0.42) 52%,
-    rgba(0,0,0,0.14) 72%,
-    transparent 92%
+  filter: blur(100px);
+  opacity: 0.55;
+  /* Wide ellipse centred at 70% from the left so the saturated core sits over
+     the visual column while the long left tail fades imperceptibly into black,
+     touching the headline without any hard ring edge. */
+  mask-image: radial-gradient(
+    ellipse at 70% 50%,
+    black 0%,
+    rgba(0,0,0,0.82) 18%,
+    rgba(0,0,0,0.55) 38%,
+    rgba(0,0,0,0.28) 57%,
+    rgba(0,0,0,0.10) 74%,
+    rgba(0,0,0,0.03) 87%,
+    transparent 97%
   );
-  -webkit-mask-image: radial-gradient(circle at center,
-    black 0%, black 16%,
-    rgba(0,0,0,0.75) 34%,
-    rgba(0,0,0,0.42) 52%,
-    rgba(0,0,0,0.14) 72%,
-    transparent 92%
+  -webkit-mask-image: radial-gradient(
+    ellipse at 70% 50%,
+    black 0%,
+    rgba(0,0,0,0.82) 18%,
+    rgba(0,0,0,0.55) 38%,
+    rgba(0,0,0,0.28) 57%,
+    rgba(0,0,0,0.10) 74%,
+    rgba(0,0,0,0.03) 87%,
+    transparent 97%
   );
   pointer-events: none;
   transition: transform 0.2s ease-out;

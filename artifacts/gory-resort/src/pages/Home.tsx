@@ -198,11 +198,23 @@ export default function Home() {
         </svg>
         <div className="hero-grid" />
 
+        {/* Unified colour spill — visible on all screen sizes, positioned at
+            section level so it bleeds left across the headline column. */}
+        <div
+          ref={heroGlowRef}
+          className="hero-glow-spill"
+          aria-hidden="true"
+          style={{
+            width: 'min(1300px, 145vw)',
+            height: 'min(900px, 95vw)',
+            top: '45%',
+            right: '-5vw',
+            transform: 'translateY(-50%)',
+          }}
+        />
+
         <div className="absolute inset-0 lg:hidden pointer-events-none overflow-hidden" aria-hidden="true">
-          <div
-            className="hero-glow-spill hero-glow-spill--mobile absolute"
-            style={{ width: '150vw', height: '150vw', top: '-24%', right: '-40vw', opacity: 0.4 }}
-          />
+          {/* Mobile-only: blurred blob wash behind the headline */}
           {/* Mobile treatment: a dimmed, blurred background wash behind the headline —
               never a sharp foreground element on small screens. The blur lives on this
               wrapper div (not the <img>) because .hero-blob-gasoline's keyframes already
@@ -259,12 +271,6 @@ export default function Home() {
 
             {/* ── Visual ── */}
             <div className="hidden lg:flex lg:col-span-5 relative items-center justify-center h-[680px]">
-              <div
-                ref={heroGlowRef}
-                className="hero-glow-spill"
-                style={{ width: 'min(760px, 98%)', height: 'min(760px, 98%)' }}
-              />
-
               <div className="hero-blob-float relative z-10">
                 <img
                   src="/chrome/blob-iridescent-1.png"
