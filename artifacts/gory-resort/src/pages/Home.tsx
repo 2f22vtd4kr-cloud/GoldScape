@@ -124,6 +124,7 @@ const WHY_US = [
 export default function Home() {
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const heroGlowRef = useRef<HTMLDivElement>(null);
+  const heroTurbulenceRef = useRef<SVGFETurbulenceElement>(null);
 
   useEffect(() => {
     const section = heroSectionRef.current;
@@ -153,11 +154,48 @@ export default function Home() {
     };
   }, []);
 
+  // Drive the hero blob's liquid-warp filter (feTurbulence baseFrequency) from JS
+  // rather than an SVG <animate>/SMIL tag — SMIL attribute animation on filter
+  // primitives is unreliable across browsers (it can simply never advance), so we
+  // interpolate it ourselves on a slow, deliberately low-frequency tick.
+  useEffect(() => {
+    const turbulence = heroTurbulenceRef.current;
+    if (!turbulence) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const periodMs = 26000;
+    let start = 0;
+    let frame = 0;
+    const tick = (t: number) => {
+      if (!start) start = t;
+      const elapsed = (t - start) % periodMs;
+      const phase = (elapsed / periodMs) * Math.PI * 2;
+      const fx = 0.0095 + Math.sin(phase) * 0.004;
+      const fy = 0.0095 + Math.cos(phase * 0.7) * 0.0035;
+      turbulence.setAttribute('baseFrequency', `${fx.toFixed(5)} ${fy.toFixed(5)}`);
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <Layout>
 
       {/* ─── HERO ───────────────────────────────────────────────────────── */}
       <section ref={heroSectionRef} className="relative dark:bg-black bg-white overflow-hidden">
+        {/* Liquid-warp SVG filter — slowly shifting fractal-noise displacement so the
+            hero blob's silhouette itself ripples and reshapes over time, instead of
+            just floating/rotating as a rigid image. Zero-size, referenced via
+            filter: url(#hero-liquid-morph) on the blob images below. */}
+        <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
+          <defs>
+            <filter id="hero-liquid-morph" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence ref={heroTurbulenceRef} type="fractalNoise" baseFrequency="0.008 0.011" numOctaves="2" seed="7" result="hero-blob-noise" />
+              <feDisplacementMap in="SourceGraphic" in2="hero-blob-noise" scale="46" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+          </defs>
+        </svg>
         <div className="hero-grid" />
 
         <div className="absolute inset-0 lg:hidden pointer-events-none overflow-hidden" aria-hidden="true">
@@ -165,6 +203,21 @@ export default function Home() {
             className="hero-glow-spill hero-glow-spill--mobile absolute"
             style={{ width: '150vw', height: '150vw', top: '-24%', right: '-40vw', opacity: 0.4 }}
           />
+          {/* Mobile treatment: a dimmed, blurred background wash behind the headline —
+              never a sharp foreground element on small screens. The blur lives on this
+              wrapper div (not the <img>) because .hero-blob-gasoline's keyframes already
+              own the `filter` property on the image itself (liquid-morph + hue-drift). */}
+          <div
+            className="hero-blob-float absolute"
+            style={{ width: '128vw', top: '-18%', right: '-38vw', opacity: 0.4, filter: 'blur(22px)' }}
+          >
+            <img
+              src="/chrome/blob-iridescent-1.png"
+              alt=""
+              className="hero-blob-gasoline w-full"
+              style={{ pointerEvents: 'none' }}
+            />
+          </div>
           <div
             className="absolute inset-0"
             style={{ background: 'linear-gradient(180deg, hsl(var(--background) / 0.35) 0%, hsl(var(--background) / 0.68) 55%, hsl(var(--background)) 100%)' }}
@@ -211,6 +264,15 @@ export default function Home() {
                 className="hero-glow-spill"
                 style={{ width: 'min(760px, 98%)', height: 'min(760px, 98%)' }}
               />
+
+              <div className="hero-blob-float relative z-10">
+                <img
+                  src="/chrome/blob-iridescent-1.png"
+                  alt="" aria-hidden="true"
+                  className="hero-blob-gasoline w-full max-w-[500px]"
+                  style={{ height: 'auto', pointerEvents: 'none' }}
+                />
+              </div>
             </div>
           </div>
         </div>

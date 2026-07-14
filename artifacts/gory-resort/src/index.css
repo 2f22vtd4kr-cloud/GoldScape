@@ -684,6 +684,76 @@ html:not(.dark) .chrome-text {
   .hero-glow-spill::before { animation: none; }
 }
 
+/* ── Hero blob dedicated float — slow organic zero-gravity drift ──
+   Multi-axis path so it never feels mechanical (not just up/down). */
+@keyframes heroBlobFloat {
+  0%   { transform: translateY(0px)    translateX(0px)   rotate(0deg)    scale(1.000); }
+  18%  { transform: translateY(-20px)  translateX(8px)   rotate(1.8deg)  scale(1.022); }
+  38%  { transform: translateY(-12px)  translateX(14px)  rotate(3.6deg)  scale(1.038); }
+  55%  { transform: translateY(-26px)  translateX(5px)   rotate(2.2deg)  scale(1.025); }
+  72%  { transform: translateY(-8px)   translateX(-8px)  rotate(-1.4deg) scale(1.012); }
+  88%  { transform: translateY(-16px)  translateX(-4px)  rotate(0.6deg)  scale(1.018); }
+  100% { transform: translateY(0px)    translateX(0px)   rotate(0deg)    scale(1.000); }
+}
+.hero-blob-float {
+  animation: heroBlobFloat 22s ease-in-out infinite;
+}
+
+/* Hero blob — slow hue-drift so the gasoline-spill palette migrates across the
+   chrome surface over time, composed with the `hero-liquid-morph` SVG filter
+   (feTurbulence + feDisplacementMap, animated in Home.tsx) which is what
+   actually reshapes the blob's silhouette — the hue/brightness/drop-shadow
+   values below ride alongside that url() filter in the same `filter` list. */
+@keyframes gasoline-hue-drift {
+  0%   {
+    filter: url(#hero-liquid-morph) hue-rotate(0deg)   saturate(115%) brightness(1.00)
+            drop-shadow(0 0 50px rgba(180,140,255,0.40))
+            drop-shadow(0 0 100px rgba(100,60,220,0.25));
+  }
+  12%  {
+    filter: url(#hero-liquid-morph) hue-rotate(45deg)  saturate(170%) brightness(1.07)
+            drop-shadow(0 0 55px rgba(255,100,200,0.38))
+            drop-shadow(0 0 110px rgba(220,60,255,0.24));
+  }
+  25%  {
+    filter: url(#hero-liquid-morph) hue-rotate(100deg) saturate(188%) brightness(1.10)
+            drop-shadow(0 0 60px rgba(60,180,255,0.44))
+            drop-shadow(0 0 120px rgba(0,120,255,0.28));
+  }
+  40%  {
+    filter: url(#hero-liquid-morph) hue-rotate(165deg) saturate(195%) brightness(1.12)
+            drop-shadow(0 0 65px rgba(0,240,180,0.40))
+            drop-shadow(0 0 130px rgba(0,200,100,0.26));
+  }
+  55%  {
+    filter: url(#hero-liquid-morph) hue-rotate(220deg) saturate(185%) brightness(1.08)
+            drop-shadow(0 0 62px rgba(100,60,255,0.42))
+            drop-shadow(0 0 125px rgba(80,0,255,0.28));
+  }
+  70%  {
+    filter: url(#hero-liquid-morph) hue-rotate(280deg) saturate(172%) brightness(1.05)
+            drop-shadow(0 0 58px rgba(200,80,255,0.40))
+            drop-shadow(0 0 115px rgba(160,40,220,0.26));
+  }
+  84%  {
+    filter: url(#hero-liquid-morph) hue-rotate(330deg) saturate(145%) brightness(1.03)
+            drop-shadow(0 0 54px rgba(255,140,80,0.36))
+            drop-shadow(0 0 108px rgba(255,80,40,0.22));
+  }
+  100% {
+    filter: url(#hero-liquid-morph) hue-rotate(360deg) saturate(115%) brightness(1.00)
+            drop-shadow(0 0 50px rgba(180,140,255,0.40))
+            drop-shadow(0 0 100px rgba(100,60,220,0.25));
+  }
+}
+.hero-blob-gasoline {
+  animation: gasoline-hue-drift 28s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-blob-gasoline { animation: none; }
+  .hero-blob-float    { animation: none; }
+}
+
 .eom-card {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.07);
