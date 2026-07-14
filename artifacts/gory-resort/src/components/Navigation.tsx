@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const LINKS = [
   { href: '/', label: 'Главная' },
@@ -12,6 +13,7 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [location] = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -33,6 +35,7 @@ export function Navigation() {
         <img
           src="/chrome/liquid/logo-estateofmind.png"
           alt="EstateofMind"
+          className="dark:invert-0 invert hue-rotate-180 transition-all duration-300"
           style={{
             objectFit: 'cover',
             objectPosition: 'center',
@@ -61,7 +64,15 @@ export function Navigation() {
         </a>
         <button
           type="button"
-          className="md:hidden text-white w-12 h-12 -mr-3 flex items-center justify-center"
+          onClick={toggleTheme}
+          className="w-9 h-9 rounded-full border border-foreground/15 dark:border-white/15 bg-foreground/5 dark:bg-white/5 hover:bg-foreground/10 transition-colors flex items-center justify-center text-foreground/70 dark:text-white/70"
+          aria-label="Переключить тему"
+        >
+          {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+        </button>
+        <button
+          type="button"
+          className="md:hidden text-foreground w-12 h-12 -mr-3 flex items-center justify-center"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? 'Закрыть меню' : 'Открыть меню'}
         >
@@ -70,7 +81,7 @@ export function Navigation() {
       </div>
 
       {mobileOpen && (
-        <div className="absolute top-full left-0 right-0 md:hidden bg-[#080808] border-t border-white/5 flex flex-col px-8 py-6 gap-6">
+        <div className="absolute top-full left-0 right-0 md:hidden bg-white dark:bg-[#080808] border-t border-black/5 dark:border-white/5 flex flex-col px-8 py-6 gap-6">
           {/* Fully opaque (not translucent + blurred) on purpose: with the animated
               chrome-blob hero sitting right underneath, a semi-transparent panel let
               the bright hero text/blob bleed through and collide with the menu links. */}
