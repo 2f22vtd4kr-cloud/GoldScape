@@ -15,3 +15,5 @@
 - [Mobile-viewport screenshots & lazy-image timing](mobile-viewport-screenshots.md) — puppeteer-core recipe for real mobile QA; fast scripted scrolling makes lazy images falsely look blank/broken
 - [Backdrop-blur bleed-through on translucent overlays](backdrop-blur-bleed-through.md) — translucent+blurred panels over bright/animated content can leak it through visibly despite correct computed styles; prefer fully opaque for guaranteed legibility
 - [Chrome-text gradient contrast floor](chrome-text-contrast-floor.md) — decorative text-clip gradients need a minimum-luminance floor or long/multi-line strings hit dark troughs and go illegible
+- [Logo transparency: bake alpha, not mix-blend-mode](logo-mixblend-vs-alpha.md) — mix-blend-mode+backdrop-filter is fragile on mobile; convert black-bg generated logos to real alpha PNGs instead
+- [Fixed-nav mobile clearance convention](fixed-nav-clearance-convention.md) — this site's fixed header needs ~pt-24 to pt-32 on new full-bleed sections; check this pattern before adding any new top-of-page section

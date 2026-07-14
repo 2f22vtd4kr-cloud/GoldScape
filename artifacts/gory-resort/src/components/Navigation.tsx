@@ -26,12 +26,14 @@ export function Navigation() {
   return (
     <nav className={`eom-nav ${isScrolled || mobileOpen ? 'scrolled' : ''}`}>
       <Link href="/" className="flex items-center shrink-0">
-        {/* object-fit:cover centers on the text band of the ~1:1 image */}
+        {/* object-fit:cover centers on the text band of the ~1:1 image.
+            The PNG has a real alpha channel (black background baked out) —
+            no mix-blend-mode needed, which was unreliable combined with the
+            nav's backdrop-filter blur and left a visible dark box on some browsers. */}
         <img
           src="/chrome/liquid/logo-estateofmind.png"
           alt="EstateofMind"
           style={{
-            mixBlendMode: 'screen',
             objectFit: 'cover',
             objectPosition: 'center',
             width: '186px',

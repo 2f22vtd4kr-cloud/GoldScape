@@ -181,7 +181,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="container mx-auto px-6 pt-10 pb-12 lg:pt-20 lg:pb-0 relative z-10">
+        <div className="container mx-auto px-6 pt-28 pb-12 lg:pt-20 lg:pb-0 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-12 lg:items-start">
 
             {/* ── Text ── */}
