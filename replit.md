@@ -32,6 +32,15 @@ Workflows (managed by Replit):
 
 ## Work Log
 
+### 2026-07-14 — Property card fixes: badge overlap, pin marker, immersion animation, scroll-to-top
+- Fixed the "ЭКСКЛЮЗИВ" badge overlapping the country/tag badges on property cards: the tag row lacked a `right-4` width constraint, so it wasn't reliably wrapping before running under the exclusive badge. Added `right-4` + conditional `pr-24` reserve when a card is exclusive.
+- Diagnosed the "lightbulb" on the isometric location maps: it was the existing `MapPin` pin marker — filled + heavily glow-blurred at small size, its round head/narrow stem silhouette reads as a lightbulb, not a pin. Replaced it with a new `.property-pin` marker (slow-breathing iridescent oil-slick halo + solid white core, in `index.css`) that pinpoints the exact building and invites a tap.
+- Built `PropertyImmersion.tsx`: clicking the new pin opens a full-screen `clip-path` iris-wipe anchored at the exact click point, dissolving the isometric map into the listing's real hero photo with a price/specs/WhatsApp-CTA overlay — simulates "flying into" the marked building. Reuses each listing's existing single photo rather than a new multi-photo gallery (that would need generating images for all 16 listings — flagged as a possible follow-up, not done).
+- Fixed country pages appearing "not loaded at the top": wouter doesn't reset scroll position on navigation (same as default browser history behavior). Added a `ScrollToTop` effect in `App.tsx` keyed on route location.
+- Also fixed (from a prior request in this session): the nav logo's black background showing as a visible box — the generated PNG had no alpha channel and relied on a fragile `mix-blend-mode: screen` + `backdrop-filter` combo. Rebaked the PNG with a real alpha channel (ImageMagick `CopyOpacity` composite using a grayscale copy as the mask) and removed the blend-mode hack. Also bumped the Home hero's mobile top padding (`pt-10` → `pt-28`) to match the site's established fixed-nav clearance convention, since it was being clipped by the fixed header.
+- Verified all fixes with a scripted puppeteer-core pass (scroll to card, click the pin, confirm immersion; scroll down then follow a country link, confirm landed at top) plus visual screenshots. Cleaned up throwaway QA scripts afterward.
+- Recurring housekeeping: killed orphaned Node processes squatting on ports 5000/8080/8081+ (left over from manual QA scripts in this session) that had crashed the `gory-resort` and `api-server` workflows; restarted all three workflows cleanly.
+
 ### 2026-07-13 — Visual/legibility pass on Home & Properties
 - Root-caused the "barely visible text" complaint to a single shared CSS class: `.chrome-text`'s metallic gradient dropped to near-black stops, which on longer headings and property prices could land a fully dark segment over part of the string. Raised the gradient floor to a legible charcoal across the board (fixes it site-wide, not just on the pages checked).
 - Replaced off-brand imagery on the Home page: the mechanical-eye motif (3 usages) and the rainbow-neon AI face panel, both of which clashed with the platinum/violet liquid-chrome design language.
