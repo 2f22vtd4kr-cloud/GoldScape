@@ -22,3 +22,4 @@
 - [Nav breakpoint content-fit](nav-breakpoint-content-fit.md) — a `hidden md:flex` nav can overflow right at 768px itself even though mobile/desktop screenshots look fine; sweep every width, not just two
 - [Light-mode contrast fixes](light-mode-contrast-fixes.md) — 3 root causes for "light mode looks broken": reused dark-tuned text-opacity alphas, gradient-sweep legibility floor, invert+hue-rotate failing on saturated art
 - [Reveal/counter animation false positives](mobile-viewport-screenshots.md) — fast scripted scroll also catches scroll-reveal fades and count-up numbers mid-flight, not just lazy images; always settle+wait before judging
+- [Screen blend over black background](screen-blend-black-bg.md) — screen(color,black)=color, so mix-blend-mode:screen never hides a baked near-black image background; use a luminance-keyed alpha matte instead

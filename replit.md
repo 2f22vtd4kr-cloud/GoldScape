@@ -36,6 +36,34 @@ PERSONAS.md          # Visitor persona roster for UX review
 
 ## Session log
 
+### July 14, 2026 — Hero visual cleanup (contour frame, spiky blob, glow fade, transparent numerals)
+
+**Requests:** desktop homepage hero looked unpolished — remove the spiky corner "contour
+frame" SVG, remove the pointy iridescent hero blob image, make the colorful glow behind it
+bigger with a seamless fade to black (no visible ring), animate that glow so its shape
+slowly morphs (desktop + mobile), and fix visible black squares behind the "01–04" process
+step numerals. Also audit the rest of the desktop site for similar issues.
+
+**Changes:**
+- Removed `ChromeHeroFrame` (the spike/web/star SVG frame) and the `blob-iridescent-1.png`
+  hero image entirely from `Home.tsx` — the glow is now the sole hero visual, on both the
+  `lg:flex` desktop block and the `lg:hidden` mobile block.
+- `.hero-glow-spill` in `index.css`: replaced the two-stop hard-edged radial mask with a
+  6-stop gradual one, increased blur (70px→110px desktop, added a 60px mobile variant),
+  and added a `hero-blob-morph` keyframe animating `border-radius` on the `::before` conic
+  layer (composed with the existing rotation) so the mass reads as a living, slowly
+  reshaping blob rather than a spinning disc. Enlarged from `560px` to `760px` desktop and
+  `120vw`→`150vw` mobile.
+- Removed the now-dead `hero-blob-float` / `hero-blob-gasoline` / `hero-tilt-wrap` CSS and
+  the `heroTiltRef` mouse-tilt logic in `Home.tsx` (only the glow keeps mouse parallax now).
+- Regenerated `chrome-num-01..04.png` as true alpha PNGs (luminance-keyed matte, see
+  `.agents/memory/screen-blend-black-bg.md`) instead of relying on `mix-blend-mode: screen`,
+  which does not hide a near-black background against a pure-black page background.
+- Full-page desktop sweep (Home, Properties list/detail, About, CountryPage, TaxGuide) plus
+  a light-mode pass found no further instances of this defect class — the face/ribbon/void-
+  wave chrome imagery elsewhere is used at large blurred scale where the same background
+  never reads as a hard edge.
+
 ### July 14, 2026 — Mobile/tablet nav overflow fix (theme toggle off-screen)
 
 **Bug report:** on mobile, the light/dark toggle button was invisible — pushed past the

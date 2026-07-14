@@ -3,7 +3,6 @@ import { Shield, Globe, Zap, Bed, Bath } from 'lucide-react';
 import { Link } from 'wouter';
 import { Layout } from '@/components/Layout';
 import { ChromeShape } from '@/components/ChromeShape';
-import { ChromeHeroFrame } from '@/components/ChromeHeroFrame';
 
 const DESTINATIONS = [
   { code: 'ae', country: 'ОАЭ',         city: 'Дубай',     price: 'от $380,000',  image: '/images/dest-dubai.jpg',    perk: '0% Налог, ВНЖ' },
@@ -125,13 +124,11 @@ const WHY_US = [
 export default function Home() {
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const heroGlowRef = useRef<HTMLDivElement>(null);
-  const heroTiltRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = heroSectionRef.current;
     const glow = heroGlowRef.current;
-    const tilt = heroTiltRef.current;
-    if (!section || !tilt) return;
+    if (!section || !glow) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     let raf = 0;
@@ -141,14 +138,11 @@ export default function Home() {
       const relY = (e.clientY - rect.top) / rect.height - 0.5;
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        tilt.style.transform =
-          `translate3d(${relX * -28}px, ${relY * -18}px, 0) rotateX(${relY * 8}deg) rotateY(${relX * -10}deg)`;
-        if (glow) glow.style.transform = `translate3d(${relX * -16}px, ${relY * -12}px, 0)`;
+        glow.style.transform = `translate3d(${relX * -16}px, ${relY * -12}px, 0)`;
       });
     };
     const reset = () => {
-      tilt.style.transform = '';
-      if (glow) glow.style.transform = '';
+      glow.style.transform = '';
     };
     section.addEventListener('mousemove', handleMove);
     section.addEventListener('mouseleave', reset);
@@ -168,18 +162,9 @@ export default function Home() {
 
         <div className="absolute inset-0 lg:hidden pointer-events-none overflow-hidden" aria-hidden="true">
           <div
-            className="hero-glow-spill absolute"
-            style={{ width: '120vw', height: '120vw', top: '-10%', right: '-30vw', opacity: 0.32 }}
+            className="hero-glow-spill hero-glow-spill--mobile absolute"
+            style={{ width: '150vw', height: '150vw', top: '-24%', right: '-40vw', opacity: 0.4 }}
           />
-          {/* Blur lives on wrapper so it doesn't override the CSS color-flow animation */}
-          <div className="absolute" style={{ width: '86vw', top: '4%', right: '-18vw', filter: 'blur(0.5px)' }}>
-            <img
-              src="/chrome/blob-iridescent-1.png"
-              alt=""
-              className="hero-blob-gasoline w-full"
-              style={{ opacity: 0.4, pointerEvents: 'none' }}
-            />
-          </div>
           <div
             className="absolute inset-0"
             style={{ background: 'linear-gradient(180deg, hsl(var(--background) / 0.35) 0%, hsl(var(--background) / 0.68) 55%, hsl(var(--background)) 100%)' }}
@@ -224,19 +209,8 @@ export default function Home() {
               <div
                 ref={heroGlowRef}
                 className="hero-glow-spill"
-                style={{ width: 'min(560px, 90%)', height: 'min(560px, 90%)' }}
+                style={{ width: 'min(760px, 98%)', height: 'min(760px, 98%)' }}
               />
-
-              <div ref={heroTiltRef} className="hero-tilt-wrap relative z-10">
-                <div className="hero-blob-float">
-                  <img
-                    src="/chrome/blob-iridescent-1.png"
-                    alt="" aria-hidden="true"
-                    className="hero-blob-gasoline w-full max-w-[500px]"
-                    style={{ height: 'auto', pointerEvents: 'none' }}
-                  />
-                </div>
-              </div>
 
               <img
                 src="/chrome/liquid/chrome-starburst.png"
@@ -252,8 +226,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        <ChromeHeroFrame opacity={0.62} className="hidden lg:block pointer-events-none" />
 
         <div
           className="absolute inset-x-0 bottom-0 pointer-events-none"
