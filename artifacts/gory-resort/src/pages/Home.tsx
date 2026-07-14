@@ -211,18 +211,6 @@ export default function Home() {
                 className="hero-glow-spill"
                 style={{ width: 'min(760px, 98%)', height: 'min(760px, 98%)' }}
               />
-
-              <img
-                src="/chrome/liquid/chrome-starburst.png"
-                alt="" aria-hidden="true"
-                className="animate-float-small absolute z-20"
-                style={{
-                  width: 'clamp(64px, 9vw, 100px)',
-                  bottom: '8%', right: '4%',
-                  opacity: 0.92,
-                  filter: 'drop-shadow(0 0 22px rgba(255,255,255,0.55)) drop-shadow(0 0 8px rgba(200,180,255,0.45))',
-                }}
-              />
             </div>
           </div>
         </div>
@@ -481,17 +469,6 @@ export default function Home() {
                 height: '52%',
                 background: 'linear-gradient(to top, hsl(var(--background) / 0.95) 0%, hsl(var(--background) / 0.55) 45%, transparent 100%)',
                 zIndex: 4,
-              }}
-            />
-            <img
-              src="/chrome/liquid/chrome-starburst.png"
-              alt="" aria-hidden="true"
-              className="absolute pointer-events-none liquid-chrome-pulse hidden sm:block"
-              style={{
-                width: '72px',
-                top: '10%', right: '10%',
-                filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.7))',
-                zIndex: 5,
               }}
             />
             <div className="absolute inset-x-0 bottom-0 flex flex-col items-start px-6 md:px-8 pb-7 md:pb-9" style={{ zIndex: 6 }}>
