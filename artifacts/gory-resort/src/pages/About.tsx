@@ -114,8 +114,14 @@ export default function About() {
       <section className="relative pt-28 pb-20 px-6 max-w-7xl mx-auto overflow-hidden">
         {/* Subtle accent — absolutely-positioned wrapper so it never affects flow */}
         <div style={{ position: 'absolute', top: 0, right: 0, width: '520px', height: '520px', pointerEvents: 'none', zIndex: 0 }}>
-          <div className="iridescent-spill w-full h-full" style={{ opacity: 0.12 }} />
+          <div className="iridescent-spill w-full h-full" style={{ opacity: 0.22 }} />
         </div>
+        <img
+          src="/chrome/blob-iridescent-1.png"
+          alt="" aria-hidden="true"
+          className="absolute pointer-events-none select-none hidden md:block"
+          style={{ top: '-80px', right: '-60px', width: '440px', opacity: 0.2, mixBlendMode: 'screen', filter: 'blur(3px)' }}
+        />
         <div className="relative z-10 max-w-3xl">
           <span className="font-oxanium text-[11px] tracking-[0.25em] dark:text-white/40 text-foreground/50 uppercase mb-6 block">
             Как мы работаем

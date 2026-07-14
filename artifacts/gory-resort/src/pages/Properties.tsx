@@ -14,6 +14,8 @@ export default function Properties() {
   const [priceFilter, setPriceFilter] = useState('');
   const [bedFilter, setBedFilter]     = useState('');
 
+  const parsePrice = (price: string) => parseInt(price.replace(/[^0-9]/g, ''), 10);
+
   const filteredListings = LISTINGS.filter(l => {
     if (countryFilter && l.country !== countryFilter) return false;
     if (typeFilter && !l.type.includes(typeFilter)) return false;
@@ -27,14 +29,20 @@ export default function Properties() {
       }
     }
     if (priceFilter) {
-      const n = parseInt(l.price.replace(/[^0-9]/g, ''), 10);
+      const n = parsePrice(l.price);
       if (priceFilter === 'under100'  && n >= 100_000)                        return false;
       if (priceFilter === '100to500'  && (n < 100_000 || n > 500_000))        return false;
       if (priceFilter === '500to2m'   && (n < 500_000 || n > 2_000_000))      return false;
       if (priceFilter === '2mplus'    && n < 2_000_000)                        return false;
     }
     return true;
-  });
+  // Always sort by price ascending so entry-level listings appear first
+  }).sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
+
+  // Compute the cheapest listing's price for the subtitle (dynamic, never stale)
+  const cheapestListing = LISTINGS.reduce((min, l) =>
+    parsePrice(l.price) < parsePrice(min.price) ? l : min, LISTINGS[0]);
+  const minPriceLabel = cheapestListing?.price.replace(/,/g, ' ') ?? '€88 000';
 
   const [, navigate] = useLocation();
 
@@ -69,7 +77,7 @@ export default function Properties() {
           </h1>
           <p className="dark:text-gray-400 text-foreground/60 font-space-grotesk text-base md:text-lg">
             {filteredListings.length === LISTINGS.length
-              ? `${LISTINGS.length} объектов · 7 стран · от €88 000`
+              ? `${LISTINGS.length} объектов · 7 стран · от ${minPriceLabel}`
               : `${filteredListings.length} ${filteredListings.length === 1 ? 'объект' : filteredListings.length < 5 ? 'объекта' : 'объектов'} по фильтру`}
           </p>
         </div>

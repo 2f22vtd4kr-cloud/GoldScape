@@ -241,7 +241,7 @@ export default function Home() {
 
             {/* ── Text ── */}
             <div className="lg:col-span-7 flex flex-col items-start pb-6 lg:pb-4">
-              <span className="font-oxanium text-[11px] md:text-[12px] tracking-[0.2em] dark:text-white/40 text-foreground/45 mb-4 uppercase">
+              <span className="font-oxanium text-[11px] md:text-[12px] tracking-[0.2em] dark:text-white/60 text-foreground/55 mb-4 uppercase">
                 Международная недвижимость
               </span>
 
@@ -250,7 +250,7 @@ export default function Home() {
               </h1>
 
               <p className="font-space-grotesk text-[15px] md:text-lg dark:text-white/60 text-foreground/65 max-w-lg mb-8 leading-relaxed">
-                Инвестиции в зарубежную недвижимость. Проверенные юрисдикции, ВНЖ для всей семьи и прозрачные сделки без скрытых комиссий. Легальный перевод средств — Swift, SEPA и другие механизмы.
+                Инвестиции в зарубежную недвижимость. Проверенные юрисдикции, ВНЖ для всей семьи и прозрачные сделки без скрытых комиссий. Легальный перевод средств — Swift, SEPA, крипто и другие механизмы.
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8 w-full sm:w-auto">
@@ -264,8 +264,8 @@ export default function Home() {
 
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3 dark:text-white/50 text-foreground/55 font-oxanium text-[12px] uppercase tracking-wider">
                 <div className="flex items-center gap-2"><Globe className="w-4 h-4 opacity-50"/> 7 стран</div>
-                <div className="flex items-center gap-2"><Shield className="w-4 h-4 opacity-50"/> ₽0 комиссии</div>
-                <div className="flex items-center gap-2"><Zap className="w-4 h-4 opacity-50"/> Легально</div>
+                <div className="flex items-center gap-2"><Shield className="w-4 h-4 opacity-50"/> Бесплатно для клиента</div>
+                <div className="flex items-center gap-2"><Zap className="w-4 h-4 opacity-50"/> 14 дней до сделки</div>
               </div>
             </div>
 
