@@ -12,6 +12,8 @@ export interface ImmersionListing {
   beds: number | string;
   baths: number;
   area: number;
+  pinPos?: { x: number; y: number };
+  accentColor?: string;
 }
 
 interface Props {
@@ -43,17 +45,21 @@ export function PropertyImmersion({ listing, origin, onClose }: Props) {
     };
   }, [listing, onClose]);
 
-  const ox = origin?.x ?? 50;
-  const oy = origin?.y ?? 50;
+  const clickX = origin?.x ?? 50;
+  const clickY = origin?.y ?? 50;
+  const mapX = listing?.pinPos?.x ?? 50;
+  const mapY = listing?.pinPos?.y ?? 50;
+  const accent = listing?.accentColor ?? 'hsl(38, 90%, 58%)';
 
   return (
     <AnimatePresence>
       {listing && (
         <motion.div
-          className="fixed inset-0 z-[200] bg-black overflow-hidden"
-          initial={{ clipPath: `circle(0% at ${ox}% ${oy}%)` }}
-          animate={{ clipPath: `circle(150% at ${ox}% ${oy}%)` }}
-          exit={{ clipPath: `circle(0% at ${ox}% ${oy}%)` }}
+          className="fixed inset-0 z-[200] overflow-hidden bg-black"
+          style={{ backgroundColor: `color-mix(in srgb, ${accent} 12%, black)` }}
+          initial={{ clipPath: `circle(0% at ${clickX}% ${clickY}%)` }}
+          animate={{ clipPath: `circle(150% at ${clickX}% ${clickY}%)` }}
+          exit={{ clipPath: `circle(0% at ${clickX}% ${clickY}%)` }}
           transition={{ duration: 0.85, ease: [0.65, 0, 0.35, 1] }}
         >
           {/* Isometric map rushes forward and dissolves — the "descent" */}
@@ -62,18 +68,19 @@ export function PropertyImmersion({ listing, origin, onClose }: Props) {
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover"
+            style={{ transformOrigin: `${mapX}% ${mapY}%` }}
             initial={{ opacity: 1, scale: 1 }}
-            animate={{ opacity: 0, scale: 2.6 }}
-            transition={{ duration: 0.85, ease: 'easeIn' }}
+            animate={{ opacity: 0, scale: 12 }}
+            transition={{ duration: 1.0, ease: [0.8, 0, 1, 1] }}
           />
           {/* Real photo settles in — "arriving" inside the property */}
           <motion.img
             src={listing.image}
             alt={`${listing.type} · ${listing.city}, ${listing.district}`}
             className="absolute inset-0 w-full h-full object-cover"
-            initial={{ opacity: 0, scale: 1.18 }}
+            initial={{ opacity: 0, scale: 1.4 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.32, ease: 'easeOut' }}
+            transition={{ duration: 1.4, delay: 0.4, ease: 'easeOut' }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-black/55" />
 

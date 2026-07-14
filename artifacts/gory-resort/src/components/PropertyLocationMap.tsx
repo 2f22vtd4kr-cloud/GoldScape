@@ -23,6 +23,8 @@ export interface Distance {
 export interface LocationMap {
   image:     string;   // isometric diorama, transparent background
   distances: Distance[];
+  pinPos?:   { x: number; y: number };
+  accentColor?: string;
 }
 
 const ICONS: Record<DistanceIcon, typeof Waves> = {
@@ -39,7 +41,7 @@ interface PropertyLocationMapProps extends LocationMap {
   onPinClick?: (origin: { x: number; y: number }) => void;
 }
 
-export function PropertyLocationMap({ image, distances, onPinClick }: PropertyLocationMapProps) {
+export function PropertyLocationMap({ image, distances, pinPos = { x: 50, y: 46 }, onPinClick }: PropertyLocationMapProps) {
   return (
     <div className="relative rounded-lg overflow-hidden border border-white/5 bg-[#0c0c0c]">
       <div className="relative aspect-[16/10] overflow-hidden">
@@ -57,20 +59,21 @@ export function PropertyLocationMap({ image, distances, onPinClick }: PropertyLo
           className="absolute inset-0 w-full h-full object-contain scale-[1.12] drop-shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
         />
 
-        {/* Pin marking the exact property — a slow-breathing, iridescent
-            "oil-slick" glow (not a literal map pin icon, which read as a
-            lightbulb) so the exact building draws the eye and invites a tap. */}
+        {/* Pin marking the exact property — a slow-breathing warm white/gold beacon
+            so the exact building draws the eye and invites a tap. */}
         <button
           type="button"
           onClick={(e) => {
             e.stopPropagation();
-            onPinClick?.({ x: (e.clientX / window.innerWidth) * 100, y: (e.clientY / window.innerHeight) * 100 });
+            onPinClick?.(pinPos);
           }}
-          className="property-pin absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2"
+          className="property-pin z-10"
+          style={{ left: `${pinPos.x}%`, top: `${pinPos.y}%` }}
           aria-label="Смотреть этот объект"
           title="Смотреть этот объект"
         >
           <span className="property-pin__halo" aria-hidden="true" />
+          <span className="property-pin__beam" aria-hidden="true" />
           <span className="property-pin__core" aria-hidden="true" />
         </button>
       </div>

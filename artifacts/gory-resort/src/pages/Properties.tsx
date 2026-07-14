@@ -47,6 +47,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapDubaiPalm,
+      pinPos: { x: 52, y: 42 },
+      accentColor: 'hsl(38,90%,58%)',
       distances: [
         { icon: 'sea',    label: 'До моря',        minutes: 1 },
         { icon: 'center', label: 'До центра города', minutes: 20 },
@@ -72,6 +74,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapDubaiMarina,
+      pinPos: { x: 47, y: 50 },
+      accentColor: 'hsl(197,88%,52%)',
       distances: [
         { icon: 'sea',    label: 'До моря',        minutes: 3 },
         { icon: 'center', label: 'До центра города', minutes: 20 },
@@ -97,6 +101,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapDubaiDowntown,
+      pinPos: { x: 52, y: 38 },
+      accentColor: 'hsl(45,95%,58%)',
       distances: [
         { icon: 'sea',    label: 'До моря (JBR)',   minutes: 15 },
         { icon: 'center', label: 'Центр города',    minutes: 1 },
@@ -122,6 +128,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapDubaiRanches,
+      pinPos: { x: 50, y: 48 },
+      accentColor: 'hsl(32,70%,52%)',
       distances: [
         { icon: 'sea',    label: 'До моря',        minutes: 25 },
         { icon: 'center', label: 'До центра города', minutes: 20 },
@@ -147,6 +155,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapDubaiBizBay,
+      pinPos: { x: 50, y: 44 },
+      accentColor: 'hsl(210,78%,52%)',
       distances: [
         { icon: 'sea',    label: 'До моря',        minutes: 15 },
         { icon: 'center', label: 'До центра города', minutes: 5 },
@@ -173,6 +183,8 @@ const LISTINGS: Array<{
     crypto: false,
     locationMap: {
       image: mapIstanbul,
+      pinPos: { x: 50, y: 46 },
+      accentColor: 'hsl(18,72%,52%)',
       distances: [
         { icon: 'sea',    label: 'До Босфора',      minutes: 3 },
         { icon: 'center', label: 'До центра (Таксим)', minutes: 10 },
@@ -198,6 +210,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapAntalya,
+      pinPos: { x: 50, y: 44 },
+      accentColor: 'hsl(178,68%,46%)',
       distances: [
         { icon: 'sea',    label: 'До пляжа',        minutes: 1 },
         { icon: 'center', label: 'До центра города', minutes: 15 },
@@ -224,6 +238,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapLimassol,
+      pinPos: { x: 50, y: 46 },
+      accentColor: 'hsl(208,78%,52%)',
       distances: [
         { icon: 'sea',    label: 'До моря',        minutes: 5 },
         { icon: 'center', label: 'До центра города', minutes: 10 },
@@ -249,6 +265,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapPaphos,
+      pinPos: { x: 50, y: 46 },
+      accentColor: 'hsl(28,62%,52%)',
       distances: [
         { icon: 'sea',    label: 'До моря',        minutes: 8 },
         { icon: 'center', label: 'До центра Пафоса', minutes: 12 },
@@ -275,6 +293,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapBatumi,
+      pinPos: { x: 50, y: 44 },
+      accentColor: 'hsl(152,68%,42%)',
       distances: [
         { icon: 'sea',    label: 'До моря',        minutes: 1 },
         { icon: 'center', label: 'До центра города', minutes: 5 },
@@ -300,6 +320,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapTbilisi,
+      pinPos: { x: 50, y: 46 },
+      accentColor: 'hsl(32,78%,52%)',
       distances: [
         { icon: 'landmark', label: 'До парка Ваке', minutes: 3 },
         { icon: 'center',   label: 'До центра города', minutes: 10 },
@@ -326,6 +348,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapPhuket,
+      pinPos: { x: 50, y: 44 },
+      accentColor: 'hsl(168,72%,42%)',
       distances: [
         { icon: 'sea',    label: 'До моря',        minutes: 3 },
         { icon: 'center', label: 'До Phuket Town',  minutes: 20 },
@@ -351,6 +375,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapSamui,
+      pinPos: { x: 50, y: 46 },
+      accentColor: 'hsl(187,72%,48%)',
       distances: [
         { icon: 'sea',    label: 'До моря',        minutes: 3 },
         { icon: 'center', label: 'До Chaweng',      minutes: 8 },
@@ -377,6 +403,8 @@ const LISTINGS: Array<{
     crypto: false,
     locationMap: {
       image: mapLisbon,
+      pinPos: { x: 50, y: 46 },
+      accentColor: 'hsl(38,72%,52%)',
       distances: [
         { icon: 'sea',    label: 'До реки Тежу',    minutes: 10 },
         { icon: 'center', label: 'До центра (Байша)', minutes: 12 },
@@ -402,6 +430,8 @@ const LISTINGS: Array<{
     crypto: false,
     locationMap: {
       image: mapAlgarve,
+      pinPos: { x: 50, y: 44 },
+      accentColor: 'hsl(15,68%,54%)',
       distances: [
         { icon: 'sea',    label: 'До океана',       minutes: 5 },
         { icon: 'center', label: 'До Алмансила',    minutes: 15 },
@@ -428,6 +458,8 @@ const LISTINGS: Array<{
     crypto: true,
     locationMap: {
       image: mapBelgrade,
+      pinPos: { x: 50, y: 46 },
+      accentColor: 'hsl(222,58%,52%)',
       distances: [
         { icon: 'landmark', label: 'До Калемегдана', minutes: 6 },
         { icon: 'center',   label: 'До центра города', minutes: 8 },
@@ -612,6 +644,8 @@ export default function Properties() {
                             beds: item.beds,
                             baths: item.baths,
                             area: item.area,
+                            pinPos: item.locationMap.pinPos,
+                            accentColor: item.locationMap.accentColor,
                           },
                         })
                       }

@@ -483,77 +483,84 @@ body {
   animation: pulseGlow 2s ease-in-out infinite;
 }
 
-/* ─── Property pin — iridescent "oil-slick" glow marking the exact building ──
-   Replaces a literal MapPin icon (which, filled + glowing, read as a
-   lightbulb). A slow breathing pulse plus a rotating multi-hue spill invite
-   a tap without looking like generic UI chrome; clicking it drives the
-   PropertyImmersion "fly into the building" transition. */
+/* ─── Property pin — Glowing architectural beacon ──
+   A slow breathing warm white/gold beacon marking the building like a light on a scale model diorama. */
 @keyframes pin-breathe {
-  0%, 100% { transform: scale(1);    opacity: 0.82; }
-  50%      { transform: scale(1.4);  opacity: 1; }
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50%      { transform: scale(1.1); opacity: 1; }
 }
-@keyframes pin-spill-spin {
-  to { transform: rotate(360deg); }
+@keyframes pin-beam-breathe {
+  0%, 100% { opacity: 0.8; }
+  50%      { opacity: 1; }
 }
 .property-pin {
-  position: relative;
+  position: absolute;
   width: 22px;
-  height: 22px;
+  height: 70px;
   border: none;
   background: none;
   padding: 0;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  transform: translate(-50%, calc(-100% + 11px));
 }
 .property-pin__halo {
   position: absolute;
-  inset: -13px;
-  display: block;
+  bottom: -10px;
+  left: -10px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  filter: blur(9px);
-  overflow: hidden;
-  animation: pin-breathe 3.4s ease-in-out infinite;
+  background: radial-gradient(circle at center, rgba(255, 230, 180, 0.35) 0%, rgba(255, 230, 180, 0) 70%);
+  animation: pin-breathe 5s ease-in-out infinite;
+  transition: transform 0.3s ease;
 }
-.property-pin__halo::before {
-  content: '';
+.property-pin__beam {
   position: absolute;
-  inset: -70%;
-  background: conic-gradient(
-    from 0deg at 50% 50%,
-    hsl(200, 95%, 62%) 0%,
-    hsl(280, 90%, 68%) 22%,
-    hsl(325, 92%, 66%) 40%,
-    hsl(28, 95%, 62%) 58%,
-    hsl(55, 90%, 65%) 72%,
-    hsl(170, 85%, 55%) 88%,
-    hsl(200, 95%, 62%) 100%
-  );
-  animation: pin-spill-spin 9s linear infinite;
+  bottom: 11px;
+  left: 9px;
+  width: 4px;
+  height: 50px;
+  background: linear-gradient(to top, rgba(255, 245, 220, 0.95) 0%, rgba(255, 235, 190, 0.4) 40%, rgba(255, 235, 190, 0) 100%);
+  filter: drop-shadow(0 0 4px rgba(255, 230, 180, 0.5));
+  animation: pin-beam-breathe 5s ease-in-out infinite;
+  transition: all 0.3s ease;
+  transform-origin: bottom center;
 }
 .property-pin__core {
   position: absolute;
-  inset: 7px;
+  bottom: 7px;
+  left: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.9), 0 0 22px 7px rgba(255, 255, 255, 0.35);
-  transition: box-shadow 0.2s ease;
+  box-shadow: 0 0 8px 2px rgba(255, 230, 180, 0.8), 0 0 16px 4px rgba(255, 230, 180, 0.4);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 .property-pin:hover .property-pin__halo,
 .property-pin:focus-visible .property-pin__halo {
-  filter: blur(11px);
+  transform: scale(1.3);
+}
+.property-pin:hover .property-pin__beam,
+.property-pin:focus-visible .property-pin__beam {
+  opacity: 1;
+  filter: drop-shadow(0 0 8px rgba(255, 230, 180, 0.9));
+  transform: scaleX(1.3);
 }
 .property-pin:hover .property-pin__core,
 .property-pin:focus-visible .property-pin__core {
-  box-shadow: 0 0 16px 4px rgba(255, 255, 255, 1), 0 0 30px 10px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 10px 3px rgba(255, 240, 200, 1), 0 0 20px 6px rgba(255, 230, 180, 0.6);
+  transform: scale(1.1);
 }
 .property-pin:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline: 2px solid rgba(255, 230, 180, 0.6);
   outline-offset: 4px;
-  border-radius: 50%;
+  border-radius: 11px;
 }
 @media (prefers-reduced-motion: reduce) {
   .property-pin__halo,
-  .property-pin__halo::before {
+  .property-pin__beam {
     animation: none;
   }
 }
