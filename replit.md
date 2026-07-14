@@ -93,6 +93,58 @@ Over black hero the ghost was invisible as a glass object. Added a faint iridesc
 
 **Mobile color-flow fix.** The mobile hero blob had `filter: 'blur(0.5px)'` set as an inline style on the `<img>`, which silently overrode the CSS animation's `filter` property, leaving the mobile blob a static grey. Moved the blur to a wrapper `<div>` so the `gasoline-hue-drift` animation now reaches the image on mobile too.
 
+### July 14, 2026 — Nika review: light mode "10% changed" + nav scroll jank (6 findings fixed)
+
+Ran another Nika pass against two complaints: light mode only visibly changes a small
+fraction of the screen, and the nav/logo feel janky while scrolling.
+
+**Finding 1 — Body text opacity utilities were dark-mode-tuned, reused in light mode.**
+Nearly every section (property cards, "Для кого мы работаем," testimonials, process
+steps, trust stats) uses a `dark:text-white/NN text-foreground/MM` pairing. The same
+alpha fraction gives much lower contrast blended against near-white than against
+near-black, so most secondary text sat under ~2:1 contrast in light mode — this is the
+real reason light mode "only changed the hero." Fixed with a scoped
+`html:not(.dark) .text-foreground\/NN` override block in `index.css` that boosts alpha
+per value in light mode only (values chosen by computing WCAG contrast ratios), leaving
+dark mode untouched.
+
+**Finding 2 — `.chrome-text` gradient (metallic headings) had no legibility floor.**
+Light-mode chrome heading gradient's lightest stops (~`#b8b4b0`) dropped to ~1.9:1
+against the warm-white background — multi-word headings like "СВОБОДА КАПИТАЛА" went
+illegible wherever letters landed on the lightest part of the sweeping gradient.
+Rebuilt the gradient with every stop capped below ~`#6c6c68` (5.3:1+).
+
+**Finding 3 — Nav logo went rainbow-streaky in light mode.**
+The light-mode logo filter used the classic `invert() + hue-rotate(180deg)` icon trick,
+which only works cleanly on near-grayscale art — this logo is a saturated iridescent
+chrome PNG. Replaced with `grayscale() brightness() contrast()` (matches how
+`.chrome-text` is already handled for light mode).
+
+**Finding 4 — Footer logo washed out AND was squashed into a tiny icon (both themes).**
+Two separate bugs: (a) a leftover `mix-blend-mode: multiply` on `.footer-logo` blended
+the image's brighter iridescent pixels into invisibility against the light footer
+background; (b) the `<img>` had no `object-fit`/explicit width, so the square
+1024×1024 source PNG rendered as a squashed 28×28 icon instead of showing the wordmark
+band — present in dark mode too, just less noticeable. Removed the mix-blend-mode,
+added `object-fit: cover` + explicit width to crop to the wordmark, and applied the
+same grayscale/darken filter as the nav logo for light mode.
+
+**Finding 5 — Broken property photo.** The Turkey/Antalya card in "Актуальные объекты"
+referenced a non-existent `prop-turkey.jpg`; corrected to the real `prop-antalya.jpg`.
+
+**Finding 6 — Nav scroll jank root cause wasn't the padding transition itself.**
+`.eom-nav`'s `transition: all` was inadvertently sweeping an expensive
+`backdrop-filter: blur(22px) saturate(210%)` on every scroll-driven padding change.
+Fixed by transitioning explicit properties only, promoting the nav to its own
+compositor layer (`transform: translateZ(0)`), trimming the blur/saturate values, and
+rAF-throttling the scroll listener.
+
+All fixes verified settled (post-animation) across desktop (1280px) and mobile (390px),
+both themes — no regressions. See `.agents/memory/light-mode-contrast-fixes.md` and
+`.agents/memory/mobile-viewport-screenshots.md` for the reusable lessons (alpha-blend
+asymmetry between themes, and how fast scripted scrolling produces false-positive
+"broken" screenshots of reveal/count-up animations mid-flight).
+
 ---
 
 ## User preferences
