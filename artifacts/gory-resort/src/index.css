@@ -1219,8 +1219,11 @@ html:not(.dark) .section-reveal-heading::after {
 
 .void-wave-section {
   position: relative;
-  background: #000;
+  background: hsl(var(--background));
   /* No fixed height — content (the centered eye + text) determines height */
+}
+html:not(.dark) .void-wave-section {
+  background: #F5F3EE;
 }
 
 /* ─── Liquid Chrome asset animations ─────────────────────────────────────

@@ -134,21 +134,21 @@ export default function TaxGuide() {
   return (
     <Layout>
       {/* HERO */}
-      <section className="relative pt-28 md:pt-36 pb-16 overflow-hidden border-b border-white/5 bg-[#020202]">
+      <section className="relative pt-28 md:pt-36 pb-16 overflow-hidden border-b dark:border-white/5 border-black/5 dark:bg-[#020202] bg-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(35,30,55,0.5)_0%,transparent_70%)] pointer-events-none" />
         <div className="container mx-auto px-6 relative z-10 max-w-5xl">
-          <nav className="flex items-center gap-2 text-[12px] font-space-grotesk text-white/30 mb-8">
-            <Link href="/" className="hover:text-white/70 transition-colors min-h-[40px] flex items-center">Главная</Link>
+          <nav className="flex items-center gap-2 text-[12px] font-space-grotesk dark:text-white/30 text-foreground/40 mb-8">
+            <Link href="/" className="dark:hover:text-white/70 hover:text-foreground/70 transition-colors min-h-[40px] flex items-center">Главная</Link>
             <span>/</span>
-            <span className="text-white/70">Налоговый гид</span>
+            <span className="dark:text-white/70 text-foreground/70">Налоговый гид</span>
           </nav>
-          <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-4 block">
+          <span className="font-oxanium text-[11px] tracking-[0.25em] dark:text-white/40 text-foreground/50 uppercase mb-4 block">
             Актуально · Июль 2026
           </span>
-          <h1 className="font-oxanium font-bold text-white uppercase leading-[1.0] tracking-tight text-[clamp(2.2rem,6vw,4rem)] mb-6">
+          <h1 className="font-oxanium font-bold dark:text-white text-foreground uppercase leading-[1.0] tracking-tight text-[clamp(2.2rem,6vw,4rem)] mb-6">
             Налоговый гид<br/>по 7 юрисдикциям
           </h1>
-          <p className="font-space-grotesk text-lg text-white/50 max-w-2xl leading-relaxed">
+          <p className="font-space-grotesk text-lg dark:text-white/50 text-foreground/60 max-w-2xl leading-relaxed">
             Сравнительный анализ налогов на доход, прирост капитала, дивиденды и покупку недвижимости. 
             Для инвесторов, IT-предпринимателей и семей.
           </p>
@@ -156,39 +156,39 @@ export default function TaxGuide() {
       </section>
 
       {/* QUICK COMPARE TABLE */}
-      <section className="py-16 bg-[#050505] border-b border-white/5">
+      <section className="py-16 dark:bg-[#050505] bg-[#F5F3EE] border-b dark:border-white/5 border-black/5">
         <div className="container mx-auto px-6 max-w-5xl">
-          <h2 className="font-oxanium text-[11px] tracking-[0.2em] text-white/30 uppercase mb-8">
+          <h2 className="font-oxanium text-[11px] tracking-[0.2em] dark:text-white/30 text-foreground/40 uppercase mb-8">
             Краткое сравнение
           </h2>
           <div className="overflow-x-auto -mx-4 px-4">
             <table className="w-full min-w-[560px] border-collapse">
               <thead>
-                <tr className="border-b border-white/[0.06]">
-                  <th className="text-left font-oxanium text-[10px] uppercase tracking-[0.15em] text-white/30 pb-4 pr-6">Страна</th>
-                  <th className="text-right font-oxanium text-[10px] uppercase tracking-[0.15em] text-white/30 pb-4 px-4">Доход</th>
-                  <th className="text-right font-oxanium text-[10px] uppercase tracking-[0.15em] text-white/30 pb-4 px-4">Капитал</th>
-                  <th className="text-right font-oxanium text-[10px] uppercase tracking-[0.15em] text-white/30 pb-4 pl-4">ВНЖ от</th>
+                <tr className="border-b dark:border-white/[0.06] border-black/[0.06]">
+                  <th className="text-left font-oxanium text-[10px] uppercase tracking-[0.15em] dark:text-white/30 text-foreground/40 pb-4 pr-6">Страна</th>
+                  <th className="text-right font-oxanium text-[10px] uppercase tracking-[0.15em] dark:text-white/30 text-foreground/40 pb-4 px-4">Доход</th>
+                  <th className="text-right font-oxanium text-[10px] uppercase tracking-[0.15em] dark:text-white/30 text-foreground/40 pb-4 px-4">Капитал</th>
+                  <th className="text-right font-oxanium text-[10px] uppercase tracking-[0.15em] dark:text-white/30 text-foreground/40 pb-4 pl-4">ВНЖ от</th>
                 </tr>
               </thead>
               <tbody>
                 {QUICK_COMPARE.map((r, i) => (
-                  <tr key={i} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+                  <tr key={i} className="border-b dark:border-white/[0.04] border-black/[0.04] dark:hover:bg-white/[0.02] hover:bg-black/[0.02] transition-colors">
                     <td className="py-4 pr-6">
                       <div className="flex items-center gap-3">
                         <div className="w-2 h-2 rounded-full shrink-0" style={{ background: r.color }} />
-                        <span className="font-oxanium text-white/80 text-[15px] tracking-tight">{r.label}</span>
+                        <span className="font-oxanium dark:text-white/80 text-foreground/80 text-[15px] tracking-tight">{r.label}</span>
                       </div>
                     </td>
-                    <td className="py-4 px-4 text-right font-oxanium text-white text-[15px]">{r.incomeTax}</td>
-                    <td className="py-4 px-4 text-right font-oxanium text-white text-[15px]">{r.CGT}</td>
-                    <td className="py-4 pl-4 text-right font-space-grotesk text-white/60 text-[13px]">{r.vnj}</td>
+                    <td className="py-4 px-4 text-right font-oxanium dark:text-white text-foreground text-[15px]">{r.incomeTax}</td>
+                    <td className="py-4 px-4 text-right font-oxanium dark:text-white text-foreground text-[15px]">{r.CGT}</td>
+                    <td className="py-4 pl-4 text-right font-space-grotesk dark:text-white/60 text-foreground/65 text-[13px]">{r.vnj}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="font-space-grotesk text-[11px] text-white/25 mt-6 leading-relaxed">
+          <p className="font-space-grotesk text-[11px] dark:text-white/25 text-foreground/35 mt-6 leading-relaxed">
             * Территориальная система: иностранные доходы не облагаются при соблюдении условий.
             † Non-Dom: 0% на дивиденды и проценты на 17 лет.
             ‡ 0% при удержании объекта более 2 лет.
@@ -198,13 +198,13 @@ export default function TaxGuide() {
       </section>
 
       {/* COUNTRY CARDS — detailed breakdown */}
-      <section className="py-20 bg-[#080808]">
+      <section className="py-20 dark:bg-[#080808] bg-white">
         <div className="container mx-auto px-6 max-w-5xl flex flex-col gap-8">
-          <h2 className="font-oxanium text-[11px] tracking-[0.2em] text-white/30 uppercase">
+          <h2 className="font-oxanium text-[11px] tracking-[0.2em] dark:text-white/30 text-foreground/40 uppercase">
             Подробно по каждой стране
           </h2>
           {TAX_COUNTRIES.map((c) => (
-            <div key={c.code} className="border border-white/[0.07] rounded-2xl bg-[#0a0a0a] overflow-hidden hover:border-white/[0.15] transition-colors group">
+            <div key={c.code} className="border dark:border-white/[0.07] border-black/[0.07] rounded-2xl dark:bg-[#0a0a0a] bg-white overflow-hidden dark:hover:border-white/[0.15] hover:border-black/15 transition-colors group">
               <div className="flex flex-col md:flex-row">
                 {/* Left accent */}
                 <div className="md:w-1 flex-shrink-0 h-1 md:h-auto" style={{ background: c.accentColor }} />
@@ -213,13 +213,13 @@ export default function TaxGuide() {
                     <div className="flex items-center gap-3 flex-1">
                       <span className="text-2xl">{c.flag}</span>
                       <div>
-                        <h3 className="font-oxanium text-white text-[20px] font-medium tracking-tight">{c.name}</h3>
+                        <h3 className="font-oxanium dark:text-white text-foreground text-[20px] font-medium tracking-tight">{c.name}</h3>
                         <p className="font-space-grotesk text-[13px]" style={{ color: c.accentColor }}>{c.headline}</p>
                       </div>
                     </div>
                     <Link
                       href={`/countries/${c.code}`}
-                      className="shrink-0 font-oxanium text-[11px] uppercase tracking-wider text-white/30 hover:text-white/70 transition-colors flex items-center gap-1.5 min-h-[40px]"
+                      className="shrink-0 font-oxanium text-[11px] uppercase tracking-wider dark:text-white/30 text-foreground/40 dark:hover:text-white/70 hover:text-foreground/70 transition-colors flex items-center gap-1.5 min-h-[40px]"
                     >
                       Объекты <ArrowRight className="w-3 h-3" />
                     </Link>
@@ -233,36 +233,36 @@ export default function TaxGuide() {
                       { label: 'Дивиденды', val: c.dividends },
                       { label: 'Корпоративный', val: c.corporateTax },
                     ].map(item => (
-                      <div key={item.label} className="bg-white/[0.03] rounded-xl p-4">
-                        <p className="font-oxanium text-[9px] uppercase tracking-[0.15em] text-white/30 mb-2">{item.label}</p>
-                        <p className="font-oxanium text-white text-[15px] font-medium leading-tight">{item.val}</p>
+                      <div key={item.label} className="dark:bg-white/[0.03] bg-black/[0.03] rounded-xl p-4">
+                        <p className="font-oxanium text-[9px] uppercase tracking-[0.15em] dark:text-white/30 text-foreground/40 mb-2">{item.label}</p>
+                        <p className="font-oxanium dark:text-white text-foreground text-[15px] font-medium leading-tight">{item.val}</p>
                       </div>
                     ))}
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <div className="flex gap-3">
-                      <span className="font-oxanium text-[10px] uppercase tracking-wider text-white/30 shrink-0 pt-0.5 w-24">Налог при покупке</span>
-                      <span className="font-space-grotesk text-[13px] text-white/60">{c.buyTax}</span>
+                      <span className="font-oxanium text-[10px] uppercase tracking-wider dark:text-white/30 text-foreground/40 shrink-0 pt-0.5 w-24">Налог при покупке</span>
+                      <span className="font-space-grotesk text-[13px] dark:text-white/60 text-foreground/65">{c.buyTax}</span>
                     </div>
                     <div className="flex gap-3">
-                      <span className="font-oxanium text-[10px] uppercase tracking-wider text-white/30 shrink-0 pt-0.5 w-24">ВНЖ/паспорт</span>
-                      <span className="font-space-grotesk text-[13px] text-white/60">{c.vnj}</span>
+                      <span className="font-oxanium text-[10px] uppercase tracking-wider dark:text-white/30 text-foreground/40 shrink-0 pt-0.5 w-24">ВНЖ/паспорт</span>
+                      <span className="font-space-grotesk text-[13px] dark:text-white/60 text-foreground/65">{c.vnj}</span>
                     </div>
                   </div>
 
-                  <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-5 mb-5">
-                    <p className="font-space-grotesk text-[14px] text-white/70 leading-relaxed">{c.highlight}</p>
+                  <div className="dark:bg-white/[0.02] bg-black/[0.02] border dark:border-white/[0.05] border-black/[0.05] rounded-xl p-5 mb-5">
+                    <p className="font-space-grotesk text-[14px] dark:text-white/70 text-foreground/70 leading-relaxed">{c.highlight}</p>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="font-oxanium text-[10px] uppercase tracking-wider text-white/25">Подходит:</span>
+                    <span className="font-oxanium text-[10px] uppercase tracking-wider dark:text-white/25 text-foreground/35">Подходит:</span>
                     {c.bestFor.map(tag => (
-                      <span key={tag} className="font-space-grotesk text-[11px] px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-white/50">
+                      <span key={tag} className="font-space-grotesk text-[11px] px-3 py-1 rounded-full border dark:border-white/10 border-black/10 dark:bg-white/[0.03] bg-black/[0.03] dark:text-white/50 text-foreground/60">
                         {tag}
                       </span>
                     ))}
-                    <span className="ml-auto font-space-grotesk text-[11px] text-white/25">⚠ {c.caution}</span>
+                    <span className="ml-auto font-space-grotesk text-[11px] dark:text-white/25 text-foreground/35">⚠ {c.caution}</span>
                   </div>
                 </div>
               </div>
@@ -272,12 +272,12 @@ export default function TaxGuide() {
       </section>
 
       {/* DISCLAIMER + CTA */}
-      <section className="py-20 bg-[#020202] border-t border-white/5">
+      <section className="py-20 dark:bg-[#020202] bg-[#F5F3EE] border-t dark:border-white/5 border-black/5">
         <div className="container mx-auto px-6 max-w-4xl">
-          <div className="bg-white/[0.02] border border-white/[0.07] rounded-2xl p-8 mb-10">
+          <div className="dark:bg-white/[0.02] bg-black/[0.02] border dark:border-white/[0.07] border-black/[0.07] rounded-2xl p-8 mb-10">
             <div className="flex items-start gap-4">
-              <ShieldCheck className="w-5 h-5 text-white/30 shrink-0 mt-0.5" />
-              <p className="font-space-grotesk text-[13px] text-white/40 leading-relaxed">
+              <ShieldCheck className="w-5 h-5 dark:text-white/30 text-foreground/40 shrink-0 mt-0.5" />
+              <p className="font-space-grotesk text-[13px] dark:text-white/40 text-foreground/50 leading-relaxed">
                 Данный материал носит общеинформационный характер и не является индивидуальной налоговой или инвестиционной рекомендацией. 
                 Налоговое законодательство меняется — актуальные данные на июль 2026. Перед принятием решения проконсультируйтесь с лицензированным налоговым советником.
               </p>
@@ -285,10 +285,10 @@ export default function TaxGuide() {
           </div>
 
           <div className="text-center">
-            <h3 className="font-oxanium text-2xl md:text-[32px] text-white font-medium tracking-tight mb-4">
+            <h3 className="font-oxanium text-2xl md:text-[32px] dark:text-white text-foreground font-medium tracking-tight mb-4">
               Нужна персональная консультация?
             </h3>
-            <p className="font-space-grotesk text-white/40 mb-8 max-w-xl mx-auto">
+            <p className="font-space-grotesk dark:text-white/40 text-foreground/50 mb-8 max-w-xl mx-auto">
               Наш налоговый директор Михаил Орлов специализируется на международных структурах для IT-предпринимателей и инвесторов из России.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

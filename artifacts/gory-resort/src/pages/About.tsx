@@ -117,36 +117,36 @@ export default function About() {
           <div className="iridescent-spill w-full h-full" style={{ opacity: 0.12 }} />
         </div>
         <div className="relative z-10 max-w-3xl">
-          <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-6 block">
+          <span className="font-oxanium text-[11px] tracking-[0.25em] dark:text-white/40 text-foreground/50 uppercase mb-6 block">
             Как мы работаем
           </span>
-          <h1 className="text-[clamp(1.65rem,9.2vw,4rem)] font-oxanium font-bold text-white leading-[1.05] mb-6 uppercase tracking-tight">
+          <h1 className="text-[clamp(1.65rem,9.2vw,4rem)] font-oxanium font-bold dark:text-white text-foreground leading-[1.05] mb-6 uppercase tracking-tight">
             Полное сопровождение
           </h1>
-          <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed max-w-xl">
+          <p className="text-xl md:text-2xl dark:text-zinc-400 text-foreground/60 font-light leading-relaxed max-w-xl">
             От первого запроса до ключей в руках — мы с вами на каждом шаге.
           </p>
         </div>
       </section>
 
       {/* TRUST METRICS (VIKTOR) */}
-      <section className="py-12 border-y border-white/5 bg-white/[0.01]">
+      <section className="py-12 border-y dark:border-white/5 border-black/5 dark:bg-white/[0.01] bg-black/[0.015]">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
-            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">7 лет</div>
-            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">На рынке с 2019 года</div>
+            <div className="text-3xl md:text-4xl font-oxanium font-bold dark:text-white text-foreground mb-2">7 лет</div>
+            <div className="text-sm font-space-grotesk dark:text-zinc-500 text-foreground/50 uppercase tracking-wider">На рынке с 2019 года</div>
           </div>
           <div>
-            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">$130M+</div>
-            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">Общий объём закрытых сделок</div>
+            <div className="text-3xl md:text-4xl font-oxanium font-bold dark:text-white text-foreground mb-2">$130M+</div>
+            <div className="text-sm font-space-grotesk dark:text-zinc-500 text-foreground/50 uppercase tracking-wider">Общий объём закрытых сделок</div>
           </div>
           <div>
-            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">100%</div>
-            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">Успешное прохождение комплаенса</div>
+            <div className="text-3xl md:text-4xl font-oxanium font-bold dark:text-white text-foreground mb-2">100%</div>
+            <div className="text-sm font-space-grotesk dark:text-zinc-500 text-foreground/50 uppercase tracking-wider">Успешное прохождение комплаенса</div>
           </div>
           <div>
-            <div className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-2">430+</div>
-            <div className="text-sm font-space-grotesk text-zinc-500 uppercase tracking-wider">Семей получили ВНЖ или паспорт</div>
+            <div className="text-3xl md:text-4xl font-oxanium font-bold dark:text-white text-foreground mb-2">430+</div>
+            <div className="text-sm font-space-grotesk dark:text-zinc-500 text-foreground/50 uppercase tracking-wider">Семей получили ВНЖ или паспорт</div>
           </div>
         </div>
       </section>
@@ -156,14 +156,14 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-16 md:items-end mb-16">
             <div className="flex-1">
-              <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-4 block">
+              <span className="font-oxanium text-[11px] tracking-[0.25em] dark:text-white/40 text-foreground/50 uppercase mb-4 block">
                 Легитимность и Опыт
               </span>
               <h2 className="text-3xl md:text-[40px] font-oxanium font-bold chrome-text leading-[1.1] uppercase tracking-tight">
                 Официальные партнёры<br />крупнейших девелоперов
               </h2>
             </div>
-            <div className="flex-1 max-w-xl text-zinc-400 font-light leading-relaxed">
+            <div className="flex-1 max-w-xl dark:text-zinc-400 text-foreground/60 font-light leading-relaxed">
               Мы не работаем через цепочки посредников. Прямые договоры с застройщиками уровня EMAAR, Nakheel, DAMAC (ОАЭ), Aristo, Pafilia (Кипр). Каждая сделка сопровождается лицензированными юристами и проходит многоуровневую проверку на соответствие нормам FATF.
             </div>
           </div>
@@ -175,9 +175,9 @@ export default function About() {
               { label: 'KYC по стандартам ЕС', desc: 'Идентификация клиента и источника средств в соответствии с EU 6AMLD' },
               { label: 'Лицензированные юристы', desc: 'Партнёры — аккредитованные адвокаты в каждой юрисдикции присутствия' },
             ].map(item => (
-              <div key={item.label} className="bg-white/[0.02] border border-white/[0.07] rounded-xl px-6 py-5 flex flex-col gap-2">
-                <span className="font-oxanium text-[11px] uppercase tracking-[0.18em] text-white/50">{item.label}</span>
-                <p className="font-space-grotesk text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
+              <div key={item.label} className="dark:bg-white/[0.02] bg-black/[0.02] border dark:border-white/[0.07] border-black/[0.06] rounded-xl px-6 py-5 flex flex-col gap-2">
+                <span className="font-oxanium text-[11px] uppercase tracking-[0.18em] dark:text-white/50 text-foreground/60">{item.label}</span>
+                <p className="font-space-grotesk text-sm dark:text-zinc-500 text-foreground/50 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -185,13 +185,13 @@ export default function About() {
       </section>
 
       {/* TEAM — Viktor: real names, no bots */}
-      <section className="py-24 border-t border-white/5 relative">
+      <section className="py-24 border-t dark:border-white/5 border-black/5 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-4 block">
+            <span className="font-oxanium text-[11px] tracking-[0.25em] dark:text-white/40 text-foreground/50 uppercase mb-4 block">
               Команда
             </span>
-            <h2 className="text-3xl md:text-[40px] font-oxanium font-bold text-white leading-[1.1] uppercase tracking-tight">
+            <h2 className="text-3xl md:text-[40px] font-oxanium font-bold dark:text-white text-foreground leading-[1.1] uppercase tracking-tight">
               С вами работают люди,<br />а не боты
             </h2>
           </div>
@@ -219,16 +219,16 @@ export default function About() {
                 note: 'Специализация: налоговое резидентство, Non-Dom структуры, оптимизация для IT-предпринимателей.',
               },
             ].map((m) => (
-              <div key={m.name} className="bg-white/[0.02] border border-white/10 rounded-2xl p-8 flex flex-col gap-4 hover:border-white/20 transition-colors">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-white/10 to-white/[0.03] border border-white/15 flex items-center justify-center font-oxanium text-white/70 text-lg tracking-tight shrink-0">
+              <div key={m.name} className="dark:bg-white/[0.02] bg-black/[0.02] border dark:border-white/10 border-black/[0.07] rounded-2xl p-8 flex flex-col gap-4 dark:hover:border-white/20 hover:border-black/15 transition-colors">
+                <div className="w-14 h-14 rounded-full dark:bg-gradient-to-br dark:from-white/10 dark:to-white/[0.03] bg-black/[0.05] border dark:border-white/15 border-black/10 flex items-center justify-center font-oxanium dark:text-white/70 text-foreground/70 text-lg tracking-tight shrink-0">
                   {m.initials}
                 </div>
                 <div>
-                  <h3 className="font-oxanium text-white font-medium text-[17px] tracking-tight">{m.name}</h3>
-                  <p className="font-space-grotesk text-[11px] text-white/40 uppercase tracking-wider mt-1">{m.role}</p>
+                  <h3 className="font-oxanium dark:text-white text-foreground font-medium text-[17px] tracking-tight">{m.name}</h3>
+                  <p className="font-space-grotesk text-[11px] dark:text-white/40 text-foreground/50 uppercase tracking-wider mt-1">{m.role}</p>
                 </div>
-                <p className="font-space-grotesk text-sm text-zinc-400">{m.exp}</p>
-                <p className="font-space-grotesk text-xs text-white/30 border-t border-white/[0.06] pt-4 leading-relaxed">{m.note}</p>
+                <p className="font-space-grotesk text-sm dark:text-zinc-400 text-foreground/60">{m.exp}</p>
+                <p className="font-space-grotesk text-xs dark:text-white/30 text-foreground/40 border-t dark:border-white/[0.06] border-black/[0.06] pt-4 leading-relaxed">{m.note}</p>
               </div>
             ))}
           </div>
@@ -249,16 +249,16 @@ export default function About() {
                 {step.num}
               </div>
               <div className="flex-1 relative z-10">
-                <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/20 bg-transparent text-white font-oxanium text-[11px] uppercase tracking-wider mb-6">
+                <div className="inline-flex items-center px-3 py-1 rounded-full border dark:border-white/20 border-black/15 bg-transparent dark:text-white text-foreground font-oxanium text-[11px] uppercase tracking-wider mb-6">
                   {step.badge}
                 </div>
-                <h3 className="text-3xl md:text-4xl font-oxanium font-bold text-white mb-6 uppercase tracking-tight">{step.title}</h3>
-                <p className="text-lg text-zinc-400 mb-8 leading-relaxed">{step.desc}</p>
+                <h3 className="text-3xl md:text-4xl font-oxanium font-bold dark:text-white text-foreground mb-6 uppercase tracking-tight">{step.title}</h3>
+                <p className="text-lg dark:text-zinc-400 text-foreground/60 mb-8 leading-relaxed">{step.desc}</p>
                 <div className="space-y-4">
                   {step.items.map((item) => (
                     <div key={item} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-white/50 shrink-0" />
-                      <span className="text-zinc-300">{item}</span>
+                      <CheckCircle2 className="w-5 h-5 dark:text-white/50 text-foreground/50 shrink-0" />
+                      <span className="dark:text-zinc-300 text-foreground/75">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -276,50 +276,50 @@ export default function About() {
       </section>
 
       {/* COST TRANSPARENCY (IRINA & DMITRI) */}
-      <section className="py-24 bg-[#0a0a0a] border-t border-white/5 relative overflow-hidden">
+      <section className="py-24 dark:bg-[#0a0a0a] bg-[#F5F3EE] border-t dark:border-white/5 border-black/5 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex flex-col lg:flex-row gap-16">
             <div className="lg:w-1/3">
-              <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-4 block">
+              <span className="font-oxanium text-[11px] tracking-[0.25em] dark:text-white/40 text-foreground/50 uppercase mb-4 block">
                 Открытая смета
               </span>
-              <h2 className="text-3xl md:text-[40px] font-oxanium font-bold text-white leading-[1.1] uppercase tracking-tight mb-6">
+              <h2 className="text-3xl md:text-[40px] font-oxanium font-bold dark:text-white text-foreground leading-[1.1] uppercase tracking-tight mb-6">
                 Сколько это <br/>стоит на самом деле
               </h2>
-              <p className="text-lg text-zinc-400 font-light leading-relaxed mb-8">
+              <p className="text-lg dark:text-zinc-400 text-foreground/60 font-light leading-relaxed mb-8">
                 Мы не скрываем дополнительные расходы. При планировании бюджета мы всегда рассчитываем «полную стоимость ключей», а не рекламную цену застройщика.
               </p>
             </div>
             
             <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-8 bg-white/[0.02] border border-white/5 rounded-2xl">
-                <h4 className="font-oxanium text-lg text-white font-bold mb-4 uppercase">Наши услуги — 0 ₽</h4>
-                <p className="text-sm text-zinc-400 leading-relaxed mb-6">
+              <div className="p-8 dark:bg-white/[0.02] bg-white border dark:border-white/5 border-black/[0.06] rounded-2xl">
+                <h4 className="font-oxanium text-lg dark:text-white text-foreground font-bold mb-4 uppercase">Наши услуги — 0 ₽</h4>
+                <p className="text-sm dark:text-zinc-400 text-foreground/60 leading-relaxed mb-6">
                   Для покупателя наша работа абсолютно бесплатна. Комиссию (обычно от 2% до 5%) нам выплачивает застройщик или продавец, при этом цена объекта для вас остаётся официальной.
                 </p>
-                <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500">
+                <div className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-500 text-foreground/50">
                   Включает: Подбор, юр. проверку, сопровождение сделки
                 </div>
               </div>
               
-              <div className="p-8 bg-white/[0.02] border border-white/5 rounded-2xl">
-                <h4 className="font-oxanium text-lg text-white font-bold mb-4 uppercase">Налоги и сборы</h4>
-                <ul className="space-y-3 text-sm text-zinc-400">
-                  <li className="flex justify-between border-b border-white/5 pb-2">
+              <div className="p-8 dark:bg-white/[0.02] bg-white border dark:border-white/5 border-black/[0.06] rounded-2xl">
+                <h4 className="font-oxanium text-lg dark:text-white text-foreground font-bold mb-4 uppercase">Налоги и сборы</h4>
+                <ul className="space-y-3 text-sm dark:text-zinc-400 text-foreground/60">
+                  <li className="flex justify-between border-b dark:border-white/5 border-black/[0.06] pb-2">
                     <span>DLD (Дубай)</span>
-                    <span className="text-white">4% от стоимости</span>
+                    <span className="dark:text-white text-foreground">4% от стоимости</span>
                   </li>
-                  <li className="flex justify-between border-b border-white/5 pb-2">
+                  <li className="flex justify-between border-b dark:border-white/5 border-black/[0.06] pb-2">
                     <span>Налог на переход права (Турция)</span>
-                    <span className="text-white">4% от кадастра</span>
+                    <span className="dark:text-white text-foreground">4% от кадастра</span>
                   </li>
-                  <li className="flex justify-between border-b border-white/5 pb-2">
+                  <li className="flex justify-between border-b dark:border-white/5 border-black/[0.06] pb-2">
                     <span>НДС (Кипр, новостройки)</span>
-                    <span className="text-white">5% или 19%</span>
+                    <span className="dark:text-white text-foreground">5% или 19%</span>
                   </li>
                   <li className="flex justify-between pb-2">
                     <span>Регистрация (Грузия)</span>
-                    <span className="text-white">~$50-100</span>
+                    <span className="dark:text-white text-foreground">~$50-100</span>
                   </li>
                 </ul>
               </div>
@@ -329,10 +329,10 @@ export default function About() {
       </section>
 
       {/* TESTIMONIALS (IRINA) */}
-      <section className="py-24 relative bg-white/[0.02] border-t border-white/5">
+      <section className="py-24 relative dark:bg-white/[0.02] bg-white border-t dark:border-white/5 border-black/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <span className="font-oxanium text-[11px] tracking-[0.25em] text-white/40 uppercase mb-4 block">
+            <span className="font-oxanium text-[11px] tracking-[0.25em] dark:text-white/40 text-foreground/50 uppercase mb-4 block">
               Реальные истории
             </span>
             <h2 className="text-3xl md:text-[40px] font-oxanium font-bold chrome-text leading-[1.1] uppercase tracking-tight">
@@ -342,32 +342,32 @@ export default function About() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="eom-card p-8 flex flex-col gap-6">
-              <p className="text-zinc-300 text-[15px] leading-relaxed flex-1">
+              <p className="dark:text-zinc-300 text-foreground/75 text-[15px] leading-relaxed flex-1">
                 «Мы искали место для переезда с двумя детьми. Боялись скрытых комиссий и проблем со школами. Ребята не просто подобрали виллу на Кипре, но и помогли устроить детей в Heritage School. Все расходы расписали до евро еще на первой встрече.»
               </p>
-              <div className="pt-6 border-t border-white/10">
-                <div className="font-bold text-white mb-1">Анна и Дмитрий</div>
-                <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500">Переезд: Санкт-Петербург → Лимасол</div>
+              <div className="pt-6 border-t dark:border-white/10 border-black/[0.07]">
+                <div className="font-bold dark:text-white text-foreground mb-1">Анна и Дмитрий</div>
+                <div className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-500 text-foreground/50">Переезд: Санкт-Петербург → Лимасол</div>
               </div>
             </div>
 
             <div className="eom-card p-8 flex flex-col gap-6">
-              <p className="text-zinc-300 text-[15px] leading-relaxed flex-1">
+              <p className="dark:text-zinc-300 text-foreground/75 text-[15px] leading-relaxed flex-1">
                 «Нужна была легальная база для бизнеса и налоговое резидентство. Взял апартаменты в Business Bay (Дубай). Оформили всё дистанционно, оплату структурировали криптой через лицензированный OTC. Минимум созвонов, максимум дела.»
               </p>
-              <div className="pt-6 border-t border-white/10">
-                <div className="font-bold text-white mb-1">Михаил</div>
-                <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500">IT-предприниматель, Москва → Дубай</div>
+              <div className="pt-6 border-t dark:border-white/10 border-black/[0.07]">
+                <div className="font-bold dark:text-white text-foreground mb-1">Михаил</div>
+                <div className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-500 text-foreground/50">IT-предприниматель, Москва → Дубай</div>
               </div>
             </div>
 
             <div className="eom-card p-8 flex flex-col gap-6">
-              <p className="text-zinc-300 text-[15px] leading-relaxed flex-1">
+              <p className="dark:text-zinc-300 text-foreground/75 text-[15px] leading-relaxed flex-1">
                 «Задача была сохранить капитал в твердой валюте. Купил три юнита в Стамбуле под сдачу и получил гражданство. Отдельное спасибо юристам EstateofMind — завернули сделку так, что комар носа не подточит в плане compliance.»
               </p>
-              <div className="pt-6 border-t border-white/10">
-                <div className="font-bold text-white mb-1">Виктор С.</div>
-                <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500">Инвестор, Екатеринбург → Стамбул</div>
+              <div className="pt-6 border-t dark:border-white/10 border-black/[0.07]">
+                <div className="font-bold dark:text-white text-foreground mb-1">Виктор С.</div>
+                <div className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-500 text-foreground/50">Инвестор, Екатеринбург → Стамбул</div>
               </div>
             </div>
           </div>
@@ -375,7 +375,7 @@ export default function About() {
       </section>
 
       {/* DESTINATIONS DEEP-DIVE */}
-      <section className="py-24 bg-white/[0.02] border-y border-white/5">
+      <section className="py-24 dark:bg-white/[0.02] bg-[#F5F3EE] border-y dark:border-white/5 border-black/5">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-4xl md:text-[44px] font-oxanium font-bold chrome-text mb-16 uppercase text-center tracking-tight">
             Наши направления
@@ -384,23 +384,23 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {DESTINATIONS.map((dest) => (
               <div key={dest.title} className="eom-card p-8 flex flex-col aspect-[2/3] group relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <div className="text-[32px] font-oxanium font-bold tracking-widest text-white/20 mb-8">{dest.code}</div>
+                <div className="absolute inset-0 dark:bg-gradient-to-br dark:from-white/5 dark:to-transparent bg-gradient-to-br from-black/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="text-[32px] font-oxanium font-bold tracking-widest dark:text-white/20 text-foreground/25 mb-8">{dest.code}</div>
                 <h3 className="text-xl font-oxanium font-bold chrome-text uppercase mb-6">{dest.title}</h3>
-                <ul className="space-y-3 text-sm text-zinc-400 mb-auto flex-1">
+                <ul className="space-y-3 text-sm dark:text-zinc-400 text-foreground/60 mb-auto flex-1">
                   {dest.points.map((point) => (
                     <li key={point} className="flex gap-2">
-                      <span className="text-white/30 mt-1">•</span> {point}
+                      <span className="dark:text-white/30 text-foreground/40 mt-1">•</span> {point}
                     </li>
                   ))}
                 </ul>
-                <div className="pt-6 mt-6 border-t border-white/10 space-y-4">
+                <div className="pt-6 mt-6 border-t dark:border-white/10 border-black/[0.07] space-y-4">
                   <div>
-                    <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500 mb-1">Инвестиционный порог</div>
+                    <div className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-500 text-foreground/50 mb-1">Инвестиционный порог</div>
                     <div className="text-[18px] font-oxanium font-bold iridescent-text">{dest.threshold}</div>
                   </div>
                   <div>
-                    <div className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-oxanium uppercase tracking-wider text-white">
+                    <div className="inline-block px-3 py-1 rounded-full dark:bg-white/5 bg-black/[0.04] border dark:border-white/10 border-black/[0.08] text-[11px] font-oxanium uppercase tracking-wider dark:text-white text-foreground">
                       {dest.visa}
                     </div>
                   </div>
@@ -413,23 +413,23 @@ export default function About() {
 
       {/* FAQ */}
       <section className="py-24 max-w-4xl mx-auto px-6">
-        <h2 className="text-3xl md:text-[40px] font-oxanium font-bold text-white mb-16 text-center uppercase tracking-tight">
+        <h2 className="text-3xl md:text-[40px] font-oxanium font-bold dark:text-white text-foreground mb-16 text-center uppercase tracking-tight">
           Часто задаваемые вопросы
         </h2>
 
         <div className="space-y-4">
           {FAQ.map((faq) => (
-            <div key={faq.q} className="bg-white/[0.02] border border-white/10 rounded-xl p-6 relative overflow-hidden group">
+            <div key={faq.q} className="dark:bg-white/[0.02] bg-white border dark:border-white/10 border-black/[0.07] rounded-xl p-6 relative overflow-hidden group">
               <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#b096f4] via-[#74b4f5] to-[#f596b4]" />
-              <h4 className="text-[17px] text-white font-medium mb-3 pl-4">{faq.q}</h4>
-              <p className="text-[15px] text-zinc-400 leading-relaxed pl-4">{faq.a}</p>
+              <h4 className="text-[17px] dark:text-white text-foreground font-medium mb-3 pl-4">{faq.q}</h4>
+              <p className="text-[15px] dark:text-zinc-400 text-foreground/60 leading-relaxed pl-4">{faq.a}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* CONTACT FORM */}
-      <section id="consult" className="py-24 bg-white/[0.02] border-t border-white/5 relative overflow-hidden">
+      <section id="consult" className="py-24 dark:bg-white/[0.02] bg-[#F5F3EE] border-t dark:border-white/5 border-black/5 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <div>
@@ -437,26 +437,26 @@ export default function About() {
                 <h2 className="text-4xl md:text-[52px] font-oxanium font-bold chrome-text leading-[1.1] mb-4 uppercase tracking-tight">
                   Начать работу
                 </h2>
-                <p className="text-xl text-zinc-400 font-light">«Бесплатная консультация — без давления, без навязывания»</p>
+                <p className="text-xl dark:text-zinc-400 text-foreground/60 font-light">«Бесплатная консультация — без давления, без навязывания»</p>
               </div>
 
               <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-400 block ml-1">Имя *</label>
+                    <label className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-400 text-foreground/60 block ml-1">Имя *</label>
                     <input
                       type="text"
-                      className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 min-h-[48px] text-white placeholder-zinc-600 focus:outline-none focus:border-white/30 transition-colors"
+                      className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[48px] dark:text-white text-foreground dark:placeholder-zinc-600 placeholder-foreground/35 focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors"
                       placeholder="Иван Иванов"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-400 block ml-1">
+                    <label className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-400 text-foreground/60 block ml-1">
                       Телефон / WhatsApp *
                     </label>
                     <input
                       type="tel"
-                      className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 min-h-[48px] text-white placeholder-zinc-600 focus:outline-none focus:border-white/30 transition-colors"
+                      className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[48px] dark:text-white text-foreground dark:placeholder-zinc-600 placeholder-foreground/35 focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors"
                       placeholder="+7 (999) 000-00-00"
                     />
                   </div>
@@ -464,8 +464,8 @@ export default function About() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-400 block ml-1">Бюджет</label>
-                    <select className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 min-h-[48px] text-white focus:outline-none focus:border-white/30 transition-colors appearance-none">
+                    <label className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-400 text-foreground/60 block ml-1">Бюджет</label>
+                    <select className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[48px] dark:text-white text-foreground focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors appearance-none">
                       <option>до $100k</option>
                       <option>$100k–500k</option>
                       <option>$500k–2M</option>
@@ -473,10 +473,10 @@ export default function About() {
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-400 block ml-1">
+                    <label className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-400 text-foreground/60 block ml-1">
                       Направление интереса
                     </label>
-                    <select className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 min-h-[48px] text-white focus:outline-none focus:border-white/30 transition-colors appearance-none">
+                    <select className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[48px] dark:text-white text-foreground focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors appearance-none">
                       <option>ОАЭ</option>
                       <option>Турция</option>
                       <option>Кипр</option>
@@ -487,9 +487,9 @@ export default function About() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-400 block ml-1">Сообщение</label>
+                  <label className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-400 text-foreground/60 block ml-1">Сообщение</label>
                   <textarea
-                    className="w-full bg-[#080808] border border-white/10 rounded-lg px-4 py-3 min-h-[120px] text-white placeholder-zinc-600 focus:outline-none focus:border-white/30 transition-colors resize-y"
+                    className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[120px] dark:text-white text-foreground dark:placeholder-zinc-600 placeholder-foreground/35 focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors resize-y"
                     placeholder="Опишите вашу ситуацию (необязательно)"
                   />
                 </div>
@@ -499,7 +499,7 @@ export default function About() {
                     <button type="submit" className="w-full eom-btn-primary flex items-center justify-center gap-2 py-4 min-h-[56px] mt-8">
                       Отправить запрос <SendHorizonal className="w-5 h-5" />
                     </button>
-                    <p className="text-[11px] text-zinc-500 text-center mt-4 px-4 leading-relaxed">
+                    <p className="text-[11px] dark:text-zinc-500 text-foreground/50 text-center mt-4 px-4 leading-relaxed">
                       Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.
                       <br />
                       Мы никогда не продаём и не передаём ваши данные.
@@ -511,8 +511,8 @@ export default function About() {
                       <CheckCircle2 className="w-7 h-7 text-[#25D366]" />
                     </div>
                     <div>
-                      <h4 className="font-oxanium text-white text-lg mb-2">Запрос получен</h4>
-                      <p className="font-space-grotesk text-zinc-400 text-sm leading-relaxed max-w-xs mx-auto">
+                      <h4 className="font-oxanium dark:text-white text-foreground text-lg mb-2">Запрос получен</h4>
+                      <p className="font-space-grotesk dark:text-zinc-400 text-foreground/60 text-sm leading-relaxed max-w-xs mx-auto">
                         Наш специалист свяжется с вами в течение нескольких часов. Или напишите напрямую.
                       </p>
                     </div>
@@ -531,14 +531,14 @@ export default function About() {
             <div className="relative flex flex-col justify-center">
               <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full iridescent-spill opacity-30 blur-[80px] pointer-events-none" />
 
-              <div className="bg-[#080808] border border-white/10 p-8 rounded-2xl relative z-10 space-y-8">
+              <div className="dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.08] p-8 rounded-2xl relative z-10 space-y-8 dark:shadow-none shadow-[0_8px_40px_rgba(0,0,0,0.06)]">
                 <a href="https://wa.me/971502345678" target="_blank" rel="noreferrer" className="flex items-center gap-4 group min-h-[48px]">
                   <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center group-hover:bg-[#25D366]/20 transition-colors">
                     <MessageCircle className="w-6 h-6 text-[#25D366]" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500 mb-1">WhatsApp (Пишите напрямую)</div>
-                    <div className="text-lg text-white group-hover:text-[#25D366] transition-colors">+971 50 234 5678</div>
+                    <div className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-500 text-foreground/50 mb-1">WhatsApp (Пишите напрямую)</div>
+                    <div className="text-lg dark:text-white text-foreground group-hover:text-[#25D366] transition-colors">+971 50 234 5678</div>
                   </div>
                 </a>
 
@@ -547,23 +547,23 @@ export default function About() {
                     <Send className="w-5 h-5 text-[#229ED9] -ml-1" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500 mb-1">Telegram (Быстрый ответ)</div>
-                    <div className="text-lg text-white group-hover:text-[#229ED9] transition-colors">@estateofmind</div>
+                    <div className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-500 text-foreground/50 mb-1">Telegram (Быстрый ответ)</div>
+                    <div className="text-lg dark:text-white text-foreground group-hover:text-[#229ED9] transition-colors">@estateofmind</div>
                   </div>
                 </a>
 
                 <a href="mailto:hello@estateofmind.com" className="flex items-center gap-4 group min-h-[48px]">
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                    <Mail className="w-5 h-5 text-white/70" />
+                  <div className="w-12 h-12 rounded-full dark:bg-white/5 bg-black/[0.04] flex items-center justify-center dark:group-hover:bg-white/10 group-hover:bg-black/[0.07] transition-colors">
+                    <Mail className="w-5 h-5 dark:text-white/70 text-foreground/70" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-oxanium uppercase tracking-wider text-zinc-500 mb-1">Email (Для документов)</div>
-                    <div className="text-lg text-white group-hover:text-white/70 transition-colors">hello@estateofmind.com</div>
+                    <div className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-500 text-foreground/50 mb-1">Email (Для документов)</div>
+                    <div className="text-lg dark:text-white text-foreground dark:group-hover:text-white/70 group-hover:text-foreground/70 transition-colors">hello@estateofmind.com</div>
                   </div>
                 </a>
 
-                <div className="pt-6 border-t border-white/10 mt-6">
-                  <p className="text-sm text-zinc-400 leading-relaxed">
+                <div className="pt-6 border-t dark:border-white/10 border-black/[0.08] mt-6">
+                  <p className="text-sm dark:text-zinc-400 text-foreground/60 leading-relaxed">
                     Ответим в течение 2 часов в рабочее время <br />
                     (Пн–Пт, 9:00–20:00 MSK)
                   </p>

@@ -163,7 +163,7 @@ export default function Home() {
     <Layout>
 
       {/* ─── HERO ───────────────────────────────────────────────────────── */}
-      <section ref={heroSectionRef} className="relative bg-black overflow-hidden">
+      <section ref={heroSectionRef} className="relative dark:bg-black bg-white overflow-hidden">
         <div className="hero-grid" />
 
         <div className="absolute inset-0 lg:hidden pointer-events-none overflow-hidden" aria-hidden="true">
@@ -182,7 +182,7 @@ export default function Home() {
           </div>
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.68) 55%, #000000 100%)' }}
+            style={{ background: 'linear-gradient(180deg, hsl(var(--background) / 0.35) 0%, hsl(var(--background) / 0.68) 55%, hsl(var(--background)) 100%)' }}
           />
         </div>
 
@@ -191,15 +191,15 @@ export default function Home() {
 
             {/* ── Text ── */}
             <div className="lg:col-span-7 flex flex-col items-start pb-6 lg:pb-4">
-              <span className="font-oxanium text-[11px] md:text-[12px] tracking-[0.2em] text-white/40 mb-4 uppercase">
+              <span className="font-oxanium text-[11px] md:text-[12px] tracking-[0.2em] dark:text-white/40 text-foreground/45 mb-4 uppercase">
                 Международная недвижимость
               </span>
 
-              <h1 className="section-reveal-heading font-oxanium font-bold text-white uppercase leading-[1.05] tracking-tight mb-5 text-[clamp(2.2rem,6vw,4rem)] max-w-xl">
+              <h1 className="section-reveal-heading font-oxanium font-bold dark:text-white text-foreground uppercase leading-[1.05] tracking-tight mb-5 text-[clamp(2.2rem,6vw,4rem)] max-w-xl">
                 Безопасная гавань для капитала
               </h1>
 
-              <p className="font-space-grotesk text-[15px] md:text-lg text-white/60 max-w-lg mb-8 leading-relaxed">
+              <p className="font-space-grotesk text-[15px] md:text-lg dark:text-white/60 text-foreground/65 max-w-lg mb-8 leading-relaxed">
                 Инвестиции в зарубежную недвижимость. Проверенные юрисдикции, ВНЖ для всей семьи и прозрачные сделки без скрытых комиссий. Легальный перевод средств — Swift, SEPA и другие механизмы.
               </p>
 
@@ -212,7 +212,7 @@ export default function Home() {
                 </a>
               </div>
 
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-white/50 font-oxanium text-[12px] uppercase tracking-wider">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-3 dark:text-white/50 text-foreground/55 font-oxanium text-[12px] uppercase tracking-wider">
                 <div className="flex items-center gap-2"><Globe className="w-4 h-4 opacity-50"/> 7 стран</div>
                 <div className="flex items-center gap-2"><Shield className="w-4 h-4 opacity-50"/> ₽0 комиссии</div>
                 <div className="flex items-center gap-2"><Zap className="w-4 h-4 opacity-50"/> Легально</div>
@@ -259,19 +259,19 @@ export default function Home() {
           className="absolute inset-x-0 bottom-0 pointer-events-none"
           style={{
             height: '28%',
-            background: 'linear-gradient(to top, #000000 0%, rgba(0,0,0,0.75) 45%, transparent 100%)',
+            background: 'linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.75) 45%, transparent 100%)',
             zIndex: 20,
           }}
         />
       </section>
 
       {/* ─── DESTINATIONS ────────────────────────────────────────────────── */}
-      <section id="countries" className="py-24 bg-[#080808] relative z-10 border-t border-white/5">
+      <section id="countries" className="py-24 dark:bg-[#080808] bg-[#F5F3EE] relative z-10 border-t dark:border-white/5 border-black/5">
         <div className="container mx-auto px-6 mb-12" data-reveal="up">
           <h2 className="font-oxanium text-3xl md:text-[32px] chrome-text tracking-tight mb-2 section-reveal-heading">
             Куда переезжают
           </h2>
-          <p className="font-space-grotesk text-sm text-white/40">Топ-7 направлений для инвестиций, релокации и ВНЖ</p>
+          <p className="font-space-grotesk text-sm dark:text-white/40 text-foreground/50">Топ-7 направлений для инвестиций, релокации и ВНЖ</p>
         </div>
 
         <div className="container mx-auto px-6">
@@ -309,52 +309,52 @@ export default function Home() {
       </section>
 
       {/* ─── FOR WHOM — use-case entry points (Irina + Viktor + Dmitri) ───── */}
-      <section className="py-20 bg-[#060606] border-t border-white/5 relative z-10">
+      <section className="py-20 dark:bg-[#060606] bg-white border-t dark:border-white/5 border-black/5 relative z-10">
         <div className="container mx-auto px-6">
           <div className="mb-10" data-reveal="up">
-            <h2 className="font-oxanium text-2xl md:text-[28px] text-white tracking-tight mb-2 section-reveal-heading">
+            <h2 className="font-oxanium text-2xl md:text-[28px] dark:text-white text-foreground tracking-tight mb-2 section-reveal-heading">
               Для кого мы работаем
             </h2>
-            <p className="font-space-grotesk text-sm text-white/40">Три ситуации — одно надёжное агентство</p>
+            <p className="font-space-grotesk text-sm dark:text-white/40 text-foreground/50">Три ситуации — одно надёжное агентство</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5" data-stagger>
-            <Link href="/countries/ae" className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl p-7 flex flex-col gap-4 hover:border-white/20 hover:bg-white/[0.04] transition-all" data-reveal="up">
+            <Link href="/countries/ae" className="group dark:bg-white/[0.02] bg-black/[0.02] border dark:border-white/[0.07] border-black/[0.06] rounded-2xl p-7 flex flex-col gap-4 dark:hover:border-white/20 hover:border-black/15 dark:hover:bg-white/[0.04] hover:bg-black/[0.035] transition-all" data-reveal="up">
               <div className="text-2xl">🏦</div>
-              <h3 className="font-oxanium text-white text-[18px] tracking-tight">Сохранение капитала</h3>
-              <p className="font-space-grotesk text-sm text-white/50 leading-relaxed flex-1">
+              <h3 className="font-oxanium dark:text-white text-foreground text-[18px] tracking-tight">Сохранение капитала</h3>
+              <p className="font-space-grotesk text-sm dark:text-white/50 text-foreground/60 leading-relaxed flex-1">
                 Имеете ₽15–100M и хотите перевести в твёрдый актив. Легально, через SWIFT/SEPA и другие механизмы. Полный FATF-комплаенс.
               </p>
-              <span className="font-oxanium text-[11px] uppercase tracking-wider text-white/25 group-hover:text-white/50 transition-colors">ОАЭ и Кипр →</span>
+              <span className="font-oxanium text-[11px] uppercase tracking-wider dark:text-white/25 text-foreground/35 dark:group-hover:text-white/50 group-hover:text-foreground/70 transition-colors">ОАЭ и Кипр →</span>
             </Link>
-            <Link href="/countries/cy" className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl p-7 flex flex-col gap-4 hover:border-white/20 hover:bg-white/[0.04] transition-all" data-reveal="up">
+            <Link href="/countries/cy" className="group dark:bg-white/[0.02] bg-black/[0.02] border dark:border-white/[0.07] border-black/[0.06] rounded-2xl p-7 flex flex-col gap-4 dark:hover:border-white/20 hover:border-black/15 dark:hover:bg-white/[0.04] hover:bg-black/[0.035] transition-all" data-reveal="up">
               <div className="text-2xl">👨‍👩‍👧</div>
-              <h3 className="font-oxanium text-white text-[18px] tracking-tight">Переезд с семьёй</h3>
-              <p className="font-space-grotesk text-sm text-white/50 leading-relaxed flex-1">
+              <h3 className="font-oxanium dark:text-white text-foreground text-[18px] tracking-tight">Переезд с семьёй</h3>
+              <p className="font-space-grotesk text-sm dark:text-white/50 text-foreground/60 leading-relaxed flex-1">
                 Планируете переезд с детьми. Нужны международные школы, безопасность и ВНЖ. Сопровождаем от выбора района до записи детей в школу.
               </p>
-              <span className="font-oxanium text-[11px] uppercase tracking-wider text-white/25 group-hover:text-white/50 transition-colors">Кипр и Турция →</span>
+              <span className="font-oxanium text-[11px] uppercase tracking-wider dark:text-white/25 text-foreground/35 dark:group-hover:text-white/50 group-hover:text-foreground/70 transition-colors">Кипр и Турция →</span>
             </Link>
-            <Link href="/tax" className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl p-7 flex flex-col gap-4 hover:border-white/20 hover:bg-white/[0.04] transition-all" data-reveal="up">
+            <Link href="/tax" className="group dark:bg-white/[0.02] bg-black/[0.02] border dark:border-white/[0.07] border-black/[0.06] rounded-2xl p-7 flex flex-col gap-4 dark:hover:border-white/20 hover:border-black/15 dark:hover:bg-white/[0.04] hover:bg-black/[0.035] transition-all" data-reveal="up">
               <div className="text-2xl">💻</div>
-              <h3 className="font-oxanium text-white text-[18px] tracking-tight">База для бизнеса</h3>
-              <p className="font-space-grotesk text-sm text-white/50 leading-relaxed flex-1">
+              <h3 className="font-oxanium dark:text-white text-foreground text-[18px] tracking-tight">База для бизнеса</h3>
+              <p className="font-space-grotesk text-sm dark:text-white/50 text-foreground/60 leading-relaxed flex-1">
                 Нужна юрисдикция с нулевым налогом, счётом в банке и налоговым резидентством. Работаем с крипто-доходом и IT-бизнесом.
               </p>
-              <span className="font-oxanium text-[11px] uppercase tracking-wider text-white/25 group-hover:text-white/50 transition-colors">Налоговый гид →</span>
+              <span className="font-oxanium text-[11px] uppercase tracking-wider dark:text-white/25 text-foreground/35 dark:group-hover:text-white/50 group-hover:text-foreground/70 transition-colors">Налоговый гид →</span>
             </Link>
           </div>
         </div>
       </section>
 
       {/* ─── FEATURED PROPERTIES ─────────────────────────────────────────── */}
-      <section className="py-24 bg-[#050505] relative z-10 border-t border-white/5">
+      <section className="py-24 dark:bg-[#050505] bg-[#F5F3EE] relative z-10 border-t dark:border-white/5 border-black/5">
         <div className="container mx-auto px-6 mb-12" data-reveal="up">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <h2 className="font-oxanium text-3xl md:text-[32px] text-white tracking-tight mb-2 section-reveal-heading">
+              <h2 className="font-oxanium text-3xl md:text-[32px] dark:text-white text-foreground tracking-tight mb-2 section-reveal-heading">
                 Актуальные объекты
               </h2>
-              <p className="font-space-grotesk text-sm text-white/40">Для инвестиций и релокации</p>
+              <p className="font-space-grotesk text-sm dark:text-white/40 text-foreground/50">Для инвестиций и релокации</p>
             </div>
             <Link href="/properties" className="eom-btn-ghost font-oxanium text-xs uppercase tracking-wider min-h-[48px] px-6 flex items-center justify-center">
               Все объекты
@@ -365,7 +365,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-stagger>
             {FEATURED_PROPERTIES.map((prop, i) => (
-              <Link key={i} href={prop.id ? `/properties/${prop.id}` : '/properties'} className="group relative bg-[#111] border border-white/5 rounded-2xl overflow-hidden hover:border-white/20 transition-colors flex flex-col min-h-[48px]" data-reveal="up">
+              <Link key={i} href={prop.id ? `/properties/${prop.id}` : '/properties'} className="group relative dark:bg-[#111] bg-white border dark:border-white/5 border-black/[0.06] rounded-2xl overflow-hidden dark:hover:border-white/20 hover:border-black/15 transition-colors flex flex-col min-h-[48px]" data-reveal="up">
                 <div className="aspect-[3/2] overflow-hidden relative bg-black">
                   <img src={prop.image} alt={prop.type} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                   <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 font-space-grotesk text-[10px] text-white uppercase tracking-widest">
@@ -374,20 +374,20 @@ export default function Home() {
                 </div>
                 <div className="p-5 flex flex-col flex-grow">
                   <div className="mb-4">
-                    <h3 className="font-oxanium text-xl text-white tracking-tight mb-1">{prop.price}</h3>
-                    <p className="font-space-grotesk text-xs text-white/50">{prop.type} · {prop.district}</p>
+                    <h3 className="font-oxanium text-xl dark:text-white text-foreground tracking-tight mb-1">{prop.price}</h3>
+                    <p className="font-space-grotesk text-xs dark:text-white/50 text-foreground/55">{prop.type} · {prop.district}</p>
                   </div>
-                  <div className="flex items-center gap-4 border-t border-white/5 pt-4 mt-auto">
+                  <div className="flex items-center gap-4 border-t dark:border-white/5 border-black/[0.06] pt-4 mt-auto">
                     <div className="flex items-center gap-1.5">
-                      <Bed className="w-4 h-4 text-white/40" />
-                      <span className="font-space-grotesk text-xs text-white/70">{prop.beds}</span>
+                      <Bed className="w-4 h-4 dark:text-white/40 text-foreground/40" />
+                      <span className="font-space-grotesk text-xs dark:text-white/70 text-foreground/70">{prop.beds}</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <Bath className="w-4 h-4 text-white/40" />
-                      <span className="font-space-grotesk text-xs text-white/70">{prop.baths}</span>
+                      <Bath className="w-4 h-4 dark:text-white/40 text-foreground/40" />
+                      <span className="font-space-grotesk text-xs dark:text-white/70 text-foreground/70">{prop.baths}</span>
                     </div>
                     <div className="flex items-center gap-1.5 ml-auto">
-                      <span className="font-space-grotesk text-xs text-white/40">{prop.area}</span>
+                      <span className="font-space-grotesk text-xs dark:text-white/40 text-foreground/45">{prop.area}</span>
                     </div>
                   </div>
                 </div>
@@ -445,7 +445,7 @@ export default function Home() {
             }}
           />
 
-          <p className="font-oxanium text-[clamp(0.6rem,1.4vw,0.8rem)] tracking-[0.32em] text-white/45 uppercase mb-5">
+          <p className="font-oxanium text-[clamp(0.6rem,1.4vw,0.8rem)] tracking-[0.32em] dark:text-white/45 text-foreground/50 uppercase mb-5">
             Международная недвижимость
           </p>
 
@@ -466,7 +466,7 @@ export default function Home() {
                 >
                   {s.val}
                 </p>
-                <p className="font-space-grotesk text-[10px] text-white/40 uppercase tracking-[0.22em] mt-1.5">
+                <p className="font-space-grotesk text-[10px] dark:text-white/40 text-foreground/50 uppercase tracking-[0.22em] mt-1.5">
                   {s.label}
                 </p>
               </div>
@@ -480,7 +480,7 @@ export default function Home() {
       </section>
 
       {/* ─── DUBAI SKYLINE — WHY US ──────────────────────────────────────── */}
-      <section id="about" className="bg-black relative overflow-hidden">
+      <section id="about" className="dark:bg-black bg-white relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
 
           <div className="relative overflow-hidden min-h-[400px] lg:min-h-0">
@@ -499,7 +499,7 @@ export default function Home() {
               className="absolute inset-y-0 right-0 hidden lg:block pointer-events-none"
               style={{
                 width: '35%',
-                background: 'linear-gradient(to right, transparent, #000000)',
+                background: 'linear-gradient(to right, transparent, hsl(var(--background)))',
                 zIndex: 4,
               }}
             />
@@ -507,7 +507,7 @@ export default function Home() {
               className="absolute inset-x-0 bottom-0 pointer-events-none"
               style={{
                 height: '52%',
-                background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.55) 45%, transparent 100%)',
+                background: 'linear-gradient(to top, hsl(var(--background) / 0.95) 0%, hsl(var(--background) / 0.55) 45%, transparent 100%)',
                 zIndex: 4,
               }}
             />
@@ -523,7 +523,7 @@ export default function Home() {
               }}
             />
             <div className="absolute inset-x-0 bottom-0 flex flex-col items-start px-6 md:px-8 pb-7 md:pb-9" style={{ zIndex: 6 }}>
-              <p className="font-oxanium text-[9px] tracking-[0.32em] text-white/40 uppercase mb-4">
+              <p className="font-oxanium text-[9px] tracking-[0.32em] dark:text-white/40 text-foreground/70 uppercase mb-4">
                 Ваши инвестиции под защитой
               </p>
               <div className="flex gap-6 mb-5">
@@ -534,7 +534,7 @@ export default function Home() {
                 ].map(s => (
                   <div key={s.val}>
                     <p className="font-oxanium text-[22px] chrome-text leading-none tracking-tight">{s.val}</p>
-                    <p className="font-space-grotesk text-[9px] text-white/45 uppercase tracking-widest mt-1">{s.label}</p>
+                    <p className="font-space-grotesk text-[9px] dark:text-white/45 text-foreground/70 uppercase tracking-widest mt-1">{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -544,7 +544,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center px-8 md:px-12 lg:px-16 py-16 lg:py-24 bg-black relative">
+          <div className="flex flex-col justify-center px-8 md:px-12 lg:px-16 py-16 lg:py-24 dark:bg-black bg-white relative">
             <img
               src="/chrome/liquid/chrome-ribbon.png"
               alt="" aria-hidden="true"
@@ -557,12 +557,12 @@ export default function Home() {
             />
 
             <h2
-              className="font-oxanium text-3xl md:text-[40px] text-white mb-4 section-reveal-heading tracking-tight"
+              className="font-oxanium text-3xl md:text-[40px] dark:text-white text-foreground mb-4 section-reveal-heading tracking-tight"
               data-reveal="up"
             >
               Почему нас выбирают
             </h2>
-            <p className="font-space-grotesk text-sm text-white/40 mb-12" data-reveal="up">
+            <p className="font-space-grotesk text-sm dark:text-white/40 text-foreground/55 mb-12" data-reveal="up">
               Семь лет — сотни сделок — ноль скрытых комиссий
             </p>
 
@@ -573,8 +573,8 @@ export default function Home() {
                     <Icon className="feature-icon-inner w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-oxanium text-[18px] text-white mb-2 tracking-tight">{title}</h3>
-                    <p className="font-space-grotesk text-[15px] text-white/50 leading-relaxed">{desc}</p>
+                    <h3 className="font-oxanium text-[18px] dark:text-white text-foreground mb-2 tracking-tight">{title}</h3>
+                    <p className="font-space-grotesk text-[15px] dark:text-white/50 text-foreground/60 leading-relaxed">{desc}</p>
                   </div>
                 </div>
               ))}
@@ -584,12 +584,12 @@ export default function Home() {
       </section>
 
       {/* ─── TRUST METRICS ───────────────────────────────────────────────── */}
-      <section className="bg-[#080808] relative overflow-hidden">
+      <section className="dark:bg-[#080808] bg-[#F5F3EE] relative overflow-hidden">
         <div className="iridescent-line" />
 
         <div className="container mx-auto px-6 py-16 relative z-10">
           <div
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 divide-x-0 md:divide-x divide-white/10"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 divide-x-0 md:divide-x dark:divide-white/10 divide-black/10"
             data-stagger
           >
             {TRUST_STATS.map(({ value, label }, i) => (
@@ -601,7 +601,7 @@ export default function Home() {
                 <span className="font-oxanium text-4xl md:text-[56px] chrome-text mb-2 tracking-tight" data-counter>
                   {value}
                 </span>
-                <span className="font-space-grotesk text-[13px] text-white/40 uppercase tracking-wider max-w-[180px]">
+                <span className="font-space-grotesk text-[13px] dark:text-white/40 text-foreground/50 uppercase tracking-wider max-w-[180px]">
                   {label}
                 </span>
               </div>
@@ -613,32 +613,32 @@ export default function Home() {
       </section>
 
       {/* ─── TESTIMONIALS ────────────────────────────────────────────────── */}
-      <section className="py-24 bg-[#050505] relative border-t border-white/5">
+      <section className="py-24 dark:bg-[#050505] bg-white relative border-t dark:border-white/5 border-black/5">
         <div className="container mx-auto px-6 mb-12" data-reveal="up">
-          <h2 className="font-oxanium text-3xl md:text-[32px] text-white mb-2 section-reveal-heading tracking-tight">
+          <h2 className="font-oxanium text-3xl md:text-[32px] dark:text-white text-foreground mb-2 section-reveal-heading tracking-tight">
             Опыт клиентов
           </h2>
-          <p className="font-space-grotesk text-sm text-white/40">Реальные кейсы инвестиций и переездов</p>
+          <p className="font-space-grotesk text-sm dark:text-white/40 text-foreground/50">Реальные кейсы инвестиций и переездов</p>
         </div>
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {TESTIMONIALS.map((t, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between hover:border-white/20 transition-colors">
+              <div key={i} className="dark:bg-white/5 bg-black/[0.025] border dark:border-white/10 border-black/[0.07] rounded-2xl p-8 flex flex-col justify-between dark:hover:border-white/20 hover:border-black/15 transition-colors">
                 <div>
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center font-oxanium text-white/70 tracking-tight shrink-0">
+                    <div className="w-12 h-12 rounded-full dark:bg-white/10 bg-black/[0.06] flex items-center justify-center font-oxanium dark:text-white/70 text-foreground/70 tracking-tight shrink-0">
                       {t.initials}
                     </div>
                     <div>
-                      <p className="font-oxanium text-white text-sm tracking-tight">{t.name}</p>
-                      <p className="font-space-grotesk text-xs text-white/40">{t.from} · {t.date}</p>
+                      <p className="font-oxanium dark:text-white text-foreground text-sm tracking-tight">{t.name}</p>
+                      <p className="font-space-grotesk text-xs dark:text-white/40 text-foreground/50">{t.from} · {t.date}</p>
                     </div>
                   </div>
-                  <p className="font-space-grotesk text-[14px] text-white/70 leading-relaxed mb-6">
+                  <p className="font-space-grotesk text-[14px] dark:text-white/70 text-foreground/75 leading-relaxed mb-6">
                     «{t.text}»
                   </p>
                 </div>
-                <div className="pt-4 border-t border-white/10">
+                <div className="pt-4 border-t dark:border-white/10 border-black/[0.07]">
                   <p className="font-space-grotesk text-[11px] text-[#b090f0] uppercase tracking-wider">{t.deal}</p>
                 </div>
               </div>
@@ -648,7 +648,7 @@ export default function Home() {
       </section>
 
       {/* ─── PROCESS ─────────────────────────────────────────────────────── */}
-      <section id="consult" className="py-24 md:py-32 bg-black relative overflow-hidden">
+      <section id="consult" className="py-24 md:py-32 dark:bg-black bg-[#F5F3EE] relative overflow-hidden">
         <img
           src="/chrome/liquid/chrome-tendrils.png"
           alt="" aria-hidden="true"
@@ -663,7 +663,7 @@ export default function Home() {
         <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center relative z-10">
 
           <div data-reveal="left">
-            <h2 className="font-oxanium text-3xl md:text-[40px] text-white mb-16 section-reveal-heading tracking-tight">
+            <h2 className="font-oxanium text-3xl md:text-[40px] dark:text-white text-foreground mb-16 section-reveal-heading tracking-tight">
               Как это работает
             </h2>
 
@@ -678,8 +678,8 @@ export default function Home() {
                     style={{ mixBlendMode: 'screen', filter: 'drop-shadow(0 0 18px rgba(200,180,255,0.55))' }}
                   />
                   <div className="pt-3">
-                    <h4 className="font-space-grotesk text-[18px] text-white mb-2 tracking-tight">{step.title}</h4>
-                    <p className="font-space-grotesk text-[14px] text-white/40 max-w-sm">{step.desc}</p>
+                    <h4 className="font-space-grotesk text-[18px] dark:text-white text-foreground mb-2 tracking-tight">{step.title}</h4>
+                    <p className="font-space-grotesk text-[14px] dark:text-white/40 text-foreground/55 max-w-sm">{step.desc}</p>
                   </div>
                 </div>
               ))}
@@ -699,12 +699,12 @@ export default function Home() {
               <ChromeShape variant="blob" iridescent size={280} breathe={false} />
             </div>
 
-            <div className="relative z-10 text-center bg-black/60 backdrop-blur-2xl px-10 py-12 border border-white/12 rounded-3xl shadow-[0_8px_60px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.08)] max-w-[340px] w-full">
+            <div className="relative z-10 text-center dark:bg-black/60 bg-white/75 backdrop-blur-2xl px-10 py-12 border dark:border-white/12 border-black/10 rounded-3xl dark:shadow-[0_8px_60px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.08)] shadow-[0_8px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.6)] max-w-[340px] w-full">
               <div className="absolute -top-12 left-1/2 -translate-x-1/2">
                 <ChromeShape variant="orb" iridescent size={90} />
               </div>
-              <h3 className="font-oxanium text-2xl text-white mb-4 tracking-tight">Бесплатный разбор</h3>
-              <p className="font-space-grotesk text-sm text-white/50 mb-8 leading-relaxed">
+              <h3 className="font-oxanium text-2xl dark:text-white text-foreground mb-4 tracking-tight">Бесплатный разбор</h3>
+              <p className="font-space-grotesk text-sm dark:text-white/50 text-foreground/60 mb-8 leading-relaxed">
                 Оставьте заявку — мы свяжемся с вами в течение часа и предложим 3 оптимальных решения под ваш капитал.
               </p>
               <Link
