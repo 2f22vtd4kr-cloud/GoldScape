@@ -2,8 +2,31 @@ import { useState } from 'react';
 import { useSearch } from 'wouter';
 import { Filter, MessageCircle, ArrowRight, Send, Check, ShieldCheck } from 'lucide-react';
 import { Layout } from '@/components/Layout';
+import { PropertyLocationMap, type LocationMap } from '@/components/PropertyLocationMap';
 
-const LISTINGS = [
+import mapDubaiPalm      from '@assets/generated_images/listing-map-dubai-palm-jumeirah.png';
+import mapDubaiMarina    from '@assets/generated_images/listing-map-dubai-marina.png';
+import mapDubaiDowntown  from '@assets/generated_images/listing-map-dubai-downtown.png';
+import mapDubaiRanches   from '@assets/generated_images/listing-map-dubai-arabian-ranches.png';
+import mapDubaiBizBay    from '@assets/generated_images/listing-map-dubai-business-bay.png';
+import mapIstanbul       from '@assets/generated_images/listing-map-istanbul-besiktas.png';
+import mapAntalya        from '@assets/generated_images/listing-map-antalya-lara.png';
+import mapLimassol       from '@assets/generated_images/listing-map-limassol-germasogeia.png';
+import mapPaphos         from '@assets/generated_images/listing-map-paphos-koloni.png';
+import mapBatumi         from '@assets/generated_images/listing-map-batumi-seafront.png';
+import mapTbilisi        from '@assets/generated_images/listing-map-tbilisi-vake.png';
+import mapPhuket         from '@assets/generated_images/listing-map-phuket-rawai.png';
+import mapSamui          from '@assets/generated_images/listing-map-samui-chaweng-noi.png';
+import mapLisbon         from '@assets/generated_images/listing-map-lisbon-campo-de-ourique.png';
+import mapAlgarve        from '@assets/generated_images/listing-map-algarve-vale-do-lobo.png';
+import mapBelgrade       from '@assets/generated_images/listing-map-belgrade-savski-venac.png';
+
+const LISTINGS: Array<{
+  id: number; country: string; city: string; district: string; type: string;
+  price: string; pricePerSqm: string; beds: number | string; baths: number;
+  area: number; image: string; agency: string; exclusive: boolean;
+  tags: string[]; crypto: boolean; locationMap: LocationMap;
+}> = [
   /* ── UAE ──────────────────────────────────────────────────────── */
   {
     id: 1,
@@ -21,6 +44,14 @@ const LISTINGS = [
     exclusive: true,
     tags: ['Вид на море', 'Золотая виза'],
     crypto: true,
+    locationMap: {
+      image: mapDubaiPalm,
+      distances: [
+        { icon: 'sea',    label: 'До моря',        minutes: 1 },
+        { icon: 'center', label: 'До центра города', minutes: 20 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 18 },
+      ],
+    },
   },
   {
     id: 2,
@@ -38,6 +69,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['Доходность 7%', '0% налог'],
     crypto: true,
+    locationMap: {
+      image: mapDubaiMarina,
+      distances: [
+        { icon: 'sea',    label: 'До моря',        minutes: 3 },
+        { icon: 'center', label: 'До центра города', minutes: 20 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 4 },
+      ],
+    },
   },
   {
     id: 3,
@@ -55,6 +94,14 @@ const LISTINGS = [
     exclusive: true,
     tags: ['Вид Burj Khalifa', 'ВНЖ инвестора'],
     crypto: true,
+    locationMap: {
+      image: mapDubaiDowntown,
+      distances: [
+        { icon: 'sea',    label: 'До моря (JBR)',   minutes: 15 },
+        { icon: 'center', label: 'Центр города',    minutes: 1 },
+        { icon: 'mall',   label: 'До Dubai Mall',   minutes: 3 },
+      ],
+    },
   },
   {
     id: 4,
@@ -72,6 +119,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['Семейное комьюнити', 'Школы IB'],
     crypto: true,
+    locationMap: {
+      image: mapDubaiRanches,
+      distances: [
+        { icon: 'sea',    label: 'До моря',        minutes: 25 },
+        { icon: 'center', label: 'До центра города', minutes: 20 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 10 },
+      ],
+    },
   },
   {
     id: 16,
@@ -89,6 +144,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['Canal View', 'Счёт в банке ОАЭ'],
     crypto: true,
+    locationMap: {
+      image: mapDubaiBizBay,
+      distances: [
+        { icon: 'sea',    label: 'До моря',        minutes: 15 },
+        { icon: 'center', label: 'До центра города', minutes: 5 },
+        { icon: 'mall',   label: 'До Dubai Mall',   minutes: 8 },
+      ],
+    },
   },
   /* ── Turkey ───────────────────────────────────────────────────── */
   {
@@ -107,6 +170,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['ВНЖ при покупке'],
     crypto: false,
+    locationMap: {
+      image: mapIstanbul,
+      distances: [
+        { icon: 'sea',    label: 'До Босфора',      minutes: 3 },
+        { icon: 'center', label: 'До центра (Таксим)', minutes: 10 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 8 },
+      ],
+    },
   },
   {
     id: 6,
@@ -124,6 +195,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['200м до пляжа', 'Гражданство'],
     crypto: true,
+    locationMap: {
+      image: mapAntalya,
+      distances: [
+        { icon: 'sea',    label: 'До пляжа',        minutes: 1 },
+        { icon: 'center', label: 'До центра города', minutes: 15 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 10 },
+      ],
+    },
   },
   /* ── Cyprus ───────────────────────────────────────────────────── */
   {
@@ -142,6 +221,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['Non-dom статус', 'ПМЖ'],
     crypto: true,
+    locationMap: {
+      image: mapLimassol,
+      distances: [
+        { icon: 'sea',    label: 'До моря',        minutes: 5 },
+        { icon: 'center', label: 'До центра города', minutes: 10 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 12 },
+      ],
+    },
   },
   {
     id: 8,
@@ -159,6 +246,14 @@ const LISTINGS = [
     exclusive: true,
     tags: ['Частная школа рядом'],
     crypto: true,
+    locationMap: {
+      image: mapPaphos,
+      distances: [
+        { icon: 'sea',    label: 'До моря',        minutes: 8 },
+        { icon: 'center', label: 'До центра Пафоса', minutes: 12 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 15 },
+      ],
+    },
   },
   /* ── Georgia ──────────────────────────────────────────────────── */
   {
@@ -177,6 +272,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['ВНЖ Грузии', 'Налог 0%'],
     crypto: true,
+    locationMap: {
+      image: mapBatumi,
+      distances: [
+        { icon: 'sea',    label: 'До моря',        minutes: 1 },
+        { icon: 'center', label: 'До центра города', minutes: 5 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 8 },
+      ],
+    },
   },
   {
     id: 10,
@@ -194,6 +297,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['Премиум район'],
     crypto: true,
+    locationMap: {
+      image: mapTbilisi,
+      distances: [
+        { icon: 'landmark', label: 'До парка Ваке', minutes: 3 },
+        { icon: 'center',   label: 'До центра города', minutes: 10 },
+        { icon: 'mall',     label: 'До ТЦ',          minutes: 7 },
+      ],
+    },
   },
   /* ── Thailand ─────────────────────────────────────────────────── */
   {
@@ -212,6 +323,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['Elite Visa'],
     crypto: true,
+    locationMap: {
+      image: mapPhuket,
+      distances: [
+        { icon: 'sea',    label: 'До моря',        minutes: 3 },
+        { icon: 'center', label: 'До Phuket Town',  minutes: 20 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 20 },
+      ],
+    },
   },
   {
     id: 15,
@@ -229,6 +348,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['Рядом с пляжем'],
     crypto: true,
+    locationMap: {
+      image: mapSamui,
+      distances: [
+        { icon: 'sea',    label: 'До моря',        minutes: 3 },
+        { icon: 'center', label: 'До Chaweng',      minutes: 8 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 10 },
+      ],
+    },
   },
   /* ── Portugal ─────────────────────────────────────────────────── */
   {
@@ -247,6 +374,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['D7 / D8 Визы'],
     crypto: false,
+    locationMap: {
+      image: mapLisbon,
+      distances: [
+        { icon: 'sea',    label: 'До реки Тежу',    minutes: 10 },
+        { icon: 'center', label: 'До центра (Байша)', minutes: 12 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 10 },
+      ],
+    },
   },
   {
     id: 14,
@@ -264,6 +399,14 @@ const LISTINGS = [
     exclusive: true,
     tags: ['Гольф-курорт', 'International School'],
     crypto: false,
+    locationMap: {
+      image: mapAlgarve,
+      distances: [
+        { icon: 'sea',    label: 'До океана',       minutes: 5 },
+        { icon: 'center', label: 'До Алмансила',    minutes: 15 },
+        { icon: 'mall',   label: 'До ТЦ',           minutes: 20 },
+      ],
+    },
   },
   /* ── Serbia ───────────────────────────────────────────────────── */
   {
@@ -282,6 +425,14 @@ const LISTINGS = [
     exclusive: false,
     tags: ['ВНЖ по недвижимости'],
     crypto: true,
+    locationMap: {
+      image: mapBelgrade,
+      distances: [
+        { icon: 'landmark', label: 'До Калемегдана', minutes: 6 },
+        { icon: 'center',   label: 'До центра города', minutes: 8 },
+        { icon: 'mall',     label: 'До ТЦ',          minutes: 6 },
+      ],
+    },
   },
 ];
 
@@ -440,6 +591,10 @@ export default function Properties() {
                     <div className="flex items-center gap-1.5" title="Площадь">
                       <span className="text-gray-500 text-[11px] uppercase tracking-wider">Area</span> {item.area}м²
                     </div>
+                  </div>
+
+                  <div className="mb-5 relative z-10">
+                    <PropertyLocationMap {...item.locationMap} />
                   </div>
 
                   <div className="mt-auto flex items-center justify-between pt-4 border-t border-white/5 relative z-10">

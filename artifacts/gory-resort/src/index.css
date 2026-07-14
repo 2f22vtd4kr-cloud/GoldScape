@@ -470,6 +470,19 @@ body {
   animation: floatBlobSmall 5s ease-in-out infinite;
 }
 
+/* Pulsing pin marker used by PropertyLocationMap */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0);
+  }
+}
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
 /* ─── Hero gas-spill system ──────────────────────────────────────────────
    Rotating oil-slick conic gradient, heavily blurred and radially masked so
    it fades to nothing well before any container edge — no hard box seam
