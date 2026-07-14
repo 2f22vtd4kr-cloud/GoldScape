@@ -17,6 +17,7 @@ const DESTINATIONS = [
 
 const FEATURED_PROPERTIES = [
   {
+    id: 1,
     image: '/images/prop-dubai.jpg',
     location: 'Дубай, ОАЭ',
     type: 'Апартаменты',
@@ -27,6 +28,8 @@ const FEATURED_PROPERTIES = [
     area: '210м²',
   },
   {
+    // No exact catalogue match at this price point — links to the general catalogue, not a detail page.
+    id: null,
     image: '/images/prop-turkey.jpg',
     location: 'Анталья, Турция',
     type: 'Квартира',
@@ -37,6 +40,7 @@ const FEATURED_PROPERTIES = [
     area: '85м²',
   },
   {
+    id: 8,
     image: '/images/prop-cyprus.jpg',
     location: 'Пафос, Кипр',
     type: 'Вилла',
@@ -47,6 +51,7 @@ const FEATURED_PROPERTIES = [
     area: '240м²',
   },
   {
+    id: 9,
     image: '/images/prop-georgia.jpg',
     location: 'Батуми, Грузия',
     type: 'Апартаменты',
@@ -202,7 +207,7 @@ export default function Home() {
                 <Link href="/properties" className="eom-btn-primary hero-cta-pill font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-8 flex items-center justify-center text-center">
                   Подобрать объект
                 </Link>
-                <a href="https://wa.me/1234567890" target="_blank" rel="noreferrer" className="eom-btn-ghost hero-cta-pill font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-8 flex items-center justify-center text-center">
+                <a href="https://wa.me/971502345678" target="_blank" rel="noreferrer" className="eom-btn-ghost hero-cta-pill font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-8 flex items-center justify-center text-center">
                   Написать в WhatsApp
                 </a>
               </div>
@@ -360,7 +365,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-stagger>
             {FEATURED_PROPERTIES.map((prop, i) => (
-              <Link key={i} href="/properties" className="group relative bg-[#111] border border-white/5 rounded-2xl overflow-hidden hover:border-white/20 transition-colors flex flex-col min-h-[48px]" data-reveal="up">
+              <Link key={i} href={prop.id ? `/properties/${prop.id}` : '/properties'} className="group relative bg-[#111] border border-white/5 rounded-2xl overflow-hidden hover:border-white/20 transition-colors flex flex-col min-h-[48px]" data-reveal="up">
                 <div className="aspect-[3/2] overflow-hidden relative bg-black">
                   <img src={prop.image} alt={prop.type} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                   <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 font-space-grotesk text-[10px] text-white uppercase tracking-widest">

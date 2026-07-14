@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/contexts/ThemeContext';
 import Home from '@/pages/Home';
 import About from '@/pages/About';
 import Properties from '@/pages/Properties';
+import PropertyDetail from '@/pages/PropertyDetail';
 import CountryPage from '@/pages/CountryPage';
 import TaxGuide from '@/pages/TaxGuide';
 import NotFound from '@/pages/not-found';
@@ -38,6 +39,7 @@ function App() {
           <Route path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/properties" component={Properties} />
+          <Route path="/properties/:id" component={PropertyDetail} />
           <Route path="/countries/:code" component={CountryPage} />
           <Route path="/tax" component={TaxGuide} />
           <Route path="/*" component={NotFound} />

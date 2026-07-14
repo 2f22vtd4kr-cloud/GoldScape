@@ -1,473 +1,10 @@
 import { useState } from 'react';
-import { useSearch } from 'wouter';
+import { useSearch, useLocation } from 'wouter';
 import { Filter, MessageCircle, ArrowRight, Send, Check, ShieldCheck } from 'lucide-react';
 import { Layout } from '@/components/Layout';
-import { PropertyLocationMap, type LocationMap } from '@/components/PropertyLocationMap';
-import { PropertyImmersion, type ImmersionListing } from '@/components/PropertyImmersion';
-
-import mapDubaiPalm      from '@assets/generated_images/listing-map-dubai-palm-jumeirah.png';
-import mapDubaiMarina    from '@assets/generated_images/listing-map-dubai-marina.png';
-import mapDubaiDowntown  from '@assets/generated_images/listing-map-dubai-downtown.png';
-import mapDubaiRanches   from '@assets/generated_images/listing-map-dubai-arabian-ranches.png';
-import mapDubaiBizBay    from '@assets/generated_images/listing-map-dubai-business-bay.png';
-import mapIstanbul       from '@assets/generated_images/listing-map-istanbul-besiktas.png';
-import mapAntalya        from '@assets/generated_images/listing-map-antalya-lara.png';
-import mapLimassol       from '@assets/generated_images/listing-map-limassol-germasogeia.png';
-import mapPaphos         from '@assets/generated_images/listing-map-paphos-koloni.png';
-import mapBatumi         from '@assets/generated_images/listing-map-batumi-seafront.png';
-import mapTbilisi        from '@assets/generated_images/listing-map-tbilisi-vake.png';
-import mapPhuket         from '@assets/generated_images/listing-map-phuket-rawai.png';
-import mapSamui          from '@assets/generated_images/listing-map-samui-chaweng-noi.png';
-import mapLisbon         from '@assets/generated_images/listing-map-lisbon-campo-de-ourique.png';
-import mapAlgarve        from '@assets/generated_images/listing-map-algarve-vale-do-lobo.png';
-import mapBelgrade       from '@assets/generated_images/listing-map-belgrade-savski-venac.png';
-
-const LISTINGS: Array<{
-  id: number; country: string; city: string; district: string; type: string;
-  price: string; pricePerSqm: string; beds: number | string; baths: number;
-  area: number; image: string; agency: string; exclusive: boolean;
-  tags: string[]; crypto: boolean; locationMap: LocationMap;
-}> = [
-  /* ── UAE ──────────────────────────────────────────────────────── */
-  {
-    id: 1,
-    country: 'AE',
-    city: 'Дубай',
-    district: 'Palm Jumeirah',
-    type: 'АПАРТАМЕНТЫ',
-    price: '$2,400,000',
-    pricePerSqm: '≈ $11,428/м²',
-    beds: 3,
-    baths: 3,
-    area: 210,
-    image: '/images/prop-dubai.jpg',
-    agency: 'fäm Properties',
-    exclusive: true,
-    tags: ['Вид на море', 'Золотая виза'],
-    crypto: true,
-    locationMap: {
-      image: mapDubaiPalm,
-      pinPos: { x: 52, y: 42 },
-      accentColor: 'hsl(38,90%,58%)',
-      distances: [
-        { icon: 'sea',    label: 'До моря',        minutes: 1 },
-        { icon: 'center', label: 'До центра города', minutes: 20 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 18 },
-      ],
-    },
-  },
-  {
-    id: 2,
-    country: 'AE',
-    city: 'Дубай',
-    district: 'Dubai Marina',
-    type: 'СТУДИЯ',
-    price: '$368,000',
-    pricePerSqm: '≈ $7,076/м²',
-    beds: 'Studio',
-    baths: 1,
-    area: 52,
-    image: '/images/prop-dubai-marina.jpg',
-    agency: 'fäm Properties',
-    exclusive: false,
-    tags: ['Доходность 7%', '0% налог'],
-    crypto: true,
-    locationMap: {
-      image: mapDubaiMarina,
-      pinPos: { x: 47, y: 50 },
-      accentColor: 'hsl(197,88%,52%)',
-      distances: [
-        { icon: 'sea',    label: 'До моря',        minutes: 3 },
-        { icon: 'center', label: 'До центра города', minutes: 20 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 4 },
-      ],
-    },
-  },
-  {
-    id: 3,
-    country: 'AE',
-    city: 'Дубай',
-    district: 'Downtown Dubai',
-    type: 'ПЕНТХАУС',
-    price: '$5,200,000',
-    pricePerSqm: '≈ $8,965/м²',
-    beds: 4,
-    baths: 4,
-    area: 580,
-    image: '/images/prop-dubai-downtown.jpg',
-    agency: 'fäm Properties',
-    exclusive: true,
-    tags: ['Вид Burj Khalifa', 'ВНЖ инвестора'],
-    crypto: true,
-    locationMap: {
-      image: mapDubaiDowntown,
-      pinPos: { x: 52, y: 38 },
-      accentColor: 'hsl(45,95%,58%)',
-      distances: [
-        { icon: 'sea',    label: 'До моря (JBR)',   minutes: 15 },
-        { icon: 'center', label: 'Центр города',    minutes: 1 },
-        { icon: 'mall',   label: 'До Dubai Mall',   minutes: 3 },
-      ],
-    },
-  },
-  {
-    id: 4,
-    country: 'AE',
-    city: 'Дубай',
-    district: 'Arabian Ranches',
-    type: 'ВИЛЛА',
-    price: '$1,850,000',
-    pricePerSqm: '≈ $4,404/м²',
-    beds: 4,
-    baths: 5,
-    area: 420,
-    image: '/images/prop-dubai-villa.jpg',
-    agency: 'fäm Properties',
-    exclusive: false,
-    tags: ['Семейное комьюнити', 'Школы IB'],
-    crypto: true,
-    locationMap: {
-      image: mapDubaiRanches,
-      pinPos: { x: 50, y: 48 },
-      accentColor: 'hsl(32,70%,52%)',
-      distances: [
-        { icon: 'sea',    label: 'До моря',        minutes: 25 },
-        { icon: 'center', label: 'До центра города', minutes: 20 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 10 },
-      ],
-    },
-  },
-  {
-    id: 16,
-    country: 'AE',
-    city: 'Дубай',
-    district: 'Business Bay',
-    type: 'АПАРТАМЕНТЫ',
-    price: '$695,000',
-    pricePerSqm: '≈ $7,989/м²',
-    beds: 2,
-    baths: 2,
-    area: 87,
-    image: '/images/prop-dubai-canal.jpg',
-    agency: 'fäm Properties',
-    exclusive: false,
-    tags: ['Canal View', 'Счёт в банке ОАЭ'],
-    crypto: true,
-    locationMap: {
-      image: mapDubaiBizBay,
-      pinPos: { x: 50, y: 44 },
-      accentColor: 'hsl(210,78%,52%)',
-      distances: [
-        { icon: 'sea',    label: 'До моря',        minutes: 15 },
-        { icon: 'center', label: 'До центра города', minutes: 5 },
-        { icon: 'mall',   label: 'До Dubai Mall',   minutes: 8 },
-      ],
-    },
-  },
-  /* ── Turkey ───────────────────────────────────────────────────── */
-  {
-    id: 5,
-    country: 'TR',
-    city: 'Стамбул',
-    district: 'Beşiktaş',
-    type: 'АПАРТАМЕНТЫ',
-    price: '$285,000',
-    pricePerSqm: '≈ $3,000/м²',
-    beds: 2,
-    baths: 1,
-    area: 95,
-    image: '/images/prop-istanbul.jpg',
-    agency: 'H&S Real Estate',
-    exclusive: false,
-    tags: ['ВНЖ при покупке'],
-    crypto: false,
-    locationMap: {
-      image: mapIstanbul,
-      pinPos: { x: 50, y: 46 },
-      accentColor: 'hsl(18,72%,52%)',
-      distances: [
-        { icon: 'sea',    label: 'До Босфора',      minutes: 3 },
-        { icon: 'center', label: 'До центра (Таксим)', minutes: 10 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 8 },
-      ],
-    },
-  },
-  {
-    id: 6,
-    country: 'TR',
-    city: 'Анталья',
-    district: 'Lara Beach',
-    type: 'ВИЛЛА',
-    price: '$448,000',
-    pricePerSqm: '≈ $2,036/м²',
-    beds: 3,
-    baths: 3,
-    area: 220,
-    image: '/images/prop-antalya.jpg',
-    agency: 'H&S Real Estate',
-    exclusive: false,
-    tags: ['200м до пляжа', 'Гражданство'],
-    crypto: true,
-    locationMap: {
-      image: mapAntalya,
-      pinPos: { x: 50, y: 44 },
-      accentColor: 'hsl(178,68%,46%)',
-      distances: [
-        { icon: 'sea',    label: 'До пляжа',        minutes: 1 },
-        { icon: 'center', label: 'До центра города', minutes: 15 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 10 },
-      ],
-    },
-  },
-  /* ── Cyprus ───────────────────────────────────────────────────── */
-  {
-    id: 7,
-    country: 'CY',
-    city: 'Лимасол',
-    district: 'Germasogeia',
-    type: 'АПАРТАМЕНТЫ',
-    price: '€435,000',
-    pricePerSqm: '≈ €4,350/м²',
-    beds: 2,
-    baths: 2,
-    area: 100,
-    image: '/images/prop-limassol.jpg',
-    agency: 'H&S Real Estate',
-    exclusive: false,
-    tags: ['Non-dom статус', 'ПМЖ'],
-    crypto: true,
-    locationMap: {
-      image: mapLimassol,
-      pinPos: { x: 50, y: 46 },
-      accentColor: 'hsl(208,78%,52%)',
-      distances: [
-        { icon: 'sea',    label: 'До моря',        minutes: 5 },
-        { icon: 'center', label: 'До центра города', minutes: 10 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 12 },
-      ],
-    },
-  },
-  {
-    id: 8,
-    country: 'CY',
-    city: 'Пафос',
-    district: 'Koloni',
-    type: 'ВИЛЛА',
-    price: '€680,000',
-    pricePerSqm: '≈ €2,833/м²',
-    beds: 3,
-    baths: 3,
-    area: 240,
-    image: '/images/prop-cyprus.jpg',
-    agency: 'H&S Real Estate',
-    exclusive: true,
-    tags: ['Частная школа рядом'],
-    crypto: true,
-    locationMap: {
-      image: mapPaphos,
-      pinPos: { x: 50, y: 46 },
-      accentColor: 'hsl(28,62%,52%)',
-      distances: [
-        { icon: 'sea',    label: 'До моря',        minutes: 8 },
-        { icon: 'center', label: 'До центра Пафоса', minutes: 12 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 15 },
-      ],
-    },
-  },
-  /* ── Georgia ──────────────────────────────────────────────────── */
-  {
-    id: 9,
-    country: 'GE',
-    city: 'Батуми',
-    district: 'Набережная',
-    type: 'АПАРТАМЕНТЫ',
-    price: '$95,000',
-    pricePerSqm: '≈ $1,319/м²',
-    beds: 2,
-    baths: 1,
-    area: 72,
-    image: '/images/prop-georgia.jpg',
-    agency: 'EstateofMind Direct',
-    exclusive: false,
-    tags: ['ВНЖ Грузии', 'Налог 0%'],
-    crypto: true,
-    locationMap: {
-      image: mapBatumi,
-      pinPos: { x: 50, y: 44 },
-      accentColor: 'hsl(152,68%,42%)',
-      distances: [
-        { icon: 'sea',    label: 'До моря',        minutes: 1 },
-        { icon: 'center', label: 'До центра города', minutes: 5 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 8 },
-      ],
-    },
-  },
-  {
-    id: 10,
-    country: 'GE',
-    city: 'Тбилиси',
-    district: 'Ваке',
-    type: 'ПЕНТХАУС',
-    price: '$185,000',
-    pricePerSqm: '≈ $1,321/м²',
-    beds: 3,
-    baths: 2,
-    area: 140,
-    image: '/images/prop-tbilisi.jpg',
-    agency: 'EstateofMind Direct',
-    exclusive: false,
-    tags: ['Премиум район'],
-    crypto: true,
-    locationMap: {
-      image: mapTbilisi,
-      pinPos: { x: 50, y: 46 },
-      accentColor: 'hsl(32,78%,52%)',
-      distances: [
-        { icon: 'landmark', label: 'До парка Ваке', minutes: 3 },
-        { icon: 'center',   label: 'До центра города', minutes: 10 },
-        { icon: 'mall',     label: 'До ТЦ',          minutes: 7 },
-      ],
-    },
-  },
-  /* ── Thailand ─────────────────────────────────────────────────── */
-  {
-    id: 11,
-    country: 'TH',
-    city: 'Пхукет',
-    district: 'Rawai',
-    type: 'ВИЛЛА',
-    price: '$520,000',
-    pricePerSqm: '≈ $1,857/м²',
-    beds: 3,
-    baths: 3,
-    area: 280,
-    image: '/images/prop-phuket.jpg',
-    agency: 'Samui Exclusive Homes',
-    exclusive: false,
-    tags: ['Elite Visa'],
-    crypto: true,
-    locationMap: {
-      image: mapPhuket,
-      pinPos: { x: 50, y: 44 },
-      accentColor: 'hsl(168,72%,42%)',
-      distances: [
-        { icon: 'sea',    label: 'До моря',        minutes: 3 },
-        { icon: 'center', label: 'До Phuket Town',  minutes: 20 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 20 },
-      ],
-    },
-  },
-  {
-    id: 15,
-    country: 'TH',
-    city: 'Самуи',
-    district: 'Chaweng Noi',
-    type: 'ВИЛЛА',
-    price: '$318,000',
-    pricePerSqm: '≈ $1,691/м²',
-    beds: 3,
-    baths: 3,
-    area: 188,
-    image: '/images/prop-koh-samui.jpg',
-    agency: 'Samui Exclusive Homes',
-    exclusive: false,
-    tags: ['Рядом с пляжем'],
-    crypto: true,
-    locationMap: {
-      image: mapSamui,
-      pinPos: { x: 50, y: 46 },
-      accentColor: 'hsl(187,72%,48%)',
-      distances: [
-        { icon: 'sea',    label: 'До моря',        minutes: 3 },
-        { icon: 'center', label: 'До Chaweng',      minutes: 8 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 10 },
-      ],
-    },
-  },
-  /* ── Portugal ─────────────────────────────────────────────────── */
-  {
-    id: 13,
-    country: 'PT',
-    city: 'Лиссабон',
-    district: 'Campo de Ourique',
-    type: 'АПАРТАМЕНТЫ',
-    price: '€410,000',
-    pricePerSqm: '≈ €5,000/м²',
-    beds: 2,
-    baths: 1,
-    area: 82,
-    image: '/images/prop-lisbon.jpg',
-    agency: 'Sotheby\'s International Realty',
-    exclusive: false,
-    tags: ['D7 / D8 Визы'],
-    crypto: false,
-    locationMap: {
-      image: mapLisbon,
-      pinPos: { x: 50, y: 46 },
-      accentColor: 'hsl(38,72%,52%)',
-      distances: [
-        { icon: 'sea',    label: 'До реки Тежу',    minutes: 10 },
-        { icon: 'center', label: 'До центра (Байша)', minutes: 12 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 10 },
-      ],
-    },
-  },
-  {
-    id: 14,
-    country: 'PT',
-    city: 'Алгарве',
-    district: 'Vale do Lobo',
-    type: 'ВИЛЛА',
-    price: '€1,380,000',
-    pricePerSqm: '≈ €6,000/м²',
-    beds: 4,
-    baths: 4,
-    area: 230,
-    image: '/images/prop-algarve.jpg',
-    agency: 'Knight Frank Portugal',
-    exclusive: true,
-    tags: ['Гольф-курорт', 'International School'],
-    crypto: false,
-    locationMap: {
-      image: mapAlgarve,
-      pinPos: { x: 50, y: 44 },
-      accentColor: 'hsl(15,68%,54%)',
-      distances: [
-        { icon: 'sea',    label: 'До океана',       minutes: 5 },
-        { icon: 'center', label: 'До Алмансила',    minutes: 15 },
-        { icon: 'mall',   label: 'До ТЦ',           minutes: 20 },
-      ],
-    },
-  },
-  /* ── Serbia ───────────────────────────────────────────────────── */
-  {
-    id: 12,
-    country: 'RS',
-    city: 'Белград',
-    district: 'Savski Venac',
-    type: 'АПАРТАМЕНТЫ',
-    price: '€88,000',
-    pricePerSqm: '≈ €1,294/м²',
-    beds: 2,
-    baths: 1,
-    area: 68,
-    image: '/images/prop-belgrade.jpg',
-    agency: 'EstateofMind Direct',
-    exclusive: false,
-    tags: ['ВНЖ по недвижимости'],
-    crypto: true,
-    locationMap: {
-      image: mapBelgrade,
-      pinPos: { x: 50, y: 46 },
-      accentColor: 'hsl(222,58%,52%)',
-      distances: [
-        { icon: 'landmark', label: 'До Калемегдана', minutes: 6 },
-        { icon: 'center',   label: 'До центра города', minutes: 8 },
-        { icon: 'mall',     label: 'До ТЦ',          minutes: 6 },
-      ],
-    },
-  },
-];
+import { PropertyLocationMap } from '@/components/PropertyLocationMap';
+import { LISTINGS } from '@/data/listings';
+import { setDetailOrigin } from '@/lib/propertyOrigin';
 
 export default function Properties() {
   const search = useSearch();
@@ -499,7 +36,12 @@ export default function Properties() {
     return true;
   });
 
-  const [immersive, setImmersive] = useState<{ listing: ImmersionListing; origin: { x: number; y: number } } | null>(null);
+  const [, navigate] = useLocation();
+
+  const openDetail = (id: number, clientX: number, clientY: number) => {
+    setDetailOrigin(clientX, clientY);
+    navigate(`/properties/${id}`);
+  };
 
   return (
     <Layout>
@@ -605,7 +147,14 @@ export default function Properties() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredListings.map((item) => (
-              <div key={item.id} className="eom-card flex flex-col group cursor-pointer border border-white/5 bg-[#0a0a0a] hover:border-white/20 transition-all duration-300 overflow-hidden rounded-xl">
+              <div
+                key={item.id}
+                role="link"
+                tabIndex={0}
+                onClick={(e) => openDetail(item.id, e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2)}
+                onKeyDown={(e) => { if (e.key === 'Enter') openDetail(item.id, window.innerWidth / 2, window.innerHeight / 2); }}
+                className="eom-card flex flex-col group cursor-pointer border border-white/5 bg-[#0a0a0a] hover:border-white/20 transition-all duration-300 overflow-hidden rounded-xl"
+              >
                 <div className="relative aspect-[3/2] overflow-hidden bg-[#111]">
                   <img
                     src={item.image}
@@ -676,27 +225,10 @@ export default function Properties() {
                     </div>
                   </div>
 
-                  <div className="mb-5 relative z-10">
+                  <div className="mb-5 relative z-10" onClick={(e) => e.stopPropagation()}>
                     <PropertyLocationMap
                       {...item.locationMap}
-                      onPinClick={(origin) =>
-                        setImmersive({
-                          origin,
-                          listing: {
-                            image: item.image,
-                            mapImage: item.locationMap.image,
-                            city: item.city,
-                            district: item.district,
-                            type: item.type,
-                            price: item.price,
-                            beds: item.beds,
-                            baths: item.baths,
-                            area: item.area,
-                            pinPos: item.locationMap.pinPos,
-                            accentColor: item.locationMap.accentColor,
-                          },
-                        })
-                      }
+                      onPinClick={() => openDetail(item.id, window.innerWidth / 2, window.innerHeight * 0.4)}
                     />
                   </div>
 
@@ -709,17 +241,9 @@ export default function Properties() {
                       type="button"
                       className="min-h-[48px] px-4 rounded text-[11px] font-space-grotesk uppercase tracking-wider text-white/70 group-hover:text-white group-hover:bg-white/10 transition-all flex items-center"
                       onClick={(e) => {
+                        e.stopPropagation();
                         const rect = (e.currentTarget as HTMLButtonElement).getBoundingClientRect();
-                        setImmersive({
-                          origin: { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 },
-                          listing: {
-                            image: item.image,
-                            mapImage: item.locationMap.image,
-                            city: item.city, district: item.district, type: item.type,
-                            price: item.price, beds: item.beds, baths: item.baths, area: item.area,
-                            pinPos: item.locationMap.pinPos, accentColor: item.locationMap.accentColor,
-                          },
-                        });
+                        openDetail(item.id, rect.left + rect.width / 2, rect.top + rect.height / 2);
                       }}
                     >
                       Подробнее <ArrowRight className="w-3 h-3 ml-1.5 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
@@ -806,11 +330,6 @@ export default function Properties() {
         </div>
       </section>
 
-      <PropertyImmersion
-        listing={immersive?.listing ?? null}
-        origin={immersive?.origin ?? null}
-        onClose={() => setImmersive(null)}
-      />
     </Layout>
   );
 }
