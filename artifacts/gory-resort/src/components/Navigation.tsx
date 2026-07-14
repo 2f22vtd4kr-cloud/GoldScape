@@ -26,6 +26,17 @@ export function Navigation() {
     setMobileOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    // Lock body scroll while the mobile menu is open. Without this, the
+    // dropdown only covers its own content height — anything behind it
+    // (e.g. the hero CTA pills) can peek out from under its bottom edge
+    // once scrolled, and the page underneath stays scrollable/interactive.
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
   return (
     <nav className={`eom-nav ${isScrolled || mobileOpen ? 'scrolled' : ''}`}>
       <Link href="/" className="flex items-center shrink-0">
@@ -47,7 +58,11 @@ export function Navigation() {
         />
       </Link>
 
-      <div className="hidden md:flex items-center gap-8">
+      {/* lg, not md: at exactly 768px (a common tablet-portrait width) the
+          logo + 4 links + Консультация + theme toggle add up to more than
+          the viewport, pushing the theme toggle off-screen. Desktop nav only
+          gets room to breathe at lg (1024px); tablets keep the hamburger. */}
+      <div className="hidden lg:flex items-center gap-8">
         {LINKS.map((link) => (
           <Link
             key={link.href}
@@ -60,7 +75,7 @@ export function Navigation() {
       </div>
 
       <div className="flex items-center gap-4">
-        <a href="/about#consult" className="eom-btn-oilslick hidden md:inline-flex">
+        <a href="/about#consult" className="eom-btn-oilslick hidden lg:inline-flex">
           Консультация
         </a>
         <button
@@ -73,7 +88,7 @@ export function Navigation() {
         </button>
         <button
           type="button"
-          className="md:hidden text-foreground w-12 h-12 -mr-3 flex items-center justify-center"
+          className="lg:hidden text-foreground w-12 h-12 -mr-3 flex items-center justify-center"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? 'Закрыть меню' : 'Открыть меню'}
         >
@@ -82,10 +97,15 @@ export function Navigation() {
       </div>
 
       {mobileOpen && (
-        <div className="absolute top-full left-0 right-0 md:hidden bg-white dark:bg-[#080808] border-t border-black/5 dark:border-white/5 flex flex-col px-8 py-6 gap-6">
+        <div className="absolute top-full left-0 right-0 min-h-screen lg:hidden bg-white dark:bg-[#080808] border-t border-black/5 dark:border-white/5 flex flex-col px-8 py-6 gap-6">
           {/* Fully opaque (not translucent + blurred) on purpose: with the animated
               chrome-blob hero sitting right underneath, a semi-transparent panel let
-              the bright hero text/blob bleed through and collide with the menu links. */}
+              the bright hero text/blob bleed through and collide with the menu links.
+              min-h-screen is load-bearing, not decorative: the panel only sizes to
+              its own content by default, which is shorter than the viewport, so
+              whatever sits behind it in the page's normal flow (e.g. the hero CTA
+              pills) pokes out from under its bottom edge. min-h-screen guarantees
+              full coverage no matter how tall the menu's own content is. */}
           {LINKS.map((link) => (
             <Link
               key={link.href}

@@ -1174,7 +1174,11 @@ html:not(.dark) .section-reveal-heading::after {
 }
 
 .eom-btn-oilslick {
-  display: inline-flex;
+  /* display intentionally NOT set here: Navigation.tsx controls it via
+     Tailwind's `hidden md:inline-flex` so the button is hidden on mobile.
+     Setting display in this rule would win the cascade over `.hidden`
+     (same specificity, declared later) and force the button visible on
+     mobile, pushing the theme toggle + hamburger off-screen. */
   align-items: center;
   gap: 8px;
   padding: 10px 20px;

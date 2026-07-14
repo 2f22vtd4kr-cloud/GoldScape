@@ -36,6 +36,34 @@ PERSONAS.md          # Visitor persona roster for UX review
 
 ## Session log
 
+### July 14, 2026 — Mobile/tablet nav overflow fix (theme toggle off-screen)
+
+**Bug report:** on mobile, the light/dark toggle button was invisible — pushed past the
+right edge of the screen.
+
+**Root cause 1:** `.eom-btn-oilslick` (the "Консультация" nav CTA) declared its own
+`display: inline-flex`, which won the CSS cascade over Tailwind's `hidden` utility (same
+specificity, declared later in `index.css`). The button stayed visible on mobile, pushing
+the theme toggle and hamburger off-screen. Fixed by removing the conflicting `display`
+declaration from `.eom-btn-oilslick` and letting `Navigation.tsx`'s `hidden lg:inline-flex`
+fully control visibility.
+
+**Root cause 2:** even after that fix, the desktop nav (links + CTA) didn't actually fit
+in the viewport right at 768px (a common tablet-portrait width) — content overflowed by
+~50px, pushing the theme toggle off-screen again, just at a different breakpoint. Moved the
+breakpoint that reveals the full desktop nav from `md` (768px) to `lg` (1024px) in
+`Navigation.tsx`, so tablets keep the hamburger menu. Verified with a scripted sweep across
+320–1440px — the theme toggle now stays fully visible at every width.
+
+**Related bug found during the sweep:** the mobile dropdown menu only sized itself to its
+own content, so on the home page the hero's "Подобрать объект" CTA (positioned behind it in
+normal page flow) poked out from under the menu's bottom edge, visually overlapping into a
+double-pill glitch. Fixed by adding `min-h-screen` to the dropdown panel and locking body
+scroll while the menu is open.
+
+See `.agents/memory/nav-breakpoint-content-fit.md` for the full writeup and the testing
+lesson (screenshot the exact breakpoint width, not just "mobile" and "desktop").
+
 ### July 14, 2026 — Liquid Glass system hardening + blob animation
 
 #### Nika design review (5 findings fixed)

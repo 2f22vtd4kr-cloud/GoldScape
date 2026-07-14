@@ -19,3 +19,4 @@
 - [Fixed-nav mobile clearance convention](fixed-nav-clearance-convention.md) — this site's fixed header needs ~pt-24 to pt-32 on new full-bleed sections; check this pattern before adding any new top-of-page section
 - [Property pin & fly-into-building immersion](property-pin-immersion.md) — MapPin icon read as a lightbulb; replaced with animated glow marker + click-origin iris-wipe transition into the listing photo
 - [SPA scroll-to-top](spa-scroll-to-top.md) — wouter preserves scroll across route changes like the browser default; App.tsx's ScrollToTop effect already covers all routes
+- [Nav breakpoint content-fit](nav-breakpoint-content-fit.md) — a `hidden md:flex` nav can overflow right at 768px itself even though mobile/desktop screenshots look fine; sweep every width, not just two
