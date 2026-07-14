@@ -3,6 +3,7 @@ import { useSearch } from 'wouter';
 import { Filter, MessageCircle, ArrowRight, Send, Check, ShieldCheck } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import { PropertyLocationMap, type LocationMap } from '@/components/PropertyLocationMap';
+import { PropertyImmersion, type ImmersionListing } from '@/components/PropertyImmersion';
 
 import mapDubaiPalm      from '@assets/generated_images/listing-map-dubai-palm-jumeirah.png';
 import mapDubaiMarina    from '@assets/generated_images/listing-map-dubai-marina.png';
@@ -445,6 +446,8 @@ export default function Properties() {
     ? LISTINGS.filter(l => l.country === countryFilter)
     : LISTINGS;
 
+  const [immersive, setImmersive] = useState<{ listing: ImmersionListing; origin: { x: number; y: number } } | null>(null);
+
   return (
     <Layout>
       {/* PAGE HEADER */}
@@ -532,7 +535,7 @@ export default function Properties() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                  <div className="absolute top-4 left-4 flex flex-wrap gap-2 pr-16">
+                  <div className={`absolute top-4 left-4 right-4 flex flex-wrap gap-2 ${item.exclusive ? 'pr-24' : ''}`}>
                     <div className="bg-[#080808]/80 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 text-[10px] font-oxanium flex items-center gap-1.5 shadow-lg">
                       <span className="text-gray-200 tracking-wider uppercase">{item.country}</span>
                     </div>
@@ -594,7 +597,25 @@ export default function Properties() {
                   </div>
 
                   <div className="mb-5 relative z-10">
-                    <PropertyLocationMap {...item.locationMap} />
+                    <PropertyLocationMap
+                      {...item.locationMap}
+                      onPinClick={(origin) =>
+                        setImmersive({
+                          origin,
+                          listing: {
+                            image: item.image,
+                            mapImage: item.locationMap.image,
+                            city: item.city,
+                            district: item.district,
+                            type: item.type,
+                            price: item.price,
+                            beds: item.beds,
+                            baths: item.baths,
+                            area: item.area,
+                          },
+                        })
+                      }
+                    />
                   </div>
 
                   <div className="mt-auto flex items-center justify-between pt-4 border-t border-white/5 relative z-10">
@@ -679,6 +700,12 @@ export default function Properties() {
           </div>
         </div>
       </section>
+
+      <PropertyImmersion
+        listing={immersive?.listing ?? null}
+        origin={immersive?.origin ?? null}
+        onClose={() => setImmersive(null)}
+      />
     </Layout>
   );
 }

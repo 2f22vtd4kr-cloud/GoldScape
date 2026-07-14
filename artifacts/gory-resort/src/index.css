@@ -470,7 +470,7 @@ body {
   animation: floatBlobSmall 5s ease-in-out infinite;
 }
 
-/* Pulsing pin marker used by PropertyLocationMap */
+/* Pulsing pin marker (legacy utility, kept in case it's reused elsewhere) */
 @keyframes pulseGlow {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.55);
@@ -481,6 +481,81 @@ body {
 }
 .animate-pulse-glow {
   animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* ─── Property pin — iridescent "oil-slick" glow marking the exact building ──
+   Replaces a literal MapPin icon (which, filled + glowing, read as a
+   lightbulb). A slow breathing pulse plus a rotating multi-hue spill invite
+   a tap without looking like generic UI chrome; clicking it drives the
+   PropertyImmersion "fly into the building" transition. */
+@keyframes pin-breathe {
+  0%, 100% { transform: scale(1);    opacity: 0.82; }
+  50%      { transform: scale(1.4);  opacity: 1; }
+}
+@keyframes pin-spill-spin {
+  to { transform: rotate(360deg); }
+}
+.property-pin {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.property-pin__halo {
+  position: absolute;
+  inset: -13px;
+  display: block;
+  border-radius: 50%;
+  filter: blur(9px);
+  overflow: hidden;
+  animation: pin-breathe 3.4s ease-in-out infinite;
+}
+.property-pin__halo::before {
+  content: '';
+  position: absolute;
+  inset: -70%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    hsl(200, 95%, 62%) 0%,
+    hsl(280, 90%, 68%) 22%,
+    hsl(325, 92%, 66%) 40%,
+    hsl(28, 95%, 62%) 58%,
+    hsl(55, 90%, 65%) 72%,
+    hsl(170, 85%, 55%) 88%,
+    hsl(200, 95%, 62%) 100%
+  );
+  animation: pin-spill-spin 9s linear infinite;
+}
+.property-pin__core {
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.9), 0 0 22px 7px rgba(255, 255, 255, 0.35);
+  transition: box-shadow 0.2s ease;
+}
+.property-pin:hover .property-pin__halo,
+.property-pin:focus-visible .property-pin__halo {
+  filter: blur(11px);
+}
+.property-pin:hover .property-pin__core,
+.property-pin:focus-visible .property-pin__core {
+  box-shadow: 0 0 16px 4px rgba(255, 255, 255, 1), 0 0 30px 10px rgba(255, 255, 255, 0.5);
+}
+.property-pin:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .property-pin__halo,
+  .property-pin__halo::before {
+    animation: none;
+  }
 }
 
 /* ─── Hero gas-spill system ──────────────────────────────────────────────

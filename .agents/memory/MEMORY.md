@@ -17,3 +17,5 @@
 - [Chrome-text gradient contrast floor](chrome-text-contrast-floor.md) — decorative text-clip gradients need a minimum-luminance floor or long/multi-line strings hit dark troughs and go illegible
 - [Logo transparency: bake alpha, not mix-blend-mode](logo-mixblend-vs-alpha.md) — mix-blend-mode+backdrop-filter is fragile on mobile; convert black-bg generated logos to real alpha PNGs instead
 - [Fixed-nav mobile clearance convention](fixed-nav-clearance-convention.md) — this site's fixed header needs ~pt-24 to pt-32 on new full-bleed sections; check this pattern before adding any new top-of-page section
+- [Property pin & fly-into-building immersion](property-pin-immersion.md) — MapPin icon read as a lightbulb; replaced with animated glow marker + click-origin iris-wipe transition into the listing photo
+- [SPA scroll-to-top](spa-scroll-to-top.md) — wouter preserves scroll across route changes like the browser default; App.tsx's ScrollToTop effect already covers all routes

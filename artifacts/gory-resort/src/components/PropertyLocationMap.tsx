@@ -1,4 +1,4 @@
-import { MapPin, Waves, Building2, ShoppingBag, Landmark, Car } from 'lucide-react';
+import { Waves, Building2, ShoppingBag, Landmark, Car } from 'lucide-react';
 
 /**
  * RULE: every property listing must ship with a `locationMap` — a generated
@@ -32,7 +32,14 @@ const ICONS: Record<DistanceIcon, typeof Waves> = {
   landmark: Landmark,
 };
 
-export function PropertyLocationMap({ image, distances }: LocationMap) {
+interface PropertyLocationMapProps extends LocationMap {
+  /** Fired when the pin is clicked, with the click's viewport position (used to
+   *  anchor the "fly into the building" immersion animation at the exact spot
+   *  the user tapped). */
+  onPinClick?: (origin: { x: number; y: number }) => void;
+}
+
+export function PropertyLocationMap({ image, distances, onPinClick }: PropertyLocationMapProps) {
   return (
     <div className="relative rounded-lg overflow-hidden border border-white/5 bg-[#0c0c0c]">
       <div className="relative aspect-[16/10] overflow-hidden">
@@ -50,14 +57,22 @@ export function PropertyLocationMap({ image, distances }: LocationMap) {
           className="absolute inset-0 w-full h-full object-contain scale-[1.12] drop-shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
         />
 
-        {/* Pin marking the exact property */}
-        <div className="absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-full flex flex-col items-center">
-          <MapPin
-            className="w-5 h-5 text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.9)]"
-            fill="currentColor"
-          />
-          <span className="-mt-1 block w-1.5 h-1.5 rounded-full bg-white animate-pulse-glow" />
-        </div>
+        {/* Pin marking the exact property — a slow-breathing, iridescent
+            "oil-slick" glow (not a literal map pin icon, which read as a
+            lightbulb) so the exact building draws the eye and invites a tap. */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onPinClick?.({ x: (e.clientX / window.innerWidth) * 100, y: (e.clientY / window.innerHeight) * 100 });
+          }}
+          className="property-pin absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2"
+          aria-label="Смотреть этот объект"
+          title="Смотреть этот объект"
+        >
+          <span className="property-pin__halo" aria-hidden="true" />
+          <span className="property-pin__core" aria-hidden="true" />
+        </button>
       </div>
 
       <div className="flex items-center divide-x divide-white/5 border-t border-white/5">
