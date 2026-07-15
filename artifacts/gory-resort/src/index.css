@@ -1005,8 +1005,15 @@ html:not(.dark) .chrome-text {
     linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  /* Confined to the right ~35% of the hero (behind the artwork/glow), never
+     the text column on the left. A centered "at center" mask used to let a
+     faint grid line land exactly on the eyebrow row and read as a strike
+     through the letters — explicit off-center sizing keeps every point of
+     the text column (x ≤ ~50%, any y) outside the ellipse: at that boundary
+     the horizontal distance term alone already exceeds the ellipse radius,
+     so no text row can ever coincide with a visible line again. */
+  mask-image: radial-gradient(ellipse 30% 65% at 82% 50%, black 15%, transparent 62%);
+  -webkit-mask-image: radial-gradient(ellipse 30% 65% at 82% 50%, black 15%, transparent 62%);
   pointer-events: none;
   z-index: 0;
 }

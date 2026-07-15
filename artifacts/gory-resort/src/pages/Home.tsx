@@ -236,7 +236,12 @@ export default function Home() {
           />
         </div>
 
-        <div className="container mx-auto px-6 pt-28 pb-12 lg:pt-20 lg:pb-0 relative z-10">
+        {/* lg:pt-28 (not lg:pt-20): the fixed nav is ~89px tall at this
+            breakpoint, and pt-20 (80px) put the hero content's top 9px
+            *above* the nav's own bottom edge — its border-bottom/box-shadow
+            line then drew directly across the eyebrow row, reading as a
+            strike-through. pt-28 clears the nav with margin to spare. */}
+        <div className="container mx-auto px-6 pt-28 pb-12 lg:pb-0 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-12 lg:items-start">
 
             {/* ── Text ── */}
