@@ -3,14 +3,16 @@ import { useParams, Link } from 'wouter';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, MessageCircle, Send, ShieldCheck,
-  Scale, TrendingUp, AlertTriangle, MapPin, Landmark,
+  Scale, TrendingUp, AlertTriangle, MapPin, Landmark, Camera,
 } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import { PropertyLocationMap } from '@/components/PropertyLocationMap';
+import { PropertyScenesCarousel } from '@/components/PropertyScenesCarousel';
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { LISTINGS, listingById } from '@/data/listings';
 import { countryByListingCode } from '@/data/countries';
 import { consumeDetailOrigin } from '@/lib/propertyOrigin';
+import { getScenesForListing } from '@/data/scenes';
 
 /**
  * Full "fly into the building" entrance: reused from the old PropertyImmersion
@@ -222,6 +224,28 @@ export default function PropertyDetail() {
           </div>
         </div>
       </section>
+
+      {/* ─── PROPERTY SCENES CAROUSEL ─────────────────────────────────── */}
+      {(() => {
+        const scenes = getScenesForListing(listing.id, listing.locationMap.image as string, accent);
+        if (scenes.length < 2) return null;
+        return (
+          <section className="py-8 md:py-12 px-4 md:px-12 lg:px-24 dark:border-b dark:border-white/5 border-b border-black/10 dark:bg-[#050505] bg-[#F5F3EE]">
+            <div className="container mx-auto max-w-7xl">
+              <div className="flex items-center gap-2 mb-5">
+                <Camera className="w-4 h-4 dark:text-white/40 text-foreground/50" />
+                <h2 className="font-oxanium text-lg md:text-xl font-semibold dark:text-white text-foreground tracking-tight">
+                  Сцены объекта
+                </h2>
+                <span className="text-[11px] font-space-grotesk dark:text-white/30 text-foreground/40 ml-1">
+                  — {scenes.length} видов
+                </span>
+              </div>
+              <PropertyScenesCarousel scenes={scenes} accent={accent} />
+            </div>
+          </section>
+        );
+      })()}
 
       {/* ─── DESCRIPTION + NEIGHBORHOOD ───────────────────────────────── */}
       <section className="py-12 md:py-16 px-4 md:px-12 lg:px-24 dark:border-b dark:border-white/5 border-b border-black/10 bg-[#F5F3EE] dark:bg-transparent">

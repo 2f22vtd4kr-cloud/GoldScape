@@ -30,5 +30,6 @@ export const modules: ModuleMap = {
   "./components/mockups/liquid-spill/QAWhyUs.tsx": () => import("../components/mockups/liquid-spill/QAWhyUs.tsx"),
   "./components/mockups/mobile-chrome/MobileHome.tsx": () => import("../components/mockups/mobile-chrome/MobileHome.tsx"),
   "./components/mockups/property-gallery/FilmstripCarousel.tsx": () => import("../components/mockups/property-gallery/FilmstripCarousel.tsx"),
-  "./components/mockups/property-gallery/TabbedCrossfade.tsx": () => import("../components/mockups/property-gallery/TabbedCrossfade.tsx")
+  "./components/mockups/property-gallery/TabbedCrossfade.tsx": () => import("../components/mockups/property-gallery/TabbedCrossfade.tsx"),
+  "./components/mockups/property-scenes/FilmstripViewer.tsx": () => import("../components/mockups/property-scenes/FilmstripViewer.tsx")
 };
