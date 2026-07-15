@@ -36,6 +36,56 @@ PERSONAS.md          # Visitor persona roster for UX review
 
 ## Session log
 
+### July 15, 2026 — Re-import setup + ongoing persona sim (round 1)
+
+**Re-import setup:** project was re-imported from GitHub with all 3 workflows failing
+(no `node_modules`). Ran `pnpm install` at the workspace root, confirmed
+`DATABASE_URL` was already provisioned and `drizzle-kit push` reported no pending
+schema changes, then restarted all 3 workflows. Verified with desktop + mobile
+screenshots — site renders correctly, no code changes were needed for this part.
+
+**Persona sim run (per `PERSONAS.md`), round 1 — desktop + true mobile-viewport
+(390px) screenshots across Home, Properties (+ filters), PropertyDetail, About,
+Compare, Favorites, and 4 country pages (AE/TR/CY/GE), plus a 768px tablet nav
+check and a light-mode pass:**
+
+- **Fixed:** the mobile tax-comparison table (`TaxGuide.tsx`, "Краткое сравнение")
+  is wider than the 390px viewport by design (`overflow-x-auto` + `min-w-[560px]`)
+  so users can swipe to see the ВНЖ/Капитал columns, but there was no visual
+  affordance — it looked like the table just ended. Added a right-edge gradient
+  fade (`sm:hidden`) plus a small "← Листайте таблицу для всех колонок" hint
+  below the table on mobile only.
+- **Verified working, no changes needed:** property filters (country/type/price/
+  beds) correctly narrow the 16-listing catalogue (tested via scripted `<select>`
+  changes, e.g. GE filter: 16 → 2 cards); card click → detail page navigation;
+  mobile hamburger menu (no overflow at 390px or the 768px tablet breakpoint);
+  light mode on Home + Properties; testimonials (named, city-tagged) and team
+  section (named individuals with initials avatars, not stock photos) already
+  satisfy Viktor/Irina's trust-signal requirements from `PERSONAS.md`.
+- Sim is ongoing per user request ("non-stop", both viewports) — later rounds
+  will append here rather than duplicating this section.
+
+**Round 2** — segment-by-segment mobile scroll sweep (PropertyDetail, CountryPage
+AE, Home) covering sections not visible above the fold: PropertyDetail's
+"Район"/"На что обратить внимание"/"Перевод капитала"/commission sections,
+CountryPage's tax + CTA + footer sections, Home's stats/testimonials/footer.
+No new defects found — layout, spacing, and footer/nav boundaries hold up at
+every scroll position checked. The recurring `GET /` 404s seen in the API
+server log during this sim are not caused by the frontend (grepped — no
+frontend code calls the API server); harmless and unrelated to page browsing.
+
+**Round 3** — stateful interaction testing (favorite + compare toggled via
+scripted clicks, not just static screenshots): populated Favorites and Compare
+pages render correctly with real listing data; the floating compare pill
+(bottom-left) persists correctly across Favorites/Compare/404 without
+overlapping the WhatsApp bubble (bottom-right); the 404 page matches brand
+styling with a working "На главную" CTA; PropertyDetail's "similar listings"
+strip at the very bottom renders correctly. Checked for JS console/page errors
+across all of the above — none found. No defects found this round; sim
+coverage across the site is now broad (all routes, both primary viewports,
+tablet breakpoint, light mode, and key stateful interactions) with only the
+one real fix from round 1 (mobile tax-table scroll hint).
+
 ### July 14, 2026 — Hero visual cleanup (contour frame, spiky blob, glow fade, transparent numerals)
 
 **Requests:** desktop homepage hero looked unpolished — remove the spiky corner "contour

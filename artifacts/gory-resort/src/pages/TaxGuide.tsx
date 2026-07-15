@@ -161,7 +161,8 @@ export default function TaxGuide() {
           <h2 className="font-oxanium text-[11px] tracking-[0.2em] dark:text-white/30 text-foreground/40 uppercase mb-8">
             Краткое сравнение
           </h2>
-          <div className="overflow-x-auto -mx-4 px-4">
+          <div className="relative">
+            <div className="overflow-x-auto -mx-4 px-4">
             <table className="w-full min-w-[560px] border-collapse">
               <thead>
                 <tr className="border-b dark:border-white/[0.06] border-black/[0.06]">
@@ -187,7 +188,12 @@ export default function TaxGuide() {
                 ))}
               </tbody>
             </table>
+            </div>
+            <div className="pointer-events-none absolute right-0 top-0 bottom-6 w-10 bg-gradient-to-l dark:from-[#050505] from-[#F5F3EE] to-transparent sm:hidden" />
           </div>
+          <p className="font-oxanium text-[10px] tracking-[0.1em] dark:text-white/25 text-foreground/35 mt-3 uppercase sm:hidden">
+            ← Листайте таблицу для всех колонок
+          </p>
           <p className="font-space-grotesk text-[11px] dark:text-white/25 text-foreground/35 mt-6 leading-relaxed">
             * Территориальная система: иностранные доходы не облагаются при соблюдении условий.
             † Non-Dom: 0% на дивиденды и проценты на 17 лет.
