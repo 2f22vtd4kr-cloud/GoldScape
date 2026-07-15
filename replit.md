@@ -293,6 +293,43 @@ composites in how real floor plans and real interiors in that market actually lo
 without claiming a specific real address is for sale here). Flagged to the user for a
 decision rather than assumed.
 
+### July 15, 2026 — Real-listing import: Montenegro (×2) + Serbia Waterfront (×1)
+
+#### Task: repopulate listings with real agency properties per BERSERK MODE instructions
+
+**Agencies researched:**
+- Montenegro: Sotheby's International Realty Montenegro (sothebysrealty.me), Monteonline (monteonline.org)
+- Serbia: Atrium Property Services (BW Parkview / Beograd na vodi)
+
+**Properties added (3 new listings, 3 new country entries):**
+
+| ID | Country | District | Type | Price | Agency | Source |
+|----|---------|----------|------|-------|--------|--------|
+| 18 | ME | Доброта, Залив Котор | Апартаменты | €943,800 | Sotheby's Int'l Realty Montenegro | sothebysrealty.me |
+| 19 | ME | Свети-Стефан, Будва | Апартаменты | €174,900 | Monteonline | monteonline.org |
+| 20 | RS | Beograd na vodi | Апартаменты | €370,000 | Atrium Property Services | atriumproperty.rs |
+
+**DNA strings (saved in scenes.ts as comments):**
+- p18: pale travertine, Bay of Kotor silver-blue, Perast church domes, white-render 3-floor waterfront building
+- p19: light herringbone oak, Sveti Stefan island view through full-width west glass, white plaster + stone accent
+- p20: light oak wide-plank, Sava + Kalemegdan wrap-around glass curtain wall, silver-white/brass palette
+
+**Images generated (21 total via Promise.all):**
+- Location maps: listing-map-kotor-dobrota.png, listing-map-sveti-stefan.png, listing-map-belgrade-waterfront.png
+- Terrain map: terrain-map-montenegro.png; Destination: dest-montenegro.jpg
+- Property card images: prop-kotor.jpg, prop-sveti-stefan.jpg, prop-belgrade-waterfront.jpg
+- Scene images (per listing): exterior, floorplan, section, life scene, bizarre — 5 scenes × 3 listings = 15 images
+
+**Other changes made in this session:**
+- `PropertyScenesCarousel.tsx`: added `life_remote_work` to SceneType union + Laptop icon entry in SCENE_ICONS
+- `countries.ts`: added Montenegro country data (code: 'me', terrain map, stats, features, markets, visa, taxNote)
+- `Home.tsx`: added Montenegro to destinations array; updated "7 стран" → "8 стран" in hero stats
+- `Properties.tsx`: country count made dynamic via `new Set(LISTINGS.map(l => l.country)).size` instead of hardcoded 7
+- `listings.ts`: added optional `agencyUrl?: string` field to Listing interface; all 3 new listings have agencyUrl
+- Typecheck clean after all changes
+
+**Catalogue status after this session:** 20 listings · 8 countries (AE/TR/CY/GE/TH/PT/RS/ME)
+
 ### July 15, 2026 — Re-import setup (round 3)
 
 Project was re-imported again with all 3 workflows failing (no `node_modules`).

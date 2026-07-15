@@ -79,7 +79,7 @@ export default function Properties() {
           </h1>
           <p className="dark:text-gray-400 text-foreground/60 font-space-grotesk text-base md:text-lg">
             {filteredListings.length === LISTINGS.length
-              ? `${LISTINGS.length} объектов · 7 стран · от ${minPriceLabel}`
+              ? `${LISTINGS.length} объектов · ${new Set(LISTINGS.map(l => l.country)).size} стран · от ${minPriceLabel}`
               : `${filteredListings.length} ${filteredListings.length === 1 ? 'объект' : filteredListings.length < 5 ? 'объекта' : 'объектов'} по фильтру`}
           </p>
         </div>
@@ -101,6 +101,7 @@ export default function Properties() {
             <option value="TH">Таиланд</option>
             <option value="PT">Португалия</option>
             <option value="RS">Сербия</option>
+            <option value="ME">Черногория</option>
           </select>
 
           <select

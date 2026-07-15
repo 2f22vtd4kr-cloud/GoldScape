@@ -13,7 +13,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronLeft, ChevronRight, Eye,
-  MapPin, Layers, Grid3x3, Flame, Users, Tv2, Coffee, Sparkles,
+  MapPin, Layers, Grid3x3, Flame, Users, Tv2, Coffee, Sparkles, Laptop,
 } from 'lucide-react';
 
 const LUXURY_EASE = [0.22, 1, 0.36, 1] as const;
@@ -27,6 +27,7 @@ export type SceneType =
   | 'life_party'
   | 'life_matchday'
   | 'life_family'
+  | 'life_remote_work'
   | 'bizarre';
 
 export type SceneCategory = 'architecture' | 'life' | 'bizarre';
@@ -48,8 +49,9 @@ const SCENE_ICONS: Record<SceneType, React.ReactNode> = {
   life_bbq:      <Flame className="w-3 h-3" />,
   life_party:    <Users className="w-3 h-3" />,
   life_matchday: <Tv2 className="w-3 h-3" />,
-  life_family:   <Coffee className="w-3 h-3" />,
-  bizarre:       <Sparkles className="w-3 h-3" />,
+  life_family:      <Coffee className="w-3 h-3" />,
+  life_remote_work: <Laptop className="w-3 h-3" />,
+  bizarre:          <Sparkles className="w-3 h-3" />,
 };
 
 const CATEGORY_CONFIG: Record<SceneCategory, { label: string; textClass: string; borderColor: string; glowColor: string }> = {

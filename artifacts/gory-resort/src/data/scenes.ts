@@ -135,6 +135,48 @@ export const PROPERTY_SCENES: SceneMap = {
     { id: 'p17-life',     type: 'life_bbq', category: 'life',         label: 'Приёмка объекта',  sublabel: 'Шестой этаж, вид на марину', image: '/images/scenes/p17-life.jpg'    },
     { id: 'p17-bizarre',  type: 'bizarre',  category: 'bizarre',      label: 'Non-Dom ритуал №2', sublabel: 'Три бухгалтера и море',    image: '/images/scenes/p17-bizarre.jpg' },
   ],
+
+  /* ── 18 · Dobrota, Kotor Bay (Sotheby's International Realty Montenegro) ── */
+  // DNA: Modern seafront apartment · 3 BR · 2 BA · 121 m² · 2.85m ceilings
+  //      floor: pale travertine tile  walls: white smooth render
+  //      windows: full-width south sliding glass, Bay of Kotor view (Perast church domes)
+  //      exterior: white-render 3-floor building, glass railings, rocky waterfront
+  //      palette: pearl white, Kotor-bay silver-blue, travertine beige, pine green
+  18: [
+    { id: 'p18-exterior',  type: 'exterior',   category: 'architecture', label: 'Экстерьер',          sublabel: 'Первая линия, залив Котор',    image: '/images/scenes/p18-exterior.jpg'  },
+    { id: 'p18-floorplan', type: 'floorplan',  category: 'architecture', label: 'Планировка',         sublabel: 'Терраса 12 м над заливом',     image: '/images/scenes/p18-floorplan.jpg' },
+    { id: 'p18-section',   type: 'section',    category: 'architecture', label: 'Разрез',             sublabel: '3 спальни, залив снаружи',      image: '/images/scenes/p18-section.jpg'   },
+    { id: 'p18-bbq',       type: 'life_bbq',   category: 'life',         label: 'Барбекю на террасе', sublabel: 'Вечер, залив Котор внизу',     image: '/images/scenes/p18-bbq.jpg'       },
+    { id: 'p18-bizarre',   type: 'bizarre',    category: 'bizarre',      label: '✦ Балканский улов',  sublabel: 'Рыбацкая лодка в гостиной',    image: '/images/scenes/p18-bizarre.jpg'   },
+  ],
+
+  /* ── 19 · Sveti Stefan, Budva Riviera (Monteonline) ──────────────── */
+  // DNA: Boutique hillside apartment · 1 BR · 1 BA · 62 m² · 2.75m ceilings
+  //      floor: light herringbone oak parquet  walls: white plaster + stone accent
+  //      windows: floor-to-ceiling west-facing glass, Sveti Stefan island view
+  //      exterior: white render + stone facade, terraced hillside garden
+  //      palette: white plaster, Adriatic turquoise, warm terracotta, honey oak
+  19: [
+    { id: 'p19-exterior',  type: 'exterior',        category: 'architecture', label: 'Экстерьер',         sublabel: 'Вид на Свети-Стефан',          image: '/images/scenes/p19-exterior.jpg'  },
+    { id: 'p19-floorplan', type: 'floorplan',        category: 'architecture', label: 'Планировка',        sublabel: '62 м² на склоне над морем',    image: '/images/scenes/p19-floorplan.jpg' },
+    { id: 'p19-section',   type: 'section',          category: 'architecture', label: 'Разрез',            sublabel: 'Остров в окне',                image: '/images/scenes/p19-section.jpg'   },
+    { id: 'p19-remote',    type: 'life_remote_work', category: 'life',         label: 'Удалённая работа',  sublabel: 'Утро, Адриатика за стеклом',   image: '/images/scenes/p19-remote.jpg'    },
+    { id: 'p19-bizarre',   type: 'bizarre',          category: 'bizarre',      label: '✦ Скрипторий',      sublabel: 'Византийский монах, свитки',   image: '/images/scenes/p19-bizarre.jpg'   },
+  ],
+
+  /* ── 20 · Belgrade Waterfront, Sava River (Atrium Property Services) ─ */
+  // DNA: High-rise corner apartment · Floor 14 · 2 BR · 2 BA · 84 m² · 3.0m ceilings
+  //      floor: wide-plank light oak engineered wood  walls: white render + glass curtain
+  //      windows: full-height glass west + north, wrap-around Sava + Kalemegdan view
+  //      exterior: glass-and-steel tower, Belgrade Waterfront quayside promenade
+  //      palette: cool silver-white, Sava steel-blue, warm brass, light oak
+  20: [
+    { id: 'p20-exterior',  type: 'exterior',      category: 'architecture', label: 'Экстерьер',          sublabel: 'Beograd na vodi, Сава',         image: '/images/scenes/p20-exterior.jpg'  },
+    { id: 'p20-floorplan', type: 'floorplan',      category: 'architecture', label: 'Планировка',         sublabel: 'Угловой, 14 этаж, вид на реку', image: '/images/scenes/p20-floorplan.jpg' },
+    { id: 'p20-section',   type: 'section',        category: 'architecture', label: 'Разрез',             sublabel: 'Крепость Калемегдан снаружи',   image: '/images/scenes/p20-section.jpg'   },
+    { id: 'p20-matchday',  type: 'life_matchday',  category: 'life',         label: 'Матч-день',          sublabel: 'ЛЧ, Сава внизу',               image: '/images/scenes/p20-matchday.jpg'  },
+    { id: 'p20-bizarre',   type: 'bizarre',        category: 'bizarre',      label: '✦ Тесла дома',       sublabel: 'Катушка в гостиной, 1890-е',    image: '/images/scenes/p20-bizarre.jpg'   },
+  ],
 };
 
 /**

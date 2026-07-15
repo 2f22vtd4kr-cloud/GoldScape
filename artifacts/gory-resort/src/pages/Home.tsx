@@ -11,7 +11,8 @@ const DESTINATIONS = [
   { code: 'ge', country: 'Грузия',       city: 'Батуми',    price: 'от $65,000',   image: '/images/dest-georgia.jpg',  perk: 'ВНЖ для семьи' },
   { code: 'th', country: 'Таиланд',      city: 'Пхукет',    price: 'от $95,000',   image: '/images/dest-thailand.jpg', perk: 'Доходность до 10%' },
   { code: 'pt', country: 'Португалия',   city: 'Лиссабон',  price: 'от €345,000',  image: '/images/dest-portugal.jpg', perk: 'Золотая виза' },
-  { code: 'rs', country: 'Сербия',       city: 'Белград',   price: 'от €85,000',   image: '/images/dest-serbia.jpg',   perk: 'ВНЖ' },
+  { code: 'rs', country: 'Сербия',       city: 'Белград',   price: 'от €85,000',   image: '/images/dest-serbia.jpg',    perk: 'ВНЖ' },
+  { code: 'me', country: 'Черногория',   city: 'Котор',     price: 'от €174,900',  image: '/images/dest-montenegro.jpg', perk: 'ВНЖ, Адриатика' },
 ];
 
 const FEATURED_PROPERTIES = [
@@ -268,7 +269,7 @@ export default function Home() {
               </div>
 
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3 dark:text-white/50 text-foreground/55 font-oxanium text-[12px] uppercase tracking-wider">
-                <div className="flex items-center gap-2"><Globe className="w-4 h-4 opacity-50"/> 7 стран</div>
+                <div className="flex items-center gap-2"><Globe className="w-4 h-4 opacity-50"/> 8 стран</div>
                 <div className="flex items-center gap-2"><Shield className="w-4 h-4 opacity-50"/> Бесплатно для клиента</div>
                 <div className="flex items-center gap-2"><Zap className="w-4 h-4 opacity-50"/> 14 дней до сделки</div>
               </div>
@@ -304,7 +305,7 @@ export default function Home() {
           <h2 className="font-oxanium text-3xl md:text-[32px] chrome-text tracking-tight mb-2 section-reveal-heading">
             Куда переезжают
           </h2>
-          <p className="font-space-grotesk text-sm dark:text-white/40 text-foreground/50">Топ-7 направлений для инвестиций, релокации и ВНЖ</p>
+          <p className="font-space-grotesk text-sm dark:text-white/40 text-foreground/50">Топ-8 направлений для инвестиций, релокации и ВНЖ</p>
         </div>
 
         <div className="container mx-auto px-6">

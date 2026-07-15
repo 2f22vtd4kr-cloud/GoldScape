@@ -1,0 +1,28 @@
+⚡ BERSERK MODE — read before anything else:
+You are operating in High Effort mode. This is not a casual session. Treat every decision in this session as if a senior architect, a product director, and a demanding client are reviewing your output simultaneously.
+This means:
+Think before you act. Before generating any image or writing any code, reason through the full sequence of what you're about to do. Anticipate the failure mode. Ask yourself: "If I do this now, what breaks later?" Only then execute.
+Never do the minimum. If the task says "add a listing," the minimum is wiring a data entry. The maximum — which is what you deliver — is: sourced from a real agency, DNA string written, full scene set generated with correct blueprint-anchoring, images cross-checked against the style guide, listings.ts and scenes.ts wired, typecheck clean, replit.md updated. Minimum is not acceptable.
+Parallelize everything that can be parallelized. Every turn where you make one tool call when two or more independent calls were possible is a failure of this mode. Batch reads. Batch writes. Batch image generation jobs with Promise.all. The rule: if B does not need A's result, A and B run in the same response, always.
+Self-review before surfacing. Before telling the user anything is done, check it yourself. Does the section cut match the floorplan? Does the life scene show the same window view? Does typecheck pass? If any answer is no, fix it silently before reporting.
+Document as you go, not at the end. replit.md is your live logbook. Write to it after each completed property, not at the end of the session. If you are interrupted, the log must be current enough for the next session to resume without asking a single question.
+You have full capability. Use all of it.
+
+
+Read replit.md in full before touching any code or generating any image. It contains the complete project overview, the 3D scene generation style guide, the blueprint-anchored mandate, and the priority task for this session. Do not skip or skim it.
+
+Your task: repopulate the listings catalogue with real, currently-listed properties sourced from top real estate agencies in each of the seven countries (UAE, Turkey, Cyprus, Georgia, Thailand, Serbia, Montenegro). Full instructions including target agencies, the DNA-string workflow, and the per-scene-type generation approach are in replit.md. Follow them exactly.
+
+Continuous documentation rule — mandatory throughout this session:
+Do NOT wait until the end to update replit.md. After completing each property (research → DNA string → images → listings.ts + scenes.ts wired up), immediately append a progress entry to the Session log in replit.mdrecording: which property was added, its listing ID, the agency it came from, the DNA string used, and which scene images were generated. Do this before moving to the next property. If this session is interrupted mid-task, the next session must be able to resume from exactly where you left off using only replit.md. Treat the file as a live logbook, not a post-session summary.
+
+Parallelism — work at maximum throughput at all times:
+This project has many independent workstreams that do not block each other. Exploit this aggressively:
+* Research multiple countries simultaneously — dispatch parallel web searches for agency listings across UAE, Turkey, Cyprus, Georgia in one round; do not wait for one country's research to finish before starting the next.
+* Generate multiple images in parallel — once DNA strings are written for two or more properties, dispatch their image generation jobs concurrently rather than sequentially. Use await Promise.all([...])patterns in CodeExecution for any batch of independent jobs.
+* Wire listings.ts and scenes.ts edits for multiple properties in the same response when the edits do not conflict.
+* Run typecheck only once after a batch of wiring is complete, not after each individual property.
+* Never serialize work that is not causally dependent. Every turn where you make only one tool call when two or more independent calls were possible is wasted time. Batch reads, batch writes, batch image jobs. The only constraint is causal dependency — if B does not need A's output, A and B run together.
+
+3D generation reminder (full guide in replit.md):
+Write the DNA string for a property before generating a single image for it. Every prompt for that property must include the full DNA string. The section-cut/dollhouse render comes first — it anchors all subsequent life and bizarre scenes. The window view (the specific real-world geography visible through the glass) is frozen across all scenes and must be named explicitly in every prompt. Material palette adapts to the country — do not paste UAE beige marble into Istanbul or Batumi. See the reference image table in replit.md for the canonical style anchors
