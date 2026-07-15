@@ -36,6 +36,14 @@ PERSONAS.md          # Visitor persona roster for UX review
 
 ## Session log
 
+### July 15, 2026 — Re-import setup (round 3)
+
+Project was re-imported again with all 3 workflows failing (no `node_modules`).
+Ran `pnpm install` at the workspace root, confirmed `DATABASE_URL` was already
+provisioned and `drizzle-kit push` (via `pnpm --filter @workspace/db run push`)
+reported no pending schema changes, then restarted all 3 workflows. Verified
+with a screenshot — homepage renders correctly. No code changes needed.
+
 ### July 15, 2026 — Re-import setup (round 2)
 
 Project was re-imported again with all 3 workflows failing (no `node_modules`).
