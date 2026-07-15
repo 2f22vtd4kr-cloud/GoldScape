@@ -16,6 +16,8 @@ import {
   MapPin, Layers, Grid3x3, Flame, Users, Tv2, Coffee, Sparkles,
 } from 'lucide-react';
 
+const LUXURY_EASE = [0.22, 1, 0.36, 1] as const;
+
 export type SceneType =
   | 'site'
   | 'exterior'
@@ -64,28 +66,63 @@ const CATEGORY_CONFIG: Record<SceneCategory, { label: string; textClass: string;
     glowColor: 'rgba(52,211,153,0.25)',
   },
   bizarre: {
-    label: '✦ Особое',
+    label: '✦ Атмосфера',
     textClass: 'text-violet-400',
     borderColor: 'border-violet-400/40',
     glowColor: 'rgba(167,139,250,0.3)',
   },
 };
 
+/* ── Scene image with skeleton loading ───────────────────────────── */
+function SceneImage({ src, alt, className, style }: { src: string; alt: string; className?: string; style?: React.CSSProperties }) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div className="relative w-full h-full">
+      {/* Shimmer skeleton shown until image loads */}
+      {!loaded && (
+        <div className="absolute inset-0 bg-[#1a1a1a] overflow-hidden">
+          <div
+            className="absolute inset-0 -translate-x-full"
+            style={{
+              background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%)',
+              animation: 'shimmer 1.6s infinite',
+            }}
+          />
+        </div>
+      )}
+      <img
+        src={src}
+        alt={alt}
+        className={className}
+        style={{ ...style, opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
+  );
+}
+
 /* ── Crossfade main image ────────────────────────────────────────── */
 function CrossfadeStage({ scene, accent }: { scene: PropertyScene; accent: string }) {
   return (
-    <div className="relative w-full overflow-hidden rounded-xl md:rounded-2xl bg-[#111]" style={{ aspectRatio: '16/9' }}>
-      <AnimatePresence mode="crossfade">
-        <motion.img
+    <div
+      className="relative w-full overflow-hidden rounded-xl md:rounded-2xl bg-[#111]"
+      style={{ aspectRatio: '16/9', maxHeight: '70vh' }}
+    >
+      <AnimatePresence mode="sync">
+        <motion.div
           key={scene.id}
-          src={scene.image}
-          alt={scene.label}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.42, ease: 'easeInOut' }}
-        />
+          transition={{ duration: 0.65, ease: LUXURY_EASE }}
+        >
+          <SceneImage
+            src={scene.image}
+            alt={scene.label}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </motion.div>
       </AnimatePresence>
 
       {/* Gradient scrim */}
@@ -172,19 +209,22 @@ export function PropertyScenesCarousel({
 
   return (
     <div className="flex flex-col gap-3">
-      {/* ── Category pills ── */}
+      {/* ── Category pills — only shown when 2+ categories present ── */}
       {presentCategories.length > 1 && (
         <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setActiveCategory('all')}
-            className={`px-3 py-1 rounded-full text-[11px] font-space-grotesk border transition-all duration-200 ${
-              activeCategory === 'all'
-                ? 'dark:bg-white/10 bg-black/8 dark:border-white/30 border-black/20 dark:text-white text-foreground'
-                : 'dark:bg-white/[0.03] bg-black/[0.03] dark:border-white/10 border-black/8 dark:text-white/40 text-foreground/40 hover:dark:text-white/70 hover:text-foreground/70'
-            }`}
-          >
-            Все сцены
-          </button>
+          {/* "All" pill only shown when 3+ categories to avoid redundancy */}
+          {presentCategories.length >= 3 && (
+            <button
+              onClick={() => setActiveCategory('all')}
+              className={`px-3 py-1 rounded-full text-[11px] font-space-grotesk border transition-all duration-200 ${
+                activeCategory === 'all'
+                  ? 'dark:bg-white/10 bg-black/8 dark:border-white/30 border-black/20 dark:text-white text-foreground'
+                  : 'dark:bg-white/[0.03] bg-black/[0.03] dark:border-white/10 border-black/8 dark:text-white/40 text-foreground/40 hover:dark:text-white/70 hover:text-foreground/70'
+              }`}
+            >
+              Все виды
+            </button>
+          )}
           {presentCategories.map(cat => {
             const cfg = CATEGORY_CONFIG[cat];
             return (
@@ -234,88 +274,99 @@ export function PropertyScenesCarousel({
         </div>
       </div>
 
-      {/* ── Filmstrip ── */}
-      <div
-        ref={filmstripRef}
-        className="flex gap-2 overflow-x-auto pb-1"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        role="tablist"
-        aria-label="Сцены объекта"
-      >
-        {filtered.map((s, idx) => {
-          const isActive = idx === safeIdx;
-          const isHovered = hoveredIdx === idx;
-          const cfg = CATEGORY_CONFIG[s.category];
-          // Show category divider when group changes
-          const showDivider = idx > 0 && filtered[idx - 1].category !== s.category;
-          return (
-            <div key={s.id} className="flex items-stretch gap-2 flex-shrink-0">
-              {showDivider && (
-                <div className="w-px self-stretch dark:bg-white/10 bg-black/10 mx-0.5" />
-              )}
-              <button
-                data-thumb-idx={idx}
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => setActiveIdx(idx)}
-                onMouseEnter={() => setHoveredIdx(idx)}
-                onMouseLeave={() => setHoveredIdx(null)}
-                className="flex flex-col gap-1 flex-shrink-0 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-lg"
-                style={{ width: 110 }}
-              >
-                {/* Thumbnail image */}
-                <div
-                  className="relative overflow-hidden rounded-lg"
-                  style={{
-                    height: 68,
-                    border: `2px solid ${isActive ? accent : 'transparent'}`,
-                    boxShadow: isActive ? `0 0 14px ${accent}50` : 'none',
-                    transition: 'border-color 0.2s, box-shadow 0.2s',
-                  }}
+      {/* ── Filmstrip with right-edge fade scroll indicator ── */}
+      <div className="relative">
+        <div
+          ref={filmstripRef}
+          className="flex gap-2 overflow-x-auto pb-1"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          role="tablist"
+          aria-label="Виды объекта"
+        >
+          {filtered.map((s, idx) => {
+            const isActive = idx === safeIdx;
+            const isHovered = hoveredIdx === idx;
+            const cfg = CATEGORY_CONFIG[s.category];
+            // Show category divider when group changes
+            const showDivider = idx > 0 && filtered[idx - 1].category !== s.category;
+            return (
+              <div key={s.id} className="flex items-stretch gap-2 flex-shrink-0">
+                {showDivider && (
+                  <div className="w-px self-stretch dark:bg-white/10 bg-black/10 mx-0.5" />
+                )}
+                <button
+                  data-thumb-idx={idx}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActiveIdx(idx)}
+                  onMouseEnter={() => setHoveredIdx(idx)}
+                  onMouseLeave={() => setHoveredIdx(null)}
+                  className="flex flex-col gap-1 flex-shrink-0 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-lg"
+                  style={{ width: 110, minHeight: 48 }}
                 >
-                  <img
-                    src={s.image}
-                    alt={s.label}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-300"
-                    style={{ transform: isHovered || isActive ? 'scale(1.06)' : 'scale(1)' }}
-                  />
-                  {/* Dark overlay with quick-view on hover */}
+                  {/* Thumbnail image */}
                   <div
-                    className="absolute inset-0 flex items-center justify-center bg-black/55 backdrop-blur-[2px] transition-opacity duration-200"
-                    style={{ opacity: isHovered && !isActive ? 1 : 0 }}
+                    className="relative overflow-hidden rounded-lg"
+                    style={{
+                      height: 68,
+                      border: `2px solid ${isActive ? accent : 'transparent'}`,
+                      boxShadow: isActive ? `0 0 14px ${accent}50` : 'none',
+                      transition: 'border-color 0.25s, box-shadow 0.25s',
+                    }}
                   >
-                    <div className="flex items-center gap-1 bg-white/15 px-2 py-1 rounded-full border border-white/20">
-                      <Eye className="w-3 h-3 text-white" />
-                      <span className="text-white text-[9px] font-medium">Смотреть</span>
+                    <img
+                      src={s.image}
+                      alt={s.label}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-300"
+                      style={{ transform: isHovered || isActive ? 'scale(1.06)' : 'scale(1)' }}
+                    />
+                    {/* Hover quick-view indicator (desktop only) */}
+                    <div
+                      className="hidden md:flex absolute inset-0 items-center justify-center bg-black/55 backdrop-blur-[2px] transition-opacity duration-200"
+                      style={{ opacity: isHovered && !isActive ? 1 : 0 }}
+                    >
+                      <div className="flex items-center gap-1 bg-white/15 px-2 py-1 rounded-full border border-white/20">
+                        <Eye className="w-3 h-3 text-white" />
+                        <span className="text-white text-[9px] font-medium">Смотреть</span>
+                      </div>
+                    </div>
+                    {/* Active bar */}
+                    {isActive && (
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5" style={{ background: accent }} />
+                    )}
+                    {/* Category label */}
+                    <div className={`absolute top-1 left-1 text-[7px] uppercase tracking-wide font-medium px-1 py-0.5 rounded-full bg-black/60 ${cfg.textClass}`}>
+                      {cfg.label}
                     </div>
                   </div>
-                  {/* Active bar */}
-                  {isActive && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5" style={{ background: accent }} />
+                  {/* Label */}
+                  <div
+                    className="text-[10px] md:text-[11px] font-medium truncate font-space-grotesk px-0.5 transition-colors"
+                    style={{ color: isActive ? accent : undefined }}
+                  >
+                    {!isActive && <span className="dark:text-white/60 text-foreground/60">{s.label}</span>}
+                    {isActive && s.label}
+                  </div>
+                  {s.sublabel && (
+                    <div className="text-[9px] dark:text-white/30 text-foreground/35 truncate font-space-grotesk px-0.5 -mt-0.5">
+                      {s.sublabel}
+                    </div>
                   )}
-                  {/* Category label */}
-                  <div className={`absolute top-1 left-1 text-[7px] uppercase tracking-wide font-medium px-1 py-0.5 rounded-full bg-black/60 ${cfg.textClass}`}>
-                    {cfg.label}
-                  </div>
-                </div>
-                {/* Label */}
-                <div
-                  className="text-[10px] md:text-[11px] font-medium truncate font-space-grotesk px-0.5 transition-colors"
-                  style={{ color: isActive ? accent : undefined }}
-                >
-                  {!isActive && <span className="dark:text-white/60 text-foreground/60">{s.label}</span>}
-                  {isActive && s.label}
-                </div>
-                {s.sublabel && (
-                  <div className="text-[9px] dark:text-white/30 text-foreground/35 truncate font-space-grotesk px-0.5 -mt-0.5">
-                    {s.sublabel}
-                  </div>
-                )}
-              </button>
-            </div>
-          );
-        })}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        {/* Right-edge fade — signals horizontal scroll available on mobile */}
+        {filtered.length > 3 && (
+          <div
+            className="absolute right-0 top-0 bottom-1 w-12 pointer-events-none"
+            style={{
+              background: 'linear-gradient(to right, transparent, var(--scenes-bg, #050505))',
+            }}
+          />
+        )}
       </div>
     </div>
   );

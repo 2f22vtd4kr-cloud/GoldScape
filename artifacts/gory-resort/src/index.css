@@ -549,6 +549,12 @@ html:not(.dark) .chrome-text {
   animation: floatBlobSmall 5s ease-in-out infinite;
 }
 
+/* Skeleton shimmer — used by PropertyScenesCarousel image loading state */
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
 /* Pulsing pin marker (legacy utility, kept in case it's reused elsewhere) */
 @keyframes pulseGlow {
   0%, 100% {

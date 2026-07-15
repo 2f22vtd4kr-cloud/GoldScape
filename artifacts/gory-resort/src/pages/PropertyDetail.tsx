@@ -235,7 +235,7 @@ export default function PropertyDetail() {
               <div className="flex items-center gap-2 mb-5">
                 <Camera className="w-4 h-4 dark:text-white/40 text-foreground/50" />
                 <h2 className="font-oxanium text-lg md:text-xl font-semibold dark:text-white text-foreground tracking-tight">
-                  Сцены объекта
+                  Визуализация объекта
                 </h2>
                 <span className="text-[11px] font-space-grotesk dark:text-white/30 text-foreground/40 ml-1">
                   — {scenes.length} видов
