@@ -622,34 +622,58 @@ html:not(.dark) .chrome-text {
    of showing a visible ring, and the ::before layer's own border-radius is
    animated so the colour mass slowly changes shape rather than staying a
    perfect static disc. This is now the sole hero visual (the old spiky
-   iridescent blob PNG and its containing frame were removed). */
+   iridescent blob PNG and its containing frame were removed).
+
+   IMPORTANT — explicit ellipse size, never the bare "ellipse at X% Y%" form:
+   without an explicit size, radial-gradient() defaults to `farthest-corner`,
+   which sizes the ellipse so it just reaches whichever box corner is
+   *farthest* from the center. With the center offset to 70% 50%, the corner
+   distances are wildly unequal (the near/right corner is much closer than
+   the far/left one), so the *same* percentage stops map to a much shorter
+   physical distance on the near side than the far side — the fade that
+   looks gradual on the left reads as an abrupt cliff on the right. Giving
+   the ellipse an explicit two-axis percentage size makes the falloff
+   symmetric in every direction regardless of where the center sits. */
 .hero-glow-spill {
   position: absolute;
   border-radius: 50%;
   filter: blur(100px);
   opacity: 0.55;
-  /* Wide ellipse centred at 70% from the left so the saturated core sits over
-     the visual column while the long left tail fades imperceptibly into black,
-     touching the headline without any hard ring edge. */
+  /* Ellipse centred at 62% from the left, sized so its OWN radii fit inside
+     this element's box on every side before the gradient finishes fading —
+     see the long note above .hero-glow-drift below for why that matters.
+     Box is width×height = min(1300px,145vw) × min(900px,95vw); at a 62%/50%
+     center the nearest edges are 38% (right) and 50% (top/bottom) of the
+     box away. Radii of 35%/44% land the gradient's near-zero tail (~97-100%
+     of the radius) *inside* those margins, so the fade is already
+     imperceptible before the box's hard boundary — no cliff. */
   mask-image: radial-gradient(
-    ellipse at 70% 50%,
+    ellipse 35% 44% at 62% 50%,
     black 0%,
-    rgba(0,0,0,0.82) 18%,
-    rgba(0,0,0,0.55) 38%,
-    rgba(0,0,0,0.28) 57%,
-    rgba(0,0,0,0.10) 74%,
-    rgba(0,0,0,0.03) 87%,
-    transparent 97%
+    rgba(0,0,0,0.94) 12%,
+    rgba(0,0,0,0.82) 24%,
+    rgba(0,0,0,0.66) 36%,
+    rgba(0,0,0,0.50) 48%,
+    rgba(0,0,0,0.36) 60%,
+    rgba(0,0,0,0.24) 71%,
+    rgba(0,0,0,0.14) 81%,
+    rgba(0,0,0,0.07) 90%,
+    rgba(0,0,0,0.02) 97%,
+    transparent 100%
   );
   -webkit-mask-image: radial-gradient(
-    ellipse at 70% 50%,
+    ellipse 35% 44% at 62% 50%,
     black 0%,
-    rgba(0,0,0,0.82) 18%,
-    rgba(0,0,0,0.55) 38%,
-    rgba(0,0,0,0.28) 57%,
-    rgba(0,0,0,0.10) 74%,
-    rgba(0,0,0,0.03) 87%,
-    transparent 97%
+    rgba(0,0,0,0.94) 12%,
+    rgba(0,0,0,0.82) 24%,
+    rgba(0,0,0,0.66) 36%,
+    rgba(0,0,0,0.50) 48%,
+    rgba(0,0,0,0.36) 60%,
+    rgba(0,0,0,0.24) 71%,
+    rgba(0,0,0,0.14) 81%,
+    rgba(0,0,0,0.07) 90%,
+    rgba(0,0,0,0.02) 97%,
+    transparent 100%
   );
   pointer-events: none;
   transition: transform 0.2s ease-out;
@@ -671,26 +695,73 @@ html:not(.dark) .chrome-text {
     hsl(250, 85%, 62%) 94%,
     hsl(210, 95%, 60%) 100%
   );
-  animation: gas-spill-spin 28s linear infinite, hero-blob-morph 17s ease-in-out infinite;
-  will-change: transform, border-radius;
+  animation: gas-spill-spin 28s linear infinite;
+  will-change: transform;
 }
 @keyframes gas-spill-spin {
   to { transform: rotate(360deg); }
 }
-/* Organic shape breathing — cycles through asymmetric corner radii so the
-   masked colour mass reads as a living blob rather than a spinning disc. */
-@keyframes hero-blob-morph {
-  0%   { border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%; }
-  25%  { border-radius: 58% 42% 38% 62% / 62% 55% 45% 38%; }
-  50%  { border-radius: 65% 35% 55% 45% / 38% 62% 40% 60%; }
-  75%  { border-radius: 38% 62% 45% 55% / 55% 38% 62% 45%; }
-  100% { border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%; }
+/* Organic "living blob" breathing — NOTE: this used to be a `border-radius`
+   keyframe animation on ::before. That was the bug behind the recurring
+   "sharp edge" complaint: ::before is a huge box (`inset: -40%` on top of
+   the already-big parent, so ~2340×1620px), and an animated border-radius
+   on a box that size can round a corner by *over a thousand pixels* at its
+   peak — easily reaching into the visible viewport as a real geometric
+   notch. 100px of blur softens the transition but can't erase a curve that
+   large; it still reads as a defined edge, exactly what must never happen
+   here. A `border-radius` clip and a soft mask fade are fundamentally
+   different tools — the first can always produce a hard(ish) geometric
+   boundary, the second mathematically cannot.
+   Fix: the "morph" now animates the MASK's own gradient — its center point
+   and ellipse size drift slowly — instead of clipping a shape with
+   border-radius. Every keyframe below re-declares the exact same colour-stop
+   list as the base mask (only the `ellipse W% H% at X% Y%` head differs),
+   so the browser can interpolate smoothly between them; the result always
+   stays a soft radial fade, so a hard edge is structurally impossible. */
+@keyframes hero-glow-drift {
+  0%, 100% {
+    mask-image: radial-gradient(
+      ellipse 35% 44% at 62% 50%,
+      black 0%, rgba(0,0,0,0.94) 12%, rgba(0,0,0,0.82) 24%, rgba(0,0,0,0.66) 36%,
+      rgba(0,0,0,0.50) 48%, rgba(0,0,0,0.36) 60%, rgba(0,0,0,0.24) 71%,
+      rgba(0,0,0,0.14) 81%, rgba(0,0,0,0.07) 90%, rgba(0,0,0,0.02) 97%, transparent 100%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 35% 44% at 62% 50%,
+      black 0%, rgba(0,0,0,0.94) 12%, rgba(0,0,0,0.82) 24%, rgba(0,0,0,0.66) 36%,
+      rgba(0,0,0,0.50) 48%, rgba(0,0,0,0.36) 60%, rgba(0,0,0,0.24) 71%,
+      rgba(0,0,0,0.14) 81%, rgba(0,0,0,0.07) 90%, rgba(0,0,0,0.02) 97%, transparent 100%
+    );
+  }
+  50% {
+    /* Same 62%/50% center as the base state (never drifts — a moving center
+       would need re-deriving the safe radius cap for every position), only
+       the radii shrink a little for a gentle pulse. Both stay comfortably
+       under the 37%/46% ceiling that keeps the fade completing inside the
+       box's own margins on every side. */
+    mask-image: radial-gradient(
+      ellipse 29% 39% at 62% 50%,
+      black 0%, rgba(0,0,0,0.94) 12%, rgba(0,0,0,0.82) 24%, rgba(0,0,0,0.66) 36%,
+      rgba(0,0,0,0.50) 48%, rgba(0,0,0,0.36) 60%, rgba(0,0,0,0.24) 71%,
+      rgba(0,0,0,0.14) 81%, rgba(0,0,0,0.07) 90%, rgba(0,0,0,0.02) 97%, transparent 100%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 29% 39% at 62% 50%,
+      black 0%, rgba(0,0,0,0.94) 12%, rgba(0,0,0,0.82) 24%, rgba(0,0,0,0.66) 36%,
+      rgba(0,0,0,0.50) 48%, rgba(0,0,0,0.36) 60%, rgba(0,0,0,0.24) 71%,
+      rgba(0,0,0,0.14) 81%, rgba(0,0,0,0.07) 90%, rgba(0,0,0,0.02) 97%, transparent 100%
+    );
+  }
+}
+.hero-glow-spill {
+  animation: hero-glow-drift 19s ease-in-out infinite;
 }
 .hero-glow-spill--mobile {
   filter: blur(60px);
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-glow-spill::before { animation: none; }
+  .hero-glow-spill { animation: none; }
 }
 
 /* ── Hero blob dedicated float — slow organic zero-gravity drift ──

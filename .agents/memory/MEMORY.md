@@ -23,3 +23,4 @@
 - [Light-mode contrast fixes](light-mode-contrast-fixes.md) — 3 root causes for "light mode looks broken": reused dark-tuned text-opacity alphas, gradient-sweep legibility floor, invert+hue-rotate failing on saturated art
 - [Reveal/counter animation false positives](mobile-viewport-screenshots.md) — fast scripted scroll also catches scroll-reveal fades and count-up numbers mid-flight, not just lazy images; always settle+wait before judging
 - [Screen blend over black background](screen-blend-black-bg.md) — screen(color,black)=color, so mix-blend-mode:screen never hides a baked near-black image background; use a luminance-keyed alpha matte instead
+- [Radial-gradient mask safe radius](radial-mask-safe-radius.md) — off-center mask ellipse radius must fit inside box's own edge distance or it cliffs regardless of stop smoothness; don't morph via border-radius on huge blurred boxes either
