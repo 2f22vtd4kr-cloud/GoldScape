@@ -34,6 +34,168 @@ scripts/             # Post-merge and utility scripts
 PERSONAS.md          # Visitor persona roster for UX review
 ```
 
+## 3D scene generation — visual style guide & blueprint-anchored mandate
+
+> **Read this section in full before generating a single image.** Ignoring it produces a random
+> assortment of stock-looking renders that share no DNA with each other or with the property's
+> floor plan. Every past session that drifted did so because it started generating before
+> anchoring to the blueprint. Do not repeat that mistake.
+
+### What these images are
+
+All scenes are **photorealistic 3D dollhouse renders** — the camera floats above the property
+at roughly a 40–55° downward angle (bird's-eye isometric), the roof/ceiling is removed to
+reveal the interior, and the surrounding real geography is visible through windows and outside
+the building envelope. They are not photographs, not flat illustrations, not eye-level renders.
+Think of each image as an architectural model photographed from a crane — you see the full floor
+plate, all rooms simultaneously, and the landmark view through every window.
+
+Resolution/framing: square or near-square (1:1 to 4:3). Ultra-high detail, cinematic. No
+cartoon, no sketch, no low-poly. The render quality must read as "developer sales brochure."
+
+### Visual reference images (on disk right now)
+
+These are the canonical style anchors. Before generating anything, open them and study them.
+All paths are relative to `artifacts/gory-resort/public/images/scenes/`.
+
+| Image | What to study in it |
+|---|---|
+| `p1-section.jpg` | **The gold standard section cut.** Camera angle, roof-off dollhouse framing, warm sunset sky, Dubai skyline + sea through curved glass balcony, marble floors, cream furniture, warm brass/wood kitchen — *this is the target quality and mood for all UAE luxury renders* |
+| `p1-floorplan.jpg` | **The gold standard floorplan.** Luxury developer style: cream background, gold brand accents, room labels with metric dimensions, north compass, key plan inset, key section inset — replicate this format exactly for every new floorplan |
+| `p1-bbq.jpg` | **Blueprint-anchored life scene, same apartment as p1-section.** Note: identical curved balcony rail, identical marble floors, identical kitchen island position, *same* Dubai skyline view through the same windows — only the people, lighting, and table setting changed. Sunset golden hour |
+| `p1-matchday.jpg` | **Same apartment, third scene.** Camera moved inside to living room level but the skyline view through floor-to-ceiling glass is the same Palm Jumeirah + Dubai Marina panorama. Night mode; blue TV glow; same marble floors and ceiling profile |
+| `p3-section.jpg` | **Vertical section cut (duplex).** Shows two full floors stacked; Burj Khalifa + Dubai Fountain visible outside to the right; room labels overlaid; dark luxury palette (charcoal, dark marble, warm gold lighting) — contrasts with p1's cream palette |
+| `p2-party.jpg` | **Studio blueprint-anchored life scene.** Top-down dollhouse of a compact studio: same floor plan for all p2 scenes — open plan with bed zone, kitchen bar, and bathroom visible simultaneously. Dubai Marina canal with yachts through full-width glass. Night/neon lighting |
+| `p5-family.jpg` | **Historic Istanbul apartment.** Completely different material vocabulary: brick exterior walls, arched windows with Ottoman profile, herringbone oak parquet floor, Turkish kilim rugs, warm afternoon Bosphorus light — style adapts to local architecture, NOT copy-pasted UAE palette |
+| `p7-life.jpg` | **Cyprus villa blueprint-anchored.** White concrete exterior, rooftop infinity pool visible above, Mediterranean Sea + Limassol coastline through glass, light oak wood floors, open-plan living + kitchen + 2 bedrooms all visible, garage below grade |
+| `p9-party.jpg` | **Batumi seafront apartment.** White contemporary exterior, Batumi's lit coastline at night through floor-to-ceiling glass, fireworks over sea — another region, another material palette (lighter stone, contemporary European finishes) |
+| `p17-life.jpg` | **Under-construction / off-plan scene.** Raw concrete shell, exposed columns, no finishes yet — valid scene type for off-plan listings; two people with blueprints on rooftop; Limassol marina below |
+
+### The blueprint-anchored rule — non-negotiable
+
+**Every scene for a given property is a different story told inside the exact same building.**
+
+The following elements are **frozen** across all scenes of a property. They must be identical
+in every render — exterior, section, floorplan, life, bizarre:
+
+1. **Floor plan shape** — the outline of the apartment/villa on its floor plate: which walls
+   exist, where the rooms are, which direction they face, how large each room is. A living room
+   that is 8.6m × 5.2m in the section cut is 8.6m × 5.2m in the matchday scene.
+
+2. **Window positions, sizes, and profile shapes** — floor-to-ceiling glass in a Dubai tower
+   stays floor-to-ceiling glass in every scene. Arched Ottoman windows in Istanbul stay arched.
+   A 12m wrap-around balcony stays 12m wrap-around. **You cannot make up new windows for a
+   life scene.**
+
+3. **The view through those windows** — this is the most commonly broken rule. The specific
+   real-world geography visible through each window is part of the building's identity:
+   - p1: Palm Jumeirah frond + Dubai Marina skyline + Arabian Gulf to the right, Burj Al Arab
+     visible on the horizon
+   - p2: Dubai Marina canal with yachts, towers on both sides
+   - p3: Burj Khalifa directly outside (right side), Dubai Fountain below
+   - p5: Bosphorus strait with ferry, European shore in the distance
+   - p6: Mediterranean coast, beach directly below
+   - p7: Mediterranean Sea + Limassol coastline (low-rise white city)
+   - p9: Batumi coastline with lit towers, Black Sea
+   - p17: Limassol Old Port marina, yachts, Old Town waterfront
+   **The window view is a geographical fingerprint. Do not swap it between properties.**
+
+4. **Structural materials (the "monumental stuff"):**
+   - Floor material: marble/travertine (UAE luxury), herringbone oak parquet (Istanbul),
+     light-tone wood-look tile (Cyprus contemporary), marble (Batumi)
+   - Exterior wall finish: curved glass + white concrete (p1), dark steel frame + glass (p3),
+     brick (p5), white render (p6/p7/p9)
+   - Ceiling height — visible in section cuts, must match in life scenes
+
+5. **Kitchen island and major structural furniture** — the island position, its material (always
+   marble top in the current set), and its size relative to the room do not move between scenes.
+
+6. **Building envelope profile** — the curved balcony rail of p1 is part of that building's
+   silhouette; the cantilevered terrace of p7 is part of that building's silhouette. They appear
+   in every exterior-facing render.
+
+### What IS allowed to change between scenes
+
+- **People** — their number, outfits, activity
+- **Lighting/time of day** — golden sunset (bbq), deep night (matchday), neon night (party),
+  bright midday (family breakfast)
+- **Soft furnishings and props** — throw pillows, table settings, food, bottles, laptops
+- **Plants** — can be added/moved slightly for compositional balance
+- **Small decorative objects** — art on walls, books, candles
+- **Camera angle within the dollhouse** — can zoom in on one zone (e.g. the living room for
+  matchday) while keeping all the structural geometry correct behind it
+
+### How to generate correctly — the Property DNA string
+
+Every property gets a **DNA string** written before any image is generated. It encodes all the
+frozen elements so every prompt is anchored to the same source. The DNA string lives as a
+comment in `artifacts/gory-resort/src/data/scenes.ts` above each property's scene array.
+
+Format (adapt to each property):
+
+```
+DNA: [building type] · [floor/level] · [room count] · [ceiling height]
+     floor: [material]  walls: [finish]  structure: [key detail]
+     windows: [description of shape, size, coverage fraction]
+     view N: [what is visible through north-facing windows]
+     view S/E/W: [other cardinal views if different]
+     landmark: [the single most recognisable feature of this window view]
+     exterior: [key silhouette feature — curved balcony, cantilevered terrace, etc.]
+     palette: [3-5 dominant colours in hex or plain English]
+```
+
+Every image generation prompt for that property MUST paste the full DNA string, then describe
+only what changes (the scene, the people, the lighting).
+
+### Scene types — generation approach per type
+
+**`section` (horizontal section cut / dollhouse):**
+Prompt must specify: camera at ~45° overhead, roof removed, all rooms visible simultaneously,
+property info text overlay top-left (property name, floor, bedroom count, ceiling height),
+landmark callout annotation top-right, icon legend left side. See `p1-section.jpg` and
+`p3-section.jpg` for exact annotation style. This is the most important scene — it anchors
+all subsequent renders.
+
+**`floorplan`:**
+2D overhead technical drawing in developer-brochure style. Cream/white background, gold/warm
+brand accents, all rooms labelled with names + metric dimensions, north compass bottom-left,
+key plan inset (building footprint with this unit highlighted), key section inset (building
+elevation with this floor highlighted), legend of icons for bedrooms/bathrooms/features on
+the left panel. See `p1-floorplan.jpg` for exact layout. Do not make it look like AutoCAD or
+a plain line drawing — it must look like a luxury developer's PDF.
+
+**`exterior`:**
+Standard architectural visualisation: the building seen from outside at street level or slight
+elevation. Daytime, clear sky or golden hour. The landmark view (what makes this location
+special) visible in the background. No interior visible.
+
+**`life_bbq`, `life_party`, `life_family`, `life_matchday`, `life_remote_work`:**
+Blueprint-anchored dollhouse (same camera as section cut), roof removed, all rooms visible.
+The scene's activity happens in the correct zone of the floor plan (bbq on the terrace, matchday
+in the living room, family breakfast at the dining table). The window view behind the activity
+must match the DNA. Lighting matches the scene mood.
+
+**`bizarre` (✦ Атмосфера):**
+Same dollhouse view, same structure — but an absurd or cinematic scenario plays out inside
+the correct floor plan. The joke lands harder when the building is recognisably the same
+property.
+
+### What went wrong in previous sessions (do not repeat)
+
+- **Generated life scenes with no connection to the section cut** — completely different room
+  shapes, different window sizes, different views outside. The buyer sees "section cut: this
+  apartment has a curved panoramic balcony overlooking the Palm" and then "matchday scene: a
+  generic rectangular living room with a city view." Trust is destroyed.
+- **Forgot to specify the window view** — generator defaulted to a generic skyline or no view
+  at all. Always name the specific landmark in the prompt.
+- **Used the same material palette for every country** — UAE beige marble appeared in Istanbul
+  and Batumi. Each country has its own material vocabulary (see p5-family.jpg for Istanbul,
+  p7-life.jpg for Cyprus, p9-party.jpg for Batumi).
+- **Skipped the DNA string** — jumped straight to generating "a luxury apartment in Dubai."
+  Without the DNA the model invents its own floor plan every time.
+
+---
+
 ## Priority for next session
 
 **#1 — Repopulate listings with real properties from top agencies in each country.**
