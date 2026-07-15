@@ -300,6 +300,102 @@ both themes — no regressions. See `.agents/memory/light-mode-contrast-fixes.md
 asymmetry between themes, and how fast scripted scrolling produces false-positive
 "broken" screenshots of reveal/count-up animations mid-flight).
 
+### July 15, 2026 — PropertyScenesCarousel polish + listing #17 bug fix (re-import round 4)
+
+#### Re-import setup
+
+Project was re-imported from GitHub again with no `node_modules`. Ran `pnpm install` at the
+workspace root and restarted all 3 workflows. No schema changes needed (Drizzle reported
+nothing pending). Site renders correctly on all routes after setup.
+
+#### Bug fix — listing #17 (Limassol Marina) was outside the LISTINGS array
+
+`artifacts/gory-resort/src/data/listings.ts` had a stray `];` that closed the `LISTINGS`
+array before listing #17's object literal. The listing compiled fine (TypeScript saw it as a
+standalone variable expression, not an array element) but was never actually part of the
+exported array. Result: the site showed "16 объектов · 6 стран" instead of 17/7 and the
+Limassol Marina property was completely invisible. Fixed by removing the premature `];`.
+
+**File changed:** `artifacts/gory-resort/src/data/listings.ts`
+
+#### PropertyScenesCarousel — 5-persona sim + full implementation
+
+Ran a full 5-persona evaluation of `PropertyScenesCarousel` (Viktor, Irina, Dmitri, Alex,
+Nika) across desktop and mobile. Key findings and every fix applied:
+
+**Viktor** — "Сцены объекта" sounds like theater. "Ocean's Eleven" tag in the filmstrip
+felt unprofessional and broke trust for an anxious investor.
+
+**Irina** — Thumbnails too small to tap accurately on phone. Family/life scenes are
+emotionally resonant; bizarre scenes (Tiger in pool) undercut family positioning. The
+hover "Смотреть" overlay was appearing on mobile where hover doesn't apply.
+
+**Dmitri** — Properties with only 2 scenes feel like placeholders. Kills trust. The
+`scenes.length < 2` threshold too low.
+
+**Alex** — Filmstrip needs scroll affordance fade on mobile (no visual cue that more
+thumbnails exist off-screen). "Все сцены" pill with only 2 categories is redundant.
+
+**Nika** — "✦ Особое" should be renamed "✦ Атмосфера" (more evocative, less
+miscellaneous). Crossfade at 0.42s is too fast — luxury standard is 0.65s with a
+decelerating easing. No `max-height` cap on the stage (full-bleed landscape properties
+could blow out the layout on tall screens). No image loading skeleton.
+
+**Changes made** (all in `artifacts/gory-resort/src/components/PropertyScenesCarousel.tsx`
+unless noted):
+
+1. **`LUXURY_EASE` constant** — `[0.22, 1, 0.36, 1]` cubic-bezier extracted at the top of
+   the file. Controls all scene transition timings. Crossfade duration raised from 0.42s
+   to 0.65s.
+
+2. **`AnimatePresence mode` fix** — was `mode="crossfade"` (not a valid Framer Motion mode,
+   caused a TypeScript error). Changed to `mode="sync"`, which produces the same visual
+   effect (enter and exit run simultaneously) and passes typecheck.
+
+3. **`max-height: 70vh` on the stage wrapper** — prevents tall-landscape scene images from
+   blowing out layout on wide viewports. The `aspectRatio: 16/9` is preserved as the
+   primary sizing; `70vh` is the safety cap.
+
+4. **Image loading skeleton (`SceneImage` component)** — new sub-component wrapping `<img>`
+   with a shimmer placeholder shown while the image loads. Uses a CSS `@keyframes shimmer`
+   sweep animation added to `artifacts/gory-resort/src/index.css`. Skeleton disappears the
+   moment `onLoad` fires (0.3s opacity transition).
+
+5. **Category pill cleanup** — "Все сцены" renamed to "Все виды". The "all" pill is now
+   hidden when fewer than 3 categories are present (2 categories don't need an "all" toggle
+   — it's just noise). Category label "✦ Особое" → "✦ Атмосфера" in `CATEGORY_CONFIG`.
+
+6. **Filmstrip right-edge fade** — a `pointer-events-none` gradient overlay at the right
+   edge of the filmstrip container signals horizontal scroll when `filtered.length > 3`.
+   Uses `var(--scenes-bg, #050505)` as the fade target color (dark-mode default;
+   matches the `dark:bg-[#050505]` section background in `PropertyDetail.tsx`).
+
+7. **Hover overlay mobile hide** — the "Смотреть" quick-view overlay on thumbnails is now
+   `hidden md:flex` (desktop only). On mobile it was appearing on top of tapped thumbnails
+   because touch events triggered both hover and click states simultaneously.
+
+8. **Section header rename** (`artifacts/gory-resort/src/pages/PropertyDetail.tsx`) —
+   "Сцены объекта" → "Визуализация объекта". The `aria-label` on the filmstrip
+   `role="tablist"` was also updated to "Виды объекта".
+
+9. **Shimmer CSS** (`artifacts/gory-resort/src/index.css`) — `@keyframes shimmer` added,
+   animating `translateX(-100%)` → `translateX(200%)` over 1.6s infinite.
+
+**TypeScript typecheck** (`pnpm --filter @workspace/gory-resort run typecheck`) confirmed
+clean after all changes.
+
+#### Tasks proposed (all later cancelled by user — no active tasks remain)
+
+Three follow-up tasks were proposed from the persona sim but user cancelled them:
+- "Fill in missing scene views so every property feels fully explored" — 10+ properties
+  have 2-3 scenes; full vision is 5+ per property including section cuts and floorplans.
+- "Import 5–10 real currently-listed properties from top agencies in each country" —
+  continuing from listing #17 (Limassol Marina), the first real-agency import.
+- "Fix mobile carousel touch UX — thumbnails too small to tap accurately on phone" —
+  swipe gesture on main stage, larger touch targets, swipe-hint animation.
+
+---
+
 ### July 15, 2026 — Persona-driven feature pass (ongoing)
 
 Running the manual persona review (`PERSONAS.md`) end-to-end: for each gap found, ship a
