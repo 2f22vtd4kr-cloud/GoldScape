@@ -34,6 +34,40 @@ scripts/             # Post-merge and utility scripts
 PERSONAS.md          # Visitor persona roster for UX review
 ```
 
+## Priority for next session
+
+**#1 — Repopulate listings with real properties from top agencies in each country.**
+
+The current 17 listings are curated composites, not real market inventory. The next session
+should go online and pull actually-listed properties from the leading agencies for each of
+our seven countries, then replace (or supplement) the existing listings with real data.
+
+Target agencies by country (research and confirm current top performers at session start):
+- **UAE** — fäm Properties, Betterhomes, Allsopp & Allsopp
+- **Turkey** — Coldwell Banker Turkey, RE/MAX Turkey, Tolerance Homes
+- **Cyprus** — H&S Real Estate, Leptos Estates, Empire Estates
+- **Georgia** — Tbilisi Real Estate, MyHome.ge top brokers
+- **Thailand** — Samui Exclusive Homes, Siam Real Estate, Thailand Property
+- **Serbia** — Flat4Day, Novdom, Stan.co.rs
+- **Montenegro** — Adriatic Properties, Montenegro Prospects, Real Estate Montenegro
+
+For each selected property:
+1. Pull real listing data: address/area, price (in USD and local currency), size (m²),
+   bedrooms, bathrooms, key features, developer/agency name.
+2. Use the agency's published floor-plan images and exterior photos as **generation
+   references** (style/realism anchors) — do not embed or republish the originals.
+3. Generate a full scene set (5+ scenes: isometric map, exterior, section cut, lifestyle
+   ×1-2, atmosphere ×1) from those references so all views of the property share the
+   same layout, finishes, and furniture placement.
+4. Wire into `listings.ts` (with `agency` and `agencyUrl` attribution fields) and
+   `scenes.ts` (PROPERTY_SCENES map).
+
+Aim for 2-3 real properties per country (14-21 total) replacing the current composite
+listings. Listing #17 (Limassol Marina) is already a real-agency import — use it as the
+pattern.
+
+---
+
 ## Session log
 
 ### July 15, 2026 — "Inside the property" gallery feature: recovered history + lost work
