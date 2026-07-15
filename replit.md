@@ -173,6 +173,89 @@ both themes — no regressions. See `.agents/memory/light-mode-contrast-fixes.md
 asymmetry between themes, and how fast scripted scrolling produces false-positive
 "broken" screenshots of reveal/count-up animations mid-flight).
 
+### July 15, 2026 — Persona-driven feature pass (ongoing)
+
+Running the manual persona review (`PERSONAS.md`) end-to-end: for each gap found, ship a
+real working feature, verify it, then move to the next. About/Properties/PropertyDetail
+already covered most persona needs (trust content, filters, WhatsApp deep links,
+investment analysis) — this pass targets genuinely *missing* functionality.
+
+#### Feature 1 — Favorites / saved listings
+
+**Persona gap:** Dmitri ("just show me the numbers, I'll message you myself, no calls")
+and Irina (comparing a shortlist with her husband before committing to a call) had no
+way to shortlist listings across visits — every return trip meant re-filtering the whole
+catalogue from scratch.
+
+**What shipped:** localStorage-backed favorites (`src/lib/favorites.ts`, no account/
+backend) with a heart toggle on every listing card and the detail-page hero
+(`FavoriteButton.tsx`), a nav heart icon with a live count badge (desktop + mobile menu),
+and a new `/favorites` page with its own empty state and a WhatsApp CTA to discuss the
+shortlist. Extracted the previously-inline Properties.tsx card markup into a shared
+`PropertyCard.tsx` so the catalogue and the favorites page render identically and stay in
+sync automatically.
+
+**Bug caught in verification:** first version passed the store's `read()` function
+straight to `useSyncExternalStore` as `getSnapshot`; since it built a new filtered array
+every call (even with unchanged content), React treated every render as a store change,
+causing "Maximum update depth exceeded" crashes on both `/properties` and the detail
+page. Fixed by caching the parsed array and only re-parsing when the raw localStorage
+string actually changes. See `.agents/memory/favorites-getsnapshot-caching.md`.
+
+Verified with a scripted Puppeteer pass (toggling two hearts, confirming
+`localStorage`, nav badge count, and the `/favorites` page all agree) plus screenshots —
+no regressions.
+
+#### Feature 2 — "Only USDT" filter
+
+**Persona gap:** Viktor (crypto-first buyer) had to open every card individually to see
+if a listing accepted USDT — the `crypto` field existed on listing data but wasn't
+exposed as a filter.
+
+**What shipped:** a toggle button in the Properties filter bar that filters the grid to
+`item.crypto === true`, wired into the existing filter/reset logic. Verified with a
+scripted click test (16 listings → 13 with the filter on).
+
+#### Feature 3 — Contact form was fake; now actually delivers the lead
+
+**Bug found, not just a gap:** the About page consultation form (`id="consult"`) had
+required-looking fields (Name *, Phone *) with **no actual validation** — submitting
+completely empty always showed the "Запрос получен" success state — and the submit
+handler only did `setSubmitted(true)`; nothing was captured, stored, or sent anywhere.
+Every visitor who used the form believed a human would follow up, and none would have.
+
+**Fix:** made all fields controlled state, added real required-field validation (blocks
+submission and shows an inline error if name/phone are empty), and on valid submit
+builds a formatted message from all the fields and opens a prefilled `wa.me` WhatsApp
+link — the same delivery channel every other CTA on this site already uses (there is no
+CRM/email backend elsewhere to be consistent with, and adding one wasn't asked for).
+Verified end-to-end with Puppeteer: empty submit blocked with the error shown and no
+`window.open` call; filled submit produced a correctly-encoded WhatsApp message with all
+5 fields and showed the success state.
+
+#### Feature 4 — Side-by-side comparison
+
+**Persona gap:** Irina (deciding with her husband between a handful of shortlisted
+options) had no way to see specs, legal status, yield, and risk side-by-side — only one
+card at a time.
+
+**What shipped:** a second icon on every listing card (`CompareButton.tsx`, opposite the
+favorite heart) adds/removes it from a session-scoped compare shortlist
+(`src/lib/compare.ts`, capped at 3 — a 4th column stops being readable), a global sticky
+bottom bar (`CompareBar.tsx`, mounted in `Layout.tsx` so it survives page navigation)
+showing the current selection with a "Сравнить" button, and a new `/compare?ids=...`
+page rendering a full comparison table (price, specs, crypto acceptance, legal fit,
+yield estimate, risk note, per-listing WhatsApp CTA) driven entirely by the URL query so
+the comparison is a real, shareable link rather than just in-memory state.
+
+**Follow-on fix:** the floating WhatsApp button and the new bottom compare bar would
+have overlapped at the bottom-right corner — `WhatsAppFloat.tsx` now shifts up
+(`bottom-6` → `bottom-24`) whenever the compare bar is showing.
+
+Verified with Puppeteer (adding 3 items, confirming the bar and the resulting
+`/compare?ids=12,9,10` page both render) plus real mobile-viewport (390×844) screenshots
+of the compare bar, the favorites empty state, and the mobile nav menu — no overlaps.
+
 ---
 
 ## User preferences

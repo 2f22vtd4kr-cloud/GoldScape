@@ -107,6 +107,12 @@ const FAQ = [
 
 export default function About() {
   const [submitted, setSubmitted] = useState(false);
+  const [formError, setFormError] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [budget, setBudget] = useState('до $100k');
+  const [interest, setInterest] = useState('ОАЭ');
+  const [message, setMessage] = useState('');
 
   return (
     <Layout>
@@ -446,12 +452,40 @@ export default function About() {
                 <p className="text-xl dark:text-zinc-400 text-foreground/60 font-light">«Бесплатная консультация — без давления, без навязывания»</p>
               </div>
 
-              <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
+              <form
+                className="space-y-6"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  // Real validation: the two fields marked * were previously
+                  // decorative — any submission "succeeded" even empty, and
+                  // nothing was actually delivered anywhere. Now it both
+                  // validates and hands the lead to a human via WhatsApp
+                  // (the same channel every other CTA on this site uses —
+                  // there is no CRM/email backend elsewhere to be consistent with).
+                  if (!name.trim() || !phone.trim()) {
+                    setFormError('Укажите имя и телефон / WhatsApp — иначе мы не сможем связаться с вами.');
+                    return;
+                  }
+                  setFormError('');
+                  const lines = [
+                    'Заявка с сайта EstateofMind:',
+                    `Имя: ${name.trim()}`,
+                    `Телефон/WhatsApp: ${phone.trim()}`,
+                    `Бюджет: ${budget}`,
+                    `Направление: ${interest}`,
+                    message.trim() ? `Сообщение: ${message.trim()}` : null,
+                  ].filter(Boolean);
+                  window.open(`https://wa.me/971502345678?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener,noreferrer');
+                  setSubmitted(true);
+                }}
+              >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-400 text-foreground/60 block ml-1">Имя *</label>
                     <input
                       type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[48px] dark:text-white text-foreground dark:placeholder-zinc-600 placeholder-foreground/35 focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors"
                       placeholder="Иван Иванов"
                     />
@@ -462,6 +496,8 @@ export default function About() {
                     </label>
                     <input
                       type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                       className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[48px] dark:text-white text-foreground dark:placeholder-zinc-600 placeholder-foreground/35 focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors"
                       placeholder="+7 (999) 000-00-00"
                     />
@@ -471,7 +507,11 @@ export default function About() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-400 text-foreground/60 block ml-1">Бюджет</label>
-                    <select className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[48px] dark:text-white text-foreground focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors appearance-none">
+                    <select
+                      value={budget}
+                      onChange={(e) => setBudget(e.target.value)}
+                      className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[48px] dark:text-white text-foreground focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors appearance-none"
+                    >
                       <option>до $100k</option>
                       <option>$100k–500k</option>
                       <option>$500k–2M</option>
@@ -482,7 +522,11 @@ export default function About() {
                     <label className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-400 text-foreground/60 block ml-1">
                       Направление интереса
                     </label>
-                    <select className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[48px] dark:text-white text-foreground focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors appearance-none">
+                    <select
+                      value={interest}
+                      onChange={(e) => setInterest(e.target.value)}
+                      className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[48px] dark:text-white text-foreground focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors appearance-none"
+                    >
                       <option>ОАЭ</option>
                       <option>Турция</option>
                       <option>Кипр</option>
@@ -495,6 +539,8 @@ export default function About() {
                 <div className="space-y-2">
                   <label className="text-[11px] font-oxanium uppercase tracking-wider dark:text-zinc-400 text-foreground/60 block ml-1">Сообщение</label>
                   <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     className="w-full dark:bg-[#080808] bg-white border dark:border-white/10 border-black/[0.12] rounded-lg px-4 py-3 min-h-[120px] dark:text-white text-foreground dark:placeholder-zinc-600 placeholder-foreground/35 focus:outline-none dark:focus:border-white/30 focus:border-black/30 transition-colors resize-y"
                     placeholder="Опишите вашу ситуацию (необязательно)"
                   />
@@ -502,6 +548,9 @@ export default function About() {
 
                 {!submitted ? (
                   <>
+                    {formError && (
+                      <p className="text-[13px] text-[#e0607a] font-space-grotesk text-center -mb-2">{formError}</p>
+                    )}
                     <button type="submit" className="w-full eom-btn-primary flex items-center justify-center gap-2 py-4 min-h-[56px] mt-8">
                       Отправить запрос <SendHorizonal className="w-5 h-5" />
                     </button>

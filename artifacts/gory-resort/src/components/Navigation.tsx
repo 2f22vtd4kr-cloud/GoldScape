@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon, Heart } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useFavoriteIds } from '@/lib/favorites';
 
 const LINKS = [
   { href: '/', label: 'Главная' },
@@ -15,6 +16,7 @@ export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [location] = useLocation();
   const { theme, toggleTheme } = useTheme();
+  const favoriteCount = useFavoriteIds().length;
 
   useEffect(() => {
     // rAF-throttled: a bare scroll listener can fire dozens of times per
@@ -99,6 +101,18 @@ export function Navigation() {
         <a href="/about#consult" className="eom-btn-oilslick hidden lg:inline-flex">
           Консультация
         </a>
+        <Link
+          href="/favorites"
+          className="glass-icon-btn relative w-9 h-9 rounded-full text-foreground/70 dark:text-white/70"
+          aria-label={favoriteCount > 0 ? `Избранное (${favoriteCount})` : 'Избранное'}
+        >
+          <Heart className={`w-4 h-4 ${favoriteCount > 0 ? 'fill-[#f596b4] text-[#f596b4]' : ''}`} />
+          {favoriteCount > 0 && (
+            <span className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-[3px] rounded-full bg-[#f596b4] text-black text-[9px] font-oxanium font-bold flex items-center justify-center leading-none">
+              {favoriteCount}
+            </span>
+          )}
+        </Link>
         <button
           type="button"
           onClick={toggleTheme}
@@ -136,6 +150,13 @@ export function Navigation() {
               {link.label}
             </Link>
           ))}
+          <Link
+            href="/favorites"
+            className={`nav-link font-space-grotesk tracking-wide uppercase text-sm py-3 flex items-center gap-2 ${location === '/favorites' ? 'active' : ''}`}
+          >
+            <Heart className={`w-4 h-4 ${favoriteCount > 0 ? 'fill-[#f596b4] text-[#f596b4]' : ''}`} />
+            Избранное{favoriteCount > 0 ? ` (${favoriteCount})` : ''}
+          </Link>
           <a href="/about#consult" className="eom-btn-primary text-center justify-center min-h-[48px] flex items-center">
             Консультация
           </a>

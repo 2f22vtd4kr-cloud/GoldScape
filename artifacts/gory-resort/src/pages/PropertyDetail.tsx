@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import { PropertyLocationMap } from '@/components/PropertyLocationMap';
+import { FavoriteButton } from '@/components/FavoriteButton';
 import { LISTINGS, listingById } from '@/data/listings';
 import { countryByListingCode } from '@/data/countries';
 import { consumeDetailOrigin } from '@/lib/propertyOrigin';
@@ -175,13 +176,16 @@ export default function PropertyDetail() {
                     <span>{listing.pricePerSqm}</span>
                   </div>
                 </div>
-                <a
-                  href={`https://wa.me/971502345678?text=${waText}`}
-                  target="_blank" rel="noreferrer"
-                  className="eom-btn-primary font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-8 inline-flex items-center justify-center gap-2 whitespace-nowrap"
-                >
-                  <MessageCircle className="w-4 h-4" /> Написать в WhatsApp
-                </a>
+                <div className="flex items-center gap-3">
+                  <a
+                    href={`https://wa.me/971502345678?text=${waText}`}
+                    target="_blank" rel="noreferrer"
+                    className="eom-btn-primary font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-8 inline-flex items-center justify-center gap-2 whitespace-nowrap"
+                  >
+                    <MessageCircle className="w-4 h-4" /> Написать в WhatsApp
+                  </a>
+                  <FavoriteButton id={listing.id} />
+                </div>
               </div>
             </div>
 
@@ -204,13 +208,16 @@ export default function PropertyDetail() {
                   <span>{listing.area} м²</span>
                 </div>
               </div>
-              <a
-                href={`https://wa.me/971502345678?text=${waText}`}
-                target="_blank" rel="noreferrer"
-                className="eom-btn-primary font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-6 inline-flex items-center justify-center gap-2 w-full"
-              >
-                <MessageCircle className="w-4 h-4" /> Написать в WhatsApp
-              </a>
+              <div className="flex items-center gap-3">
+                <a
+                  href={`https://wa.me/971502345678?text=${waText}`}
+                  target="_blank" rel="noreferrer"
+                  className="eom-btn-primary font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-6 inline-flex items-center justify-center gap-2 flex-1"
+                >
+                  <MessageCircle className="w-4 h-4" /> Написать в WhatsApp
+                </a>
+                <FavoriteButton id={listing.id} />
+              </div>
             </div>
           </div>
         </div>

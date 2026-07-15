@@ -7,6 +7,8 @@ import Properties from '@/pages/Properties';
 import PropertyDetail from '@/pages/PropertyDetail';
 import CountryPage from '@/pages/CountryPage';
 import TaxGuide from '@/pages/TaxGuide';
+import Favorites from '@/pages/Favorites';
+import Compare from '@/pages/Compare';
 import NotFound from '@/pages/not-found';
 
 /** Wouter (like the browser's default history API) keeps the previous scroll
@@ -42,6 +44,8 @@ function App() {
           <Route path="/properties/:id" component={PropertyDetail} />
           <Route path="/countries/:code" component={CountryPage} />
           <Route path="/tax" component={TaxGuide} />
+          <Route path="/favorites" component={Favorites} />
+          <Route path="/compare" component={Compare} />
           <Route path="/*" component={NotFound} />
         </Switch>
       </Router>

@@ -24,3 +24,5 @@
 - [Reveal/counter animation false positives](mobile-viewport-screenshots.md) — fast scripted scroll also catches scroll-reveal fades and count-up numbers mid-flight, not just lazy images; always settle+wait before judging
 - [Screen blend over black background](screen-blend-black-bg.md) — screen(color,black)=color, so mix-blend-mode:screen never hides a baked near-black image background; use a luminance-keyed alpha matte instead
 - [Radial-gradient mask safe radius](radial-mask-safe-radius.md) — off-center mask ellipse radius must fit inside box's own edge distance or it cliffs regardless of stop smoothness; don't morph via border-radius on huge blurred boxes either
+- [useSyncExternalStore getSnapshot caching](favorites-getsnapshot-caching.md) — a getSnapshot that rebuilds a new array every call causes "Maximum update depth exceeded"; cache and only recompute when raw storage value changes
+- [Client-only listing selections](client-only-listing-selections.md) — favorites=localStorage (persist), compare=sessionStorage (one task); no backend on this site by design
