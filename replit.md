@@ -36,6 +36,67 @@ PERSONAS.md          # Visitor persona roster for UX review
 
 ## Session log
 
+### July 15, 2026 — "Inside the property" gallery feature: recovered history + lost work
+
+This feature has spanned three sessions interrupted by re-imports. Recording the full
+picture here so the next re-import doesn't lose it again.
+
+**Where it actually stands (committed, on disk right now):**
+- Two Canvas mockup variants exist at
+  `artifacts/mockup-sandbox/src/components/mockups/property-gallery/`:
+  `TabbedCrossfade.tsx` (pill-tab nav + crossfade) and `FilmstripCarousel.tsx`
+  (scroll-snap filmstrip + arrows/dots). Both render listing #4 (Arabian Ranches villa,
+  Dubai) only — no other listing has gallery data yet.
+- `_shared/galleryData.ts` holds 6 items for listing 4: floor1, floor2, exterior,
+  lifestyle-bbq, lifestyle-party, and a per-listing "easter egg" bonus render (currently
+  a tongue-in-cheek heist-movie scene, `listing-4-bizarre.png`).
+- **Each of those 6 images was generated independently** — different room, different
+  framing, no shared reference — so they don't read as photos of *one* real property.
+
+**What the user actually asked for (repeated verbatim this session because it was lost
+after a re-import mid-implementation):**
+1. A **third gallery variant**: filmstrip carousel, but with quick-jump display buttons
+   per view (borrowed from the tabbed-crossfade variant) — a hybrid of the two existing
+   variants.
+2. Stop generating listings/scenes from imagination. Instead, **source real, currently
+   listed properties from top real estate agencies in each of our countries** (UAE,
+   Turkey, Cyprus, Georgia, Thailand, Portugal, Serbia) — agency sites usually publish
+   both floor-plan blueprints and real photos, which should be used as generation
+   references so results are close to reality.
+3. Solve the "each view is disconnected" problem with a real technique — every
+   generated view of a given property (floor plan, exterior, lifestyle scenes) must be
+   anchored to the *same* real property (same layout, same finishes, same furniture
+   placement) so they visibly belong together. Lifestyle scenes in particular should
+   show the *whole* room/property context (e.g. "watching the game" should read as a
+   scene in *this* living room, not a generic stock room), so a prospective buyer can
+   feel what living there would be like.
+
+**What was in progress when the last session was interrupted (visible in
+`attached_assets/IMG_3252_1784128394817.jpeg`, a screenshot of that session's activity
+feed, but never reached disk/git):** the agent had started a "pilot" pass on listing 4 —
+activity log showed "Detailing floor plan activities" → "Regenerated pilot images with
+whole-floor framing" → 2 new images generated — before several image-generation
+subagents were stopped ("Subagent stopped: You are producing content...", likely a
+content-policy trip, possibly related to the heist-themed easter egg or to reproducing
+a real, identifiable property/agency's imagery). **None of that regeneration work or
+any agency research survived** — `git log` for this feature stops at the original
+commit that added the two variants with the old, disconnected per-room images; nothing
+about whole-floor framing or real agencies was ever committed. Re-imports wipe anything
+that only exists in the agent's working state and isn't committed, so mid-flight visual
+R&D like this needs to land in git (or at least in `attached_assets/generated_images/`)
+before it's safe from a re-import.
+
+**Not yet resolved / needs a product decision before continuing:** whether "import
+real, currently listed" properties means literally scraping specific live agency
+listings and their copyrighted photos to use as AI-generation reference (legal/ethical
+exposure — using another brokerage's real, currently-for-sale listing with fabricated
+interior/lifestyle scenes could look like unauthorized use of their IP, and to a site
+visitor could look like *this* site is the seller of a property it has no relationship
+to), versus using real listings only as **style/realism reference** (grounding fictional
+composites in how real floor plans and real interiors in that market actually look,
+without claiming a specific real address is for sale here). Flagged to the user for a
+decision rather than assumed.
+
 ### July 15, 2026 — Re-import setup (round 3)
 
 Project was re-imported again with all 3 workflows failing (no `node_modules`).
