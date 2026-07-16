@@ -28,3 +28,4 @@
 - [Client-only listing selections](client-only-listing-selections.md) — favorites=localStorage (persist), compare=sessionStorage (one task); no backend on this site by design
 - [Terrain map transparency](terrain-map-transparency.md) — AI terrain PNGs have white bg; use ImageMagick corner-floodfill → -nobg.png; remove iso-tile box-shadow after, use filter:drop-shadow instead
 - [Belgrade image gen rules](belgrade-image-gen-rules.md) — 3D isometric only, no text/people/hand-drawn; naming: Птичий полёт first, Планировка for floor plans; no pulse dot
+- [Property image DNA system](property-dna-system.md) — buildPrompt(id,type,desc) in property-dna.ts; anchor block enforces same building/site/landmark/interior across all scenes; playbook in docs/IMAGE_GENERATION.md

@@ -2,29 +2,31 @@
  * scenes.ts
  *
  * Scene image sets for each real property listing.
- * 
+ *
+ * ─────────────────────────────────────────────────────────────────
+ * GENERATING / REGENERATING IMAGES — READ THIS FIRST
+ * ─────────────────────────────────────────────────────────────────
+ * Every scene image MUST be generated using the DNA system defined in
+ * `src/data/property-dna.ts`.  Do NOT write ad-hoc prompts.
+ *
+ *   import { buildPrompt } from '@/data/property-dna';
+ *   const prompt = buildPrompt(listingId, sceneType, sceneSpecificDescription);
+ *   // then pass prompt to generateImage({ prompt, resolution: 'high' })
+ *
+ * The full playbook (rationale, step-by-step, review checklist) is at:
+ *   docs/IMAGE_GENERATION.md
+ *
+ * ─────────────────────────────────────────────────────────────────
  * Architecture:
  * - Each entry is keyed by listing id
  * - Scenes are ordered: architecture (exterior → section → floorplan) → life → bizarre
  * - The site/location map is injected dynamically from listing.locationMap.image in PropertyDetail
  * - Images live in /images/scenes/{slug}.jpg (public folder)
- * 
- * IMAGE STYLE RULES (enforced for all generated scenes):
- *   ✓ 3D isometric architectural visualization — clean, technical precision
- *   ✓ Dramatic directional lighting, high detail
- *   ✗ NO hand-drawn / illustration / sketch style
- *   ✗ NO people or realistic human life scenarios
- *   ✗ NO text, labels, or annotations baked into the image
- * 
+ *
  * Naming convention:
  *   - Slot 0 (site map): label = "Птичий полёт"
  *   - Floor plan: label = "Планировка" (single floor) or "Планировка · эт. N" (multi-floor)
  *   - Each scene type must have a unique, specific label — never generic "Архитектура"
- * 
- * Consistency principle ("property DNA"):
- *   All scenes for a given listing were generated with the same DNA string describing the property's
- *   architecture, materials, palette, and distinctive features — ensuring visual coherence across
- *   exterior, cross-section, life, and bizarre images.
  */
 import type { PropertyScene } from '@/components/PropertyScenesCarousel';
 
@@ -32,10 +34,7 @@ type SceneMap = Record<number, PropertyScene[]>;
 
 export const PROPERTY_SCENES: SceneMap = {
   /* ── 12 · Belgrade Savski Venac (Estitor) ───────────────────── */
-  // DNA: Pre-war apartment · Belgrade Savski Venac · 2 BR · 68m² · 3m ceilings
-  //      floor: restored chevron parquet (warm honey)  walls: white plaster + period cornices
-  //      windows: tall wooden sash windows, Art Deco 1930s stone building
-  //      palette: warm parquet, Belgrade-grey stone, ivory plaster
+  // DNA → see property-dna.ts entry 12
   12: [
     { id: 'p12-exterior',  type: 'exterior',        category: 'architecture', label: 'Экстерьер',        sublabel: 'Межвоенное здание',      image: '/images/scenes/p12-exterior.jpg'  },
     { id: 'p12-section',   type: 'section',         category: 'architecture', label: 'Разрез',           sublabel: 'Высокие потолки, 3м',    image: '/images/scenes/p12-section.jpg'   },
@@ -45,11 +44,7 @@ export const PROPERTY_SCENES: SceneMap = {
   ],
 
   /* ── 20 · Belgrade Waterfront (Atrium Property Services) ────── */
-  // DNA: High-rise corner apartment · Floor 14 · 2 BR · 2 BA · 95 m² · 3.0m ceilings
-  //      floor: wide-plank light oak engineered wood  walls: white render + glass curtain
-  //      windows: full-height glass west + north, wrap-around Sava + Kalemegdan view
-  //      exterior: glass-and-steel tower, Belgrade Waterfront quayside promenade
-  //      palette: cool silver-white, Sava steel-blue, warm brass, light oak
+  // DNA → see property-dna.ts entry 20
   20: [
     { id: 'p20-exterior',  type: 'exterior',      category: 'architecture', label: 'Экстерьер',          sublabel: 'Beograd na vodi, Сава',         image: '/images/scenes/p20-exterior.jpg'  },
     { id: 'p20-floorplan', type: 'floorplan',     category: 'architecture', label: 'Планировка',         sublabel: 'Угловой, 14 этаж, вид на реку', image: '/images/scenes/p20-floorplan.jpg' },
@@ -59,11 +54,7 @@ export const PROPERTY_SCENES: SceneMap = {
   ],
 
   /* ── 18 · Dobrota, Kotor Bay (Sotheby's International Realty Montenegro) ── */
-  // DNA: Modern seafront apartment · 3 BR · 2 BA · 121 m² · 2.85m ceilings
-  //      floor: pale travertine tile  walls: white smooth render
-  //      windows: full-width south sliding glass, Bay of Kotor view (Perast church domes)
-  //      exterior: white-render 3-floor building, glass railings, rocky waterfront
-  //      palette: pearl white, Kotor-bay silver-blue, travertine beige, pine green
+  // DNA → see property-dna.ts entry 18  (proof-of-concept: first set generated with full DNA system)
   18: [
     { id: 'p18-exterior',  type: 'exterior',   category: 'architecture', label: 'Экстерьер',          sublabel: 'Первая линия, залив Котор',    image: '/images/scenes/p18-exterior.jpg'  },
     { id: 'p18-floorplan', type: 'floorplan',  category: 'architecture', label: 'Планировка',         sublabel: 'Терраса 12 м над заливом',     image: '/images/scenes/p18-floorplan.jpg' },
@@ -73,11 +64,7 @@ export const PROPERTY_SCENES: SceneMap = {
   ],
 
   /* ── 19 · Sveti Stefan, Budva Riviera (Monteonline) ──────────── */
-  // DNA: Boutique hillside apartment · 1 BR · 1 BA · 62 m² · 2.75m ceilings
-  //      floor: light herringbone oak parquet  walls: white plaster + stone accent
-  //      windows: floor-to-ceiling west-facing glass, Sveti Stefan island view
-  //      exterior: white render + stone facade, terraced hillside garden
-  //      palette: white plaster, Adriatic turquoise, warm terracotta, honey oak
+  // DNA → see property-dna.ts entry 19
   19: [
     { id: 'p19-exterior',  type: 'exterior',        category: 'architecture', label: 'Экстерьер',         sublabel: 'Вид на Свети-Стефан',          image: '/images/scenes/p19-exterior.jpg'  },
     { id: 'p19-floorplan', type: 'floorplan',        category: 'architecture', label: 'Планировка',        sublabel: '62 м² на склоне над морем',    image: '/images/scenes/p19-floorplan.jpg' },
