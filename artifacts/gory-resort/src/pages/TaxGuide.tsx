@@ -116,17 +116,34 @@ const TAX_COUNTRIES = [
     highlight:      'Иностранные доходы, ввезённые в Таиланд после уплаты налогов в стране-источнике, не облагаются тайским налогом.',
     caution:        'Иностранцы не могут владеть землёй (только Freehold-квартиры по квоте 49%).',
   },
+  {
+    flag: '🇲🇪',
+    name: 'Черногория',
+    code: 'me',
+    accentColor: '#e8a03a',
+    headline: 'Низкий налог + ВНЖ без порога инвестиций',
+    incomeTax:      '9% (flat)',
+    capitalGains:   '0% после 2 лет; 9% до 2 лет',
+    dividends:      '15%',
+    corporateTax:   '15%',
+    buyTax:         '3% налог на передачу прав',
+    vnj:            'ВНЖ при регистрации по адресу, без минимума; ПМЖ через 5 лет',
+    bestFor:        ['Инвесторы в аренду', 'Адриатический образ жизни', 'Семьи'],
+    highlight:      'Низкая плоская ставка 9% на арендный доход — одна из самых выгодных в регионе. Временное ВНЖ оформляется при регистрации по адресу объекта без минимальной суммы сделки.',
+    caution:        'Программа гражданства за инвестиции (CBI) приостановлена с декабря 2022 года. Черногория — кандидат ЕС (с 2010), но дата вступления не определена.',
+  },
 ];
 
 /* ── Comparison summary row ─────────────────────────────────────────────── */
 const QUICK_COMPARE = [
-  { label: 'ОАЭ',        incomeTax: '0%',   CGT: '0%',  vnj: '$545K',  color: '#e8a83a' },
-  { label: 'Грузия',     incomeTax: '0%*',  CGT: '5%',  vnj: '$100K',  color: '#3dad6a' },
-  { label: 'Кипр',       incomeTax: '0%†',  CGT: '0%',  vnj: '€300K',  color: '#4a8fd4' },
-  { label: 'Турция',     incomeTax: '15-40%', CGT: '0%‡', vnj: '$400K', color: '#d45a3a' },
-  { label: 'Португалия', incomeTax: '20%§', CGT: '28%', vnj: '€500K',  color: '#c8982a' },
-  { label: 'Сербия',     incomeTax: '15%',  CGT: '15%', vnj: 'Любая сумма', color: '#5a7dd4' },
-  { label: 'Таиланд',    incomeTax: '0%*',  CGT: '—',   vnj: '$25K',   color: '#3aaa8a' },
+  { label: 'ОАЭ',           incomeTax: '0%',    CGT: '0%',   vnj: '$545K',       color: '#e8a83a' },
+  { label: 'Грузия',        incomeTax: '0%*',   CGT: '5%',   vnj: '$150K',       color: '#3dad6a' },
+  { label: 'Кипр',          incomeTax: '0%†',   CGT: '0%',   vnj: '€300K',       color: '#4a8fd4' },
+  { label: 'Турция',        incomeTax: '15-40%', CGT: '0%‡', vnj: '$400K',       color: '#d45a3a' },
+  { label: 'Португалия',    incomeTax: '20%§',  CGT: '28%',  vnj: '€500K',       color: '#c8982a' },
+  { label: 'Сербия',        incomeTax: '15%',   CGT: '15%',  vnj: 'Любая сумма', color: '#5a7dd4' },
+  { label: 'Таиланд',       incomeTax: '0%*',   CGT: '—',    vnj: '$25K',        color: '#3aaa8a' },
+  { label: 'Черногория',    incomeTax: '9%',    CGT: '0%¶',  vnj: 'Любая сумма', color: '#e8a03a' },
 ];
 
 /* ─────────────────────────────────────────────────────────────────────────── */
@@ -146,7 +163,7 @@ export default function TaxGuide() {
             Актуально · Июль 2026
           </span>
           <h1 className="font-oxanium font-bold dark:text-white text-foreground uppercase leading-[1.0] tracking-tight text-[clamp(2.2rem,6vw,4rem)] mb-6">
-            Налоговый гид<br/>по 7 юрисдикциям
+            Налоговый гид<br/>по 8 юрисдикциям
           </h1>
           <p className="font-space-grotesk text-lg dark:text-white/50 text-foreground/60 max-w-2xl leading-relaxed">
             Сравнительный анализ налогов на доход, прирост капитала, дивиденды и покупку недвижимости. 
@@ -199,6 +216,7 @@ export default function TaxGuide() {
             † Non-Dom: 0% на дивиденды и проценты на 17 лет.
             ‡ 0% при удержании объекта более 2 лет.
             § NHR режим: 20% фиксированный на зарубежный трудовой доход.
+            ¶ 0% прирост капитала при удержании объекта более 2 лет; 9% при продаже в течение 2 лет.
           </p>
         </div>
       </section>

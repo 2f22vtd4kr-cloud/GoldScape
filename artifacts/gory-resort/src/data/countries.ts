@@ -1,11 +1,11 @@
-import mapUae from '@assets/generated_images/terrain-map-uae.png';
-import mapTurkey from '@assets/generated_images/terrain-map-turkey.png';
-import mapCyprus from '@assets/generated_images/terrain-map-cyprus.png';
-import mapGeorgia from '@assets/generated_images/terrain-map-georgia.png';
-import mapThailand from '@assets/generated_images/terrain-map-thailand.png';
-import mapPortugal from '@assets/generated_images/terrain-map-portugal.png';
-import mapSerbia from '@assets/generated_images/terrain-map-serbia.png';
-import mapMontenegro from '@assets/generated_images/terrain-map-montenegro.png';
+import mapUae from '@assets/generated_images/terrain-map-uae-nobg.png';
+import mapTurkey from '@assets/generated_images/terrain-map-turkey-nobg.png';
+import mapCyprus from '@assets/generated_images/terrain-map-cyprus-nobg.png';
+import mapGeorgia from '@assets/generated_images/terrain-map-georgia-nobg.png';
+import mapThailand from '@assets/generated_images/terrain-map-thailand-nobg.png';
+import mapPortugal from '@assets/generated_images/terrain-map-portugal-nobg.png';
+import mapSerbia from '@assets/generated_images/terrain-map-serbia-nobg.png';
+import mapMontenegro from '@assets/generated_images/terrain-map-montenegro-nobg.png';
 
 export interface CountryMarket {
   city:      string;

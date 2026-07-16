@@ -65,7 +65,7 @@ export default function Properties() {
         <img
           src="/chrome/blob-iridescent-1.png"
           alt=""
-          className="absolute -top-20 right-0 w-[360px] opacity-10 md:opacity-30 mix-blend-screen pointer-events-none -z-10 md:z-0"
+          className="absolute top-0 -right-8 w-[300px] opacity-15 md:opacity-35 mix-blend-screen pointer-events-none -z-10 md:z-0"
         />
 
         <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-4">

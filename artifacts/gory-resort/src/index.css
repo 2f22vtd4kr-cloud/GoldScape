@@ -1288,28 +1288,9 @@ html:not(.dark) .section-reveal-heading::after {
   80%      { filter: brightness(1.08) saturate(1.14) contrast(1.05); }
 }
 
-.iso-tile {
-  box-shadow:
-    3px 3px 0 #e8e5e0,
-    6px 6px 0 #e0ddd8,
-    10px 10px 0 #d8d5d0,
-    14px 14px 0 #d0cdc8,
-    18px 18px 0 #c8c5c0,
-    22px 22px 30px rgba(0,0,0,0.12),
-    0 0 80px rgba(140,100,60,0.04);
-  border: 1px solid rgba(0,0,0,0.08);
-}
-.dark .iso-tile {
-  box-shadow:
-    3px 3px 0 #090909,
-    6px 6px 0 #080808,
-    10px 10px 0 #060606,
-    14px 14px 0 #030303,
-    18px 18px 0 #010101,
-    22px 22px 30px rgba(0,0,0,0.96),
-    0 0 80px rgba(140,100,255,0.06);
-  border: 1px solid rgba(255,255,255,0.09);
-}
+/* .iso-tile box-shadow/border removed — transparent PNG maps need
+   filter:drop-shadow on the <img> (respects alpha), not box-shadow
+   on the element's rectangular bounding box. */
 
 /* mix-blend-mode removed — real alpha PNG + explicit grayscale/darken
    filter (set in Footer.tsx) handles both themes without the wash-out risk
@@ -1517,6 +1498,10 @@ html:not(.dark) .void-wave-section {
 }
 
 /* ─── IsoTerrain 3D tile ─────────────────────────────────────────────────*/
+/* box-shadow / border intentionally removed: terrain maps now have transparent
+   backgrounds — box-shadow would draw square layers from the PNG bounding box
+   rather than following the terrain shape. filter: drop-shadow() on the <img>
+   respects alpha and creates the correct shaped shadow instead.              */
 .iso-outer {
   perspective: 1200px;
   perspective-origin: 50% 22%;
@@ -1524,15 +1509,6 @@ html:not(.dark) .void-wave-section {
 .iso-tile {
   transform: rotateX(52deg) rotateZ(-18deg);
   transform-style: preserve-3d;
-  box-shadow:
-    3px 3px 0 #090909,
-    6px 6px 0 #080808,
-    10px 10px 0 #060606,
-    14px 14px 0 #030303,
-    18px 18px 0 #010101,
-    22px 22px 30px rgba(0,0,0,0.96),
-    0 0 80px rgba(140,100,255,0.06);
-  border: 1px solid rgba(255,255,255,0.09);
 }
 @media (prefers-reduced-motion: reduce) {
   .iso-tile { transform: rotateX(52deg) rotateZ(-18deg); }

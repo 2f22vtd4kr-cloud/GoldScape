@@ -1,0 +1,116 @@
+⚡ BERSERK MODE — EstateofMind real estate site · Round 5
+
+MANDATORY OPERATING PROTOCOL — READ BEFORE ANYTHING ELSE
+
+You are working on the EstateofMind project (Russian-language luxury real estate brokerage for capital-preservation investors). This is a high-volume, high-effort session. You must apply the following workflow multipliers immediately:
+
+PARALLELISM RULE — 2× what you did last session:
+- Last session ran 21 image generation jobs in one Promise.all batch. This session must run ≥ 42 jobs per batch.
+- Last session made 4 parallel file edits per turn. This session must target 8+ independent parallel edits per turn.
+- Every tool call that does not depend on the prior result must be batched. No sequential calls where parallel calls are possible.
+- Use Promise.all([...]) for ALL image generation, ALL independent web searches, ALL independent file reads. Never await one then start the next.
+- Dispatch explore subagents for codebase orientation instead of reading files one by one.
+
+WORKING DEPTH RULE — 2× what you did last session:
+- Last session added 3 listings. This session must add ≥ 6 listings (2-3 per remaining country gap).
+- Do not stop after the first wave. After completing wave 1 (properties + images + scenes), immediately begin wave 2 without asking permission.
+- Keep working until ALL THREE tasks below are fully complete and typecheck is clean. Only then stop.
+
+DO NOT:
+- Ask "shall I proceed?" between tasks
+- Ask permission before generating images in bulk
+- Stop to narrate — just build
+- Run sequential web searches when parallel is possible
+
+---
+
+PROJECT STATE (as of July 15, 2026 — session 4 results)
+
+Tech stack: React 19 + Vite + Tailwind + shadcn/ui + pnpm monorepo
+Frontend: artifacts/gory-resort/src/
+Key data files:
+- artifacts/gory-resort/src/data/listings.ts — 20 listings (IDs 1–20), Listing interface (has optional agencyUrl?: string), LISTINGS array
+- artifacts/gory-resort/src/data/scenes.ts — PROPERTY_SCENES[id] map; valid SceneType: site | exterior | section | floorplan | life_bbq | life_party | life_matchday | life_family | life_remote_work | bizarre
+- artifacts/gory-resort/src/data/countries.ts — COUNTRIES array, 8 entries: AE, TR, CY, GE, TH, PT, RS, ME
+- artifacts/gory-resort/src/pages/Properties.tsx — country filter dropdown (all 8 codes wired)
+- artifacts/gory-resort/src/pages/Home.tsx — destinations grid (8 entries)
+- artifacts/gory-resort/src/pages/TaxGuide.tsx — comparison table (Montenegro missing)
+- artifacts/gory-resort/public/images/ — property card images (static, served by Vite)
+- artifacts/gory-resort/public/images/scenes/ — scene images (p{id}-{type}.jpg)
+- attached_assets/generated_images/ — isometric location maps and terrain maps (imported as ES modules via @assets/... alias)
+
+Current catalogue: 20 listings · 8 countries (AE/TR/CY/GE/TH/PT/RS/ME)
+
+Listing interface shape (copy exactly):
+id: number; country: string; city: string; district: string; type: string;
+price: string; pricePerSqm: string; beds: number | string; baths: number;
+area: number; image: string; agency: string; agencyUrl?: string; exclusive: boolean;
+tags: string[]; crypto: boolean; locationMap: LocationMap;
+description: string; neighborhood: string; legalFit: string;
+yieldEstimate: string; riskNote: string;
+LocationMap shape:
+{ image: ImportedModule; pinPos: { x: number; y: number };
+accentColor: string;
+distances: Array<{ icon: string; label: string; minutes: number }> }
+
+Scene object shape:
+{ id: string; type: SceneType; category: 'architecture'|'life'|'bizarre';
+label: string; sublabel?: string; image: string }
+
+Import pattern for location maps (added to top of listings.ts):
+import mapFoo from '@assets/generated_images/listing-map-foo.png';
+
+Image generation output paths:
+* Location maps → attached_assets/generated_images/listing-map-{slug}.png
+* Property card → artifacts/gory-resort/public/images/prop-{slug}.jpg
+* Scenes → artifacts/gory-resort/public/images/scenes/p{id}-{type}.jpg
+
+TASKS (complete all three, in any order, without stopping between them)
+TASK A — Replace composite listings with real agency properties
+The following listings are composites (not sourced from real agency inventory). Replace or supplement each country so it has 2–3 real-agency listings total. Priority order:
+Country	Current listing IDs	Gap
+Turkey (TR)	5, 6	Verify or replace with real Antalya/Istanbul/Alanya agency listings
+Georgia (GE)	9, 10	Verify or replace with real Batumi/Tbilisi agency listings
+Thailand (TH)	11, 15	Verify or replace with real Phuket/Samui agency listings
+UAE (AE)	1, 2, 3, 4, 16	Already has 5 — verify at least 2 have real agencyUrl
+Serbia (RS)	12, 20	20 is real (BW Parkview). Verify 12 or replace
+For each new or verified real listing you add:
+1. Web-search the agency's live listing page; extract exact price, size, beds/baths, district, and agency name
+2. Write a DNA string (frozen geometry + palette + view) as a comment in scenes.ts
+3. Generate in one Promise.all batch: location map (isometric) + property card + all 5 scenes (exterior, floorplan, section, 1 life scene, bizarre)
+4. Add all fields to listings.ts including agencyUrl
+5. Add DNA comment + 5-scene array to scenes.ts
+Image generation style anchors (keep consistent):
+* Location maps: "square isometric 3D terrain map illustration, photorealistic, [city context], luxury developer brochure style, warm afternoon light, ultra-high detail, square composition"
+* Property cards: photorealistic luxury real estate photography, natural light, architectural photography style
+* Scenes use the DNA string as the anchor — paste it verbatim into every scene prompt for that listing
+TASK B — Fill scene gaps so every listing has ≥ 5 scenes
+Read scenes.ts. Any listing with fewer than 5 entries (not counting the auto-injected site map) needs new scenes generated. The following are known gaps from session 4:
+* Listing 12 (Belgrade Savski Venac) — only 2 scenes: needs section, floorplan, 1 life scene
+* Listing 13 (Lisbon) — only 2 scenes: needs section, floorplan, 1 life scene
+* Listing 15 (Koh Samui) — only 2 scenes: needs section, floorplan, 1 life scene
+* Check all 20 listings and fix any others with < 5 scenes
+Generate all missing scenes in one big Promise.allbatch grouped by listing. Use the DNA string from the scenes.ts comment for that listing.
+TASK C — Add Montenegro to the TaxGuide comparison table
+File: artifacts/gory-resort/src/pages/TaxGuide.tsx
+Montenegro tax data (accurate as of mid-2026):
+* Property transfer tax: 3%
+* Income tax on rental income: 9% (flat)
+* Capital gains tax: 0% after 2 years of ownership; 9% within 2 years
+* Corporate tax: 15%
+* Wealth tax: none
+* VAT on new construction: 21%
+* Residency: temporary residence via property registration, no minimum investment; CBI program (citizenship) suspended Dec 2022; PR after 5 years
+* Entry price: from €174,900
+Add Montenegro row to every table/comparison component in TaxGuide.tsx that currently shows the other 7 countries.
+
+SESSION END CHECKLIST
+Before marking done:
+* pnpm --filter @workspace/gory-resort run typecheck— zero errors
+*  Screenshot /properties — country count in subtitle = correct number
+*  Screenshot /properties?country=me equivalent (select ME in filter) — shows Montenegro listings only
+*  Screenshot /tax — Montenegro row present in comparison table
+*  Screenshot /countries/me — country page loads correctly
+*  replit.md updated with session log (all new listings in the same table format as prior sessions)
+Run all screenshots in parallel via the Screenshot tool before declaring done.
+

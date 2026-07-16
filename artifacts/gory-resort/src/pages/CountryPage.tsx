@@ -8,13 +8,13 @@ function CountryPageContent({ data }: { data: CountryData }) {
   return (
     <Layout>
       {/* ─── HERO ──────────────────────────────────────────────────────────── */}
-      <section className="relative pt-28 md:pt-36 pb-12 md:pb-24 overflow-hidden dark:border-b dark:border-white/5 border-b border-black/5">
+      <section className="relative pt-28 md:pt-36 pb-12 md:pb-24 overflow-x-hidden dark:border-b dark:border-white/5 border-b border-black/5">
         {/* Deep, expensive dark background, not generic black. */}
         <div className="absolute inset-0 dark:bg-[#020202] bg-white pointer-events-none" />
         {/* Subtle, desaturated iridescent wash. Not crypto neon. */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(35,30,45,0.4)_0%,transparent_70%)] pointer-events-none" />
 
-        <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+        <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 md:overflow-visible">
           
           {/* Left Column: Text & Stats */}
           <div className="w-full md:w-1/2 flex flex-col relative z-20">
@@ -70,7 +70,7 @@ function CountryPageContent({ data }: { data: CountryData }) {
                 alt={`${data.capital}, ${data.nameEn}`}
                 className="relative z-10 w-auto max-w-[110%] max-h-[550px] object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)] iso-tile transition-transform duration-1000 hover:rotate-0 hover:scale-105"
               />
-              <div className="absolute bottom-4 right-0 z-20 dark:bg-[#050505]/80 bg-white/75 backdrop-blur-md px-5 py-3 rounded-full dark:border dark:border-white/10 border border-black/10 shadow-2xl">
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 dark:bg-[#050505]/80 bg-white/75 backdrop-blur-md px-5 py-3 rounded-full dark:border dark:border-white/10 border border-black/10 shadow-2xl whitespace-nowrap">
                 <p className="font-oxanium dark:text-white/80 text-foreground/70 text-[11px] font-medium tracking-[0.18em] uppercase">
                   {data.capital} · {data.nameEn}
                 </p>
