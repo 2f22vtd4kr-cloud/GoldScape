@@ -124,14 +124,45 @@ Each `PropertyScene`: `id`, `type` (exterior / section / floorplan / life_* / bi
 
 ---
 
-## Image generation rules
+## Image generation — DNA system
 
-All property scene images must follow these rules — **no exceptions**:
+All property scene images are generated using the **DNA system** defined in `src/data/property-dna.ts`. **Never bypass this.** Full playbook: `docs/IMAGE_GENERATION.md`.
 
-- **Style**: 3D isometric architectural visualization — clean, technical precision, dramatic directional lighting, high detail. Think architect's isometric render, not illustration.
-- **No people**: zero human figures in any image. Life-scenario scenes (BBQ, remote work, match day) show the *space set up for the activity* — furniture, objects, atmosphere — never the people doing it.
-- **No hand-drawn / sketch / illustration style**: the AI generator sometimes defaults to this; always reject it.
-- **No text**: no labels, annotations, street signs, or any lettering baked into the image.
+### The core rule
+Write the scene-specific description only (what's happening, what objects are added for this scene). **Never describe the building, materials, or landmark in the scene prompt** — `buildPrompt()` prepends those from the DNA anchor, identically, every time.
+
+```typescript
+import { buildPrompt } from '@/data/property-dna';
+const prompt = buildPrompt(listingId, sceneType, sceneDesc);
+// sceneDesc = only what is happening / what objects are added
+```
+
+### DNA anchor fields (required per property)
+| Field | What it pins | Why precision matters |
+|-------|-------------|----------------------|
+| `building` | Facade material, era, colour, roof, window type, balcony rail | "white modern" → AI invents a new building every time |
+| `site` | What surrounds the building at ground level | Missing → AI invents its own context |
+| `landmark` | The ONE distinctive thing always visible through main windows | Must be specific enough to render the same thing every run |
+| `interior` | Floor material, wall finish, ceiling height, frame colour | Missing → every interior scene gets a different floor |
+| `palette` | 5–7 specific colour names | Generic "white, blue" → different gamut each run |
+
+### Nika review checklist (all 7 must pass before keeping an image)
+- [ ] Landmark correct and recognisable?
+- [ ] Floor material matches DNA?
+- [ ] Wall finish matches DNA?
+- [ ] No void background?
+- [ ] No text/numbers baked in?
+- [ ] Building style matches exterior (not a different property)?
+- [ ] Render quality: photorealistic, ultra-high detail, no sketch artifacts?
+
+### Scene types and camera conventions
+| Scene type | Camera / framing |
+|------------|-----------------|
+| `exterior` | Street or water level, 25–35° elevation, two facade planes visible |
+| `section` | 45° isometric dolls-house cutaway, roof and front wall removed, all floors stacked |
+| `floorplan` | 65° top-down isometric, roof only removed, site context at building edges |
+| `life_*` | Interior or terrace shot showing correct floor + walls + landmark through glass |
+| `bizarre` | 45° isometric room cutaway, same camera as section, landmark visible through window |
 
 ### Scene naming conventions (consistent across ALL properties)
 
@@ -144,6 +175,22 @@ All property scene images must follow these rules — **no exceptions**:
 | 4+ | Life/bizarre scenes | Specific descriptive label — never the generic word "Архитектура" |
 
 Never call multiple different scene types by the same label.
+
+### Current scene status (July 2026)
+All 4 properties have complete 5-scene carousel sets generated with the full DNA system:
+
+| Property | Exterior | Section | Floorplan | Life scene | Bizarre |
+|----------|----------|---------|-----------|-----------|---------|
+| p12 Belgrade Savski Venac | ✓ | ✓ | ✓ | `life_remote_work` — Kalemegdan in window | ✓ Ocean's Eleven heist planning |
+| p18 Dobrota Kotor Bay | ✓ | ✓ | ✓ | `life_bbq` — terrace at blue hour | ✓ Balkan catch, fishing boat in living room |
+| p19 Sveti Stefan | ✓ | ✓ | ✓ | `life_remote_work` — Sveti Stefan island filling glass door | ✓ Bengal tiger in limestone shower |
+| p20 Belgrade Waterfront | ✓ | ✓ | ✓ | `life_matchday` — Champions League, Sava + Kalemegdan at blue hour | ✓ Tesla coil in corner living room |
+
+**What each set pins as persistent:**
+- **p12**: honey herringbone parquet, white lime plaster + egg-and-dart cornice, tall panelled oak doors, Kalemegdan ramparts visible through sash windows
+- **p18**: pale cream travertine tile, white plaster, anthracite aluminium frames, Gospa od Škrpjela island + Perast across the bay
+- **p19**: honey herringbone parquet, rough-cut limestone stone accent wall, dark bronze aluminium frames, exposed dark oak beam, Sveti Stefan island filling the west glass opening
+- **p20**: light natural oak wide-plank floor, Calacatta marble kitchen island, champagne-steel curtain wall, Sava river (west) + Kalemegdan ramparts (north) simultaneously visible
 
 ---
 
