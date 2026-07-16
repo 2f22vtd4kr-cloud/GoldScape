@@ -143,11 +143,6 @@ function CrossfadeStage({ scene, accent }: { scene: PropertyScene; accent: strin
               <div className="text-white/50 text-[12px] md:text-sm mt-0.5 font-space-grotesk">{scene.sublabel}</div>
             )}
           </div>
-          {/* Accent pulse dot */}
-          <div
-            className="w-2 h-2 rounded-full animate-pulse mb-1"
-            style={{ background: accent, boxShadow: `0 0 8px ${accent}` }}
-          />
         </div>
       </div>
 

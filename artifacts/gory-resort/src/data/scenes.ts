@@ -241,8 +241,8 @@ export function getScenesForListing(id: number, siteMapImage: string, accent: st
     id: `site-${id}`,
     type: 'site',
     category: 'architecture',
-    label: 'Расположение',
-    sublabel: 'Изометрическая карта',
+    label: 'Птичий полёт',
+    sublabel: 'Вид с высоты',
     image: siteMapImage,
   };
   const rest = PROPERTY_SCENES[id] ?? [];
