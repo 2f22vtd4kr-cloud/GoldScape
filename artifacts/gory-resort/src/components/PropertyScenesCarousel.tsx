@@ -191,12 +191,15 @@ export function PropertyScenesCarousel({
   // Reset index when category changes
   useEffect(() => { setActiveIdx(0); }, [activeCategory]);
 
-  // Scroll active thumbnail into view
+  // Scroll active thumbnail into view — horizontal only, never page-level vertical scroll
   useEffect(() => {
     const strip = filmstripRef.current;
     if (!strip) return;
     const thumb = strip.querySelector(`[data-thumb-idx="${safeIdx}"]`) as HTMLElement;
-    thumb?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    if (!thumb) return;
+    const thumbCenter = thumb.offsetLeft + thumb.offsetWidth / 2;
+    const targetLeft = thumbCenter - strip.clientWidth / 2;
+    strip.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
   }, [safeIdx]);
 
   // Categories present in this property's scenes

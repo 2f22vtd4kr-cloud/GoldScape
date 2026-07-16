@@ -50,7 +50,7 @@ export const PROPERTY_SCENES: SceneMap = {
     { id: 'p20-floorplan', type: 'floorplan',     category: 'architecture', label: 'Планировка',         sublabel: 'Угловой, 14 этаж, вид на реку', image: '/images/scenes/p20-floorplan.jpg' },
     { id: 'p20-section',   type: 'section',       category: 'architecture', label: 'Разрез',             sublabel: 'Крепость Калемегдан снаружи',   image: '/images/scenes/p20-section.jpg'   },
     { id: 'p20-matchday',  type: 'life_matchday', category: 'life',         label: 'Матч-день',          sublabel: 'ЛЧ, Сава внизу',               image: '/images/scenes/p20-matchday.jpg'  },
-    { id: 'p20-bizarre',   type: 'bizarre',       category: 'bizarre',      label: '✦ Тесла дома',       sublabel: 'Катушка в гостиной, 1890-е',    image: '/images/scenes/p20-bizarre.jpg'   },
+    { id: 'p20-bizarre',   type: 'bizarre',       category: 'bizarre',      label: '✦ American Psycho',  sublabel: 'Визитки. Облицовка — жемчуг',  image: '/images/scenes/p20-bizarre.jpg'   },
   ],
 
   /* ── 18 · Dobrota, Kotor Bay (Sotheby's International Realty Montenegro) ── */
@@ -60,7 +60,7 @@ export const PROPERTY_SCENES: SceneMap = {
     { id: 'p18-floorplan', type: 'floorplan',  category: 'architecture', label: 'Планировка',         sublabel: 'Терраса 12 м над заливом',     image: '/images/scenes/p18-floorplan.jpg' },
     { id: 'p18-section',   type: 'section',    category: 'architecture', label: 'Разрез',             sublabel: '3 спальни, залив снаружи',      image: '/images/scenes/p18-section.jpg'   },
     { id: 'p18-bbq',       type: 'life_bbq',   category: 'life',         label: 'Барбекю на террасе', sublabel: 'Вечер, залив Котор внизу',     image: '/images/scenes/p18-bbq.jpg'       },
-    { id: 'p18-bizarre',   type: 'bizarre',    category: 'bizarre',      label: '✦ Балканский улов',  sublabel: 'Рыбацкая лодка в гостиной',    image: '/images/scenes/p18-bizarre.jpg'   },
+    { id: 'p18-bizarre',   type: 'bizarre',    category: 'bizarre',      label: '✦ Le Grand Bleu',    sublabel: 'Жак Майоль. Которский залив',  image: '/images/scenes/p18-bizarre.jpg'   },
   ],
 
   /* ── 19 · Sveti Stefan, Budva Riviera (Monteonline) ──────────── */
