@@ -337,19 +337,6 @@ export function PropertyScenesCarousel({
                       {s.label}
                     </div>
                   </div>
-                  {/* Label */}
-                  <div
-                    className="text-[10px] md:text-[11px] font-medium truncate font-space-grotesk px-0.5 transition-colors"
-                    style={{ color: isActive ? accent : undefined }}
-                  >
-                    {!isActive && <span className="dark:text-white/60 text-foreground/60">{s.label}</span>}
-                    {isActive && s.label}
-                  </div>
-                  {s.sublabel && (
-                    <div className="text-[9px] dark:text-white/30 text-foreground/35 truncate font-space-grotesk px-0.5 -mt-0.5">
-                      {s.sublabel}
-                    </div>
-                  )}
                 </button>
               </div>
             );
