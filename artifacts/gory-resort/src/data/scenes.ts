@@ -41,7 +41,7 @@ export const PROPERTY_SCENES: SceneMap = {
     { id: 'p12-section',   type: 'section',         category: 'architecture', label: 'Разрез',           sublabel: 'Высокие потолки, 3м',    image: '/images/scenes/p12-section.jpg'   },
     { id: 'p12-floorplan', type: 'floorplan',       category: 'architecture', label: 'Планировка',       sublabel: '68 м², Savski Venac',    image: '/images/scenes/p12-floorplan.jpg' },
     { id: 'p12-remote',    type: 'life_remote_work', category: 'life',        label: 'Удалённая работа', sublabel: 'Вид на Калемегдан',      image: '/images/scenes/p12-remote.jpg'    },
-    { id: 'p12-bizarre',   type: 'bizarre',         category: 'bizarre',      label: 'Слава',            sublabel: '20 родственников, хаос', image: '/images/scenes/p12-bizarre.jpg'   },
+    { id: 'p12-bizarre',   type: 'bizarre',         category: 'bizarre',      label: "✦ Ocean's Eleven", sublabel: 'Белладжио, план на столе', image: '/images/scenes/p12-bizarre.jpg'   },
   ],
 
   /* ── 20 · Belgrade Waterfront (Atrium Property Services) ────── */
@@ -83,7 +83,7 @@ export const PROPERTY_SCENES: SceneMap = {
     { id: 'p19-floorplan', type: 'floorplan',        category: 'architecture', label: 'Планировка',        sublabel: '62 м² на склоне над морем',    image: '/images/scenes/p19-floorplan.jpg' },
     { id: 'p19-section',   type: 'section',          category: 'architecture', label: 'Разрез',            sublabel: 'Остров в окне',                image: '/images/scenes/p19-section.jpg'   },
     { id: 'p19-remote',    type: 'life_remote_work', category: 'life',         label: 'Удалённая работа',  sublabel: 'Утро, Адриатика за стеклом',   image: '/images/scenes/p19-remote.jpg'    },
-    { id: 'p19-bizarre',   type: 'bizarre',          category: 'bizarre',      label: '✦ Скрипторий',      sublabel: 'Византийский монах, свитки',   image: '/images/scenes/p19-bizarre.jpg'   },
+    { id: 'p19-bizarre',   type: 'bizarre',          category: 'bizarre',      label: '✦ Похмелье',        sublabel: 'Тигр в ванной',                image: '/images/scenes/p19-bizarre.jpg'   },
   ],
 };
 

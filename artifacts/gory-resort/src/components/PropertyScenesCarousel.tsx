@@ -68,7 +68,7 @@ const CATEGORY_CONFIG: Record<SceneCategory, { label: string; textClass: string;
     glowColor: 'rgba(52,211,153,0.25)',
   },
   bizarre: {
-    label: '✦ Атмосфера',
+    label: '👀',
     textClass: 'text-violet-400',
     borderColor: 'border-violet-400/40',
     glowColor: 'rgba(167,139,250,0.3)',
@@ -332,9 +332,9 @@ export function PropertyScenesCarousel({
                     {isActive && (
                       <div className="absolute bottom-0 left-0 right-0 h-0.5" style={{ background: accent }} />
                     )}
-                    {/* Category label */}
+                    {/* Scene-specific label */}
                     <div className={`absolute top-1 left-1 text-[7px] uppercase tracking-wide font-medium px-1 py-0.5 rounded-full bg-black/60 ${cfg.textClass}`}>
-                      {cfg.label}
+                      {s.label}
                     </div>
                   </div>
                   {/* Label */}
