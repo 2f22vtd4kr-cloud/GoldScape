@@ -3,12 +3,19 @@
  *
  * Displays real agency photos fetched from the listing's original source.
  * Shown above the AI visualisation carousel so buyers see the real property first.
+ *
+ * Features:
+ *  - Touch swipe on mobile
+ *  - Keyboard arrow navigation
+ *  - Badge + agency link in a single non-overlapping top bar
+ *  - Nav arrows always subtly visible (not hidden-until-hover on touch devices)
  */
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Camera, ExternalLink } from 'lucide-react';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+const SWIPE_THRESHOLD = 40; // px
 
 interface Props {
   photos: string[];
@@ -62,6 +69,7 @@ export function PropertyAgencyGallery({ photos, agency, agencyUrl, accent = 'hsl
   const [hovered, setHovered] = useState<number | null>(null);
   const [imgLoaded, setImgLoaded] = useState(false);
   const stripRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
 
   const go = useCallback((delta: number) => {
     setActive(i => (i + delta + photos.length) % photos.length);
@@ -89,14 +97,28 @@ export function PropertyAgencyGallery({ photos, agency, agencyUrl, accent = 'hsl
     strip.scrollTo({ left: Math.max(0, center - strip.clientWidth / 2), behavior: 'smooth' });
   }, [active]);
 
+  // Touch swipe handlers
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(diff) > SWIPE_THRESHOLD) go(diff < 0 ? 1 : -1);
+    touchStartX.current = null;
+  }, [go]);
+
   if (!photos.length) return null;
 
   return (
     <div className="flex flex-col gap-3">
       {/* ── Main stage ── */}
       <div
-        className="relative group overflow-hidden rounded-xl md:rounded-2xl bg-[#111] dark:bg-[#0a0a0a]"
+        className="relative group overflow-hidden rounded-xl md:rounded-2xl bg-[#111] dark:bg-[#0a0a0a] select-none"
         style={{ aspectRatio: '16/9', maxHeight: '70vh' }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <AnimatePresence mode="sync">
           <motion.div
@@ -130,45 +152,52 @@ export function PropertyAgencyGallery({ photos, agency, agencyUrl, accent = 'hsl
         </AnimatePresence>
 
         {/* Gradient scrim */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/20 pointer-events-none" />
 
-        {/* "Реальные фото" badge */}
-        <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1">
-          <Camera className="w-3 h-3 text-emerald-400" />
-          <span className="text-[10px] font-oxanium uppercase tracking-[0.15em] text-emerald-300">Реальные фото</span>
+        {/* ── Top bar: badge + agency link in a single flex row ── */}
+        <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
+          {/* "Реальные фото" badge */}
+          <div className="flex items-center gap-1.5 bg-black/65 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1 flex-shrink-0 pointer-events-auto">
+            <Camera className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+            <span className="text-[10px] font-oxanium uppercase tracking-[0.12em] text-emerald-300 whitespace-nowrap">
+              Реальные фото
+            </span>
+          </div>
+
+          {/* Source link */}
+          {agencyUrl ? (
+            <a
+              href={agencyUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1 bg-black/65 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1 hover:border-white/30 transition-colors group/link pointer-events-auto min-w-0 flex-shrink"
+            >
+              <span className="text-[10px] font-space-grotesk text-white/50 group-hover/link:text-white/80 transition-colors truncate max-w-[180px]">
+                {agency}
+              </span>
+              <ExternalLink className="w-2.5 h-2.5 text-white/30 group-hover/link:text-white/60 transition-colors flex-shrink-0" />
+            </a>
+          ) : null}
         </div>
-
-        {/* Source link */}
-        {agencyUrl && (
-          <a
-            href={agencyUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="absolute top-3 right-3 flex items-center gap-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1 hover:border-white/30 transition-colors group/link"
-          >
-            <span className="text-[10px] font-space-grotesk text-white/50 group-hover/link:text-white/80 transition-colors">{agency}</span>
-            <ExternalLink className="w-2.5 h-2.5 text-white/30 group-hover/link:text-white/60 transition-colors" />
-          </a>
-        )}
 
         {/* Counter */}
         <div className="absolute bottom-3 right-3 text-[10px] font-space-grotesk text-white/40 bg-black/40 backdrop-blur-sm rounded px-2 py-0.5">
           {active + 1} / {photos.length}
         </div>
 
-        {/* Nav arrows */}
+        {/* Nav arrows — subtly visible always (essential for touch); more prominent on hover */}
         {photos.length > 1 && (
           <>
             <button
               onClick={() => go(-1)}
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-black/80 hover:border-white/30 transition-all opacity-0 group-hover:opacity-100 z-10"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-black/80 hover:border-white/30 transition-all z-10 opacity-40 group-hover:opacity-100"
               aria-label="Предыдущее фото"
             >
               <ChevronLeft className="w-4 h-4 text-white/80" />
             </button>
             <button
               onClick={() => go(1)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-black/80 hover:border-white/30 transition-all opacity-0 group-hover:opacity-100 z-10"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-black/80 hover:border-white/30 transition-all z-10 opacity-40 group-hover:opacity-100"
               aria-label="Следующее фото"
             >
               <ChevronRight className="w-4 h-4 text-white/80" />
