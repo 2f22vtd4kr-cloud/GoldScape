@@ -21,6 +21,12 @@ export interface Listing {
   price: string; pricePerSqm: string; beds: number | string; baths: number;
   area: number; image: string; agency: string; agencyUrl?: string; exclusive: boolean;
   tags: string[]; crypto: boolean; locationMap: LocationMap;
+  /**
+   * Real photos fetched from the original agency listing page.
+   * Displayed in the "Фотографии от агентства" section above the AI visualisation carousel.
+   * First photo also serves as the hero/card image.
+   */
+  agencyPhotos?: string[];
   /** Rich lifestyle/architecture narrative — 3-5 sentences. */
   description: string;
   /** District colour — schools, safety, walkability, who actually lives there. */
@@ -46,10 +52,14 @@ export const LISTINGS: Listing[] = [
     beds: 2,
     baths: 1,
     area: 68,
-    image: '/images/prop-belgrade.jpg',
+    image: '/images/agency/p12/1.webp',
     agency: 'Estitor',
     agencyUrl: 'https://estitor.com/rs-en/real-estates/purpose-sale/type-apartment/city-beograd/id-543864',
     exclusive: false,
+    agencyPhotos: [
+      '/images/agency/p12/1.webp',
+      '/images/agency/p12/2.webp',
+    ],
     tags: ['ВНЖ по недвижимости'],
     crypto: true,
     locationMap: {
@@ -84,6 +94,7 @@ export const LISTINGS: Listing[] = [
     agency: 'Atrium Property Services',
     agencyUrl: 'https://www.atriumproperty.rs/',
     exclusive: false,
+    agencyPhotos: [], // Agency site blocked scraping; photos to be added manually
     tags: ['Вид на Саву', 'Калемегдан', 'ВНЖ по недвижимости'],
     crypto: false,
     locationMap: {
@@ -115,10 +126,22 @@ export const LISTINGS: Listing[] = [
     beds: 3,
     baths: 2,
     area: 121,
-    image: '/images/prop-kotor.jpg',
+    image: '/images/agency/p18/1.jpg',
     agency: "Sotheby's International Realty Montenegro",
     agencyUrl: 'https://sothebysrealty.me/modern-apartments-on-the-first-line-to-the-sea-dobrota/',
     exclusive: true,
+    agencyPhotos: [
+      '/images/agency/p18/1.jpg',
+      '/images/agency/p18/2.jpg',
+      '/images/agency/p18/3.jpg',
+      '/images/agency/p18/4.jpg',
+      '/images/agency/p18/5.jpg',
+      '/images/agency/p18/6.jpg',
+      '/images/agency/p18/7.jpg',
+      '/images/agency/p18/8.jpg',
+      '/images/agency/p18/9.jpg',
+      '/images/agency/p18/10.jpg',
+    ],
     tags: ['Первая линия', 'Залив Котор', 'UNESCO'],
     crypto: false,
     locationMap: {
@@ -149,10 +172,20 @@ export const LISTINGS: Listing[] = [
     beds: 1,
     baths: 1,
     area: 62,
-    image: '/images/prop-sveti-stefan.jpg',
+    image: '/images/agency/p19/1.jpg',
     agency: 'Monteonline',
     agencyUrl: 'https://monteonline.org/en/properties/novaya-kvartira-s-1-spalnej-v-sveti-stefane-s-panoramnym-vidom-na-more/',
     exclusive: false,
+    agencyPhotos: [
+      '/images/agency/p19/1.jpg',
+      '/images/agency/p19/2.jpg',
+      '/images/agency/p19/3.jpg',
+      '/images/agency/p19/4.jpg',
+      '/images/agency/p19/5.jpg',
+      '/images/agency/p19/6.jpg',
+      '/images/agency/p19/7.jpg',
+      '/images/agency/p19/8.jpg',
+    ],
     tags: ['Вид на Свети-Стефан', 'Адриатика'],
     crypto: false,
     locationMap: {

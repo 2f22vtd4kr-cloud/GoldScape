@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import { PropertyLocationMap } from '@/components/PropertyLocationMap';
+import { PropertyAgencyGallery } from '@/components/PropertyAgencyGallery';
 import { PropertyScenesCarousel } from '@/components/PropertyScenesCarousel';
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { LISTINGS, listingById } from '@/data/listings';
@@ -224,6 +225,29 @@ export default function PropertyDetail() {
           </div>
         </div>
       </section>
+
+      {/* ─── AGENCY REAL PHOTOS ────────────────────────────────────────── */}
+      {listing.agencyPhotos && listing.agencyPhotos.length > 0 && (
+        <section className="py-8 md:py-12 px-4 md:px-12 lg:px-24 dark:border-b dark:border-white/5 border-b border-black/10 dark:bg-[#070707] bg-white">
+          <div className="container mx-auto max-w-7xl">
+            <div className="flex items-center gap-2 mb-5">
+              <Camera className="w-4 h-4 dark:text-white/40 text-foreground/50" />
+              <h2 className="font-oxanium text-lg md:text-xl font-semibold dark:text-white text-foreground tracking-tight">
+                Фотографии объекта
+              </h2>
+              <span className="text-[11px] font-space-grotesk dark:text-white/30 text-foreground/40 ml-1">
+                — {listing.agencyPhotos.length} фото от агентства
+              </span>
+            </div>
+            <PropertyAgencyGallery
+              photos={listing.agencyPhotos}
+              agency={listing.agency}
+              agencyUrl={listing.agencyUrl}
+              accent={accent}
+            />
+          </div>
+        </section>
+      )}
 
       {/* ─── PROPERTY SCENES CAROUSEL ─────────────────────────────────── */}
       {(() => {
