@@ -27,34 +27,30 @@ This is the single source of truth. It contains:
 
 ---
 
-## Step-by-Step: Generating a Scene
+## Step-by-Step: Generating a Scene (Consistency-First Workflow)
+
+All properties are **real listings** from real agencies. Generated images must stay photorealistic, geographically plausible, and visually identical across scenes for the same listing.
+
+### Recommended pipeline (master + reference)
 
 ```typescript
 import { buildPrompt } from '@/data/property-dna';
+import { generateImage } from '/* image client */';
 
-// 1. Pick the scene type (must match a key in cameraByType or fall back to 'default')
-const sceneType = 'life_bbq';
+// 1. MASTER exterior — text only
+const exteriorPrompt = buildPrompt(18, 'exterior', `Full facade establishing shot. Entire building + site. No people.`);
+const masterDataUrl = await generateImage(exteriorPrompt);
+// Review: materials, landmark, no interior rooms through glass.
 
-// 2. Write only the scene-specific description — what is happening, objects, mood.
-//    Do NOT describe the building, site, or materials here — those come from the anchor.
-const sceneDesc = `
-  BBQ evening on the second-floor terrace. A large outdoor grill with glowing charcoal
-  and skewers of meat smoking. Long wooden dining table set for eight with terracotta
-  plates, wine glasses, olive branches as centrepiece. Warm Edison-bulb string lights
-  strung above. Blue-hour sky — deep cobalt above, salmon-pink at the horizon over the
-  bay. The Gospa od Škrpjela island glows with warm reflected light across the water.
-`;
-
-// 3. Build the full prompt
-const prompt = buildPrompt(18, sceneType, sceneDesc);
-
-// 4. Generate
-await generateImage({
-  prompt,
-  outputPath: 'artifacts/gory-resort/public/images/scenes/p18-bbq.jpg',
-  resolution: 'high',
-});
+// 2. All other scenes — pass master as visual identity lock
+const sectionPrompt = buildPrompt(18, 'section', `Dolls-house cutaway, all floors stacked. Landmark through rear glass.`, { withMasterReference: true });
+const sectionDataUrl = await generateImage(sectionPrompt, { data: masterDataUrl });
 ```
+
+`generateImage(prompt, references?)` accepts reference images. Prefer master-reference for every scene after the first approved exterior.
+
+### ControlNet note
+ControlNet (depth/canny) is ideal for isometric spatial lock but not available on the current Gemini path. Documented for a future Flux/SDXL backend. Until then, master-reference is the production standard.
 
 ---
 

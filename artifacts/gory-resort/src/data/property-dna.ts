@@ -114,13 +114,22 @@ export interface PropertyDNA {
   cameraByType: Partial<Record<string, string>>;
 }
 
-/** Boilerplate appended to EVERY prompt. Never omit or paraphrase. */
+/**
+ * Boilerplate appended to EVERY prompt. Never omit or paraphrase.
+ * Strengthened 2026-08 for isometric spatial consistency + anti-hallucination
+ * (window-interior bug, void backgrounds, material drift).
+ * Properties are real listings from real agencies — keep photorealistic and
+ * geographically plausible; never invent a different building.
+ */
 export const PROHIBITIONS = [
-  'NO text, labels, numbers, annotations, compass roses, or UI overlays baked into the image.',
+  'NO text, labels, numbers, annotations, compass roses, scale bars, or UI overlays baked into the image.',
   'NO human figures, silhouettes, or shadows of people (exception: life_* scenes where the brief explicitly adds people).',
-  'NO hand-drawn, sketch, watercolor, or illustration rendering style.',
-  'NO plain white, grey, or black void backgrounds — the building always sits in its real geographic context.',
-  'Photorealistic 3D architectural render, ultra-high detail.',
+  'NO hand-drawn, sketch, watercolor, cartoon, or illustration rendering style.',
+  'NO plain white, grey, or black void backgrounds — the building always sits in its real geographic context with correct site edges visible.',
+  'Windows and glass must show ONLY sky, landscape, or landmark reflections / views. NEVER render detailed furnished interior rooms, people, or furniture visible through exterior glass (classic AI window-hallucination bug).',
+  'Strictly preserve the exact same building geometry, facade materials, window frame colour/type, roof, balcony railings, and interior materials described in the anchor. Do not invent a different building or substitute materials.',
+  'For isometric / section / floorplan views: use true isometric or near-isometric parallel projection (no strong perspective distortion). Camera angle and elevation must match the CAMERA / FRAMING instruction exactly.',
+  'Photorealistic 3D architectural visualization, ultra-high detail, physically plausible lighting and materials. This is a real property from a real estate listing — realism and geographic fidelity are mandatory.',
 ].join(' ');
 
 /**
@@ -154,16 +163,30 @@ export function buildAnchor(listingId: number): string {
  * @param listingId  Property ID.
  * @param sceneType  e.g. 'exterior' | 'section' | 'floorplan' | 'life_bbq' | 'bizarre'
  * @param sceneDesc  Scene-specific description (what is happening, objects, mood).
+ * @param options.withMasterReference  When true, prepends strong identity-lock language
+ *   intended for use with generateImage(..., masterExteriorBase64). Recommended for
+ *   section / floorplan / life / bizarre after a clean exterior master exists.
  */
 export function buildPrompt(
   listingId: number,
   sceneType: string,
   sceneDesc: string,
+  options?: { withMasterReference?: boolean },
 ): string {
   const dna = PROPERTY_DNA[listingId];
   if (!dna) throw new Error(`No DNA defined for listing ${listingId}`);
   const camera = dna.cameraByType[sceneType] ?? dna.cameraByType['default'] ?? '';
+  const identityLock = options?.withMasterReference
+    ? [
+        'IDENTITY LOCK (mandatory):',
+        'A master reference image of this exact real property is provided.',
+        'Preserve the identical building massing, facade materials and colours, window and door frames, roof profile, balcony/terrace railings, site edges, and the landmark view.',
+        'Do not redesign, restyle, or substitute any architectural element. Only change camera, cutaways, interior visibility, lighting mood, or scene-specific objects as described below.',
+        '',
+      ].join('\n')
+    : '';
   const parts = [
+    identityLock,
     buildAnchor(listingId),
     '',
     camera ? `CAMERA / FRAMING: ${camera}` : '',
@@ -175,6 +198,34 @@ export function buildPrompt(
     PROHIBITIONS,
   ].filter(Boolean);
   return parts.join('\n');
+}
+
+/**
+ * Recommended generation workflow for spatial + material consistency:
+ *
+ * 1. Generate exterior (or a clean isometric base) with pure text DNA:
+ *      const exteriorPrompt = buildPrompt(id, 'exterior', '...');
+ *      const master = await generateImage(exteriorPrompt);
+ *
+ * 2. For every other scene of the same listing, pass the master as reference:
+ *      const scenePrompt = buildPrompt(id, 'section', '...', { withMasterReference: true });
+ *      const section = await generateImage(scenePrompt, { data: master });
+ *
+ * This leverages Gemini 2.5 Flash Image multi-image conditioning (the practical
+ * equivalent of IP-Adapter / character-reference for architecture). ControlNet
+ * (depth / canny) is not available on the current Gemini path; if the pipeline
+ * later moves to Flux / SDXL, add depth or canny ControlNet on top of the same
+ * master for even tighter spatial lock.
+ */
+export function getConsistencyWorkflowNote(): string {
+  return [
+    'CONSISTENCY WORKFLOW',
+    '1. Generate master exterior (or isometric site) with buildPrompt + generateImage (text only).',
+    '2. Review master against real agency photos / DNA checklist (materials, landmark, no window interiors).',
+    '3. Generate all other scenes with buildPrompt(..., { withMasterReference: true }) + generateImage(prompt, master).',
+    '4. Never regenerate a scene without the master once the master is approved.',
+    'ControlNet note: current stack uses Gemini multi-image reference. For future Flux/SDXL, prefer depth or canny ControlNet derived from the master for isometric cutaways and floorplans.',
+  ].join('\n');
 }
 
 /* ══════════════════════════════════════════════════════════════════
