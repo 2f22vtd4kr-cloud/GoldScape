@@ -2174,3 +2174,25 @@ html:not(.dark) .liquid-glass-tinted {
     background: rgba(250, 249, 246, 0.94) !important;
   }
 }
+
+
+/* ── Mobile glass budget (frontend-design / liquid-glass-system) ───────────
+   Sticky filter bar already uses liquid-glass-neutral on small screens.
+   Cap large blurred surfaces; prefer transform/opacity animation only. */
+@media (max-width: 767px) {
+  .liquid-glass,
+  .liquid-glass-tinted,
+  .liquid-glass-iridescent {
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+  }
+  /* Featured / listing cards: full-width press feedback without scale jank */
+  .eom-card:active {
+    transform: scale(0.992);
+  }
+  /* Chrome switches sit in filter labels — keep ≥44px hit area */
+  label:has(.chrome-switch) {
+    min-height: 48px;
+  }
+}
+

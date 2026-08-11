@@ -316,7 +316,7 @@ export default function Home() {
               <Link
                 key={i}
                 href={`/countries/${dest.code}`}
-                className="dest-card min-h-[160px] flex flex-col justify-between relative overflow-hidden group border border-white/5 rounded-xl hover:border-white/20 transition-colors"
+                className="dest-card min-h-[160px] flex flex-col justify-between relative overflow-hidden group border border-white/5 rounded-xl hover:border-white/20 transition-colors touch-manipulation"
                 data-reveal="up"
               >
                 <div className="absolute inset-0 bg-black z-0">
@@ -396,12 +396,12 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6" data-stagger>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6" data-stagger>
             {FEATURED_PROPERTIES.map((prop, i) => (
               <Link
                 key={i}
                 href={prop.id ? `/properties/${prop.id}` : '/properties'}
-                className="eom-card group relative flex flex-col overflow-hidden min-h-[48px]"
+                className="eom-card group relative flex flex-col overflow-hidden min-h-[48px] touch-manipulation"
                 data-reveal="up"
               >
                 {/* Cinematic photo stage — matches PropertyCard hierarchy */}

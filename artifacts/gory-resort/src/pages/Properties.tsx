@@ -84,10 +84,10 @@ export default function Properties() {
       </header>
 
       {/* FILTER BAR */}
-      <div className="sticky top-20 z-40 liquid-glass border-b dark:border-white/10 border-black/10 py-4 px-4 md:px-12 lg:px-24">
+      <div className="sticky top-20 z-40 liquid-glass-neutral md:liquid-glass border-b dark:border-white/10 border-black/10 py-3.5 md:py-4 px-4 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:flex md:flex-wrap gap-3 items-center">
           <select
-            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer"
+            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
             value={countryFilter}
             onChange={e => setCountryFilter(e.target.value)}
           >
@@ -103,7 +103,7 @@ export default function Properties() {
           </select>
 
           <select
-            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer"
+            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
             value={typeFilter}
             onChange={e => setTypeFilter(e.target.value)}
           >
@@ -115,7 +115,7 @@ export default function Properties() {
           </select>
 
           <select
-            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer"
+            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
             value={priceFilter}
             onChange={e => setPriceFilter(e.target.value)}
           >
@@ -127,7 +127,7 @@ export default function Properties() {
           </select>
 
           <select
-            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer"
+            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
             value={bedFilter}
             onChange={e => setBedFilter(e.target.value)}
           >
@@ -140,7 +140,7 @@ export default function Properties() {
           </select>
 
           {/* Brand metal toggles — chrome material, not glass checkboxes */}
-          <label className="w-full md:w-auto min-h-[48px] px-3 py-2 rounded-lg glass-filter-select flex items-center justify-between md:justify-start gap-3 cursor-pointer">
+          <label className="w-full md:w-auto min-h-[48px] px-3 py-2.5 rounded-lg glass-filter-select flex items-center justify-between md:justify-start gap-3 cursor-pointer touch-manipulation select-none">
             <span className="text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60">
               Только USDT
             </span>
@@ -151,7 +151,7 @@ export default function Properties() {
             />
           </label>
 
-          <label className="w-full md:w-auto min-h-[48px] px-3 py-2 rounded-lg glass-filter-select flex items-center justify-between md:justify-start gap-3 cursor-pointer">
+          <label className="w-full md:w-auto min-h-[48px] px-3 py-2.5 rounded-lg glass-filter-select flex items-center justify-between md:justify-start gap-3 cursor-pointer touch-manipulation select-none">
             <span className="text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60">
               ВНЖ / резидентство
             </span>
