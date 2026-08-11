@@ -71,7 +71,7 @@ export default function Properties() {
           <div className="text-[11px] tracking-[0.12em] uppercase dark:text-white/35 text-foreground/40 font-space-grotesk">
             Каталог
           </div>
-          <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] font-semibold dark:text-white text-foreground leading-[1.15] tracking-tight">
+          <h1 className="font-display text-4xl md:text-5xl lg:text-[3.25rem] font-medium dark:text-white text-foreground leading-[1.15] tracking-tight">
             Объекты за рубежом
           </h1>
           <p className="dark:text-white/45 text-foreground/55 font-space-grotesk text-sm md:text-[15px] max-w-xl">
