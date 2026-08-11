@@ -339,17 +339,13 @@ export const PROPERTY_DNA: Record<number, PropertyDNA> = {
   /* ── 19 · Sveti Stefan, Budva Riviera (Monteonline) ─────────────── */
   19: {
     id: 19,
-    name: 'Sveti Stefan Hillside — Boutique apartment, Budva Riviera, Montenegro',
+    name: 'Sveti Stefan — Sea-view apartment, Budva Riviera, Montenegro',
     anchor: {
       building: [
-        'A boutique two-floor hillside residential building in Sveti Stefan, Montenegro.',
-        'White smooth render exterior with natural limestone stone-cladding accent panels on the ground floor.',
-        'Shallow-pitch terracotta pan-tile roof on the upper volume.',
-        'Slim dark-bronze aluminium window frames.',
-        'The west-facing facade has a single floor-to-ceiling frameless glass sliding door (2.4 m wide)',
-        'opening onto a cantilevered limestone-tiled terrace with a slim stone parapet wall.',
-        'Terraced hillside garden below: Mediterranean planting — lavender, rosemary, olive trees,',
-        'natural limestone retaining walls stepping down to the coastal road.',
+        'CRITICAL — match REAL Monteonline agency photos: modest modern residential apartment, not a luxury hillside villa.',
+        'Simple residential building with white/light plaster, standard sliding door to a compact balcony with outdoor table.',
+        'Neighbouring terracotta roofs and pine/olive greenery visible from the balcony.',
+        'Do NOT invent a freestanding boutique villa with grand limestone terraces unless agency photos show that.',
       ].join(' '),
       site: [
         'Sveti Stefan peninsula, Budva Riviera, Montenegro — elevated hillside position.',
@@ -368,18 +364,13 @@ export const PROPERTY_DNA: Record<number, PropertyDNA> = {
         'This landmark is ALWAYS visible through the west-facing glass sliding door and terrace.',
       ].join(' '),
       interior: [
-        'Light honey herringbone oak parquet floor (classic 45° herringbone, 7×35 cm strips) throughout living areas.',
-        'Bathroom and kitchen: same pale limestone tile as terrace (40×40 cm, warm grey-beige).',
-        'Walls: smooth white plaster, warm tone. Stone accent wall on one side of the living room:',
-        'natural rough-cut local limestone blocks, cream-honey colour.',
-        'Ceiling: flat white plaster, 2.75 m height, exposed dark-stained oak beam accent.',
-        'Window/door frames: dark bronze aluminium.',
-        'Kitchen: terracotta-toned linen-textured cabinetry, natural limestone countertop.',
-        'Bathroom: wall-hung white ceramic fixtures, brass hardware, natural stone shelf niches.',
+        'Matches real Monteonline photos: light large-format beige/cream tile floors, white walls, open living-dining-kitchen.',
+        'Beige or cream leather sofa, wooden dining table, sliding glass door to compact balcony.',
+        'Simple contemporary finishes — not herringbone parquet luxury villa.',
       ].join(' '),
-      palette: 'Adriatic turquoise · white plaster · honey herringbone oak · warm limestone grey-beige · terracotta pan-tile · dark bronze aluminium · deep Adriatic ultramarine',
+      palette: 'Adriatic blue · white plaster · light beige tile · cream leather · wood dining · terracotta neighbour roofs · pine green',
     },
-    lightingSetup: 'Late afternoon (17:00–18:30 summer) from the west; warm golden 4200 K back-lighting on the building from the sea side; long warm shadows from the terrace parapet; the Sveti Stefan island glows amber in the golden-hour light.',
+    lightingSetup: 'Bright natural daylight through the sliding door; clear Mediterranean sky. Photographic, restrained — not golden-hour luxury CGI.',
     cameraByType: {
       exterior: 'ENTIRE building visible from terraced garden base to terracotta roof ridge — camera pulled back so no floor or parapet is cropped. Building fills maximum 55% of frame height. Camera at 25° elevation, positioned west above the sea, facing east. Full west facade with terrace and glass door visible. Sveti Stefan island in the foreground-left. Pine-forested hillside behind the building. Site context visible on all sides.',
       section: 'BOTH FLOORS fully visible from foundation slab to ridge — none cropped. Pull camera back so the full two-floor stack fits in frame with 15% margin top and bottom. 45° isometric dolls-house cutaway. East wall removed. Stone accent wall and exposed oak beam visible on the living room interior. Sveti Stefan island visible through the west-facing glass door.',
@@ -1137,7 +1128,7 @@ export const PROPERTY_DNA: Record<number, PropertyDNA> = {
     },
     lightingSetup: 'Late afternoon (16:30–17:30) low sun from the west over the Sava; warm amber-gold 4000 K light streaming through the west curtain-wall; the river surface blazes with reflections; interior glows warm against the cool steel exterior.',
     cameraByType: {
-      exterior: 'ENTIRE tower visible from quayside base to roof — camera pulled far enough back so no floor or mechanical plant is cropped. Building fills maximum 55% of frame height. Camera at 30° elevation, drone position above the Sava river facing east. Full corner of the tower visible — west and north facades simultaneously. Quayside promenade and linden trees in foreground, Kalemegdan in far background. Wide enough to see the tower top.',
+      exterior: 'ENTIRE tower visible from quayside base to roof — camera pulled far enough back so no floor is cropped. Building fills max 55% of frame. Drone above Sava facing east; west and north facades of the corner visible. Quayside, trees, Kalemegdan in background. CRITICAL: glass curtain wall must show ONLY sky/river/city reflections or neutral tint — NEVER detailed furnished interiors visible through every window pane (common AI bug). Windows are reflective or dark, not transparent room views.',
       section: 'ALL VISIBLE FLOORS (12–14) fully stacked and visible — none cropped at top or bottom. Pull camera back so the full floor stack fits in frame with 15% margin. 45° isometric dolls-house cutaway. South and west walls removed. Sava river and Kalemegdan visible through the glass curtain-wall.',
       floorplan: 'ENTIRE apartment floor plan within frame — all rooms and curtain-wall perimeter visible, no rooms cropped. 65° top-down isometric, ceiling removed. Light oak floor and furniture visible. Sava river visible at the west building edge. No white background.',
       life_matchday: 'Interior wide shot from the east wall of the corner living room — full room visible, both curtain-wall facades in frame. Large wall-mounted TV showing a UEFA Champions League match. Floor-to-ceiling glass fills the north and west walls — Sava and Kalemegdan glowing at twilight outside.',
