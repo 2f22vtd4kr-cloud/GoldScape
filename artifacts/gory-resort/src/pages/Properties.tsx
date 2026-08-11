@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSearch, useLocation } from 'wouter';
-import { MessageCircle, Send } from 'lucide-react';
+import { MessageCircle, Send, Check } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import { PropertyCard } from '@/components/PropertyCard';
 import { ChromeSwitch } from '@/components/ChromeSwitch';
