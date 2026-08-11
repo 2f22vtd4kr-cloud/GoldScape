@@ -236,51 +236,49 @@ export function getConsistencyWorkflowNote(): string {
 
 export const PROPERTY_DNA: Record<number, PropertyDNA> = {
 
-  /* ── 12 · Belgrade Savski Venac (Estitor) ──────────────────────── */
+  /* ── 12 · Belgrade (Estitor / BW Simfonija) ─────────────────────── */
+  /* DATA INTEGRITY NOTE:
+     listings.ts still says "pre-war Savski Venac €88k" but agencyUrl + agency photos
+     point to BW Simfonija — modern new-construction residential towers near Belgrade
+     Waterfront / Sava, ~€370k on Estitor. DNA below matches the REAL photos and URL.
+     listings.ts price/description should be reconciled separately. */
   12: {
     id: 12,
-    name: 'Belgrade Savski Venac — Pre-war apartment, Estitor',
+    name: 'Belgrade — BW Simfonija modern apartment (Estitor)',
     anchor: {
       building: [
-        'A 1930s Art Deco inter-war residential apartment building in Belgrade Savski Venac.',
-        'Five-storey corner building clad in pale Belgrade-grey limestone ashlar.',
-        'Classical facade with period ornamental cornices at each floor level, pilasters framing the corner bay,',
-        'and tall narrow double-hung wooden sash windows (1.0 m wide × 2.2 m tall) with white-painted timber frames.',
-        'The apartment occupies the second floor of this corner block.',
-        'Roof: traditional slate mansard with copper-green gutters.',
-        'Street level: stone-paved pavement, period street lamps, parked early-20th-century style cars.',
+        'CRITICAL — match the REAL Estitor / BW Simfonija agency photos, not a pre-war fantasy.',
+        'A modern high-rise residential complex (BW Simfonija style) in Belgrade near the Sava / Waterfront zone.',
+        'Tall contemporary towers with light stone / concrete cladding, dark vertical window strips, and recessed balconies with glass or metal railings.',
+        'Multiple similar towers arranged around landscaped courtyards, playgrounds and internal streets.',
+        'Ground floors with lobby entrances, controlled access, 24/7 reception character.',
+        'NOT a 1930s Art Deco limestone corner building. NOT a historic Savski Venac mansion block.',
       ].join(' '),
       site: [
-        'Savski Venac residential quarter, Belgrade, Serbia.',
-        'Dense pre-war streetscape: similar limestone apartment blocks 4–6 floors, mature linden trees',
-        'lining the avenue, occasional 19th-century iron balcony railings on neighbouring facades.',
-        'The Kalemegdan fortress park tree canopy is visible above the rooftops to the north-east.',
+        'Belgrade Waterfront / Savski Venac edge — modern master-planned residential quarter.',
+        'Paved internal streets, young trees, grass courtyards, children\'s playgrounds, night lighting.',
+        'Neighbouring identical or similar modern residential towers.',
+        'Sava river and promenade within walking distance; city skyline and bridges in wider views.',
       ].join(' '),
       landmark: [
-        'The Kalemegdan fortress and park: ancient stone ramparts, a medieval round tower, and a dense',
-        'green oak canopy visible above the city roofline to the north-east.',
-        'Through the sash windows on the north-east aspect, the terracotta rooftops of the old fortress',
-        'neighbourhood cascade downhill toward the Sava river, with the Belgrade Waterfront glass towers',
-        'glinting on the far bank.',
+        'Sava river and Belgrade Waterfront promenade; distant views of bridges and the old fortress / Kalemegdan skyline when orientation allows.',
+        'Immediate landmark is the cluster of modern residential towers and the landscaped courtyard between them.',
       ].join(' '),
       interior: [
-        'Restored honey-coloured chevron parquet floor (solid oak, 7 cm × 35 cm strips).',
-        'Smooth white lime plaster walls with period-original plaster cornices (egg-and-dart profile) at',
-        '3.0 m ceiling height. Ceiling: flat lime plaster, painted white.',
-        'Window frames: white-painted wood. Interior doors: tall (2.4 m) panelled oak doors with brass hardware.',
-        'Kitchen: stone countertops, cream shaker cabinetry.',
-        'Bathroom: metro white tile, chrome fixtures, clawfoot cast-iron bath.',
+        'Modern compact apartment: light wood or laminate floors, grey flat-panel kitchen cabinets, black or dark dining table, light sofa.',
+        'Floor-to-ceiling or large windows, sheer curtains, clean contemporary finishes.',
+        'Matches the real agency interior photos — functional new-build, not historic renovation with parquet and egg-and-dart cornices.',
       ].join(' '),
-      palette: 'Warm honey parquet · Belgrade-grey limestone · ivory plaster · brass gold · Sava steel-blue (distant) · slate charcoal (roof)',
+      palette: 'Light stone cladding · dark window strips · night warm interior glow · courtyard green · Sava steel-blue · modern grey kitchen',
     },
-    lightingSetup: 'Late-afternoon sun (16:00–17:00 Belgrade summer) from the south-west; warm 3800 K golden light raking across the limestone facade, casting long rectangular shadows from window mullions.',
+    lightingSetup: 'Either bright daytime or atmospheric evening with building facade lighting and warm interior windows. Photographic, not hyper-CGI.',
     cameraByType: {
-      exterior: 'ENTIRE building visible from pavement to slate mansard roof — camera pulled back so nothing is cropped. Building fills maximum 55% of frame height. Street-level perspective, camera at 25° elevation facing the corner so two facade planes are visible. Street, linden trees, and neighbouring facades visible in foreground and sides.',
-      section: 'ALL FIVE FLOORS visible from ground-floor pavement to attic ridge — none cropped. Pull camera back so the full stacked building fits within frame with a 15% margin at top and bottom. 45° isometric cutaway, viewer faces the south-west corner. Front and right walls removed. Kalemegdan visible through the rear sash windows.',
-      floorplan: 'ENTIRE floor plan within frame — all four exterior walls visible, no rooms cropped at edges. 65° top-down isometric, roof slab removed. Interior fully exposed. Street and adjacent rooftops visible at correct edges. No white background.',
-      life_remote_work: 'Interior wide shot from the far corner of the living room — full room visible, do not zoom into the desk or window. Laptop on a period writing desk, the Kalemegdan roofline visible through the glass.',
-      bizarre: '45° isometric cutaway of the living room, same angle as section. ENTIRE room visible from floor to ceiling — all four walls in frame. Viewer faces south-west corner. Ocean\'s Eleven (2001) casino-heist planning: a large round table covered with architectural blueprints of the Bellagio vault, casino-chip stacks, hotel security badges, walkie-talkies, and a scaled model of the vault mechanism. The Kalemegdan fortress silhouette visible through the sash window behind the table.',
-      default: '45° isometric camera, slight elevation, three-quarter view showing two interior walls. Full room visible, not zoomed in.',
+      exterior: 'Show the REAL modern residential towers: light cladding, dark vertical glazing, balconies, courtyard or street context. Multiple towers visible. Do NOT invent a 1930s limestone Art Deco corner building. Everyday modern Belgrade residential complex.',
+      section: 'Isometric cutaway of one modern apartment within the tower massing. Stacked floors of the high-rise readable. Courtyard or city view through windows.',
+      floorplan: 'Top-down or high isometric of the modern apartment layout. Light floors, open living/kitchen. Context of balcony or city at edges. No white void.',
+      life_remote_work: 'Interior of the real modern apartment — grey kitchen, dining table, large window with courtyard or city view. Laptop on table. Contemporary, lived-in but tidy.',
+      bizarre: 'Isometric cutaway of the modern living room. Keep real materials (light floors, grey kitchen language). Scene props only; do not change architecture to pre-war.',
+      default: 'Camera that keeps the building recognisable as the modern BW-style residential towers.',
     },
   },
 
