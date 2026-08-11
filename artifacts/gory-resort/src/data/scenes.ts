@@ -213,24 +213,22 @@ export const PROPERTY_SCENES: SceneMap = {
 /**
  * Scene types shown in the product UI.
  *
- * 2026-08-11: photoreal AI exteriors / life / bizarre are disabled — they were
- * inconsistent hallucinations (wrong buildings, floating villas, window bugs)
- * and free programmatic image APIs are either quota-blocked or too low quality
- * for real-estate trust. Keep only isometric bird-view architecture:
- *   - site map (Птичий полёт)
- *   - section (Разрез)
- *   - floorplan (Планировка)
+ * 2026-08-11 product decision (confirmed with terrain-map example):
+ * Keep ONLY the 3D terrain-block bird-view maps (listing-map-*.png style —
+ * extruded geo tile: coast, city, elevation, white studio background).
+ * These are the consistent “Птичий полёт” assets.
  *
- * Real agency photos remain on the listing card / gallery via agencyPhotos.
- * Full scene catalog stays in PROPERTY_SCENES for when a reliable free/paid
- * regen path exists.
+ * Disabled (hallucinated AI property renders):
+ *   exterior, section, floorplan, life_*, bizarre
+ *
+ * Real agency photos remain on listing cards via agencyPhotos.
+ * PROPERTY_SCENES catalog retained for a future reliable regen path.
  */
-const ACTIVE_SCENE_TYPES = new Set(['section', 'floorplan']);
+const ACTIVE_SCENE_TYPES = new Set<string>([]);
 
 /**
- * Get scenes for a listing, prepending the isometric site-map as scene #0.
+ * Get scenes for a listing: only the 3D terrain bird-view map.
  * siteMapImage is the imported module URL from listing.locationMap.image.
- * Only isometric bird-view architecture scenes are returned (see ACTIVE_SCENE_TYPES).
  */
 export function getScenesForListing(id: number, siteMapImage: string, accent: string): PropertyScene[] {
   const siteScene: PropertyScene = {
@@ -238,7 +236,7 @@ export function getScenesForListing(id: number, siteMapImage: string, accent: st
     type: 'site',
     category: 'architecture',
     label: 'Птичий полёт',
-    sublabel: 'Вид с высоты',
+    sublabel: '3D карта местности',
     image: siteMapImage,
   };
   const rest = (PROPERTY_SCENES[id] ?? []).filter((s) => ACTIVE_SCENE_TYPES.has(s.type));
