@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSearch, useLocation } from 'wouter';
-import { MessageCircle, Send, Check } from 'lucide-react';
+import { MessageCircle, Send, CheckCircle } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import { PropertyCard } from '@/components/PropertyCard';
 import { ChromeSwitch } from '@/components/ChromeSwitch';
@@ -238,13 +238,13 @@ export default function Properties() {
             </p>
             <div className="flex flex-wrap gap-4 mt-2 justify-center lg:justify-start">
               <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider dark:text-gray-400 text-foreground/60 font-space-grotesk dark:bg-white/5 bg-black/[0.04] px-3 py-1.5 rounded-full dark:border dark:border-white/5 border border-black/5">
-                <Check className="w-3 h-3 text-[#8b5e1a]" /> 100% Конфиденциально
+                <CheckCircle className="w-3 h-3 text-[#8b5e1a]" /> 100% Конфиденциально
               </div>
               <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider dark:text-gray-400 text-foreground/60 font-space-grotesk dark:bg-white/5 bg-black/[0.04] px-3 py-1.5 rounded-full dark:border dark:border-white/5 border border-black/5">
-                <Check className="w-3 h-3 text-[#8b5e1a]" /> Прямая связь (без форм)
+                <CheckCircle className="w-3 h-3 text-[#8b5e1a]" /> Прямая связь (без форм)
               </div>
               <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider dark:text-gray-400 text-foreground/60 font-space-grotesk dark:bg-white/5 bg-black/[0.04] px-3 py-1.5 rounded-full dark:border dark:border-white/5 border border-black/5">
-                <Check className="w-3 h-3 text-[#8b5e1a]" /> Проверка чистоты (Compliance)
+                <CheckCircle className="w-3 h-3 text-[#8b5e1a]" /> Проверка чистоты (Compliance)
               </div>
             </div>
           </div>
