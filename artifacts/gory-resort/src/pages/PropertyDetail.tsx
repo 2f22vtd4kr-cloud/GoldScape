@@ -249,21 +249,18 @@ export default function PropertyDetail() {
         </section>
       )}
 
-      {/* ─── PROPERTY SCENES CAROUSEL ─────────────────────────────────── */}
+      {/* ─── TERRAIN BIRD-VIEW (Птичий полёт) ─────────────────────────── */}
       {(() => {
         const scenes = getScenesForListing(listing.id, listing.locationMap.image as string, accent);
-        if (scenes.length < 2) return null;
+        if (scenes.length === 0) return null;
         return (
           <section className="py-8 md:py-12 px-4 md:px-12 lg:px-24 dark:border-b dark:border-white/5 border-b border-black/10 dark:bg-[#050505] bg-[#F5F3EE]">
             <div className="container mx-auto max-w-7xl">
               <div className="flex items-center gap-2 mb-5">
-                <Camera className="w-4 h-4 dark:text-white/40 text-foreground/50" />
+                <MapPin className="w-4 h-4 dark:text-white/40 text-foreground/50" />
                 <h2 className="font-oxanium text-lg md:text-xl font-semibold dark:text-white text-foreground tracking-tight">
-                  Визуализация объекта
+                  Птичий полёт · 3D карта местности
                 </h2>
-                <span className="text-[11px] font-space-grotesk dark:text-white/30 text-foreground/40 ml-1">
-                  — {scenes.length} видов
-                </span>
               </div>
               <PropertyScenesCarousel scenes={scenes} accent={accent} />
             </div>
@@ -293,9 +290,35 @@ export default function PropertyDetail() {
 
           <div className="flex flex-col gap-4">
             <PropertyLocationMap {...listing.locationMap} />
-            <div className="flex items-center gap-2 text-[11px] font-space-grotesk dark:text-gray-500 text-foreground/50 px-1">
-              <ShieldCheck className="w-3.5 h-3.5 dark:text-white/30 text-foreground/40" />
-              <span>Partner: <span className="dark:text-gray-400 text-foreground/60">{listing.agency}</span></span>
+            <div className="flex flex-col gap-2 text-[11px] font-space-grotesk dark:text-gray-500 text-foreground/50 px-1">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500/80" />
+                <span>
+                  Источник:{' '}
+                  {listing.agencyUrl ? (
+                    <a
+                      href={listing.agencyUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="dark:text-gray-300 text-foreground/70 hover:underline"
+                    >
+                      {listing.agency}
+                    </a>
+                  ) : (
+                    <span className="dark:text-gray-400 text-foreground/60">{listing.agency}</span>
+                  )}
+                </span>
+              </div>
+              {listing.agencyUrl && (
+                <a
+                  href={listing.agencyUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[11px] font-space-grotesk dark:text-white/50 text-foreground/50 hover:underline"
+                >
+                  Открыть объявление агентства →
+                </a>
+              )}
             </div>
           </div>
         </div>

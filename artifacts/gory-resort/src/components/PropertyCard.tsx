@@ -1,8 +1,9 @@
-import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight, ShieldCheck, ExternalLink, Camera } from 'lucide-react';
 import { PropertyLocationMap } from '@/components/PropertyLocationMap';
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { CompareButton } from '@/components/CompareButton';
 import type { Listing } from '@/data/listings';
+import { hasAgencyGallery, isListingVerified } from '@/lib/listingIntegrity';
 
 /**
  * Shared listing card — used by the full catalogue (Properties.tsx) and the
@@ -101,22 +102,51 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
           />
         </div>
 
-        <div className="mt-auto flex items-center justify-between pt-4 dark:border-t dark:border-white/5 border-t border-black/5 relative z-10">
-          <div className="flex items-center gap-2 text-[10px] font-space-grotesk dark:text-gray-500 text-foreground/50">
-            <ShieldCheck className="w-3 h-3 dark:text-white/30 text-foreground/40" />
-            <span>Partner: <span className="dark:text-gray-400 text-foreground/60">{item.agency}</span></span>
+        <div className="mt-auto flex flex-col gap-2 pt-4 dark:border-t dark:border-white/5 border-t border-black/5 relative z-10">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 text-[10px] font-space-grotesk dark:text-gray-500 text-foreground/50 min-w-0">
+              {isListingVerified(item) ? (
+                <ShieldCheck className="w-3 h-3 text-emerald-500/80 shrink-0" />
+              ) : (
+                <ShieldCheck className="w-3 h-3 dark:text-white/30 text-foreground/40 shrink-0" />
+              )}
+              <span className="truncate">
+                {item.agencyUrl ? (
+                  <a
+                    href={item.agencyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="dark:text-gray-400 text-foreground/60 hover:underline inline-flex items-center gap-1"
+                  >
+                    {item.agency}
+                    <ExternalLink className="w-2.5 h-2.5 opacity-50" />
+                  </a>
+                ) : (
+                  <span className="dark:text-gray-400 text-foreground/60">{item.agency}</span>
+                )}
+              </span>
+            </div>
+            {hasAgencyGallery(item) && (
+              <span className="text-[9px] font-space-grotesk dark:text-white/40 text-foreground/40 inline-flex items-center gap-1 shrink-0">
+                <Camera className="w-3 h-3" />
+                {item.agencyPhotos!.length}
+              </span>
+            )}
           </div>
-          <button
-            type="button"
-            className="min-h-[48px] px-4 rounded text-[11px] font-space-grotesk uppercase tracking-wider dark:text-white/70 text-foreground/60 dark:group-hover:text-white group-hover:text-foreground dark:group-hover:bg-white/10 group-hover:bg-black/[0.04] transition-all flex items-center"
-            onClick={(e) => {
-              e.stopPropagation();
-              const rect = (e.currentTarget as HTMLButtonElement).getBoundingClientRect();
-              onOpen(item.id, rect.left + rect.width / 2, rect.top + rect.height / 2);
-            }}
-          >
-            Подробнее <ArrowRight className="w-3 h-3 ml-1.5 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-          </button>
+          <div className="flex items-center justify-end">
+            <button
+              type="button"
+              className="min-h-[48px] px-4 rounded text-[11px] font-space-grotesk uppercase tracking-wider dark:text-white/70 text-foreground/60 dark:group-hover:text-white group-hover:text-foreground dark:group-hover:bg-white/10 group-hover:bg-black/[0.04] transition-all flex items-center"
+              onClick={(e) => {
+                e.stopPropagation();
+                const rect = (e.currentTarget as HTMLButtonElement).getBoundingClientRect();
+                onOpen(item.id, rect.left + rect.width / 2, rect.top + rect.height / 2);
+              }}
+            >
+              Подробнее <ArrowRight className="w-3 h-3 ml-1.5 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -14,6 +14,7 @@ export default function Properties() {
   const [priceFilter, setPriceFilter] = useState('');
   const [bedFilter, setBedFilter]     = useState('');
   const [cryptoOnly, setCryptoOnly]   = useState(false);
+  const [residencyOnly, setResidencyOnly] = useState(false);
 
   const parsePrice = (price: string) => parseInt(price.replace(/[^0-9]/g, ''), 10);
 
@@ -21,6 +22,10 @@ export default function Properties() {
     if (countryFilter && l.country !== countryFilter) return false;
     if (typeFilter && !l.type.includes(typeFilter)) return false;
     if (cryptoOnly && !l.crypto) return false;
+    if (residencyOnly) {
+      const blob = [...(l.tags ?? []), l.legalFit, l.description].join(' ');
+      if (!/внж|резидент|golden\s*visa|вид на жительство/i.test(blob)) return false;
+    }
     if (bedFilter) {
       if (bedFilter === 'Studio') {
         if (l.beds !== 'Studio') return false;
@@ -44,7 +49,7 @@ export default function Properties() {
   // Compute the cheapest listing's price for the subtitle (dynamic, never stale)
   const cheapestListing = LISTINGS.reduce((min, l) =>
     parsePrice(l.price) < parsePrice(min.price) ? l : min, LISTINGS[0]);
-  const minPriceLabel = cheapestListing?.price.replace(/,/g, ' ') ?? '€88 000';
+  const minPriceLabel = cheapestListing?.price.replace(/,/g, ' ') ?? '—';
 
   const [, navigate] = useLocation();
 
@@ -159,10 +164,26 @@ export default function Properties() {
             Только USDT
           </button>
 
-          {(countryFilter || typeFilter || priceFilter || bedFilter || cryptoOnly) && (
+          <button
+            type="button"
+            aria-pressed={residencyOnly}
+            onClick={() => setResidencyOnly(v => !v)}
+            className={`w-full md:w-auto min-h-[48px] px-4 py-2.5 rounded-lg text-xs font-oxanium uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer ${
+              residencyOnly
+                ? 'bg-emerald-500/15 border border-emerald-500/50 text-emerald-600 dark:text-emerald-400'
+                : 'glass-filter-select dark:text-gray-300 text-foreground/60'
+            }`}
+          >
+            <span className={`w-3.5 h-3.5 rounded-sm border flex items-center justify-center ${residencyOnly ? 'bg-emerald-600 border-emerald-600' : 'border-current opacity-60'}`}>
+              {residencyOnly && <Check className="w-2.5 h-2.5 text-white" />}
+            </span>
+            ВНЖ / резидентство
+          </button>
+
+          {(countryFilter || typeFilter || priceFilter || bedFilter || cryptoOnly || residencyOnly) && (
             <button
               type="button"
-              onClick={() => { setCountryFilter(''); setTypeFilter(''); setPriceFilter(''); setBedFilter(''); setCryptoOnly(false); }}
+              onClick={() => { setCountryFilter(''); setTypeFilter(''); setPriceFilter(''); setBedFilter(''); setCryptoOnly(false); setResidencyOnly(false); }}
               className="w-full md:w-auto min-h-[48px] px-5 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-400 text-foreground/50 dark:hover:text-white hover:text-foreground dark:border dark:border-white/10 border border-black/10 rounded-lg dark:hover:border-white/30 hover:border-black/15 transition-colors bg-transparent cursor-pointer md:ml-auto"
             >
               Сбросить
