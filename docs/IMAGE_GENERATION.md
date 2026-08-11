@@ -148,3 +148,85 @@ The p18 (Dobrota, Kotor Bay) scene set was the first to be generated using the f
 **After DNA system applied:**
 - All scenes share: white render facade, anthracite aluminium frames, glass balcony railings, pale travertine interior, Gospa od Škrpjela island always visible in the bay.
 - The property is instantly recognisable across all five scenes as the same building.
+
+---
+
+## Reality lock (2026-08-11)
+
+DNA must be written from **real agency photos**, not aspirational CGI.
+
+| Listing | Wrong (old) | Correct (agency) |
+|---------|-------------|------------------|
+| p18 | White glass villa on rocks mid-bay | Multi-storey block, terracotta roof, coastal road + beach |
+| p12 | 1930s Art Deco limestone | BW Simfonija modern high-rise (Estitor) |
+| p19 | Luxury hillside villa | Modest sea-view apartment (Monteonline) |
+| p20 | — | Glass tower OK, but ban window-interior hallucination |
+
+Always open `public/images/agency/pN/` before editing DNA.
+
+---
+
+## Automated tools
+
+### Regenerate scenes (Gemini master-reference)
+
+```bash
+# Dry-run (prints prompts, no API)
+node scripts/regen/regen-scenes.mjs --ids 12,18,19,20 --dry-run
+
+# Real regen (needs AI_INTEGRATIONS_GEMINI_API_KEY or GEMINI_API_KEY)
+node scripts/regen/regen-scenes.mjs --ids 18 --scenes exterior,section,floorplan
+```
+
+Writes to `public/images/scenes/` and `chats/screenshots-*/regen-*`.
+
+### Visual regression
+
+```bash
+# Snapshot current scenes as baselines
+node scripts/visual-regression/compare-scenes.mjs --ids 12,18,19,20 --update-baselines
+
+# Compare after regen
+node scripts/visual-regression/compare-scenes.mjs --ids 12,18,19,20
+```
+
+Report: `chats/screenshots-*/visual-regression-report.md`
+
+### DNA coverage audit
+
+```bash
+node scripts/audit-dna-vs-listings.mjs
+```
+
+### Stable Diffusion + ControlNet (GPU)
+
+For tighter spatial lock than Gemini multi-image:
+
+```bash
+python scripts/sd_consistency/pipeline.py \
+  --master artifacts/gory-resort/public/images/scenes/p18-exterior.jpg \
+  --prompt "isometric section of the same building..." \
+  --out /tmp/p18-section-sd.jpg
+```
+
+Requires GPU + `diffusers` / `controlnet-aux`. On CPU the script warns and stubs. Prefer Gemini path in this environment.
+
+Recommended SD settings (from architecture practice):
+- ControlNet depth strength 0.6–0.7
+- Denoise / img2img strength 0.35–0.45
+- CFG ~3.5–4.5 for Flux-class; ~7 for SD1.5
+- Negative: floating building, window interiors, hyper-CGI, white void
+
+---
+
+## Desktop / mobile visual check
+
+```bash
+# From artifacts/gory-resort after pnpm install
+pnpm dev
+# then
+node scripts/screenshot-mobile.mjs
+node scripts/serve-and-screenshot.mjs
+```
+
+Save captures under `chats/screenshots-YYYY-MM-DD/`.
