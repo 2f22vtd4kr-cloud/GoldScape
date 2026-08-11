@@ -70,7 +70,7 @@ function CountryPageContent({ data }: { data: CountryData }) {
                 alt={`${data.capital}, ${data.nameEn}`}
                 className="relative z-10 w-auto max-w-[110%] max-h-[550px] object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)] iso-tile transition-transform duration-1000 hover:rotate-0 hover:scale-105"
               />
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 dark:bg-[#050505]/80 bg-white/75 backdrop-blur-md px-5 py-3 rounded-full dark:border dark:border-white/10 border border-black/10 shadow-2xl whitespace-nowrap">
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 liquid-glass px-5 py-3 rounded-full border dark:border-white/10 border-black/10 shadow-2xl whitespace-nowrap">
                 <p className="font-oxanium dark:text-white/80 text-foreground/70 text-[11px] font-medium tracking-[0.18em] uppercase">
                   {data.capital} · {data.nameEn}
                 </p>
@@ -82,7 +82,7 @@ function CountryPageContent({ data }: { data: CountryData }) {
 
       {/* ─── TRUST & LEGITIMACY STRIP (Viktor / Irina) ─────────────────────── */}
       {/* Wrapped without overflow to strictly follow no horizontal scroll rule */}
-      <section className="dark:border-b dark:border-white/5 border-b border-black/5 dark:bg-[#030303] bg-[#F5F3EE] py-4 md:py-5 relative z-20">
+      <section className="dark:border-b dark:border-white/5 border-b border-black/5 liquid-glass-neutral py-4 md:py-5 relative z-20">
         <div className="container mx-auto px-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[11px] md:text-[13px] font-space-grotesk dark:text-white/40 text-foreground/50">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 dark:text-white/30 text-foreground/40" />
@@ -115,10 +115,10 @@ function CountryPageContent({ data }: { data: CountryData }) {
             {data.features.map((f, i) => (
               <div
                 key={i}
-                className="dark:border dark:border-white/[0.06] border border-black/[0.06] rounded-xl p-8 dark:bg-[#080808] bg-[#F5F3EE] flex flex-col gap-6
-                           dark:hover:border-white/[0.15] hover:border-black/10 dark:hover:bg-[#0a0a0a] hover:bg-white transition-all duration-500 group"
+                className="liquid-glass-tinted liquid-glass-interactive rounded-xl p-8 flex flex-col gap-6
+                           border dark:border-white/[0.06] border-black/[0.06] transition-all duration-500 group"
               >
-                <div className="w-12 h-12 rounded-full dark:border dark:border-white/[0.08] border border-black/[0.06] dark:bg-[#0c0c0c] bg-white flex items-center justify-center shrink-0 dark:group-hover:border-white/[0.2] group-hover:border-black/15 transition-colors">
+                <div className="w-12 h-12 rounded-full chrome-surface flex items-center justify-center shrink-0 transition-colors">
                   <CheckCircle className="w-5 h-5 dark:text-white/40 text-foreground/50 dark:group-hover:text-white/80 group-hover:text-foreground/80 transition-colors" />
                 </div>
                 <div>
@@ -150,7 +150,7 @@ function CountryPageContent({ data }: { data: CountryData }) {
                 key={i}
                 className={`flex flex-col md:flex-row md:items-center gap-4 md:gap-6 px-6 md:px-10 py-8
                             ${i < data.markets.length - 1 ? 'dark:border-b dark:border-white/[0.04] border-b border-black/[0.04]' : ''}
-                            dark:hover:bg-[#090909] hover:bg-[#F5F3EE] transition-colors duration-300`}
+                            dark:hover:bg-white/[0.03] hover:bg-black/[0.02] transition-colors duration-300`}
               >
                 <div className="md:w-1/3 min-w-0">
                   <span className="font-oxanium dark:text-white/90 text-foreground text-[18px] font-medium tracking-[-0.01em] block">{m.city}</span>
@@ -249,7 +249,7 @@ function CountryPageContent({ data }: { data: CountryData }) {
               <Send className="w-5 h-5 dark:text-white/40 text-foreground/50 group-hover:text-[#0088cc]/90 transition-colors" />
               <span className="font-space-grotesk text-[13px] font-medium tracking-[0.05em] uppercase">Telegram</span>
             </a>
-            <Link href="/about" className="eom-btn-primary min-h-[52px] px-8 flex items-center justify-center font-oxanium text-[12px] uppercase tracking-[0.1em] w-full sm:w-auto">
+            <Link href="/about" className="eom-btn-oilslick chrome-metal-rim min-h-[52px] px-8 flex items-center justify-center font-oxanium text-[12px] uppercase tracking-[0.1em] w-full sm:w-auto">
               Оставить заявку
             </Link>
           </div>
