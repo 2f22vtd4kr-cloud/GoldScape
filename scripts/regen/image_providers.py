@@ -127,15 +127,30 @@ def generate_gemini(prompt: str, ref_path: Path | None = None) -> bytes:
     raise RuntimeError("Gemini response contained no image part")
 
 
+def generate_pollinations(prompt: str, ref_path: Path | None = None) -> bytes:
+    """Free no-key text-to-image. Quality uneven for architecture; last-resort only."""
+    from urllib.parse import quote
+
+    q = quote(prompt[:500])
+    url = f"https://image.pollinations.ai/prompt/{q}?width=1024&height=576&nologo=true&model=flux"
+    req = urllib.request.Request(url, method="GET", headers={"User-Agent": "GoldScape/1.0"})
+    with urllib.request.urlopen(req, timeout=90) as resp:
+        data = resp.read()
+    if len(data) < 1000:
+        raise RuntimeError("Pollinations returned empty/too-small image")
+    return data
+
+
 PROVIDERS = {
     "gemini": generate_gemini,
     "openai": generate_openai,
     "hf": generate_hf,
+    "pollinations": generate_pollinations,
 }
 
 
 def available_providers() -> list[str]:
-    out = []
+    out = ["pollinations"]  # always available, no key
     if os.environ.get("GEMINI_API_KEY") or os.environ.get("AI_INTEGRATIONS_GEMINI_API_KEY"):
         out.append("gemini")
     if os.environ.get("OPENAI_API_KEY"):
@@ -148,15 +163,8 @@ def available_providers() -> list[str]:
 def generate(prompt: str, provider: str = "auto", ref_path: Path | None = None) -> bytes:
     if provider == "auto":
         avail = available_providers()
-        if not avail:
-            raise RuntimeError(
-                "No image provider keys found. Set one of:\n"
-                "  OPENAI_API_KEY  (recommended paid path)\n"
-                "  HF_TOKEN        (Hugging Face Inference Providers)\n"
-                "  GEMINI_API_KEY  (requires paid/billing — free keys only work in AI Studio UI)"
-            )
-        # Prefer openai > hf > gemini (gemini free often quota 0 for images)
-        for pref in ("openai", "hf", "gemini"):
+        # Prefer paid quality; pollinations last (free but weak for real-estate)
+        for pref in ("openai", "hf", "gemini", "pollinations"):
             if pref in avail:
                 provider = pref
                 break
