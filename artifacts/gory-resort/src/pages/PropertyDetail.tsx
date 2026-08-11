@@ -127,7 +127,7 @@ export default function PropertyDetail() {
             <ArrowLeft className="w-3.5 h-3.5" /> Назад к каталогу
           </Link>
 
-          <div className="rounded-2xl overflow-hidden dark:border dark:border-white/10 border border-black/10 dark:bg-[#0a0a0a] bg-white flex flex-col">
+          <div className="eom-card overflow-hidden flex flex-col">
             <div className="relative aspect-[4/3] md:aspect-[21/9]">
               <img
                 src={listing.image}
@@ -190,7 +190,7 @@ export default function PropertyDetail() {
                   <a
                     href={`https://wa.me/971502345678?text=${waText}`}
                     target="_blank" rel="noreferrer"
-                    className="eom-btn-primary font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-8 inline-flex items-center justify-center gap-2 whitespace-nowrap"
+                    className="eom-btn-oilslick chrome-metal-rim font-oxanium text-sm uppercase tracking-wider min-h-[48px] px-8 inline-flex items-center justify-center gap-2 whitespace-nowrap"
                   >
                     <MessageCircle className="w-4 h-4" /> Написать в WhatsApp
                   </a>
@@ -205,7 +205,7 @@ export default function PropertyDetail() {
                 <div className="flex items-center gap-2 dark:text-white/60 text-foreground/65 text-[11px] font-oxanium uppercase tracking-[0.2em] mb-2">
                   <MapPin className="w-3.5 h-3.5" /> {listing.city} · {listing.district}
                 </div>
-                <div className="text-3xl font-oxanium font-bold chrome-text tracking-tight mb-2">
+                <div className="eom-card-price text-3xl font-bold tracking-tight mb-2">
                   {listing.price}
                 </div>
                 <div className="flex flex-wrap gap-x-3 gap-y-1 dark:text-white/70 text-foreground/70 text-sm font-space-grotesk">
@@ -257,7 +257,7 @@ export default function PropertyDetail() {
       ) : (
         <section className="py-8 md:py-10 px-4 md:px-12 lg:px-24 dark:border-b dark:border-white/5 border-b border-black/10 dark:bg-[#070707] bg-white">
           <div className="container mx-auto max-w-7xl">
-            <div className="rounded-2xl dark:border dark:border-white/10 border border-black/10 dark:bg-white/[0.02] bg-black/[0.02] p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+            <div className="liquid-glass-tinted rounded-2xl border dark:border-white/10 border-black/10 p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
               <div className="flex-1">
                 <h2 className="font-oxanium text-lg font-semibold dark:text-white text-foreground mb-2">
                   Фотографии на стороне агентства
@@ -290,7 +290,7 @@ export default function PropertyDetail() {
             <div className="container mx-auto max-w-7xl">
               <div className="flex items-center gap-2 mb-5">
                 <MapPin className="w-4 h-4 dark:text-white/40 text-foreground/50" />
-                <h2 className="font-oxanium text-lg md:text-xl font-semibold dark:text-white text-foreground tracking-tight">
+                <h2 className="font-oxanium text-lg md:text-xl font-semibold chrome-text tracking-tight">
                   Птичий полёт · 3D карта местности
                 </h2>
               </div>
@@ -370,7 +370,7 @@ export default function PropertyDetail() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="dark:bg-white/[0.02] bg-black/[0.02] dark:border dark:border-white/[0.07] border border-black/[0.06] rounded-2xl p-6 flex flex-col gap-3">
+            <div className="liquid-glass-tinted rounded-2xl p-6 flex flex-col gap-3 border dark:border-white/[0.07] border-black/[0.06]">
               <div className="flex items-center gap-2 dark:text-white/80 text-foreground/80">
                 <Scale className="w-4 h-4" />
                 <h3 className="font-oxanium text-sm uppercase tracking-wider">Резидентство и гражданство</h3>
@@ -383,7 +383,7 @@ export default function PropertyDetail() {
               )}
             </div>
 
-            <div className="dark:bg-white/[0.02] bg-black/[0.02] dark:border dark:border-white/[0.07] border border-black/[0.06] rounded-2xl p-6 flex flex-col gap-3">
+            <div className="liquid-glass-tinted rounded-2xl p-6 flex flex-col gap-3 border dark:border-white/[0.07] border-black/[0.06]">
               <div className="flex items-center gap-2 dark:text-white/80 text-foreground/80">
                 <ShieldCheck className="w-4 h-4" />
                 <h3 className="font-oxanium text-sm uppercase tracking-wider">Налоги и сборы</h3>
@@ -393,7 +393,7 @@ export default function PropertyDetail() {
               </p>
             </div>
 
-            <div className="dark:bg-white/[0.02] bg-black/[0.02] dark:border dark:border-white/[0.07] border border-black/[0.06] rounded-2xl p-6 flex flex-col gap-3">
+            <div className="liquid-glass-tinted rounded-2xl p-6 flex flex-col gap-3 border dark:border-white/[0.07] border-black/[0.06]">
               <div className="flex items-center gap-2 dark:text-white/80 text-foreground/80">
                 <TrendingUp className="w-4 h-4" />
                 <h3 className="font-oxanium text-sm uppercase tracking-wider">Доходность</h3>
@@ -401,7 +401,7 @@ export default function PropertyDetail() {
               <p className="dark:text-gray-300 text-foreground/75 font-space-grotesk text-sm leading-relaxed">{listing.yieldEstimate}</p>
             </div>
 
-            <div className="dark:bg-white/[0.02] bg-black/[0.02] dark:border dark:border-white/[0.07] border border-black/[0.06] rounded-2xl p-6 flex flex-col gap-3">
+            <div className="liquid-glass-tinted rounded-2xl p-6 flex flex-col gap-3 border dark:border-white/[0.07] border-black/[0.06]">
               <div className="flex items-center gap-2 dark:text-white/80 text-foreground/80">
                 <AlertTriangle className="w-4 h-4" />
                 <h3 className="font-oxanium text-sm uppercase tracking-wider">На что обратить внимание</h3>
@@ -411,13 +411,13 @@ export default function PropertyDetail() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="dark:bg-white/[0.015] bg-black/[0.015] dark:border dark:border-white/[0.05] border border-black/[0.05] rounded-xl p-5 flex flex-col gap-2">
+            <div className="liquid-glass-neutral rounded-xl p-5 flex flex-col gap-2 border dark:border-white/[0.05] border-black/[0.05]">
               <h4 className="font-oxanium text-[11px] uppercase tracking-wider dark:text-white/50 text-foreground/60">Перевод капитала</h4>
               <p className="dark:text-gray-500 text-foreground/50 font-space-grotesk text-[13px] leading-relaxed">
                 Для клиентов с российскими паспортами мы структурируем сделку поэтапно: открытие счёта в юрисдикции покупки, прямой SWIFT-перевод или расчёт в USDT/USDC при согласии застройщика, полное KYC/AML-сопровождение и подтверждение источника средств на каждом шаге, чтобы исключить блокировку транзакции банком-получателем.
               </p>
             </div>
-            <div className="dark:bg-white/[0.015] bg-black/[0.015] dark:border dark:border-white/[0.05] border border-black/[0.05] rounded-xl p-5 flex flex-col gap-2">
+            <div className="liquid-glass-neutral rounded-xl p-5 flex flex-col gap-2 border dark:border-white/[0.05] border-black/[0.05]">
               <h4 className="font-oxanium text-[11px] uppercase tracking-wider dark:text-white/50 text-foreground/60">Комиссия агентства</h4>
               <p className="dark:text-gray-500 text-foreground/50 font-space-grotesk text-[13px] leading-relaxed">
                 Наша комиссия фиксируется в письменном виде до перевода первого платежа и не добавляется к указанной здесь цене объекта — итоговая сумма к оплате известна заранее, без скрытых наценок на этапе сделки.
@@ -488,7 +488,7 @@ export default function PropertyDetail() {
             <a
               href={`https://wa.me/971502345678?text=${waText}`}
               target="_blank" rel="noreferrer"
-              className="w-full sm:w-auto min-h-[48px] px-8 rounded-full dark:bg-white dark:text-black bg-foreground text-background font-oxanium font-semibold text-sm dark:hover:bg-gray-200 hover:opacity-90 transition-colors flex items-center justify-center uppercase tracking-wider gap-2"
+              className="eom-btn-oilslick chrome-metal-rim w-full sm:w-auto min-h-[48px] px-8 rounded-full font-oxanium font-semibold text-sm flex items-center justify-center uppercase tracking-wider gap-2"
             >
               <MessageCircle className="w-4 h-4" /> Написать в WhatsApp
             </a>
