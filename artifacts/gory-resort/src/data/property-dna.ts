@@ -129,7 +129,9 @@ export const PROHIBITIONS = [
   'Windows and glass must show ONLY sky, landscape, or landmark reflections / views. NEVER render detailed furnished interior rooms, people, or furniture visible through exterior glass (classic AI window-hallucination bug).',
   'Strictly preserve the exact same building geometry, facade materials, window frame colour/type, roof, balcony railings, and interior materials described in the anchor. Do not invent a different building or substitute materials.',
   'For isometric / section / floorplan views: use true isometric or near-isometric parallel projection (no strong perspective distortion). Camera angle and elevation must match the CAMERA / FRAMING instruction exactly.',
-  'Photorealistic 3D architectural visualization, ultra-high detail, physically plausible lighting and materials. This is a real property from a real estate listing — realism and geographic fidelity are mandatory.',
+  'Photorealistic architectural photography style — restrained, matte finishes, natural weathering, subtle imperfections. NOT glossy hyper-CGI or luxury advert look.',
+  'Building must sit firmly on land with correct street / beach / neighbour context. NEVER float the building on rocks in the middle of the water or invent a different building type than the real listing.',
+  'This is a real property from a real estate agency — match the real building massing, roof type and site from agency photos. Realism and geographic fidelity are mandatory.',
 ].join(' ');
 
 /**
@@ -288,22 +290,20 @@ export const PROPERTY_DNA: Record<number, PropertyDNA> = {
     name: 'Dobrota Waterfront — Modern apartment, Kotor Bay, Montenegro',
     anchor: {
       building: [
-        'A contemporary three-floor waterfront residential building in Dobrota, Montenegro.',
-        'Smooth white sand-render facade, flat concrete roof with thin overhanging slab edges.',
-        'Dark anthracite aluminium window frames throughout.',
-        'Each floor has a full-width terrace with frameless tempered-glass balcony railings.',
-        'Terrace floors: large-format pale travertine tiles (60×120 cm, cream-beige).',
-        'Ground floor sits directly above raw grey limestone rocks at the waterline.',
-        'The building is three bays wide; the central bay slightly projects forward as a shallow volume.',
-        'Neighbours on left: traditional Montenegrin stone house with terracotta pantile roof.',
+        'CRITICAL — match the REAL Sotheby\'s agency photos, not a fantasy villa.',
+        'A multi-storey residential apartment building on the first coastal line in Dobrota, Kotor Bay.',
+        'Four-to-five storeys. Facade: light beige / stone-coloured render with natural limestone cladding on lower levels.',
+        'Shallow-pitch TERRACOTTA RED pan-tile roof (traditional Mediterranean) — NEVER a flat white concrete roof.',
+        'Rectangular modern windows with dark frames; some small balconies or recessed terraces.',
+        'The building sits on the LAND side of the coastal road. It is NOT floating on rocks in the water and is NOT a freestanding glass villa.',
+        'Underground garage and elevator as in the real listing. Everyday residential architecture, not hyper-CGI luxury.',
       ].join(' '),
       site: [
-        'Dobrota village, Kotor Bay, Montenegro — first-row waterfront position.',
-        'The building footprint is separated from the Bay of Kotor water by only 4–6 m of raw limestone rock.',
-        'Rocky shoreline with Mediterranean scrub (wild rosemary, sage, sparse stone-pine).',
-        'To the left (east): the continuation of the Dobrota coastal road and traditional stone village houses.',
-        'Behind the building (north): steep limestone mountain flank of Lovćen massif rising almost',
-        'vertically — bare grey-white karstic rock with sparse dark-green Mediterranean pine.',
+        'Dobrota village waterfront — building stands on the coastal road with a narrow pebble beach immediately in front.',
+        'Coastal road (asphalt + red cycle strip) runs between the building and the water. Cars, trees, garden walls, neighbours.',
+        'Neighbours: other residential buildings and traditional stone houses with terracotta roofs on both sides and uphill.',
+        'Small beach with umbrellas, people, kayaks, boats, jetties. Steep limestone Lovćen mountains rise directly behind the village.',
+        'Normal village life and clutter — NOT a sterile CGI island or isolated rock outcrop in the middle of the bay.',
       ].join(' '),
       landmark: [
         'The Bay of Kotor: flat, deep ultramarine-blue water with subtle mirror reflections.',
@@ -329,7 +329,7 @@ export const PROPERTY_DNA: Record<number, PropertyDNA> = {
     },
     lightingSetup: 'Mid-morning sun (09:30–11:00 local summer) from the south-east; cool-warm 5500 K natural light; the white facade is fully lit and bright, the bay shimmers with gentle highlights.',
     cameraByType: {
-      exterior: 'ENTIRE three-floor building visible from limestone rock base to flat concrete roof edge — camera pulled back so no floor or overhang is cropped. Building fills maximum 55% of frame height. Camera at 30° elevation, positioned above the bay facing north. Rocky shoreline foreground. Gospa od Škrpjela island visible behind/beside the building. Context visible on all sides.',
+      exterior: 'Show the REAL building: multi-storey residential block with terracotta roof on the coastal road. Camera elevated or from the water looking back at the shore so the road, beach and neighbours are visible in front of the building. Building must sit firmly on land. Include cars, trees, other houses, everyday context. NEVER invent a white glass villa on rocks in the middle of the bay. Gospa od Škrpjela visible across the water.',
       section: 'ALL THREE FLOORS visible from rocky base to roof slab — none cropped. Pull camera back so the full stacked building fits in frame with 15% margin top and bottom. 45° isometric dolls-house cutaway. Roof lifted, south facade removed. All floors stacked and visible simultaneously. The Bay of Kotor and Gospa od Škrpjela island visible through the glass panels.',
       floorplan: 'ENTIRE building footprint within frame — all four exterior walls visible, no rooms cropped. 65° top-down isometric, roof removed. Travertine floor pattern and furniture visible. Bay water edge visible at the south side. No white or grey background — rock, water, and road context at all building edges.',
       life_bbq: 'Camera at 35° elevation above and to the east, looking west. FULL terrace visible — no edges cropped. The bay with Gospa od Škrpjela and Perast fills the background. Blue-hour (21:00), warm terrace lights, cool cobalt bay.',

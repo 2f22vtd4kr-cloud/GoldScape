@@ -2,32 +2,41 @@
 
 Visual review of existing AI-generated isometric / architectural scenes for EstateofMind (GoldScape).
 
-These are the **real production assets** currently in `artifacts/gory-resort/public/images/scenes/`.
+These are the **real production assets** currently in `artifacts/gory-resort/public/images/scenes/` plus real agency photos for comparison.
 
 ## Files
 
 | # | File | Property | Finding |
 |---|------|----------|---------|
-| 01 | p18-exterior-master | Dobrota / Kotor | Best master. White render, glass rail, anthracite frames, Gospa od Škrpjela correct. Minor window-interior glow. |
-| 02 | p18-section | Dobrota | Materials + landmark OK, but renders as single-floor cutaway instead of 3-floor stacked dolls-house. |
-| 03 | p18-floorplan | Dobrota | Clean isometric, light floors, water edge. Slight void edges. |
-| 04 | p18-bbq-life | Dobrota | Excellent blue-hour terrace. Strong identity match to exterior. |
-| 05 | p18-bizarre-boat | Dobrota | Building identity holds; prop is wooden boat instead of DNA “Big Blue / monofin” brief. |
-| 06 | p20-exterior-window-bug | Belgrade Waterfront | Severe window-interior hallucination — every glass panel shows furnished rooms. Priority regen target. |
+| 01 | p18-exterior-master | Dobrota / Kotor | **WRONG BUILDING.** AI invented white glass villa on rocks in the water. |
+| 02 | p18-section | Dobrota | Follows the wrong building language. |
+| 03 | p18-floorplan | Dobrota | Follows the wrong building language. |
+| 04 | p18-bbq-life | Dobrota | Attractive but still the wrong building type. |
+| 05 | p18-bizarre-boat | Dobrota | Same issue + wrong props vs DNA. |
+| 06 | p20-exterior-window-bug | Belgrade Waterfront | Severe window-interior hallucination. |
 | 07 | p12-exterior | Savski Venac | Solid pre-war limestone + Kalemegdan context. |
 | 08 | p19-exterior | Sveti Stefan | Strong island landmark pin. |
-| 09 | p19-remote-work | Sveti Stefan | One of the best single frames; island fills glass correctly. |
+| 09 | p19-remote-work | Sveti Stefan | One of the best single frames. |
 | 10 | p20-section | Belgrade Waterfront | Section for p20. |
+| 11–13 | REAL-p18-agency-* | Dobrota | **Ground truth** from Sotheby's: multi-storey block, terracotta roof, coastal road, beach, neighbours. |
 
-## Verdict
+## Critical finding (p18)
 
-- DNA system already improved cross-scene identity vs pre-DNA collage look.
-- Remaining issues the new master-reference `generateImage` + strengthened PROHIBITIONS target:
-  1. Window-interior bug (p20 exterior worst)
-  2. Section camera not producing stacked multi-floor
-  3. Bizarre props not matching written DNA briefs
-  4. Occasional void backgrounds
+AI exterior invented a white glass villa floating on rocks in the bay.  
+Real Sotheby's photos show a multi-storey residential building with **terracotta pan-tile roof** sitting on the coastal road with beach, cars and neighbours.
+
+DNA for p18 has been rewritten to match the real building. All current p18 scene images are invalid and must be regenerated.
+
+## Web research takeaways for realism
+
+- Prefer “architectural photography / restrained / matte finishes / natural weathering” over “luxury CGI render”.
+- ControlNet depth + canny (when available) for geometry lock; Gemini multi-image reference is the current substitute.
+- Always ground the building on land with correct street/beach context — never let the model invent a different building type.
+- Use real agency photos as reference images when regenerating.
 
 ## Next
 
-Regenerate masters first, then all dependent scenes with `{ withMasterReference: true }`.
+1. Regenerate p18 master exterior from corrected DNA (must show terracotta roof + road + beach).
+2. Regenerate all other p18 scenes with master-reference.
+3. Audit p12 / p19 / p20 DNA against their real agency photos the same way.
+4. Keep adding screenshots here (desktop + mobile when the app is running).
