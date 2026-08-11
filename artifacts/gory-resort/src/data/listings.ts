@@ -582,7 +582,9 @@ export const LISTINGS: Listing[] = [
     agency: 'Atrium Property Services',
     agencyUrl: 'https://www.atriumproperty.rs/',
     exclusive: false,
-    agencyPhotos: [], // Agency site blocked scraping; photos to be added manually
+    agencyPhotos: [
+      '/images/agency/p20/1.jpg',
+    ],
     tags: ['Вид на Саву', 'Калемегдан', 'ВНЖ по недвижимости'],
     crypto: false,
     locationMap: {

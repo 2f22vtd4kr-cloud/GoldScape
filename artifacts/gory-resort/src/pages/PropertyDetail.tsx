@@ -227,7 +227,7 @@ export default function PropertyDetail() {
       </section>
 
       {/* ─── AGENCY REAL PHOTOS ────────────────────────────────────────── */}
-      {listing.agencyPhotos && listing.agencyPhotos.length > 0 && (
+      {listing.agencyPhotos && listing.agencyPhotos.length > 0 ? (
         <section className="py-8 md:py-12 px-4 md:px-12 lg:px-24 dark:border-b dark:border-white/5 border-b border-black/10 dark:bg-[#070707] bg-white">
           <div className="container mx-auto max-w-7xl">
             <div className="flex items-center gap-2 mb-5">
@@ -236,7 +236,7 @@ export default function PropertyDetail() {
                 Фотографии объекта
               </h2>
               <span className="text-[11px] font-space-grotesk dark:text-white/30 text-foreground/40 ml-1">
-                — {listing.agencyPhotos.length} фото от агентства
+                — {listing.agencyPhotos.length} фото · {listing.agency}
               </span>
             </div>
             <PropertyAgencyGallery
@@ -245,6 +245,31 @@ export default function PropertyDetail() {
               agencyUrl={listing.agencyUrl}
               accent={accent}
             />
+          </div>
+        </section>
+      ) : (
+        <section className="py-8 md:py-10 px-4 md:px-12 lg:px-24 dark:border-b dark:border-white/5 border-b border-black/10 dark:bg-[#070707] bg-white">
+          <div className="container mx-auto max-w-7xl">
+            <div className="rounded-2xl dark:border dark:border-white/10 border border-black/10 dark:bg-white/[0.02] bg-black/[0.02] p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+              <div className="flex-1">
+                <h2 className="font-oxanium text-lg font-semibold dark:text-white text-foreground mb-2">
+                  Фотографии на стороне агентства
+                </h2>
+                <p className="font-space-grotesk text-sm dark:text-gray-400 text-foreground/60 leading-relaxed">
+                  Галерея ещё не загружена в EstateOfMind. Актуальные снимки смотрите у партнёра — {listing.agency}.
+                </p>
+              </div>
+              {listing.agencyUrl && (
+                <a
+                  href={listing.agencyUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="eom-btn-primary font-oxanium text-xs uppercase tracking-wider min-h-[48px] px-6 inline-flex items-center justify-center gap-2 shrink-0"
+                >
+                  Открыть у агентства
+                </a>
+              )}
+            </div>
           </div>
         </section>
       )}

@@ -195,11 +195,27 @@ export default function Properties() {
       {/* PROPERTY GRID */}
       <section className="py-12 px-4 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredListings.map((item) => (
-              <PropertyCard key={item.id} item={item} onOpen={openDetail} />
-            ))}
-          </div>
+          {filteredListings.length === 0 ? (
+            <div className="rounded-2xl dark:border dark:border-white/10 border border-black/10 dark:bg-white/[0.02] bg-black/[0.02] p-10 text-center max-w-xl mx-auto mb-12">
+              <p className="font-oxanium text-lg dark:text-white text-foreground mb-2">Нет объектов по фильтру</p>
+              <p className="font-space-grotesk text-sm dark:text-gray-400 text-foreground/60 mb-6">
+                В этой выборке пока нет проверенных объявлений. Сбросьте фильтры или выберите другую страну.
+              </p>
+              <button
+                type="button"
+                onClick={() => { setCountryFilter(''); setTypeFilter(''); setPriceFilter(''); setBedFilter(''); setCryptoOnly(false); setResidencyOnly(false); }}
+                className="eom-btn-primary font-oxanium text-xs uppercase tracking-wider min-h-[48px] px-6"
+              >
+                Сбросить фильтры
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredListings.map((item) => (
+                <PropertyCard key={item.id} item={item} onOpen={openDetail} />
+              ))}
+            </div>
+          )}
 
           <div className="mt-16 flex flex-col items-center justify-center">
             <div
