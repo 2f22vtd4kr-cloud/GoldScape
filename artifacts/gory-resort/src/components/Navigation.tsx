@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Menu, X, Sun, Moon, Heart } from 'lucide-react';
-import { useTheme } from '@/contexts/ThemeContext';
+import { Menu, X, Heart } from 'lucide-react';
 import { useFavoriteIds } from '@/lib/favorites';
+import { ChromeThemeToggle } from '@/components/ChromeThemeToggle';
 
 const LINKS = [
   { href: '/', label: 'Главная' },
@@ -15,7 +15,6 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [location] = useLocation();
-  const { theme, toggleTheme } = useTheme();
   const favoriteCount = useFavoriteIds().length;
 
   useEffect(() => {
@@ -98,7 +97,7 @@ export function Navigation() {
       </div>
 
       <div className="flex items-center gap-4">
-        <a href="/about#consult" className="eom-btn-oilslick hidden lg:inline-flex">
+        <a href="/about#consult" className="eom-btn-oilslick chrome-metal-rim hidden lg:inline-flex">
           Консультация
         </a>
         <Link
@@ -113,14 +112,7 @@ export function Navigation() {
             </span>
           )}
         </Link>
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="glass-icon-btn w-9 h-9 rounded-full text-foreground/70 dark:text-white/70"
-          aria-label="Переключить тему"
-        >
-          {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-        </button>
+        <ChromeThemeToggle />
         <button
           type="button"
           className="lg:hidden text-foreground w-12 h-12 -mr-3 flex items-center justify-center"

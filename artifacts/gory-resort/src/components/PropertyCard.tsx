@@ -6,8 +6,9 @@ import type { Listing } from '@/data/listings';
 import { hasAgencyGallery, isListingVerified } from '@/lib/listingIntegrity';
 
 /**
- * Listing card — photo-first, restrained type hierarchy.
- * Price → place → specs → agency. Map stays secondary.
+ * Listing card — cinematic photo-first, liquid-chrome price.
+ * Hierarchy: photo → price (chrome) → place → specs → agency.
+ * Map stays secondary. No generic SaaS card energy.
  */
 export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: number, clientX: number, clientY: number) => void }) {
   return (
@@ -15,31 +16,42 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
       role="link"
       tabIndex={0}
       onClick={(e) => onOpen(item.id, e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2)}
-      onKeyDown={(e) => { if (e.key === 'Enter') onOpen(item.id, window.innerWidth / 2, window.innerHeight / 2); }}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') onOpen(item.id, window.innerWidth / 2, window.innerHeight / 2);
+      }}
       className="eom-card flex flex-col group cursor-pointer overflow-hidden"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900">
+      {/* ── Photo stage ─────────────────────────────────────────── */}
+      <div className="relative aspect-[4/3] overflow-hidden bg-neutral-950">
         <img
           src={item.image}
           alt={`${item.type} · ${item.city}, ${item.district}`}
           loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20" />
+        {/* Cinematic vignette — heavier bottom for price legibility */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.25) 38%, transparent 58%), linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, transparent 28%)',
+          }}
+        />
 
+        {/* Badges + actions */}
         <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2">
           <div className="flex flex-wrap gap-1.5">
-            <span className="rounded-full bg-black/45 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] text-white/90 uppercase">
+            <span className="rounded-full bg-black/50 backdrop-blur-md border border-white/12 px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] text-white/90 uppercase">
               {item.country}
             </span>
             {isListingVerified(item) && (
-              <span className="rounded-full bg-emerald-950/55 backdrop-blur-md border border-emerald-400/25 px-2.5 py-1 text-[10px] font-medium tracking-[0.08em] text-emerald-200/95 uppercase inline-flex items-center gap-1">
+              <span className="rounded-full bg-emerald-950/60 backdrop-blur-md border border-emerald-400/25 px-2.5 py-1 text-[10px] font-medium tracking-[0.08em] text-emerald-200/95 uppercase inline-flex items-center gap-1">
                 <ShieldCheck className="w-3 h-3" />
                 {hasAgencyGallery(item) ? 'Фото' : 'OK'}
               </span>
             )}
             {item.exclusive && (
-              <span className="rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] text-white/90 uppercase">
+              <span className="rounded-full bg-white/12 backdrop-blur-md border border-white/22 px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] text-white/92 uppercase">
                 Exclusive
               </span>
             )}
@@ -50,30 +62,36 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
           </div>
         </div>
 
-        <div className="absolute bottom-3 left-3 right-3">
-          <div className="text-white text-[1.65rem] md:text-[1.75rem] font-semibold tracking-tight leading-none drop-shadow-sm">
+        {/* Price — chrome-adjacent high-contrast display */}
+        <div className="absolute bottom-3.5 left-3.5 right-3.5">
+          <div className="eom-card-price text-[1.7rem] md:text-[1.85rem] font-semibold tracking-tight leading-none">
             {item.price}
           </div>
-          <div className="mt-1 text-[11px] text-white/70 font-medium">
-            {item.pricePerSqm}
-            {item.crypto ? <span className="ml-2 text-amber-200/80">USDT</span> : null}
+          <div className="mt-1.5 flex items-center gap-2 text-[11px] text-white/65 font-medium tracking-wide">
+            <span>{item.pricePerSqm}</span>
+            {item.crypto ? (
+              <span className="rounded-sm bg-amber-400/15 border border-amber-300/25 px-1.5 py-0.5 text-[10px] text-amber-100/90 tracking-[0.08em] uppercase">
+                USDT
+              </span>
+            ) : null}
           </div>
         </div>
       </div>
 
-      <div className="p-4 md:p-5 flex flex-col flex-1 gap-3">
+      {/* ── Body ────────────────────────────────────────────────── */}
+      <div className="p-4 md:p-5 flex flex-col flex-1 gap-3.5">
         <div>
-          <div className="text-[15px] font-medium dark:text-white/90 text-foreground leading-snug">
+          <div className="text-[15px] font-medium dark:text-white/92 text-foreground leading-snug">
             {item.city}
-            <span className="mx-1.5 text-foreground/30">·</span>
-            <span className="dark:text-white/55 text-foreground/60 font-normal">{item.district}</span>
+            <span className="mx-1.5 text-foreground/25 dark:text-white/25">·</span>
+            <span className="dark:text-white/50 text-foreground/55 font-normal">{item.district}</span>
           </div>
-          <div className="mt-1 text-[12px] dark:text-white/40 text-foreground/45 tracking-[0.04em]">
+          <div className="mt-1 text-[11px] uppercase tracking-[0.12em] dark:text-white/35 text-foreground/40">
             {item.type}
           </div>
         </div>
 
-        <div className="flex items-center gap-3 text-[12px] dark:text-white/65 text-foreground/70">
+        <div className="flex items-center gap-3 text-[12px] dark:text-white/60 text-foreground/65">
           <span>{item.beds === 'Studio' ? 'Студия' : `${item.beds} спальни`}</span>
           <span className="opacity-25">·</span>
           <span>{item.baths} с/у</span>
@@ -81,15 +99,18 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
           <span>{item.area} м²</span>
         </div>
 
-        <div className="rounded-xl overflow-hidden border dark:border-white/8 border-black/6" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="rounded-xl overflow-hidden border dark:border-white/[0.07] border-black/[0.06]"
+          onClick={(e) => e.stopPropagation()}
+        >
           <PropertyLocationMap
             {...item.locationMap}
             onPinClick={() => onOpen(item.id, window.innerWidth / 2, window.innerHeight * 0.4)}
           />
         </div>
 
-        <div className="mt-auto pt-1 flex items-center justify-between gap-3">
-          <div className="min-w-0 text-[11px] dark:text-white/40 text-foreground/45 truncate">
+        <div className="mt-auto pt-0.5 flex items-center justify-between gap-3">
+          <div className="min-w-0 text-[11px] dark:text-white/38 text-foreground/42 truncate">
             {item.agencyUrl ? (
               <a
                 href={item.agencyUrl}
@@ -105,12 +126,12 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
               item.agency
             )}
             {hasAgencyGallery(item) && (
-              <span className="ml-2 dark:text-white/30 text-foreground/35">
+              <span className="ml-2 dark:text-white/28 text-foreground/32">
                 · {item.agencyPhotos!.length} фото
               </span>
             )}
           </div>
-          <span className="shrink-0 inline-flex items-center gap-1 text-[11px] font-medium dark:text-white/55 text-foreground/55 group-hover:dark:text-white group-hover:text-foreground transition-colors">
+          <span className="shrink-0 inline-flex items-center gap-1 text-[11px] font-medium tracking-[0.04em] dark:text-white/55 text-foreground/55 group-hover:dark:text-white group-hover:text-foreground transition-colors">
             Смотреть
             <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </span>
