@@ -230,3 +230,23 @@ node scripts/serve-and-screenshot.mjs
 ```
 
 Save captures under `chats/screenshots-YYYY-MM-DD/`.
+
+---
+
+## Provider reality (API keys)
+
+| Provider | Env var | Notes |
+|----------|---------|--------|
+| **Gemini image** | `GEMINI_API_KEY` | Free keys work **only** in AI Studio web UI. Programmatic calls need **billing** (free tier image quota is often `limit: 0`). |
+| **OpenAI** | `OPENAI_API_KEY` | `dall-e-3` / `gpt-image-1` — reliable paid path for photoreal architecture. |
+| **Hugging Face** | `HF_TOKEN` | Inference Providers (e.g. FLUX.1-schnell). Free tier may exist with account token. |
+
+Multi-provider CLI:
+
+```bash
+python scripts/regen/image_providers.py --list
+python scripts/regen/image_providers.py --provider auto \
+  --prompt "..." --out chats/screenshots-2026-08-11/test.jpg
+```
+
+Regen scenes still use DNA prompts; swap backend via env without changing DNA.
