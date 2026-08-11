@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useSearch, useLocation } from 'wouter';
-import { MessageCircle, Send, Check } from 'lucide-react';
+import { MessageCircle, Send } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import { PropertyCard } from '@/components/PropertyCard';
+import { ChromeSwitch } from '@/components/ChromeSwitch';
 import { LISTINGS } from '@/data/listings';
 import { setDetailOrigin } from '@/lib/propertyOrigin';
 
@@ -71,7 +72,7 @@ export default function Properties() {
           <div className="text-[11px] tracking-[0.12em] uppercase dark:text-white/35 text-foreground/40 font-space-grotesk">
             Каталог
           </div>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-[3.25rem] font-medium dark:text-white text-foreground leading-[1.15] tracking-tight">
+          <h1 className="font-display text-4xl md:text-5xl lg:text-[3.25rem] font-medium chrome-text leading-[1.15] tracking-tight">
             Объекты за рубежом
           </h1>
           <p className="dark:text-white/45 text-foreground/55 font-space-grotesk text-sm md:text-[15px] max-w-xl">
@@ -83,7 +84,7 @@ export default function Properties() {
       </header>
 
       {/* FILTER BAR */}
-      <div className="sticky top-20 z-40 dark:bg-[#080808]/90 bg-white/90 backdrop-blur-xl dark:border-b dark:border-white/10 border-b border-black/10 py-4 px-4 md:px-12 lg:px-24">
+      <div className="sticky top-20 z-40 liquid-glass border-b dark:border-white/10 border-black/10 py-4 px-4 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:flex md:flex-wrap gap-3 items-center">
           <select
             className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer"
@@ -138,39 +139,28 @@ export default function Properties() {
             <option value="3+">3+ спальни</option>
           </select>
 
-          {/* Viktor (crypto-first buyer): needs to filter down to USDT-accepting sellers
-              without reading every card's badge one by one. */}
-          <button
-            type="button"
-            aria-pressed={cryptoOnly}
-            onClick={() => setCryptoOnly(v => !v)}
-            className={`w-full md:w-auto min-h-[48px] px-4 py-2.5 rounded-lg text-xs font-oxanium uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer ${
-              cryptoOnly
-                ? 'bg-[#8b5e1a]/20 border border-[#8b5e1a]/60 text-[#c99a4a]'
-                : 'glass-filter-select dark:text-gray-300 text-foreground/60'
-            }`}
-          >
-            <span className={`w-3.5 h-3.5 rounded-sm border flex items-center justify-center ${cryptoOnly ? 'bg-[#8b5e1a] border-[#8b5e1a]' : 'border-current opacity-60'}`}>
-              {cryptoOnly && <Check className="w-2.5 h-2.5 text-black" />}
+          {/* Brand metal toggles — chrome material, not glass checkboxes */}
+          <label className="w-full md:w-auto min-h-[48px] px-3 py-2 rounded-lg glass-filter-select flex items-center justify-between md:justify-start gap-3 cursor-pointer">
+            <span className="text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60">
+              Только USDT
             </span>
-            Только USDT
-          </button>
+            <ChromeSwitch
+              checked={cryptoOnly}
+              onCheckedChange={setCryptoOnly}
+              aria-label="Показать только объекты с оплатой USDT"
+            />
+          </label>
 
-          <button
-            type="button"
-            aria-pressed={residencyOnly}
-            onClick={() => setResidencyOnly(v => !v)}
-            className={`w-full md:w-auto min-h-[48px] px-4 py-2.5 rounded-lg text-xs font-oxanium uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer ${
-              residencyOnly
-                ? 'bg-emerald-500/15 border border-emerald-500/50 text-emerald-600 dark:text-emerald-400'
-                : 'glass-filter-select dark:text-gray-300 text-foreground/60'
-            }`}
-          >
-            <span className={`w-3.5 h-3.5 rounded-sm border flex items-center justify-center ${residencyOnly ? 'bg-emerald-600 border-emerald-600' : 'border-current opacity-60'}`}>
-              {residencyOnly && <Check className="w-2.5 h-2.5 text-white" />}
+          <label className="w-full md:w-auto min-h-[48px] px-3 py-2 rounded-lg glass-filter-select flex items-center justify-between md:justify-start gap-3 cursor-pointer">
+            <span className="text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60">
+              ВНЖ / резидентство
             </span>
-            ВНЖ / резидентство
-          </button>
+            <ChromeSwitch
+              checked={residencyOnly}
+              onCheckedChange={setResidencyOnly}
+              aria-label="Показать объекты с путём к ВНЖ или резидентству"
+            />
+          </label>
 
           {(countryFilter || typeFilter || priceFilter || bedFilter || cryptoOnly || residencyOnly) && (
             <button
