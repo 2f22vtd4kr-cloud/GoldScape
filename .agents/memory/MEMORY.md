@@ -1,3 +1,4 @@
+- [Scene generation HARD BAN — terrain only](scene-generation-terrain-only-ban.md) — ONLY 3D isometric terrain maps; never exterior/section/floorplan/life/bizarre AI renders (2026-08-11)
 - [AI Simulator backend (OpenAI)](openai-simulator.md) — insufficient_quota is permanent (check err.code, not message text); manual-persona fallback when no LLM billing available
 - [Cinematic Noir graduation decisions](noir-graduation.md) — palette, type, and content choices made when graduating the Canvas mockup to the live site
 - [Translation fixes applied](translation-fixes.md) — 6 Russian translation issues patched in LanguageContext.tsx

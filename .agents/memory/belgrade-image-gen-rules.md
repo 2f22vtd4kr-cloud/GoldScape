@@ -1,23 +1,26 @@
 ---
 name: Belgrade property image generation rules
-description: Style rules and naming conventions for AI-generated property scene images (established from Belgrade property feedback)
+description: Style rules for AI-generated images. HARD BAN on exterior/section/life/bizarre — only 3D isometric terrain maps.
 ---
 
-## Style rules (what to generate)
-- **Master reference style**: 3D isometric renders — clean architectural visualization
-- **No text**: never include any text, labels, or annotations baked into generated images
-- **No hand-drawn style**: avoid illustration/sketch aesthetic
-- **No realistic human life scenarios**: no people in scenes (e.g. a man working at a computer desk, lifestyle photography)
+## HARD PRODUCT RULE (2026-08-11)
 
-## Carousel naming conventions (consistent across ALL properties)
-- **Slot 0** (isometric location/site map): label = "Птичий полёт", sublabel = "Вид с высоты"
-- **Exterior image**: label = "Экстерьер"
-- **Section/cut**: label = "Разрез"
-- **Floor plan**: single floor → label = "Планировка"; multiple floors → specify e.g. "Планировка · эт. 3"
-- Do NOT call different scene types all generic "architecture" — each needs its own specific label
+**ONLY 3D isometric terrain / site maps** («Птичий полёт»).
 
-## UI: no pulsating dot
-- The accent-colored pulsating dot in the lower-right of CrossfadeStage has been permanently removed from PropertyScenesCarousel.tsx
+**DO NOT generate:** exterior, section (Разрез), floorplan AI art, life_*, bizarre.
 
-**Why:** User explicitly corrected generated images that used wrong styles; these rules prevent rework.
-**How to apply:** Before generating any new scene images, check these rules. Before adding any new scene type, ensure its label is specific and consistent across all properties.
+See `scene-generation-terrain-only-ban.md`.
+
+## Style rules (terrain maps only)
+- **Master reference style**: 3D isometric terrain blocks — clean architectural / geo visualization, white or transparent studio ground after process-maps
+- **No text**: never include text, labels, or annotations baked into images
+- **No hand-drawn style**
+- **No people**
+
+## Carousel
+- Slot 0 only in product UI: label = **Птичий полёт**, sublabel = 3D карта местности
+- Source: `listing.locationMap.image` (processed terrain PNG)
+- `ACTIVE_SCENE_TYPES` is empty — archived scene types are not shown
+
+## UI
+- Pulsating accent dot permanently removed from PropertyScenesCarousel

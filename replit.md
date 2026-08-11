@@ -75,7 +75,7 @@ PERSONAS.md             # Visitor persona definitions for copy/design review
 
 ### Property display
 - **`PropertyCard.tsx`** — listing card with image, price, tags, favorite/compare buttons, glow-on-hover
-- **`PropertyScenesCarousel.tsx`** — multi-scene image carousel with filmstrip, crossfade, category pill filter (architecture / life / bizarre), keyboard navigation. The pulsating accent dot has been **permanently removed**.
+- **`PropertyScenesCarousel.tsx`** — carousel shows **only** the 3D terrain bird-view («Птичий полёт»). AI exterior/section/life/bizarre renders are product-banned. Pulsating accent dot permanently removed.
 - **`PropertyLocationMap.tsx`** — isometric site map with animated pin, drive-time distances
 
 ### UI / chrome
@@ -110,11 +110,10 @@ PERSONAS.md             # Visitor persona definitions for copy/design review
 
 Each `Listing` has: `id`, `country` (ISO 2-letter), `city`, `district`, `type`, `price`, `pricePerSqm`, `beds`, `baths`, `area`, `image`, `agency`, `agencyUrl`, `exclusive`, `tags`, `crypto`, `locationMap`, `description`, `neighborhood`, `legalFit`, `yieldEstimate`, `riskNote`.
 
-### `scenes.ts` — `PROPERTY_SCENES: Record<number, PropertyScene[]>`
+### `scenes.ts` — terrain-only product surface
 
-Maps listing IDs to ordered scene arrays. Scene 0 is always the isometric site map (injected by `getScenesForListing()`). Scenes are categorized as `architecture` | `life` | `bizarre`.
-
-Each `PropertyScene`: `id`, `type` (exterior / section / floorplan / life_* / bizarre / site), `category`, `label` (Russian), `sublabel`, `image` (public path).
+`getScenesForListing()` returns **only** the isometric site/terrain map (`type: 'site'`, «Птичий полёт»).
+`ACTIVE_SCENE_TYPES` is empty — archived `PROPERTY_SCENES` entries (exterior/section/life/bizarre) are **not shown** and must not be regenerated.
 
 ### `countries.ts` — `COUNTRIES: CountryData[]`
 
@@ -124,85 +123,46 @@ Each `PropertyScene`: `id`, `type` (exterior / section / floorplan / life_* / bi
 
 ---
 
-## Image generation — DNA system
+## Image generation — HARD PRODUCT RULE (2026-08-11)
 
-All property scene images are generated using the **DNA system** defined in `src/data/property-dna.ts`. **Never bypass this.** Full playbook: `docs/IMAGE_GENERATION.md`.
+> **ONLY 3D isometric terrain / bird-view map tiles are allowed as generated scene art.**
+> Do **NOT** generate, regenerate, or ship: exterior CGI, section cutaways (Разрез), floorplans (Планировка), life_* lifestyle scenes, or bizarre scenes.
+> Those AI property renders are banned — they look inconsistent and do not represent the real listings.
 
-### The core rule
-Write the scene-specific description only (what's happening, what objects are added for this scene). **Never describe the building, materials, or landmark in the scene prompt** — `buildPrompt()` prepends those from the DNA anchor, identically, every time.
+### What is allowed
+| Asset | Purpose | Location |
+|-------|---------|----------|
+| **3D isometric terrain / site map** (`listing-map-*.png`, transparent bg) | «Птичий полёт» bird-view for each listing | `attached_assets/generated_images/` → wired as `locationMap.image` |
+| **Country terrain map** (`terrain-map-*-nobg.png`) | Country page iso tile | same |
+| **Real agency photos** | Card/detail photography | `agencyPhotos` on the listing — never invent photos |
 
-```typescript
-import { buildPrompt } from '@/data/property-dna';
-const prompt = buildPrompt(listingId, sceneType, sceneDesc);
-// sceneDesc = only what is happening / what objects are added
-```
+### What is banned (do not generate)
+- `exterior`, `section`, `floorplan`, `life_*`, `bizarre` AI renders
+- Any “dolls-house” cutaway, monofin living-room, American Psycho set dressing, tiger-in-shower, etc.
+- Photoreal “agency exterior” CGI that is not a real agency photo
 
-### DNA anchor fields (required per property)
-| Field | What it pins | Why precision matters |
-|-------|-------------|----------------------|
-| `building` | Facade material, era, colour, roof, window type, balcony rail | "white modern" → AI invents a new building every time |
-| `site` | What surrounds the building at ground level | Missing → AI invents its own context |
-| `landmark` | The ONE distinctive thing always visible through main windows | Must be specific enough to render the same thing every run |
-| `interior` | Floor material, wall finish, ceiling height, frame colour | Missing → every interior scene gets a different floor |
-| `palette` | 5–7 specific colour names | Generic "white, blue" → different gamut each run |
+### Runtime behaviour
+`getScenesForListing()` injects **only** the site terrain map (`type: 'site'`, label **Птичий полёт**).
+`ACTIVE_SCENE_TYPES` is an **empty Set** — the `PROPERTY_SCENES` catalog may still exist on disk for archive, but **nothing from it is shown** until a future explicit product decision re-enables specific types.
 
-### Nika review checklist (all 7 must pass before keeping an image)
-- [ ] Landmark correct and recognisable?
-- [ ] Floor material matches DNA?
-- [ ] Wall finish matches DNA?
-- [ ] No void background?
-- [ ] No text/numbers baked in?
-- [ ] Building style matches exterior (not a different property)?
-- [ ] Render quality: photorealistic, ultra-high detail, no sketch artifacts?
+### DNA system (`property-dna.ts`)
+DNA anchors remain useful for **terrain-map** prompts (building massing, coast, city context) and for future work **if** product ever re-enables a scene type. Do **not** use DNA to mass-generate banned scene types.
 
-### Scene types and camera conventions
-| Scene type | Camera / framing |
-|------------|-----------------|
-| `exterior` | Street or water level, 25–35° elevation, two facade planes visible |
-| `section` | 45° isometric dolls-house cutaway, roof and front wall removed, all floors stacked |
-| `floorplan` | 65° top-down isometric, roof only removed, site context at building edges |
-| `life_*` | Interior or terrace shot showing correct floor + walls + landmark through glass |
-| `bizarre` | 45° isometric room cutaway, same camera as section, landmark visible through window |
-
-### Scene naming conventions (consistent across ALL properties)
-
-| Slot | Scene type | Russian label |
-|------|------------|---------------|
-| 0 | Site/location map (isometric) | **Птичий полёт** |
-| 1 | Exterior view | Экстерьер |
-| 2 | Cross-section cut | Разрез |
-| 3 | Floor plan | **Планировка** (single floor) / **Планировка · эт. N** (multi-floor) |
-| 4+ | Life/bizarre scenes | Specific descriptive label — never the generic word "Архитектура" |
-
-Never call multiple different scene types by the same label.
-
-### Current scene status (July 2026)
-All 4 properties have complete 5-scene carousel sets generated with the full DNA system:
-
-| Property | Exterior | Section | Floorplan | Life scene | Bizarre |
-|----------|----------|---------|-----------|-----------|---------|
-| p12 Belgrade Savski Venac | ✓ | ✓ | ✓ | `life_remote_work` — Kalemegdan in window | ✓ Ocean's Eleven heist planning |
-| p18 Dobrota Kotor Bay | ✓ | ✓ | ✓ | `life_bbq` — terrace at blue hour | ✓ Balkan catch, fishing boat in living room |
-| p19 Sveti Stefan | ✓ | ✓ | ✓ | `life_remote_work` — Sveti Stefan island filling glass door | ✓ Bengal tiger in limestone shower |
-| p20 Belgrade Waterfront | ✓ | ✓ | ✓ | `life_matchday` — Champions League, Sava + Kalemegdan at blue hour | ✓ Tesla coil in corner living room |
-
-**What each set pins as persistent:**
-- **p12**: honey herringbone parquet, white lime plaster + egg-and-dart cornice, tall panelled oak doors, Kalemegdan ramparts visible through sash windows
-- **p18**: pale cream travertine tile, white plaster, anthracite aluminium frames, Gospa od Škrpjela island + Perast across the bay
-- **p19**: honey herringbone parquet, rough-cut limestone stone accent wall, dark bronze aluminium frames, exposed dark oak beam, Sveti Stefan island filling the west glass opening
-- **p20**: light natural oak wide-plank floor, Calacatta marble kitchen island, champagne-steel curtain wall, Sava river (west) + Kalemegdan ramparts (north) simultaneously visible
-
----
+### Adding a listing image set
+1. Verify real listing + `agencyUrl`.
+2. Prefer real `agencyPhotos` from the agency page for the card/detail gallery.
+3. Generate **one** 1024×1024 **isometric terrain / site map** (white studio bg → `pnpm process-maps` → `*-nobg.png`).
+4. Wire as `locationMap.image`. That is the only generated scene.
 
 ## Adding a new real listing
 
 1. Verify the listing exists on the agency's website and save its exact URL as `agencyUrl`.
 2. Add the entry to `LISTINGS` in `artifacts/gory-resort/src/data/listings.ts`.
-3. Generate an isometric location map (1024×1024 PNG) and run `pnpm process-maps` to strip the white background → saves `*-nobg.png` in `attached_assets/generated_images/`.
-4. Import the map and wire it as `locationMap.image` in the listing.
-5. Add a scene set to `PROPERTY_SCENES` in `scenes.ts` following the DNA comment convention (architecture, materials, palette, distinctive features — used as the generation prompt base).
-6. Generate all scene images using `generateImage()` following the image generation rules above. Minimum scenes: exterior, section, floorplan + at least one life scene + one bizarre.
-7. Add a cover image to `artifacts/gory-resort/public/images/prop-<slug>.jpg`.
+3. Pull real photos into `agencyPhotos` when possible (card + detail gallery).
+4. Generate **only** an isometric terrain / site map (1024×1024 PNG) and run `pnpm process-maps` → `*-nobg.png` in `attached_assets/generated_images/`.
+5. Import the map and wire it as `locationMap.image`.
+6. Optional cover: `artifacts/gory-resort/public/images/prop-<slug>.jpg` from a real agency photo — not AI exterior CGI.
+7. Do **not** add exterior / section / floorplan / life / bizarre AI scenes. `ACTIVE_SCENE_TYPES` stays empty.
 
 ## Adding a new country
 
