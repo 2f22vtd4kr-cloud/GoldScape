@@ -65,29 +65,16 @@ export default function Properties() {
 
   return (
     <Layout>
-      {/* PAGE HEADER */}
-      <header className="relative pt-32 pb-12 px-6 md:px-12 lg:px-24 overflow-hidden dark:border-b dark:border-white/5 border-b border-black/5">
-        <img
-          src="/chrome/spike-chrome.png"
-          alt=""
-          className="absolute top-8 right-[12%] w-[120px] opacity-10 md:opacity-70 animate-float drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] pointer-events-none -z-10 md:z-0"
-        />
-        <img
-          src="/chrome/blob-iridescent-1.png"
-          alt=""
-          className="absolute top-0 -right-8 w-[300px] opacity-15 md:opacity-35 mix-blend-screen pointer-events-none -z-10 md:z-0"
-        />
-
-        <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-4">
-          <div className="text-xs text-gray-500 font-space-grotesk flex items-center min-h-[48px] md:min-h-0">
-            <span className="dark:hover:text-white hover:text-foreground cursor-pointer transition-colors">Главная</span>
-            <span className="mx-2">/</span>
-            <span className="dark:text-gray-300 text-foreground/75">Объекты</span>
+      {/* PAGE HEADER — restrained, photo-catalogue style */}
+      <header className="relative pt-28 md:pt-32 pb-8 md:pb-10 px-6 md:px-12 lg:px-24 dark:border-b dark:border-white/[0.06] border-b border-black/5">
+        <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-3">
+          <div className="text-[11px] tracking-[0.12em] uppercase dark:text-white/35 text-foreground/40 font-space-grotesk">
+            Каталог
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-oxanium font-bold chrome-text leading-tight tracking-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] font-semibold dark:text-white text-foreground leading-[1.15] tracking-tight">
             Объекты за рубежом
           </h1>
-          <p className="dark:text-gray-400 text-foreground/60 font-space-grotesk text-base md:text-lg">
+          <p className="dark:text-white/45 text-foreground/55 font-space-grotesk text-sm md:text-[15px] max-w-xl">
             {filteredListings.length === LISTINGS.length
               ? `${LISTINGS.length} объектов · ${new Set(LISTINGS.map(l => l.country)).size} стран · от ${minPriceLabel}`
               : `${filteredListings.length} ${filteredListings.length === 1 ? 'объект' : filteredListings.length < 5 ? 'объекта' : 'объектов'} по фильтру`}

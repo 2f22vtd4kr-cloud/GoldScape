@@ -1,4 +1,4 @@
-import { ArrowRight, ShieldCheck, ExternalLink, Camera } from 'lucide-react';
+import { ArrowUpRight, ShieldCheck, ExternalLink } from 'lucide-react';
 import { PropertyLocationMap } from '@/components/PropertyLocationMap';
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { CompareButton } from '@/components/CompareButton';
@@ -6,9 +6,8 @@ import type { Listing } from '@/data/listings';
 import { hasAgencyGallery, isListingVerified } from '@/lib/listingIntegrity';
 
 /**
- * Shared listing card — used by the full catalogue (Properties.tsx) and the
- * saved-listings page (Favorites.tsx) so the two stay visually identical.
- * Nika's hierarchy: Price -> Location -> Type -> Specs.
+ * Listing card — photo-first, restrained type hierarchy.
+ * Price → place → specs → agency. Map stays secondary.
  */
 export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: number, clientX: number, clientY: number) => void }) {
   return (
@@ -17,136 +16,104 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
       tabIndex={0}
       onClick={(e) => onOpen(item.id, e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2)}
       onKeyDown={(e) => { if (e.key === 'Enter') onOpen(item.id, window.innerWidth / 2, window.innerHeight / 2); }}
-      className="eom-card flex flex-col group cursor-pointer overflow-hidden rounded-xl transition-all duration-300"
+      className="eom-card flex flex-col group cursor-pointer overflow-hidden"
     >
-      {/* Photo container — bg-[#111] is intentional placeholder behind <img> */}
-      <div className="relative aspect-[3/2] overflow-hidden bg-[#111]">
+      <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900">
         <img
           src={item.image}
           alt={`${item.type} · ${item.city}, ${item.district}`}
           loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
-        {/* Photo legibility scrim — intentionally dark in both themes */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20" />
 
-        {/* Photo badges — intentionally dark in both themes for legibility */}
-        <div className={`absolute top-4 left-4 right-4 flex flex-wrap gap-2 ${item.exclusive ? 'pr-24' : ''}`}>
-          <div className="bg-[#080808]/80 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 text-[10px] font-oxanium flex items-center gap-1.5 shadow-lg">
-            <span className="text-gray-200 tracking-wider uppercase">{item.country}</span>
-          </div>
-          {item.tags?.map(tag => (
-            <div key={tag} className="bg-[#141414]/90 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 text-[10px] font-space-grotesk text-white/80 shadow-lg whitespace-nowrap">
-              {tag}
-            </div>
-          ))}
-        </div>
-
-        {item.exclusive && (
-          <div className="absolute top-4 right-4">
-            {/* Exclusive badge sits over photo — intentionally dark in both themes */}
-            <div className="bg-black/60 backdrop-blur-md border border-white/20 rounded px-2 py-1 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-              <span className="iridescent-text text-[9px] font-oxanium font-bold uppercase tracking-[0.2em]">
-                ЭКСКЛЮЗИВ
+        <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2">
+          <div className="flex flex-wrap gap-1.5">
+            <span className="rounded-full bg-black/45 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] text-white/90 uppercase">
+              {item.country}
+            </span>
+            {isListingVerified(item) && (
+              <span className="rounded-full bg-emerald-950/55 backdrop-blur-md border border-emerald-400/25 px-2.5 py-1 text-[10px] font-medium tracking-[0.08em] text-emerald-200/95 uppercase inline-flex items-center gap-1">
+                <ShieldCheck className="w-3 h-3" />
+                {hasAgencyGallery(item) ? 'Фото' : 'OK'}
               </span>
-            </div>
-          </div>
-        )}
-
-        <CompareButton id={item.id} className="absolute bottom-3 left-3" />
-        <FavoriteButton id={item.id} className="absolute bottom-3 right-3" />
-      </div>
-
-      <div className="p-5 flex flex-col flex-1 relative">
-        {/* Decorative background glow on hover */}
-        <div className="absolute inset-0 dark:bg-gradient-to-br dark:from-white/[0.03] dark:to-transparent bg-gradient-to-br from-black/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-        <div className="mb-4 flex flex-col gap-1 relative z-10">
-          <div className="text-2xl font-oxanium font-bold chrome-text tracking-tight">{item.price}</div>
-          <div className="flex items-center gap-2 text-[11px] font-space-grotesk dark:text-gray-500 text-foreground/50">
-            <span>{item.pricePerSqm}</span>
-            {item.crypto && (
-              <>
-                <span className="opacity-30">|</span>
-                <span className="text-[#8b5e1a]/80 font-medium flex items-center gap-1">USDT</span>
-              </>
+            )}
+            {item.exclusive && (
+              <span className="rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] text-white/90 uppercase">
+                Exclusive
+              </span>
             )}
           </div>
+          <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+            <CompareButton id={item.id} />
+            <FavoriteButton id={item.id} />
+          </div>
         </div>
 
-        <div className="flex flex-col gap-1 mb-5 relative z-10">
-          <div className="text-sm font-space-grotesk dark:text-gray-200 text-foreground/75 font-medium">
-            {item.city} <span className="mx-1 opacity-40">·</span> <span className="dark:text-gray-400 text-foreground/60">{item.district}</span>
+        <div className="absolute bottom-3 left-3 right-3">
+          <div className="text-white text-[1.65rem] md:text-[1.75rem] font-semibold tracking-tight leading-none drop-shadow-sm">
+            {item.price}
           </div>
-          <div className="text-[10px] font-oxanium uppercase tracking-[0.2em] dark:text-gray-500 text-foreground/50 font-medium">
+          <div className="mt-1 text-[11px] text-white/70 font-medium">
+            {item.pricePerSqm}
+            {item.crypto ? <span className="ml-2 text-amber-200/80">USDT</span> : null}
+          </div>
+        </div>
+      </div>
+
+      <div className="p-4 md:p-5 flex flex-col flex-1 gap-3">
+        <div>
+          <div className="text-[15px] font-medium dark:text-white/90 text-foreground leading-snug">
+            {item.city}
+            <span className="mx-1.5 text-foreground/30">·</span>
+            <span className="dark:text-white/55 text-foreground/60 font-normal">{item.district}</span>
+          </div>
+          <div className="mt-1 text-[12px] dark:text-white/40 text-foreground/45 tracking-[0.04em]">
             {item.type}
           </div>
         </div>
 
-        <div className="flex gap-5 mb-5 pt-4 dark:border-t dark:border-white/5 border-t border-black/5 text-[13px] font-space-grotesk dark:text-gray-300 text-foreground/75 relative z-10">
-          <div className="flex items-center gap-1.5" title="Спальни">
-            <span className="dark:text-gray-500 text-foreground/50 text-[11px] uppercase tracking-wider">Beds</span> {item.beds}
-          </div>
-          <div className="flex items-center gap-1.5" title="Ванные">
-            <span className="dark:text-gray-500 text-foreground/50 text-[11px] uppercase tracking-wider">Baths</span> {item.baths}
-          </div>
-          <div className="flex items-center gap-1.5" title="Площадь">
-            <span className="dark:text-gray-500 text-foreground/50 text-[11px] uppercase tracking-wider">Area</span> {item.area}м²
-          </div>
+        <div className="flex items-center gap-3 text-[12px] dark:text-white/65 text-foreground/70">
+          <span>{item.beds === 'Studio' ? 'Студия' : `${item.beds} спальни`}</span>
+          <span className="opacity-25">·</span>
+          <span>{item.baths} с/у</span>
+          <span className="opacity-25">·</span>
+          <span>{item.area} м²</span>
         </div>
 
-        <div className="mb-5 relative z-10" onClick={(e) => e.stopPropagation()}>
+        <div className="rounded-xl overflow-hidden border dark:border-white/8 border-black/6" onClick={(e) => e.stopPropagation()}>
           <PropertyLocationMap
             {...item.locationMap}
             onPinClick={() => onOpen(item.id, window.innerWidth / 2, window.innerHeight * 0.4)}
           />
         </div>
 
-        <div className="mt-auto flex flex-col gap-2 pt-4 dark:border-t dark:border-white/5 border-t border-black/5 relative z-10">
-          <div className="flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2 text-[10px] font-space-grotesk dark:text-gray-500 text-foreground/50 min-w-0">
-              {isListingVerified(item) ? (
-                <ShieldCheck className="w-3 h-3 text-emerald-500/80 shrink-0" />
-              ) : (
-                <ShieldCheck className="w-3 h-3 dark:text-white/30 text-foreground/40 shrink-0" />
-              )}
-              <span className="truncate">
-                {item.agencyUrl ? (
-                  <a
-                    href={item.agencyUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="dark:text-gray-400 text-foreground/60 hover:underline inline-flex items-center gap-1"
-                  >
-                    {item.agency}
-                    <ExternalLink className="w-2.5 h-2.5 opacity-50" />
-                  </a>
-                ) : (
-                  <span className="dark:text-gray-400 text-foreground/60">{item.agency}</span>
-                )}
-              </span>
-            </div>
+        <div className="mt-auto pt-1 flex items-center justify-between gap-3">
+          <div className="min-w-0 text-[11px] dark:text-white/40 text-foreground/45 truncate">
+            {item.agencyUrl ? (
+              <a
+                href={item.agencyUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-1 hover:dark:text-white/70 hover:text-foreground/70 transition-colors"
+              >
+                {item.agency}
+                <ExternalLink className="w-3 h-3 opacity-50" />
+              </a>
+            ) : (
+              item.agency
+            )}
             {hasAgencyGallery(item) && (
-              <span className="text-[9px] font-space-grotesk dark:text-white/40 text-foreground/40 inline-flex items-center gap-1 shrink-0">
-                <Camera className="w-3 h-3" />
-                {item.agencyPhotos!.length}
+              <span className="ml-2 dark:text-white/30 text-foreground/35">
+                · {item.agencyPhotos!.length} фото
               </span>
             )}
           </div>
-          <div className="flex items-center justify-end">
-            <button
-              type="button"
-              className="min-h-[48px] px-4 rounded text-[11px] font-space-grotesk uppercase tracking-wider dark:text-white/70 text-foreground/60 dark:group-hover:text-white group-hover:text-foreground dark:group-hover:bg-white/10 group-hover:bg-black/[0.04] transition-all flex items-center"
-              onClick={(e) => {
-                e.stopPropagation();
-                const rect = (e.currentTarget as HTMLButtonElement).getBoundingClientRect();
-                onOpen(item.id, rect.left + rect.width / 2, rect.top + rect.height / 2);
-              }}
-            >
-              Подробнее <ArrowRight className="w-3 h-3 ml-1.5 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-            </button>
-          </div>
+          <span className="shrink-0 inline-flex items-center gap-1 text-[11px] font-medium dark:text-white/55 text-foreground/55 group-hover:dark:text-white group-hover:text-foreground transition-colors">
+            Смотреть
+            <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </span>
         </div>
       </div>
     </div>

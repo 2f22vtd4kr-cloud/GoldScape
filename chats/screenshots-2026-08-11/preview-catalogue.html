@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EstateOfMind — catalogue preview</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #080808;
+    color: #e8e8e8;
+  }
+  header {
+    padding: 2rem 1.5rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  h1 { font-size: 1.75rem; margin: 0 0 0.35rem; letter-spacing: -0.02em; }
+  .sub { color: #888; font-size: 0.9rem; }
+  .filters {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(8,8,8,0.95);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .chip {
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 0.5rem;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #aaa;
+  }
+  .chip.on {
+    border-color: rgba(16,185,129,0.5);
+    color: #6ee7b7;
+    background: rgba(16,185,129,0.12);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    padding: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+  .photo {
+    position: relative;
+    aspect-ratio: 3/2;
+    background: #1a1a1a;
+  }
+  .photo img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .badge {
+    position: absolute; top: 0.75rem; left: 0.75rem;
+    background: rgba(8,8,8,0.8);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 999px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .badge.ok {
+    left: auto; right: 0.75rem;
+    border-color: rgba(16,185,129,0.35);
+    color: #6ee7b7;
+  }
+  .body { padding: 1rem 1.1rem 1.15rem; }
+  .price { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .meta { color: #999; font-size: 0.8rem; margin-bottom: 0.75rem; }
+  .specs { display: flex; gap: 1rem; font-size: 0.8rem; color: #bbb; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.75rem; margin-bottom: 0.75rem; }
+  .agency { font-size: 0.7rem; color: #777; display: flex; justify-content: space-between; align-items: center; }
+  .agency a { color: #aaa; }
+  .map-wrap { border-radius: 0.5rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); margin-bottom: 0.75rem; }
+  .map-wrap img { width: 100%; display: block; background: #0a0a0a; }
+  footer.note {
+    max-width: 1200px; margin: 0 auto 2rem; padding: 0 1.5rem;
+    color: #666; font-size: 0.75rem; line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Объекты за рубежом</h1>
+    <p class="sub">EstateOfMind · каталог (preview статики · gallery-first sort)</p>
+  </header>
+  <div class="filters">
+    <span class="chip">Страна: Все</span>
+    <span class="chip">Цена: Любая</span>
+    <span class="chip">Только USDT</span>
+    <span class="chip on">ВНЖ / резидентство</span>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="photo">
+        <img src="/images/agency/p19/1.jpg" alt="Sveti Stefan"/>
+        <span class="badge">ME</span>
+        <span class="badge ok">Проверено · фото</span>
+      </div>
+      <div class="body">
+        <div class="price">€174,900</div>
+        <div class="meta">Свети-Стефан · 1 спальня · 62 м²</div>
+        <div class="map-wrap"><img src="/images/prop-sveti-stefan.jpg" alt="map context" style="max-height:120px;object-fit:cover"/></div>
+        <div class="specs"><span>Beds 1</span><span>Baths 1</span><span>Area 62м²</span></div>
+        <div class="agency"><span>Monteonline · 8 фото</span><a href="#">Источник ↗</a></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="photo">
+        <img src="/images/agency/p18/1.jpg" alt="Dobrota"/>
+        <span class="badge">ME</span>
+        <span class="badge ok">Проверено · фото</span>
+      </div>
+      <div class="body">
+        <div class="price">€943,800</div>
+        <div class="meta">Доброта · Котор · Sotheby's</div>
+        <div class="map-wrap"><img src="/images/prop-kotor.jpg" alt="kotor" style="max-height:120px;object-fit:cover"/></div>
+        <div class="specs"><span>Beds 3</span><span>Baths 3</span><span>Area 180м²</span></div>
+        <div class="agency"><span>Sotheby's · 10 фото</span><a href="#">Источник ↗</a></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="photo">
+        <img src="/images/agency/p12/6.webp" alt="BW Simfonija"/>
+        <span class="badge">RS</span>
+        <span class="badge ok">Проверено · фото</span>
+      </div>
+      <div class="body">
+        <div class="price">€370,000</div>
+        <div class="meta">Белград · BW Simfonija · Estitor</div>
+        <div class="map-wrap"><img src="/images/prop-belgrade-waterfront.jpg" alt="bg" style="max-height:120px;object-fit:cover"/></div>
+        <div class="specs"><span>Beds 2</span><span>Baths 2</span><span>Area 95м²</span></div>
+        <div class="agency"><span>Estitor · 7 фото</span><a href="#">Источник ↗</a></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="photo">
+        <img src="/images/agency/p20/1.jpg" alt="BW"/>
+        <span class="badge">RS</span>
+        <span class="badge ok">Проверено · фото</span>
+      </div>
+      <div class="body">
+        <div class="price">€370,000</div>
+        <div class="meta">Belgrade Waterfront · Atrium</div>
+        <div class="specs"><span>Beds 2</span><span>Baths 2</span><span>Area 95м²</span></div>
+        <div class="agency"><span>Atrium · 1 фото</span><a href="#">Источник ↗</a></div>
+      </div>
+    </article>
+  </div>
+  <p class="footer note">
+    Статический preview реальных agency/public ассетов. Полный React (Vite) в этой среде не поднялся: pnpm catalog: + symlink restrictions.
+    На main: gallery-first sort, verified badge, residency filter, terrain-only scenes, agency empty-state CTA.
+  </p>
+</body>
+</html>
