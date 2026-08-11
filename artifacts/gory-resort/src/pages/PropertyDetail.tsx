@@ -14,6 +14,7 @@ import { LISTINGS, listingById } from '@/data/listings';
 import { countryByListingCode } from '@/data/countries';
 import { consumeDetailOrigin } from '@/lib/propertyOrigin';
 import { getScenesForListing } from '@/data/scenes';
+import { isListingVerified, hasAgencyGallery } from '@/lib/listingIntegrity';
 
 /**
  * Full "fly into the building" entrance: reused from the old PropertyImmersion
@@ -141,6 +142,12 @@ export default function PropertyDetail() {
                 <div className="bg-[#080808]/80 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 text-[10px] font-oxanium flex items-center gap-1.5 shadow-lg">
                   <span className="text-gray-200 tracking-wider uppercase">{listing.country}</span>
                 </div>
+                {isListingVerified(listing) && (
+                  <div className="bg-emerald-950/80 backdrop-blur-md border border-emerald-500/30 rounded-full px-3 py-1 text-[10px] font-oxanium flex items-center gap-1.5 shadow-lg text-emerald-300/90 uppercase tracking-wider">
+                    <ShieldCheck className="w-3 h-3" />
+                    {hasAgencyGallery(listing) ? 'Проверено · фото' : 'Проверено'}
+                  </div>
+                )}
                 {listing.tags.map(tag => (
                   <div key={tag} className="bg-[#141414]/90 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 text-[10px] font-space-grotesk text-white/80 shadow-lg whitespace-nowrap">
                     {tag}

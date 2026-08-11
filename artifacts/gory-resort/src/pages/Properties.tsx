@@ -43,8 +43,13 @@ export default function Properties() {
       if (priceFilter === '2mplus'    && n < 2_000_000)                        return false;
     }
     return true;
-  // Always sort by price ascending so entry-level listings appear first
-  }).sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
+  // Prefer real agency galleries first, then price ascending
+  }).sort((a, b) => {
+    const ap = (a.agencyPhotos?.length ?? 0) > 0 ? 0 : 1;
+    const bp = (b.agencyPhotos?.length ?? 0) > 0 ? 0 : 1;
+    if (ap !== bp) return ap - bp;
+    return parsePrice(a.price) - parsePrice(b.price);
+  });
 
   // Compute the cheapest listing's price for the subtitle (dynamic, never stale)
   const cheapestListing = LISTINGS.reduce((min, l) =>
