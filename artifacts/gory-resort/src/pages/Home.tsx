@@ -332,7 +332,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-space-grotesk text-[#b090f0] text-[10px] mb-1 font-medium">{dest.perk}</p>
-                    <p className="font-oxanium text-white text-sm tracking-wide">{dest.price}</p>
+                    <p className="font-oxanium text-sm tracking-wide eom-card-price !text-base leading-none">{dest.price}</p>
                   </div>
                 </div>
               </Link>
@@ -396,32 +396,61 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-stagger>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6" data-stagger>
             {FEATURED_PROPERTIES.map((prop, i) => (
-              <Link key={i} href={prop.id ? `/properties/${prop.id}` : '/properties'} className="group relative dark:bg-[#111] bg-white border dark:border-white/5 border-black/[0.06] rounded-2xl overflow-hidden dark:hover:border-white/20 hover:border-black/15 transition-colors flex flex-col min-h-[48px]" data-reveal="up">
-                <div className="aspect-[3/2] overflow-hidden relative bg-black">
-                  <img src={prop.image} alt={prop.type} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-                  <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 font-space-grotesk text-[10px] text-white uppercase tracking-widest">
-                    {prop.location}
+              <Link
+                key={i}
+                href={prop.id ? `/properties/${prop.id}` : '/properties'}
+                className="eom-card group relative flex flex-col overflow-hidden min-h-[48px]"
+                data-reveal="up"
+              >
+                {/* Cinematic photo stage — matches PropertyCard hierarchy */}
+                <div className="relative aspect-[4/3] overflow-hidden bg-neutral-950">
+                  <img
+                    src={prop.image}
+                    alt={`${prop.type} · ${prop.location}`}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background:
+                        'linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.28) 40%, transparent 58%), linear-gradient(to bottom, rgba(0,0,0,0.30) 0%, transparent 26%)',
+                    }}
+                  />
+                  <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2">
+                    <span className="rounded-full bg-black/50 backdrop-blur-md border border-white/12 px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] text-white/90 uppercase">
+                      {prop.location}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-3 left-3 right-3">
+                    <div className="eom-card-price text-[1.65rem] md:text-[1.8rem] font-semibold tracking-tight leading-none">
+                      {prop.price}
+                    </div>
                   </div>
                 </div>
-                <div className="p-5 flex flex-col flex-grow">
-                  <div className="mb-4">
-                    <h3 className="font-oxanium text-xl dark:text-white text-foreground tracking-tight mb-1">{prop.price}</h3>
-                    <p className="font-space-grotesk text-xs dark:text-white/50 text-foreground/55">{prop.type} · {prop.district}</p>
+                <div className="p-4 md:p-5 flex flex-col flex-1 gap-3">
+                  <div>
+                    <div className="text-[15px] font-medium dark:text-white/92 text-foreground leading-snug">
+                      {prop.district}
+                    </div>
+                    <div className="mt-1 text-[11px] uppercase tracking-[0.12em] dark:text-white/35 text-foreground/40">
+                      {prop.type}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-4 border-t dark:border-white/5 border-black/[0.06] pt-4 mt-auto">
-                    <div className="flex items-center gap-1.5">
-                      <Bed className="w-4 h-4 dark:text-white/40 text-foreground/40" />
-                      <span className="font-space-grotesk text-xs dark:text-white/70 text-foreground/70">{prop.beds}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Bath className="w-4 h-4 dark:text-white/40 text-foreground/40" />
-                      <span className="font-space-grotesk text-xs dark:text-white/70 text-foreground/70">{prop.baths}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 ml-auto">
-                      <span className="font-space-grotesk text-xs dark:text-white/40 text-foreground/45">{prop.area}</span>
-                    </div>
+                  <div className="mt-auto flex items-center gap-3 text-[12px] dark:text-white/60 text-foreground/65 pt-1 border-t dark:border-white/[0.06] border-black/[0.06]">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Bed className="w-3.5 h-3.5 opacity-50" />
+                      {prop.beds}
+                    </span>
+                    <span className="opacity-25">·</span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Bath className="w-3.5 h-3.5 opacity-50" />
+                      {prop.baths}
+                    </span>
+                    <span className="opacity-25">·</span>
+                    <span className="ml-auto dark:text-white/45 text-foreground/50">{prop.area}</span>
                   </div>
                 </div>
               </Link>
@@ -637,7 +666,7 @@ export default function Home() {
       {/* ─── TESTIMONIALS ────────────────────────────────────────────────── */}
       <section className="py-24 dark:bg-[#050505] bg-white relative border-t dark:border-white/5 border-black/5">
         <div className="container mx-auto px-6 mb-12" data-reveal="up">
-          <h2 className="font-oxanium text-3xl md:text-[32px] dark:text-white text-foreground mb-2 section-reveal-heading tracking-tight">
+          <h2 className="font-oxanium text-3xl md:text-[32px] chrome-text mb-2 section-reveal-heading tracking-tight">
             Опыт клиентов
           </h2>
           <p className="font-space-grotesk text-sm dark:text-white/40 text-foreground/50">Реальные кейсы инвестиций и переездов</p>
@@ -645,7 +674,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {TESTIMONIALS.map((t, i) => (
-              <div key={i} className="dark:bg-white/5 bg-black/[0.025] border dark:border-white/10 border-black/[0.07] rounded-2xl p-8 flex flex-col justify-between dark:hover:border-white/20 hover:border-black/15 transition-colors">
+              <div key={i} className="liquid-glass-tinted liquid-glass-interactive rounded-2xl p-8 flex flex-col justify-between border dark:border-white/10 border-black/[0.07]">
                 <div>
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-12 h-12 rounded-full dark:bg-white/10 bg-black/[0.06] flex items-center justify-center font-oxanium dark:text-white/70 text-foreground/70 tracking-tight shrink-0">
