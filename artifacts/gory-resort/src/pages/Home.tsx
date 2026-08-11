@@ -674,7 +674,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {TESTIMONIALS.map((t, i) => (
-              <div key={i} className="liquid-glass-tinted liquid-glass-interactive rounded-2xl p-8 flex flex-col justify-between border dark:border-white/10 border-black/[0.07]">
+              <div key={i} className="testimonial-card liquid-glass-tinted liquid-glass-interactive rounded-2xl p-8 flex flex-col justify-between border dark:border-white/10 border-black/[0.07]">
                 <div>
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-12 h-12 rounded-full dark:bg-white/10 bg-black/[0.06] flex items-center justify-center font-oxanium dark:text-white/70 text-foreground/70 tracking-tight shrink-0">
