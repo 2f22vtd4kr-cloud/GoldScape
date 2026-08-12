@@ -3,7 +3,7 @@ import { PropertyLocationMap } from '@/components/PropertyLocationMap';
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { CompareButton } from '@/components/CompareButton';
 import type { Listing } from '@/data/listings';
-import { hasAgencyGallery, isListingVerified } from '@/lib/listingIntegrity';
+import { hasAgencyGallery, isListingVerified, listingCoverImage } from '@/lib/listingIntegrity';
 
 /**
  * Listing card — cinematic photo-first, liquid-chrome price.
@@ -21,15 +21,13 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
       }}
       className="eom-card flex flex-col group cursor-pointer overflow-hidden"
     >
-      {/* ── Photo stage ─────────────────────────────────────────── */}
       <div className="relative aspect-[4/3] overflow-hidden bg-neutral-950">
         <img
-          src={item.image}
-          alt={`${item.type} · ${item.city}, ${item.district}`}
+          src={listingCoverImage(item)}
+          alt={`${item.type} \u00b7 ${item.city}, ${item.district}`}
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
-        {/* Cinematic vignette — heavier bottom for price legibility */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -38,79 +36,72 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
           }}
         />
 
-        {/* Badges + actions */}
         <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2">
           <div className="flex flex-wrap gap-1.5">
             <span className="rounded-full bg-black/50 backdrop-blur-md border border-white/12 px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] text-white/90 uppercase">
               {item.country}
             </span>
             {isListingVerified(item) && (
-              <span className="rounded-full bg-emerald-950/60 backdrop-blur-md border border-emerald-400/25 px-2.5 py-1 text-[10px] font-medium tracking-[0.08em] text-emerald-200/95 uppercase inline-flex items-center gap-1">
+              <span className="rounded-full bg-emerald-950/60 backdrop-blur-md border border-emerald-400/25 px-2.5 py-1 text-[10px] font-medium tracking-[0.08em] text-emerald-200/90 uppercase inline-flex items-center gap-1">
                 <ShieldCheck className="w-3 h-3" />
-                {hasAgencyGallery(item) ? 'Фото' : 'OK'}
+                Verified
               </span>
             )}
             {item.exclusive && (
-              <span className="rounded-full bg-white/12 backdrop-blur-md border border-white/22 px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] text-white/92 uppercase">
+              <span className="rounded-full bg-[#8b5e1a]/35 backdrop-blur-md border border-[#c9a227]/30 px-2.5 py-1 text-[10px] font-medium tracking-[0.08em] text-[#f0d78c] uppercase">
                 Exclusive
+              </span>
+            )}
+            {item.crypto && (
+              <span className="rounded-full bg-black/50 backdrop-blur-md border border-white/12 px-2.5 py-1 text-[10px] font-medium tracking-[0.08em] text-white/80 uppercase">
+                USDT
               </span>
             )}
           </div>
           <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
-            <CompareButton id={item.id} />
             <FavoriteButton id={item.id} />
+            <CompareButton id={item.id} />
           </div>
         </div>
 
-        {/* Price — chrome-adjacent high-contrast display */}
-        <div className="absolute bottom-3.5 left-3.5 right-3.5">
-          <div className="eom-card-price text-[1.7rem] md:text-[1.85rem] font-semibold tracking-tight leading-none">
-            {item.price}
+        <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-3">
+          <div className="min-w-0">
+            <div className="chrome-text font-oxanium text-xl md:text-2xl font-semibold tracking-tight leading-none">
+              {item.price}
+            </div>
+            {item.pricePerSqm && (
+              <div className="mt-1 text-[11px] tracking-wide text-white/55 font-space-grotesk">
+                {item.pricePerSqm}
+              </div>
+            )}
           </div>
-          <div className="mt-1.5 flex items-center gap-2 text-[11px] text-white/65 font-medium tracking-wide">
-            <span>{item.pricePerSqm}</span>
-            {item.crypto ? (
-              <span className="rounded-sm bg-amber-400/15 border border-amber-300/25 px-1.5 py-0.5 text-[10px] text-amber-100/90 tracking-[0.08em] uppercase">
-                USDT
-              </span>
-            ) : null}
-          </div>
+          {item.locationMap?.image && (
+            <div className="w-16 h-16 shrink-0 opacity-90" onClick={(e) => e.stopPropagation()}>
+              <PropertyLocationMap image={item.locationMap.image} accent={item.locationMap.accent} compact />
+            </div>
+          )}
         </div>
       </div>
 
-      {/* ── Body ────────────────────────────────────────────────── */}
-      <div className="p-4 md:p-5 flex flex-col flex-1 gap-3.5">
+      <div className="flex flex-col gap-3 p-4 md:p-5 flex-1">
         <div>
-          <div className="text-[15px] font-medium dark:text-white/92 text-foreground leading-snug">
+          <div className="text-[11px] uppercase tracking-[0.14em] dark:text-white/40 text-foreground/45 font-space-grotesk mb-1">
             {item.city}
-            <span className="mx-1.5 text-foreground/25 dark:text-white/25">·</span>
-            <span className="dark:text-white/50 text-foreground/55 font-normal">{item.district}</span>
+            {item.district ? ` \u00b7 ${item.district}` : ''}
           </div>
-          <div className="mt-1 text-[11px] uppercase tracking-[0.12em] dark:text-white/35 text-foreground/40">
+          <h3 className="font-oxanium text-base md:text-lg font-medium dark:text-white text-foreground tracking-tight leading-snug">
             {item.type}
-          </div>
+          </h3>
         </div>
 
-        <div className="flex items-center gap-3 text-[12px] dark:text-white/60 text-foreground/65">
-          <span>{item.beds === 'Studio' ? 'Студия' : `${item.beds} спальни`}</span>
-          <span className="opacity-25">·</span>
-          <span>{item.baths} с/у</span>
-          <span className="opacity-25">·</span>
-          <span>{item.area} м²</span>
+        <div className="flex flex-wrap gap-x-4 gap-y-1 text-[12px] dark:text-white/50 text-foreground/55 font-space-grotesk">
+          {item.beds != null && <span>{item.beds === 'Studio' ? 'Studio' : `${item.beds} сп.`}</span>}
+          {item.baths != null && <span>{item.baths} с/у</span>}
+          {item.area != null && <span>{item.area} м²</span>}
         </div>
 
-        <div
-          className="rounded-xl overflow-hidden border dark:border-white/[0.07] border-black/[0.06]"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <PropertyLocationMap
-            {...item.locationMap}
-            onPinClick={() => onOpen(item.id, window.innerWidth / 2, window.innerHeight * 0.4)}
-          />
-        </div>
-
-        <div className="mt-auto pt-0.5 flex items-center justify-between gap-3">
-          <div className="min-w-0 text-[11px] dark:text-white/38 text-foreground/42 truncate">
+        <div className="mt-auto pt-3 flex items-center justify-between gap-3 border-t dark:border-white/8 border-black/5">
+          <div className="text-[11px] dark:text-white/40 text-foreground/45 font-space-grotesk min-w-0 truncate">
             {item.agencyUrl ? (
               <a
                 href={item.agencyUrl}
@@ -127,7 +118,7 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
             )}
             {hasAgencyGallery(item) && (
               <span className="ml-2 dark:text-white/28 text-foreground/32">
-                · {item.agencyPhotos!.length} фото
+                \u00b7 {item.agencyPhotos!.length} фото
               </span>
             )}
           </div>
