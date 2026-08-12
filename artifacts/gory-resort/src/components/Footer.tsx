@@ -23,22 +23,22 @@ export function Footer() {
             <h4 className="font-oxanium text-foreground mb-6 uppercase tracking-wider text-sm">Направления</h4>
             <ul className="flex flex-col gap-4 font-space-grotesk text-sm text-foreground/50 dark:text-white/40">
               <li>
-                <Link href="/properties" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
+                <Link href="/properties?country=AE" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   ОАЭ (Дубай)
                 </Link>
               </li>
               <li>
-                <Link href="/properties" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
+                <Link href="/properties?country=TR" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Турция (Стамбул)
                 </Link>
               </li>
               <li>
-                <Link href="/properties" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
+                <Link href="/properties?country=CY" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Кипр (Лимасол)
                 </Link>
               </li>
               <li>
-                <Link href="/properties" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
+                <Link href="/properties?country=GE" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Грузия (Батуми)
                 </Link>
               </li>
