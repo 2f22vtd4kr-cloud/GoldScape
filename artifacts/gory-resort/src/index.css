@@ -952,7 +952,9 @@ html:not(.dark) .chrome-text {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 1rem 1.25rem;
+  padding: max(0.75rem, env(safe-area-inset-top, 0px)) 1.25rem 0.75rem;
+  padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2196,3 +2198,92 @@ html:not(.dark) .liquid-glass-tinted {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Mobile responsive patterns (EstateOfMind)
+   - Safe areas (notch / home indicator)
+   - Opaque sticky chrome (no content bleed-through)
+   - ≥44px touch targets
+   - No horizontal scroll
+   - Room for fixed WA float + compare bar
+   ═══════════════════════════════════════════════════════════════ */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
+
+/* Main clears fixed nav; extra bottom for WA float */
+main {
+  padding-top: calc(4.25rem + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 768px) {
+  main {
+    padding-top: calc(5rem + env(safe-area-inset-top, 0px));
+    padding-bottom: 2rem;
+  }
+}
+
+/* Sticky catalogue filters — solid, respect safe areas */
+.eom-filter-sticky {
+  background: #0c0c0e !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  top: calc(4.25rem + env(safe-area-inset-top, 0px));
+  padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1rem, env(safe-area-inset-right, 0px));
+}
+html:not(.dark) .eom-filter-sticky {
+  background: #f7f6f3 !important;
+}
+@media (min-width: 768px) {
+  .eom-filter-sticky {
+    top: calc(5rem + env(safe-area-inset-top, 0px));
+  }
+}
+
+/* Touch targets */
+@media (max-width: 767px) {
+  button,
+  a.glass-icon-btn,
+  .glass-filter-select,
+  [role="link"] {
+    min-height: 44px;
+  }
+  .glass-filter-select {
+    font-size: 12px;
+  }
+  /* Cards: full-bleed-ish rhythm on small screens */
+  .eom-card {
+    border-radius: 14px;
+  }
+  /* Prevent double-tap zoom delay on primary CTAs */
+  a[href*="wa.me"],
+  button[type="submit"] {
+    touch-action: manipulation;
+  }
+}
+
+/* WhatsApp float — home indicator clearance */
+.eom-wa-float {
+  right: max(1.25rem, env(safe-area-inset-right, 0px));
+  bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+}
+.eom-wa-float.is-shifted {
+  bottom: max(6rem, calc(5.5rem + env(safe-area-inset-bottom, 0px)));
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .eom-card img,
+  .eom-card:active {
+    transition: none !important;
+    transform: none !important;
+  }
+}

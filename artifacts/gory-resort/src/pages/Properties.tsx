@@ -86,7 +86,7 @@ export default function Properties() {
         </div>
       </header>
 
-      <div className="sticky top-[4.5rem] md:top-20 z-40 border-b dark:border-white/10 border-black/10 dark:bg-[#0c0c0e] bg-[#f7f6f3] px-4 md:px-12 lg:px-24 py-2.5 md:py-4">
+      <div className="eom-filter-sticky sticky z-40 border-b dark:border-white/10 border-black/10 px-4 md:px-12 lg:px-24 py-2.5 md:py-4">
         {/* Mobile: compact bar — opaque so cards don't bleed through */}
         <div className="md:hidden max-w-7xl mx-auto flex items-center gap-2">
           <button

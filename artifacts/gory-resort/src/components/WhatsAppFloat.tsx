@@ -17,12 +17,12 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noreferrer"
       aria-label="Написать в WhatsApp"
-      className={`fixed right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center
-                 hover:scale-105 active:scale-95 transition-all duration-200 ${hasCompareBar ? 'bottom-24' : 'bottom-6'}`}
+      className={`eom-wa-float fixed z-50 w-14 h-14 rounded-full flex items-center justify-center
+                 hover:scale-105 active:scale-95 transition-all duration-200 touch-manipulation ${hasCompareBar ? 'is-shifted' : ''}`}
       style={{
         background: 'radial-gradient(ellipse at 50% 18%, rgba(80,240,140,0.50) 0%, rgba(37,211,102,0.82) 55%, rgba(18,160,70,0.90) 100%)',
-        backdropFilter: 'blur(18px) saturate(190%)',
-        WebkitBackdropFilter: 'blur(18px) saturate(190%)',
+        
+        
         border: '1px solid rgba(255,255,255,0.26)',
         borderBottomColor: 'rgba(255,255,255,0.07)',
         boxShadow: [
