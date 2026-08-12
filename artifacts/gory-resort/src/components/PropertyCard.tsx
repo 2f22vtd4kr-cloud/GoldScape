@@ -21,6 +21,7 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
       }}
       className="eom-card flex flex-col group cursor-pointer overflow-hidden"
     >
+      {/* ── Photo stage ─────────────────────────────────────────── */}
       <div className="relative aspect-[4/3] overflow-hidden bg-neutral-950">
         <img
           src={listingCoverImage(item)}
@@ -28,6 +29,7 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
+        {/* Cinematic vignette — heavier bottom for price legibility */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -36,6 +38,7 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
           }}
         />
 
+        {/* Badges + actions */}
         <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2">
           <div className="flex flex-wrap gap-1.5">
             <span className="rounded-full bg-black/50 backdrop-blur-md border border-white/12 px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] text-white/90 uppercase">
@@ -75,11 +78,6 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
               </div>
             )}
           </div>
-          {item.locationMap?.image && (
-            <div className="w-16 h-16 shrink-0 opacity-90" onClick={(e) => e.stopPropagation()}>
-              <PropertyLocationMap image={item.locationMap.image} accent={item.locationMap.accent} compact />
-            </div>
-          )}
         </div>
       </div>
 
@@ -95,10 +93,20 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
         </div>
 
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-[12px] dark:text-white/50 text-foreground/55 font-space-grotesk">
-          {item.beds != null && <span>{item.beds === 'Studio' ? 'Studio' : `${item.beds} сп.`}</span>}
-          {item.baths != null && <span>{item.baths} с/у</span>}
-          {item.area != null && <span>{item.area} м²</span>}
+          {item.beds != null && (
+            <span>{item.beds === 'Studio' ? 'Studio' : `${item.beds} \u0441\u043f.`}</span>
+          )}
+          {item.baths != null && <span>{item.baths} \u0441/\u0443</span>}
+          {item.area != null && <span>{item.area} \u043c\u00b2</span>}
         </div>
+
+        {item.locationMap && (
+          <div className="rounded-xl overflow-hidden dark:border dark:border-white/8 border border-black/5" onClick={(e) => e.stopPropagation()}>
+            <PropertyLocationMap
+              {...item.locationMap}
+            />
+          </div>
+        )}
 
         <div className="mt-auto pt-3 flex items-center justify-between gap-3 border-t dark:border-white/8 border-black/5">
           <div className="text-[11px] dark:text-white/40 text-foreground/45 font-space-grotesk min-w-0 truncate">
@@ -118,12 +126,12 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
             )}
             {hasAgencyGallery(item) && (
               <span className="ml-2 dark:text-white/28 text-foreground/32">
-                \u00b7 {item.agencyPhotos!.length} фото
+                \u00b7 {item.agencyPhotos!.length} \u0444\u043e\u0442\u043e
               </span>
             )}
           </div>
           <span className="shrink-0 inline-flex items-center gap-1 text-[11px] font-medium tracking-[0.04em] dark:text-white/55 text-foreground/55 group-hover:dark:text-white group-hover:text-foreground transition-colors">
-            Смотреть
+            \u0421\u043c\u043e\u0442\u0440\u0435\u0442\u044c
             <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </span>
         </div>
