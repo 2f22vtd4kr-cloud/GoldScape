@@ -8,7 +8,7 @@ function CountryPageContent({ data }: { data: CountryData }) {
   return (
     <Layout>
       {/* ─── HERO ──────────────────────────────────────────────────────────── */}
-      <section className="relative pt-28 md:pt-36 pb-12 md:pb-24 overflow-x-hidden dark:border-b dark:border-white/5 border-b border-black/5">
+      <section className="relative pt-6 md:pt-12 pb-12 md:pb-24 overflow-x-hidden dark:border-b dark:border-white/5 border-b border-black/5">
         {/* Deep, expensive dark background, not generic black. */}
         <div className="absolute inset-0 dark:bg-[#020202] bg-white pointer-events-none" />
         {/* Subtle, desaturated iridescent wash. Not crypto neon. */}
@@ -267,7 +267,7 @@ export default function CountryPage() {
   if (!data) {
     return (
       <Layout>
-        <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 dark:bg-[#020202] bg-white">
+        <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-16 dark:bg-[#020202] bg-white">
           <h1 className="font-oxanium text-4xl dark:text-white text-foreground mb-4 tracking-tight">Страна не найдена</h1>
           <p className="font-space-grotesk dark:text-white/40 text-foreground/50 mb-8">
             Направление «{code}» не найдено в каталоге.

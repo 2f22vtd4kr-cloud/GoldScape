@@ -2182,11 +2182,37 @@ html:not(.dark) .liquid-glass-tinted {
    Sticky filter bar already uses liquid-glass-neutral on small screens.
    Cap large blurred surfaces; prefer transform/opacity animation only. */
 @media (max-width: 767px) {
+  /* Mobile policy: NO backdrop-filter on chrome — solid fills only.
+     Blur under sticky filters caused photo bleed-through / ghosting. */
   .liquid-glass,
+  .liquid-glass-neutral,
   .liquid-glass-tinted,
-  .liquid-glass-iridescent {
-    backdrop-filter: blur(12px) saturate(160%);
-    -webkit-backdrop-filter: blur(12px) saturate(160%);
+  .liquid-glass-iridescent,
+  .glass-icon-btn,
+  .glass-filter-select,
+  .eom-nav {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .liquid-glass,
+  .liquid-glass-neutral {
+    background: rgba(14, 14, 16, 0.96) !important;
+  }
+  html:not(.dark) .liquid-glass,
+  html:not(.dark) .liquid-glass-neutral {
+    background: rgba(250, 249, 246, 0.96) !important;
+  }
+  .liquid-glass-tinted {
+    background: rgba(20, 18, 26, 0.96) !important;
+  }
+  html:not(.dark) .liquid-glass-tinted {
+    background: rgba(248, 246, 252, 0.96) !important;
+  }
+  .eom-nav {
+    background: rgba(12, 12, 14, 0.97) !important;
+  }
+  html:not(.dark) .eom-nav {
+    background: rgba(250, 249, 246, 0.97) !important;
   }
   /* Featured / listing cards: full-width press feedback without scale jank */
   .eom-card:active {
@@ -2285,5 +2311,18 @@ html:not(.dark) .eom-filter-sticky {
   .eom-card:active {
     transition: none !important;
     transform: none !important;
+  }
+}
+
+/* Desktop keeps liquid-glass blur; mobile forced solid above */
+@media (min-width: 768px) {
+  .eom-filter-sticky {
+    /* filters stay opaque even on desktop for consistency */
+    background: #0c0c0e !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  html:not(.dark) .eom-filter-sticky {
+    background: #f7f6f3 !important;
   }
 }

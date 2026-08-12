@@ -117,7 +117,7 @@ export default function About() {
   return (
     <Layout>
       {/* PAGE HEADER */}
-      <section className="relative pt-28 pb-20 px-6 max-w-7xl mx-auto overflow-hidden">
+      <section className="relative pt-6 md:pt-10 pb-20 px-6 max-w-7xl mx-auto overflow-hidden">
         {/* Subtle accent — absolutely-positioned wrapper so it never affects flow */}
         <div style={{ position: 'absolute', top: 0, right: 0, width: '520px', height: '520px', pointerEvents: 'none', zIndex: 0 }}>
           <div className="iridescent-spill w-full h-full" style={{ opacity: 0.22 }} />

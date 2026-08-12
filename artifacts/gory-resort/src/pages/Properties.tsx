@@ -70,7 +70,7 @@ export default function Properties() {
 
   return (
     <Layout>
-      <header className="relative pt-28 md:pt-32 pb-8 md:pb-10 px-6 md:px-12 lg:px-24 dark:border-b dark:border-white/[0.06] border-b border-black/5">
+      <header className="relative pt-6 md:pt-10 pb-8 md:pb-10 px-6 md:px-12 lg:px-24 dark:border-b dark:border-white/[0.06] border-b border-black/5">
         <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-3">
           <div className="text-[11px] tracking-[0.12em] uppercase dark:text-white/35 text-foreground/40 font-space-grotesk">
             Каталог

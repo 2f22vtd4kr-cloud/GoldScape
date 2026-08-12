@@ -77,7 +77,7 @@ export default function PropertyDetail() {
   if (!listing) {
     return (
       <Layout>
-        <div className="min-h-[60vh] flex flex-col items-center justify-center gap-6 px-6 text-center pt-32">
+        <div className="min-h-[60vh] flex flex-col items-center justify-center gap-6 px-6 text-center pt-16">
           <h1 className="font-oxanium text-3xl dark:text-white text-foreground">Объект не найден</h1>
           <p className="text-gray-400 font-space-grotesk max-w-md">
             Возможно, ссылка устарела или объект был снят с продажи.
@@ -110,7 +110,7 @@ export default function PropertyDetail() {
       </AnimatePresence>
 
       {/* ─── HERO ──────────────────────────────────────────────────────── */}
-      <section className="relative pt-28 md:pt-36 pb-8 md:pb-12 overflow-hidden dark:border-b dark:border-white/5 border-b border-black/10">
+      <section className="relative pt-6 md:pt-12 pb-8 md:pb-12 overflow-hidden dark:border-b dark:border-white/5 border-b border-black/10">
         <div className="container mx-auto px-4 md:px-12 lg:px-24">
           <nav className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] md:text-[13px] font-space-grotesk dark:text-white/40 text-foreground/50 mb-6" aria-label="breadcrumb">
             <Link href="/" className="dark:hover:text-white/80 hover:text-foreground/80 transition-colors flex items-center min-h-[48px] md:min-h-0">Главная</Link>

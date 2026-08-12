@@ -23,7 +23,7 @@ export default function Favorites() {
 
   return (
     <Layout>
-      <header className="relative pt-32 pb-12 px-6 md:px-12 lg:px-24 overflow-hidden dark:border-b dark:border-white/5 border-b border-black/5">
+      <header className="relative pt-8 md:pt-12 pb-12 px-6 md:px-12 lg:px-24 overflow-hidden dark:border-b dark:border-white/5 border-b border-black/5">
         <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-4">
           <div className="text-xs text-gray-500 font-space-grotesk flex items-center min-h-[48px] md:min-h-0">
             <Link href="/" className="dark:hover:text-white hover:text-foreground cursor-pointer transition-colors">Главная</Link>

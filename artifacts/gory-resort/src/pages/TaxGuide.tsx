@@ -151,7 +151,7 @@ export default function TaxGuide() {
   return (
     <Layout>
       {/* HERO */}
-      <section className="relative pt-28 md:pt-36 pb-16 overflow-hidden border-b dark:border-white/5 border-black/5 dark:bg-[#020202] bg-white">
+      <section className="relative pt-6 md:pt-12 pb-16 overflow-hidden border-b dark:border-white/5 border-black/5 dark:bg-[#020202] bg-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(35,30,55,0.5)_0%,transparent_70%)] pointer-events-none" />
         <div className="container mx-auto px-6 relative z-10 max-w-5xl">
           <nav className="flex items-center gap-2 text-[12px] font-space-grotesk dark:text-white/30 text-foreground/40 mb-8">
