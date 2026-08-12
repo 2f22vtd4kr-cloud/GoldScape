@@ -3,7 +3,7 @@ import { PropertyLocationMap } from '@/components/PropertyLocationMap';
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { CompareButton } from '@/components/CompareButton';
 import type { Listing } from '@/data/listings';
-import { hasAgencyGallery, isListingVerified, listingCoverImage } from '@/lib/listingIntegrity';
+import { hasAgencyGallery, isListingVerified, listingCoverImage, formatBedsLabel, formatBathsLabel } from '@/lib/listingIntegrity';
 
 /**
  * Listing card — cinematic photo-first, liquid-chrome price.
@@ -87,9 +87,9 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
         </div>
 
         <div className="flex items-center gap-3 text-[12px] dark:text-white/60 text-foreground/65">
-          <span>{item.beds === 'Studio' ? 'Студия' : `${item.beds} спальни`}</span>
+          <span>{formatBedsLabel(item.beds)}</span>
           <span className="opacity-25">·</span>
-          <span>{item.baths} с/у</span>
+          <span>{formatBathsLabel(item.baths)}</span>
           <span className="opacity-25">·</span>
           <span>{item.area} м²</span>
         </div>
@@ -108,7 +108,9 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
           <div className="min-w-0 text-[11px] dark:text-white/38 text-foreground/42 truncate">
 {hasAgencyGallery(item)
               ? `Проверено · ${item.agencyPhotos!.length} фото`
-              : 'Проверенный объект'}
+              : isListingVerified(item)
+                ? 'Проверено'
+                : 'В каталоге'}
           </div>
           <span className="shrink-0 inline-flex items-center gap-1 text-[11px] font-medium tracking-[0.04em] dark:text-white/55 text-foreground/55 group-hover:dark:text-white group-hover:text-foreground transition-colors">
             Смотреть

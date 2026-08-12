@@ -14,7 +14,7 @@ import { LISTINGS, listingById } from '@/data/listings';
 import { countryByListingCode } from '@/data/countries';
 import { consumeDetailOrigin } from '@/lib/propertyOrigin';
 import { getScenesForListing } from '@/data/scenes';
-import { isListingVerified, hasAgencyGallery } from '@/lib/listingIntegrity';
+import { isListingVerified, hasAgencyGallery, formatBedsLabel, formatBathsLabel } from '@/lib/listingIntegrity';
 
 /**
  * Full "fly into the building" entrance: reused from the old PropertyImmersion
@@ -145,7 +145,7 @@ export default function PropertyDetail() {
                 {isListingVerified(listing) && (
                   <div className="bg-emerald-950/80 backdrop-blur-md border border-emerald-500/30 rounded-full px-3 py-1 text-[10px] font-oxanium flex items-center gap-1.5 shadow-lg text-emerald-300/90 uppercase tracking-wider">
                     <ShieldCheck className="w-3 h-3" />
-                    {hasAgencyGallery(listing) ? 'Проверено · фото' : 'Проверено'}
+                    {hasAgencyGallery(listing) ? 'Проверено · фото' : isListingVerified(listing) ? 'Проверено' : 'В каталоге'}
                   </div>
                 )}
                 {listing.tags.map(tag => (
@@ -177,9 +177,9 @@ export default function PropertyDetail() {
                   <div className="flex flex-wrap gap-x-4 gap-y-1 text-white/70 text-sm font-space-grotesk">
                     <span>{listing.type}</span>
                     <span className="opacity-30">·</span>
-                    <span>{listing.beds === 'Studio' ? 'Студия' : `${listing.beds} спальни`}</span>
+                    <span>{formatBedsLabel(listing.beds)}</span>
                     <span className="opacity-30">·</span>
-                    <span>{listing.baths} санузла</span>
+                    <span>{formatBathsLabel(listing.baths)}</span>
                     <span className="opacity-30">·</span>
                     <span>{listing.area} м²</span>
                     <span className="opacity-30">·</span>
@@ -211,9 +211,9 @@ export default function PropertyDetail() {
                 <div className="flex flex-wrap gap-x-3 gap-y-1 dark:text-white/70 text-foreground/70 text-sm font-space-grotesk">
                   <span>{listing.type}</span>
                   <span className="opacity-30">·</span>
-                  <span>{listing.beds === 'Studio' ? 'Студия' : `${listing.beds} спальни`}</span>
+                  <span>{formatBedsLabel(listing.beds)}</span>
                   <span className="opacity-30">·</span>
-                  <span>{listing.baths} санузла</span>
+                  <span>{formatBathsLabel(listing.baths)}</span>
                   <span className="opacity-30">·</span>
                   <span>{listing.area} м²</span>
                 </div>

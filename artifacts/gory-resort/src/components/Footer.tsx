@@ -22,6 +22,16 @@ export function Footer() {
           <div>
             <h4 className="font-oxanium text-foreground mb-6 uppercase tracking-wider text-sm">Направления</h4>
             <ul className="flex flex-col gap-4 font-space-grotesk text-sm text-foreground/50 dark:text-white/40">
+                            <li>
+                <Link href="/properties?country=RS" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
+                  Сербия (Белград)
+                </Link>
+              </li>
+              <li>
+                <Link href="/properties?country=ME" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
+                  Черногория (Котор)
+                </Link>
+              </li>
               <li>
                 <Link href="/properties?country=AE" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   ОАЭ (Дубай)
@@ -40,6 +50,16 @@ export function Footer() {
               <li>
                 <Link href="/properties?country=GE" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
                   Грузия (Батуми)
+                </Link>
+              </li>
+              <li>
+                <Link href="/properties?country=TH" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
+                  Таиланд
+                </Link>
+              </li>
+              <li>
+                <Link href="/properties?country=PT" className="hover:text-foreground dark:hover:text-white transition-colors py-1 flex items-center min-h-[40px]">
+                  Португалия
                 </Link>
               </li>
             </ul>

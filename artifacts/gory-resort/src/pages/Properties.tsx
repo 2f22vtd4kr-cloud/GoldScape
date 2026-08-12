@@ -114,10 +114,10 @@ export default function Properties() {
             onChange={e => setPriceFilter(e.target.value)}
           >
             <option value="">Цена: Любая</option>
-            <option value="under100">до $100к</option>
-            <option value="100to500">$100к – $500к</option>
-            <option value="500to2m">$500к – $2М</option>
-            <option value="2mplus">$2М+</option>
+            <option value="under100">до 100к (€/$)</option>
+            <option value="100to500">100к – 500к (€/$)</option>
+            <option value="500to2m">500к – 2М (€/$)</option>
+            <option value="2mplus">2М+ (€/$)</option>
           </select>
 
           <select

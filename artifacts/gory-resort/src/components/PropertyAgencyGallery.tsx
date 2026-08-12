@@ -12,7 +12,7 @@
  */
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Camera, ExternalLink } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Camera } from 'lucide-react';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const SWIPE_THRESHOLD = 40; // px

@@ -15,14 +15,14 @@ export function checkListingIntegrity(listing: Listing): IntegrityIssue[] {
   if (!listing.agencyUrl || !/^https?:\/\//i.test(listing.agencyUrl)) {
     issues.push({
       code: 'missing_agency_url',
-      message: 'Нет рабочей ссылки на страницу агентства',
+      message: 'Нет рабочей ссылки для верификации объекта',
     });
   }
 
   if (!listing.agency || listing.agency.trim().length < 2) {
     issues.push({
       code: 'weak_attribution',
-      message: 'Не указано агентство',
+      message: 'Не указан источник верификации',
     });
   }
 
@@ -30,7 +30,7 @@ export function checkListingIntegrity(listing: Listing): IntegrityIssue[] {
   if (photos.length === 0) {
     issues.push({
       code: 'missing_agency_photos',
-      message: 'Нет фотографий агентства — только обложка',
+      message: 'Нет фото объекта — только обложка-заглушка',
     });
   }
 
@@ -44,12 +44,45 @@ export function checkListingIntegrity(listing: Listing): IntegrityIssue[] {
   return issues;
 }
 
-/** Listing is “verified” when it has agency URL + at least one agency photo + core fields. */
+/** Fully verified: verification URL + core fields + at least one real photo. */
 export function isListingVerified(listing: Listing): boolean {
+  const issues = checkListingIntegrity(listing);
+  return !issues.some((i) =>
+    i.code === 'missing_agency_url' ||
+    i.code === 'missing_fields' ||
+    i.code === 'weak_attribution' ||
+    i.code === 'missing_agency_photos',
+  );
+}
+
+/** Soft catalog presence: URL + core text, photos optional. */
+export function isListingCatalogReady(listing: Listing): boolean {
   const issues = checkListingIntegrity(listing);
   return !issues.some((i) =>
     i.code === 'missing_agency_url' || i.code === 'missing_fields' || i.code === 'weak_attribution',
   );
+}
+
+/** Russian beds label: Студия / 1 спальня / 2 спальни / 5 спален */
+export function formatBedsLabel(beds: number | string): string {
+  if (beds === 'Studio' || beds === 'studio') return 'Студия';
+  const n = typeof beds === 'number' ? beds : parseInt(String(beds), 10);
+  if (!Number.isFinite(n)) return String(beds);
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return `${n} спальня`;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${n} спальни`;
+  return `${n} спален`;
+}
+
+/** Russian baths/санузел label */
+export function formatBathsLabel(baths: number): string {
+  const n = baths;
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return `${n} санузел`;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${n} санузла`;
+  return `${n} санузлов`;
 }
 
 /** Soft badge: has real bureau photos (stronger trust signal). */
