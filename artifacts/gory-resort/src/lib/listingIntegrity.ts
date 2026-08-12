@@ -70,3 +70,13 @@ export function listingResidencyTags(listing: Listing): string[] {
   if (listing.exclusive) out.push('exclusive');
   return out;
 }
+
+/**
+ * Catalogue / card cover: prefer first real agency photo, then listing.image.
+ * Avoids shared dest-*.jpg placeholders when bureau photos exist.
+ */
+export function listingCoverImage(listing: Listing): string {
+  const photo = listing.agencyPhotos?.find((p) => typeof p === 'string' && p.length > 0);
+  if (photo) return photo;
+  return listing.image;
+}
