@@ -1,4 +1,4 @@
-import { ArrowUpRight, ShieldCheck, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { PropertyLocationMap } from '@/components/PropertyLocationMap';
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { CompareButton } from '@/components/CompareButton';
@@ -106,25 +106,9 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
 
         <div className="mt-auto pt-0.5 flex items-center justify-between gap-3">
           <div className="min-w-0 text-[11px] dark:text-white/38 text-foreground/42 truncate">
-            {item.agencyUrl ? (
-              <a
-                href={item.agencyUrl}
-                target="_blank"
-                rel="noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1 hover:dark:text-white/70 hover:text-foreground/70 transition-colors"
-              >
-                {item.agency}
-                <ExternalLink className="w-3 h-3 opacity-50" />
-              </a>
-            ) : (
-              item.agency
-            )}
-            {hasAgencyGallery(item) && (
-              <span className="ml-2 dark:text-white/28 text-foreground/32">
-                · {item.agencyPhotos!.length} фото
-              </span>
-            )}
+{hasAgencyGallery(item)
+              ? `Проверено · ${item.agencyPhotos!.length} фото`
+              : 'Проверенный объект'}
           </div>
           <span className="shrink-0 inline-flex items-center gap-1 text-[11px] font-medium tracking-[0.04em] dark:text-white/55 text-foreground/55 group-hover:dark:text-white group-hover:text-foreground transition-colors">
             Смотреть

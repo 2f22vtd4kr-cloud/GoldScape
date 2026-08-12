@@ -1,7 +1,7 @@
 /**
  * PropertyAgencyGallery
  *
- * Displays real agency photos fetched from the listing's original source.
+ * Displays verified property photos for the listing gallery.
  * Shown above the AI visualisation carousel so buyers see the real property first.
  *
  * Features:
@@ -143,7 +143,7 @@ export function PropertyAgencyGallery({ photos, agency, agencyUrl, accent = 'hsl
             )}
             <img
               src={photos[active]}
-              alt={`${agency} — фото ${active + 1}`}
+              alt={`Фото ${active + 1}`}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ opacity: imgLoaded ? 1 : 0, transition: 'opacity 0.3s' }}
               onLoad={() => setImgLoaded(true)}
@@ -164,20 +164,9 @@ export function PropertyAgencyGallery({ photos, agency, agencyUrl, accent = 'hsl
             </span>
           </div>
 
-          {/* Source link */}
-          {agencyUrl ? (
-            <a
-              href={agencyUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-1 bg-black/65 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1 hover:border-white/30 transition-colors group/link pointer-events-auto min-w-0 flex-shrink"
-            >
-              <span className="text-[10px] font-space-grotesk text-white/50 group-hover/link:text-white/80 transition-colors truncate max-w-[180px]">
-                {agency}
-              </span>
-              <ExternalLink className="w-2.5 h-2.5 text-white/30 group-hover/link:text-white/60 transition-colors flex-shrink-0" />
-            </a>
-          ) : null}
+          <span className="text-[10px] font-oxanium uppercase tracking-[0.12em] text-white/50 bg-black/65 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1 pointer-events-none flex-shrink-0">
+            EstateOfMind
+          </span>
         </div>
 
         {/* Counter */}

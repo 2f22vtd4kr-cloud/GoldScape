@@ -243,13 +243,13 @@ export default function PropertyDetail() {
                 Фотографии объекта
               </h2>
               <span className="text-[11px] font-space-grotesk dark:text-white/30 text-foreground/40 ml-1">
-                — {listing.agencyPhotos.length} фото · {listing.agency}
+                — {listing.agencyPhotos.length} фото
               </span>
             </div>
             <PropertyAgencyGallery
               photos={listing.agencyPhotos}
-              agency={listing.agency}
-              agencyUrl={listing.agencyUrl}
+              agency='EstateOfMind'
+              agencyUrl={undefined}
               accent={accent}
             />
           </div>
@@ -263,19 +263,9 @@ export default function PropertyDetail() {
                   Фотографии на стороне агентства
                 </h2>
                 <p className="font-space-grotesk text-sm dark:text-gray-400 text-foreground/60 leading-relaxed">
-                  Галерея ещё не загружена в EstateOfMind. Актуальные снимки смотрите у партнёра — {listing.agency}.
+                  Галерея фото для этого объекта пока не загружена. Запросите подборку — пришлём актуальные кадры.
                 </p>
               </div>
-              {listing.agencyUrl && (
-                <a
-                  href={listing.agencyUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="eom-btn-primary font-oxanium text-xs uppercase tracking-wider min-h-[48px] px-6 inline-flex items-center justify-center gap-2 shrink-0"
-                >
-                  Открыть у агентства
-                </a>
-              )}
             </div>
           </div>
         </section>
@@ -327,30 +317,9 @@ export default function PropertyDetail() {
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-500/80" />
                 <span>
                   Источник:{' '}
-                  {listing.agencyUrl ? (
-                    <a
-                      href={listing.agencyUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="dark:text-gray-300 text-foreground/70 hover:underline"
-                    >
-                      {listing.agency}
-                    </a>
-                  ) : (
-                    <span className="dark:text-gray-400 text-foreground/60">{listing.agency}</span>
-                  )}
+                  <span className="dark:text-gray-400 text-foreground/60">EstateOfMind</span>
                 </span>
               </div>
-              {listing.agencyUrl && (
-                <a
-                  href={listing.agencyUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-[11px] font-space-grotesk dark:text-white/50 text-foreground/50 hover:underline"
-                >
-                  Открыть объявление агентства →
-                </a>
-              )}
             </div>
           </div>
         </div>
