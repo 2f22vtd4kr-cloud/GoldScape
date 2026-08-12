@@ -32,7 +32,7 @@ export function PropertyCard({ item, onOpen }: { item: Listing; onOpen: (id: num
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.25) 38%, transparent 58%), linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, transparent 28%)',
+              'linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.12) 32%, transparent 52%), linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, transparent 22%)',
           }}
         />
         <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2">

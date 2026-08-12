@@ -16,8 +16,14 @@ export default function Properties() {
   const [bedFilter, setBedFilter]     = useState('');
   const [cryptoOnly, setCryptoOnly]   = useState(false);
   const [residencyOnly, setResidencyOnly] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const parsePrice = (price: string) => parseInt(price.replace(/[^0-9]/g, ''), 10);
+
+  const activeFilterCount = [
+    countryFilter, typeFilter, priceFilter, bedFilter,
+    cryptoOnly ? '1' : '', residencyOnly ? '1' : '',
+  ].filter(Boolean).length;
 
   const filteredListings = LISTINGS.filter(l => {
     if (countryFilter && l.country !== countryFilter) return false;
@@ -80,10 +86,31 @@ export default function Properties() {
         </div>
       </header>
 
-      <div className="sticky top-[4.5rem] md:top-20 z-40 liquid-glass border-b dark:border-white/10 border-black/10 py-3.5 md:py-4 px-4 md:px-12 lg:px-24">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:flex md:flex-wrap gap-3 items-center">
+      <div className="sticky top-[4.5rem] md:top-20 z-40 border-b dark:border-white/10 border-black/10 dark:bg-[#0c0c0e] bg-[#f7f6f3] px-4 md:px-12 lg:px-24 py-2.5 md:py-4">
+        {/* Mobile: compact bar — opaque so cards don't bleed through */}
+        <div className="md:hidden max-w-7xl mx-auto flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setFiltersOpen((v) => !v)}
+            className="flex-1 min-h-[44px] rounded-lg border dark:border-white/15 border-black/10 dark:bg-white/[0.04] bg-black/[0.03] px-4 text-xs font-oxanium uppercase tracking-wider dark:text-white/80 text-foreground/70 flex items-center justify-between touch-manipulation"
+          >
+            <span>Фильтры{activeFilterCount ? ` · ${activeFilterCount}` : ''}</span>
+            <span className="dark:text-white/40 text-foreground/40">{filtersOpen ? '▲' : '▼'}</span>
+          </button>
+          {activeFilterCount > 0 && (
+            <button
+              type="button"
+              onClick={() => { setCountryFilter(''); setTypeFilter(''); setPriceFilter(''); setBedFilter(''); setCryptoOnly(false); setResidencyOnly(false); }}
+              className="min-h-[44px] px-3 rounded-lg text-[10px] font-oxanium uppercase tracking-wider dark:text-white/50 text-foreground/50 border dark:border-white/10 border-black/10 touch-manipulation"
+            >
+              Сброс
+            </button>
+          )}
+        </div>
+        <div className={`${filtersOpen ? 'grid' : 'hidden'} md:!flex max-w-7xl mx-auto grid-cols-2 md:flex-wrap gap-2.5 md:gap-3 items-center pt-2.5 md:pt-0`}>
+
           <select
-            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
+            className="glass-filter-select w-full md:w-auto min-h-[44px] md:min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
             value={countryFilter}
             onChange={e => setCountryFilter(e.target.value)}
           >
@@ -99,7 +126,7 @@ export default function Properties() {
           </select>
 
           <select
-            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
+            className="glass-filter-select w-full md:w-auto min-h-[44px] md:min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
             value={typeFilter}
             onChange={e => setTypeFilter(e.target.value)}
           >
@@ -109,7 +136,7 @@ export default function Properties() {
           </select>
 
           <select
-            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
+            className="glass-filter-select w-full md:w-auto min-h-[44px] md:min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
             value={priceFilter}
             onChange={e => setPriceFilter(e.target.value)}
           >
@@ -121,7 +148,7 @@ export default function Properties() {
           </select>
 
           <select
-            className="glass-filter-select w-full md:w-auto min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
+            className="glass-filter-select w-full md:w-auto min-h-[44px] md:min-h-[48px] rounded-lg px-4 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60 focus:outline-none appearance-none cursor-pointer touch-manipulation"
             value={bedFilter}
             onChange={e => setBedFilter(e.target.value)}
           >
@@ -133,7 +160,7 @@ export default function Properties() {
             <option value="3+">3+ спальни</option>
           </select>
 
-          <label className="w-full md:w-auto min-h-[48px] px-3 py-2.5 rounded-lg glass-filter-select flex items-center justify-between md:justify-start gap-3 cursor-pointer touch-manipulation select-none">
+          <label className="w-full md:w-auto min-h-[44px] md:min-h-[48px] px-3 py-2.5 rounded-lg glass-filter-select flex items-center justify-between md:justify-start gap-3 cursor-pointer touch-manipulation select-none">
             <span className="text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60">
               Только USDT
             </span>
@@ -144,7 +171,7 @@ export default function Properties() {
             />
           </label>
 
-          <label className="w-full md:w-auto min-h-[48px] px-3 py-2.5 rounded-lg glass-filter-select flex items-center justify-between md:justify-start gap-3 cursor-pointer touch-manipulation select-none">
+          <label className="w-full md:w-auto min-h-[44px] md:min-h-[48px] px-3 py-2.5 rounded-lg glass-filter-select flex items-center justify-between md:justify-start gap-3 cursor-pointer touch-manipulation select-none">
             <span className="text-xs font-oxanium uppercase tracking-wider dark:text-gray-300 text-foreground/60">
               ВНЖ / резидентство
             </span>
@@ -159,11 +186,12 @@ export default function Properties() {
             <button
               type="button"
               onClick={() => { setCountryFilter(''); setTypeFilter(''); setPriceFilter(''); setBedFilter(''); setCryptoOnly(false); setResidencyOnly(false); }}
-              className="w-full md:w-auto min-h-[48px] px-5 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-400 text-foreground/50 dark:hover:text-white hover:text-foreground dark:border dark:border-white/10 border border-black/10 rounded-lg dark:hover:border-white/30 hover:border-black/15 transition-colors bg-transparent cursor-pointer md:ml-auto"
+              className="w-full md:w-auto min-h-[44px] md:min-h-[48px] px-5 py-2.5 text-xs font-oxanium uppercase tracking-wider dark:text-gray-400 text-foreground/50 dark:hover:text-white hover:text-foreground dark:border dark:border-white/10 border border-black/10 rounded-lg dark:hover:border-white/30 hover:border-black/15 transition-colors bg-transparent cursor-pointer md:ml-auto"
             >
               Сбросить
             </button>
           )}
+        
         </div>
       </div>
 
